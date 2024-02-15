@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'LandingController')->name('landing');
+Route::get('website', 'PortalController')->name('portal');
+Route::get('form', fn () => view('portal.form'))->name('form');
+Route::get('berita', fn () => view('portal.berita'))->name('berita');
+Route::get('text', fn () => view('portal.text'))->name('text');
