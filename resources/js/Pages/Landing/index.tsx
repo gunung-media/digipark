@@ -18,37 +18,37 @@ export default function Landing() {
     const menus = [
         {
             href: route('portal'),
-            imgSrc: guideIcon,
+            imgSrc: mapIcon,
             title: "Layanan Konsultasi"
         },
         {
             href: route('portal'),
-            imgSrc: guideIcon,
+            imgSrc: graphicIcon,
             title: "Laporan PHK"
         },
         {
             href: route('portal'),
-            imgSrc: guideIcon,
+            imgSrc: statisticIcon,
             title: "Pengesahan Peraturan Perusahaan"
         },
         {
             href: route('portal'),
-            imgSrc: guideIcon,
+            imgSrc: proposalIcon,
             title: "Pelaporan Lowongan"
         },
         {
             href: route('portal'),
-            imgSrc: guideIcon,
+            imgSrc: reportIcon,
             title: "Pelaporan Penempatan"
         },
         {
             href: route('portal'),
-            imgSrc: guideIcon,
+            imgSrc: trackingIcon,
             title: "Permintaan Tenaga Kerja"
         },
         {
             href: route('portal'),
-            imgSrc: guideIcon,
+            imgSrc: dpIcon,
             title: "Pelatihan Dan Pemagangan"
         },
         {
