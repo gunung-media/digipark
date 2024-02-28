@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
+
+class News extends Model
+{
+    use HasFactory;
+
+    public static function boot(): void
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            $model->slug = Str::slug($model->title);
+        });
+
+        static::creating(function ($model) {
+            $model->slug = Str::slug($model->title);
+        });
+    }
+
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(NewsCategory::class);
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(NewsTag::class, 'news_has_tags', 'news_id', 'tags_id');
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(NewsComment::class);
+    }
+}
