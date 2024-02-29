@@ -72,7 +72,8 @@ class DashboardResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ImagesRelationManager::class,
+            RelationManagers\VisionsRelationManager::class,
         ];
     }
 
