@@ -2,9 +2,12 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\DashboardResource;
+use App\Models\Dashboard;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -53,6 +56,17 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])->navigationItems([
+                NavigationItem::make('Dashboard Content')
+                    ->url(
+                        fn () =>
+                        Dashboard::count() === 0
+                            ? DashboardResource::getUrl('create')
+                            :  DashboardResource::getUrl('edit', ['record' => Dashboard::first()])
+                    )
+                    ->icon('heroicon-o-presentation-chart-line')
+                    ->isActiveWhen(fn () => request()->routeIs('filament.admin.resources.dashboards.edit', 'filament.admin.resources.dashboards.create'))
+            ])
+            ->breadcrumbs(fn () => !request()->routeIs('filament.admin.resources.dashboards.edit', 'filament.admin.resources.dashboards.create'));
     }
 }
