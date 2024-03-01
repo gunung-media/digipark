@@ -57,7 +57,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])->navigationItems([
-                NavigationItem::make('Dashboard Content')
+                NavigationItem::make('Website Content')
                     ->url(
                         fn () =>
                         Dashboard::count() === 0
