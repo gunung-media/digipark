@@ -56,20 +56,32 @@
                           aria-expanded="false">Layanan Online</a>
 
                       <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                          <li><a class="dropdown-item" href="{{ route('form') }}">Pembuatan Kartu AK/I</a></li>
-                          <li><a class="dropdown-item" href="{{ route('form') }}">Lapor Lowongan</a>
-                          <li><a class="dropdown-item" href="{{ route('form') }}">Lapor Penempatan</a>
-                          <li><a class="dropdown-item" href="{{ route('form') }}">Permintaan Tenaga Kerja</a>
-                          <li><a class="dropdown-item" href="{{ route('form') }}">Laporan Pemutusan Hubungan Kerja</a>
-                          <li><a class="dropdown-item" href="{{ route('form') }}">Rekomendasi Klaim JHT</a>
-                          <li><a class="dropdown-item" href="{{ route('form') }}">Pengesahan Peraturan Perusahaan</a>
-                          </li>
+                          @if (auth('company')->check())
+                              <li><a class="dropdown-item"
+                                      href="{{ route('portal.layanan.pembuatanPekerjaan') }}">Pembuatan Pekerjaan<a>
+                              </li>
+                          @else
+                              <li><a class="dropdown-item" href="{{ route('form') }}">Pembuatan Kartu AK/I</a></li>
+                              <li><a class="dropdown-item" href="{{ route('form') }}">Lapor Lowongan</a>
+                              <li><a class="dropdown-item" href="{{ route('form') }}">Lapor Penempatan</a>
+                              <li><a class="dropdown-item" href="{{ route('form') }}">Permintaan Tenaga Kerja</a>
+                              <li><a class="dropdown-item" href="{{ route('form') }}">Laporan Pemutusan Hubungan
+                                      Kerja</a>
+                              <li><a class="dropdown-item" href="{{ route('form') }}">Rekomendasi Klaim JHT</a>
+                              <li><a class="dropdown-item" href="{{ route('form') }}">Pengesahan Peraturan
+                                      Perusahaan</a>
+                              </li>
+                          @endif
                       </ul>
                   </li>
-
-
                   <li class="nav-item ms-3">
-                      <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Login</a>
+                      @if (auth('company')->check())
+                          <a class="nav-link custom-btn custom-border-btn btn"
+                              href="{{ route('portal.logout') }}">Logout</a>
+                      @else
+                          <a class="nav-link custom-btn custom-border-btn btn"
+                              href="{{ route('portal.login') }}">Login</a>
+                      @endif
                   </li>
               </ul>
           </div>

@@ -42,4 +42,13 @@
         width: 40px;
         height: 40px;
     }
+
+    .login-section {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        padding-top: 150px;
+        padding-bottom: 150px;
+    }
 </style>

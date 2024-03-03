@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
 use Rawilk\FilamentPasswordInput\Password;
 
 class CompanyResource extends Resource
@@ -28,9 +29,12 @@ class CompanyResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('email')
                     ->email()
-                    ->unique('companies', 'email')
+                    ->unique('companies', 'email', null, true)
                     ->required(),
-                Password::make('password')->required(),
+                Password::make('password')
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create'),
                 Forms\Components\TextInput::make('address')
                     ->required(),
                 Forms\Components\TextInput::make('phone_number')
