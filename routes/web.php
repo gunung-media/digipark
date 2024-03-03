@@ -16,5 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'LandingController')->name('landing');
 Route::get('website', 'PortalController')->name('portal');
 Route::get('form', fn () => view('portal.form'))->name('form');
-Route::get('berita', fn () => view('portal.berita'))->name('berita');
+
+Route::name('portal.berita.')->prefix('website/berita')->group(function () {
+    Route::get('/', 'Berita\IndexController')->name('index');
+    Route::get('{slug}', 'Berita\DetailController')->name('detail');
+});
+
 Route::get('text', fn () => view('portal.text'))->name('text');

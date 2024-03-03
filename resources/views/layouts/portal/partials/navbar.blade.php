@@ -21,45 +21,33 @@
                           aria-expanded="false">Home</a>
 
                       <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                          <li><a class="dropdown-item" href="#unit-layanan">Unit Layanan</a></li>
-                          <li><a class="dropdown-item" href="#profil">Profil</a></li>
-                          <li><a class="dropdown-item" href="#pekerjaan">Pekerjaan</a></li>
-                          <li><a class="dropdown-item" href="#news">Berita</a></li>
+                          <li><a class="dropdown-item" href="/website#unit-layanan">Unit Layanan</a></li>
+                          <li><a class="dropdown-item" href="/website#profil">Profil</a></li>
+                          <li><a class="dropdown-item" href="/website#pekerjaan">Pekerjaan</a></li>
+                          <li><a class="dropdown-item" href="/website/berita">Berita</a></li>
                       </ul>
                   </li>
 
-                  <li class="nav-item dropdown">
-                      <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
-                          id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                          aria-expanded="false">Latas</a>
-
-                      <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                          <li><a class="dropdown-item" href="{{ route('text') }}">Informasi Pelatihan Kerja di LPK</a>
-                          </li>
-                          <li><a class="dropdown-item" href="{{ route('text') }}">Informarsi Pemagangan di
-                                  Perusahaan</a>
-                          </li>
-                          <li><a class="dropdown-item" href="{{ route('text') }}">Informarsi Program Kartu Pekerja</a>
-                          </li>
-                          <li><a class="dropdown-item" href="{{ route('text') }}">Data Pemagangan dan Produktivitas</a>
-                          </li>
-                          <li><a class="dropdown-item" href="{{ route('text') }}">Informasi Bidang Pelatihan dan
-                                  Produktivitas</a>
-                          </li>
-                      </ul>
+                  <li class="nav-item">
+                      <a class="nav-link click-scroll" href="/website#konsultasi">Konsultasi</a>
                   </li>
 
-                  <li class="nav-item dropdown">
-                      <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
-                          id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                          aria-expanded="false">Hubungan Industrial</a>
+                  @foreach ($menus as $menu)
+                      <li class="nav-item dropdown">
+                          <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
+                              id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                              aria-expanded="false">{{ $menu->name }}</a>
 
-                      <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                          <li><a class="dropdown-item" href="{{ route('form') }}">Data Hubungan Industrial</a></li>
-                          <li><a class="dropdown-item" href="{{ route('form') }}">Informasi Bidang HI & Syarat Kerja</a>
-                          </li>
-                      </ul>
-                  </li>
+                          <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                              @forelse ($menu->subMenus  as $sub)
+                                  <li><a class="dropdown-item" href="{{ route('text') }}">{{ $sub->title }}</a>
+                                  </li>
+                              @empty
+                                  <li>-</li>
+                              @endforelse
+                          </ul>
+                      </li>
+                  @endforeach
 
                   <li class="nav-item dropdown">
                       <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
@@ -78,9 +66,6 @@
                       </ul>
                   </li>
 
-                  <li class="nav-item">
-                      <a class="nav-link click-scroll" href="#konsultasi">Konsultasi</a>
-                  </li>
 
                   <li class="nav-item ms-3">
                       <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Login</a>

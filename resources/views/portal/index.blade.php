@@ -9,38 +9,18 @@
                     <div class="col-lg-12 col-12 p-0">
                         <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="{{ asset('portal/images/slide/volunteer-helping-with-donation-box.jpg') }}"
-                                        class="carousel-image img-fluid" alt="...">
+                                @foreach ($dashboard->images as $image)
+                                    <div class="carousel-item active">
+                                        <img src="{{ asset('storage/' . $image->image) }}" class="carousel-image img-fluid"
+                                            alt="...">
 
-                                    <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>be a Kind Heart</h1>
+                                        <div class="carousel-caption d-flex flex-column justify-content-end">
+                                            <h1>{{ $image->title }}</h1>
 
-                                        <p>Professional charity theme based on Bootstrap 5.2.2</p>
+                                            <p>{{ $image->subtitle }}</p>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <img src="{{ asset('portal/images/slide/volunteer-selecting-organizing-clothes-donations-charity.jpg') }}"
-                                        class="carousel-image img-fluid" alt="...">
-
-                                    <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Non-profit</h1>
-
-                                        <p>You can support us to grow more</p>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <img src="{{ asset('portal/images/slide/medium-shot-people-collecting-donations.jpg') }}"
-                                        class="carousel-image img-fluid" alt="...">
-
-                                    <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Humanity</h1>
-
-                                        <p>Please tell your friends about our website</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
 
                             <button class="carousel-control-prev" type="button" data-bs-target="#hero-slide"
@@ -70,50 +50,18 @@
                         <h2 class="mb-5">Unit Layanan</h2>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                        <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="donate.html" class="d-block">
-                                <img src="{{ asset('portal/images/icons/hands.png') }}"
-                                    class="featured-block-image img-fluid" alt="">
+                    @foreach ($dashboard->visions as $vision)
+                        <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                            <div class="featured-block d-flex justify-content-center align-items-center">
+                                <a href="#" class="d-block">
+                                    <img src="{{ asset('storage/' . $vision->image) }}"
+                                        class="featured-block-image img-fluid" alt="">
 
-                                <p class="featured-block-text">Become a <strong>volunteer</strong></p>
-                            </a>
+                                    <p class="featured-block-text">{{ $vision->title }}</p>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
-                        <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="donate.html" class="d-block">
-                                <img src="{{ asset('portal/images/icons/heart.png') }}"
-                                    class="featured-block-image img-fluid" alt="">
-
-                                <p class="featured-block-text"><strong>Caring</strong> Earth</p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
-                        <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="donate.html" class="d-block">
-                                <img src="{{ asset('portal/images/icons/receive.png') }}"
-                                    class="featured-block-image img-fluid" alt="">
-
-                                <p class="featured-block-text">Make a <strong>Donation</strong></p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                        <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="donate.html" class="d-block">
-                                <img src="{{ asset('portal/images/icons/scholarship.png') }}"
-                                    class="featured-block-image img-fluid" alt="">
-
-                                <p class="featured-block-text"><strong>Scholarship</strong> Program</p>
-                            </a>
-                        </div>
-                    </div>
-
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -133,8 +81,7 @@
 
                             <h5 class="mb-3">Digital Palangka Raya Kreatif Ketenagakerjaan</h5>
 
-                            <p class="mb-0">Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum
-                                sint consectetur cupidatat.</p>
+                            <p class="mb-0">{!! $dashboard->short_description ?? '' !!}</p>
                         </div>
 
                         <div class="row">
@@ -142,19 +89,7 @@
                                 <div class="custom-text-box mb-lg-0">
                                     <h5 class="mb-3">Our Mission</h5>
 
-                                    <p>Sed leo nisl, posuere at molestie ac, suscipit auctor quis metus</p>
-
-                                    <ul class="custom-list mt-2">
-                                        <li class="custom-list-item d-flex">
-                                            <i class="bi-check custom-text-box-icon me-2"></i>
-                                            Charity Theme
-                                        </li>
-
-                                        <li class="custom-list-item d-flex">
-                                            <i class="bi-check custom-text-box-icon me-2"></i>
-                                            Semantic HTML
-                                        </li>
-                                    </ul>
+                                    <p>{!! $dashboard->mission ?? '' !!}</p>
                                 </div>
                             </div>
 
@@ -249,116 +184,39 @@
 
         <section class="section-padding" id="pekerjaan">
             <div class="container">
-                <div class="row">
+                <div class="row d-flex justify-content-center">
 
                     <div class="col-lg-12 col-12 text-center mb-4">
                         <h2>Pekerjaan</h2>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
-                        <div class="custom-block-wrap">
-                            <img src="{{ asset('portal/images/causes/group-african-kids-paying-attention-class.jpg') }}"
-                                class="custom-block-image img-fluid" alt="">
+                    @forelse ($jobs as $job)
+                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                            <div class="custom-block-wrap">
+                                @if (!is_null($job->image))
+                                    <img src="{{ asset('strorage/' . $job->image) }}" class="custom-block-image img-fluid"
+                                        alt="">
+                                @else
+                                    <img src="{{ asset('images/404.jpg') }}" class="custom-block-image img-fluid"
+                                        alt="">
+                                @endif
 
-                            <div class="custom-block">
-                                <div class="custom-block-body">
-                                    <h5 class="mb-3">Children Education</h5>
+                                <div class="custom-block">
+                                    <div class="custom-block-body">
+                                        <h5 class="mb-3">{{ $job->name_job ?? '' }}</h5>
 
-                                    <p>Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm tokito</p>
-
-                                    <div class="progress mt-4">
-                                        <div class="progress-bar w-75" role="progressbar" aria-valuenow="75"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                        {!! $job->description !!}
                                     </div>
 
-                                    <div class="d-flex align-items-center my-2">
-                                        <p class="mb-0">
-                                            <strong>Raised:</strong>
-                                            $18,500
-                                        </p>
-
-                                        <p class="ms-auto mb-0">
-                                            <strong>Goal:</strong>
-                                            $32,000
-                                        </p>
-                                    </div>
+                                    <a href="donate.html" class="custom-btn btn">Detail</a>
                                 </div>
-
-                                <a href="donate.html" class="custom-btn btn">Detail</a>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
-                        <div class="custom-block-wrap">
-                            <img src="{{ asset('portal/images/causes/poor-child-landfill-looks-forward-with-hope.jpg') }}"
-                                class="custom-block-image img-fluid" alt="">
-
-                            <div class="custom-block">
-                                <div class="custom-block-body">
-                                    <h5 class="mb-3">Poverty Development</h5>
-
-                                    <p>Sed leo nisl, posuere at molestie ac, suscipit auctor mauris. Etiam quis metus
-                                        tempor</p>
-
-                                    <div class="progress mt-4">
-                                        <div class="progress-bar w-50" role="progressbar" aria-valuenow="50"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-
-                                    <div class="d-flex align-items-center my-2">
-                                        <p class="mb-0">
-                                            <strong>Raised:</strong>
-                                            $27,600
-                                        </p>
-
-                                        <p class="ms-auto mb-0">
-                                            <strong>Goal:</strong>
-                                            $60,000
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <a href="donate.html" class="custom-btn btn">Detail</a>
-                            </div>
+                    @empty
+                        <div>
+                            <h5>-</h5>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="custom-block-wrap">
-                            <img src="{{ asset('portal/images/causes/african-woman-pouring-water-recipient-outdoors.jpg') }}"
-                                class="custom-block-image img-fluid" alt="">
-
-                            <div class="custom-block">
-                                <div class="custom-block-body">
-                                    <h5 class="mb-3">Supply drinking water</h5>
-
-                                    <p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                    </p>
-
-                                    <div class="progress mt-4">
-                                        <div class="progress-bar w-100" role="progressbar" aria-valuenow="100"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-
-                                    <div class="d-flex align-items-center my-2">
-                                        <p class="mb-0">
-                                            <strong>Raised:</strong>
-                                            $84,600
-                                        </p>
-
-                                        <p class="ms-auto mb-0">
-                                            <strong>Goal:</strong>
-                                            $100,000
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <a href="donate.html" class="custom-btn btn">Detail</a>
-                            </div>
-                        </div>
-                    </div>
-
+                    @endforelse
                 </div>
             </div>
         </section>
@@ -451,252 +309,117 @@
                         <h2>Latest News</h2>
                     </div>
 
-                    <div class="col-lg-7 col-12">
-                        <div class="news-block">
-                            <div class="news-block-top">
-                                <a href="{{ route('berita') }}">
-                                    <img src="{{ asset('portal/images/news/medium-shot-volunteers-with-clothing-donations.jpg') }}"
-                                        class="news-image img-fluid" alt="">
-                                </a>
+                    @if (count($news->slice(0, 2)))
+                        @foreach ($news->slice(0, 2) as $new)
+                            <div class="col-lg-7 col-12">
+                                <div class="news-block">
+                                    <div class="news-block-top">
+                                        <a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}">
+                                            <img src="{{ asset('storage/' . $new->image) }}" class="news-image img-fluid"
+                                                alt="">
+                                        </a>
 
-                                <div class="news-category-block">
-                                    <a href="#" class="category-block-link">
-                                        Lifestyle,
-                                    </a>
+                                        <div class="news-category-block">
+                                            <a href="#" class="category-block-link">
+                                                {{ $new->category->name }}
+                                            </a>
+                                        </div>
+                                    </div>
 
-                                    <a href="#" class="category-block-link">
-                                        Clothing Donation
-                                    </a>
+                                    <div class="news-block-info">
+                                        <div class="d-flex mt-2">
+                                            <div class="news-block-date">
+                                                <p>
+                                                    <i class="bi-calendar4 custom-icon me-1"></i>
+                                                    {{ $new->created_at_format }}
+                                                </p>
+                                            </div>
+
+                                            <div class="news-block-author mx-5">
+                                                <p>
+                                                    <i class="bi-person custom-icon me-1"></i>
+                                                    By {{ $new->author }}
+                                                </p>
+                                            </div>
+
+                                            <div class="news-block-comment">
+                                                <p>
+                                                    <i class="bi-chat-left custom-icon me-1"></i>
+                                                    {{ $new->comments->count() }} Comments
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="news-block-title mb-2">
+                                            <h4><a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}"
+                                                    class="news-block-title-link">{{ $new->title }}</a></h4>
+                                        </div>
+
+                                    </div>
                                 </div>
+
                             </div>
-
-                            <div class="news-block-info">
-                                <div class="d-flex mt-2">
-                                    <div class="news-block-date">
-                                        <p>
-                                            <i class="bi-calendar4 custom-icon me-1"></i>
-                                            October 12, 2036
-                                        </p>
-                                    </div>
-
-                                    <div class="news-block-author mx-5">
-                                        <p>
-                                            <i class="bi-person custom-icon me-1"></i>
-                                            By Admin
-                                        </p>
-                                    </div>
-
-                                    <div class="news-block-comment">
-                                        <p>
-                                            <i class="bi-chat-left custom-icon me-1"></i>
-                                            32 Comments
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="news-block-title mb-2">
-                                    <h4><a href="{{ route('berita') }}" class="news-block-title-link">Clothing donation
-                                            to
-                                            urban area</a></h4>
-                                </div>
-
-                                <div class="news-block-body">
-                                    <p>Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm tokito
-                                        Professional charity theme based on Bootstrap</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="news-block mt-3">
-                            <div class="news-block-top">
-                                <a href="{{ route('berita') }}">
-                                    <img src="{{ asset('portal/images/news/medium-shot-people-collecting-foodstuff.jpg') }}"
-                                        class="news-image img-fluid" alt="">
-                                </a>
-
-                                <div class="news-category-block">
-                                    <a href="#" class="category-block-link">
-                                        Food,
-                                    </a>
-
-                                    <a href="#" class="category-block-link">
-                                        Donation,
-                                    </a>
-
-                                    <a href="#" class="category-block-link">
-                                        Caring
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="news-block-info">
-                                <div class="d-flex mt-2">
-                                    <div class="news-block-date">
-                                        <p>
-                                            <i class="bi-calendar4 custom-icon me-1"></i>
-                                            October 20, 2036
-                                        </p>
-                                    </div>
-
-                                    <div class="news-block-author mx-5">
-                                        <p>
-                                            <i class="bi-person custom-icon me-1"></i>
-                                            By Admin
-                                        </p>
-                                    </div>
-
-                                    <div class="news-block-comment">
-                                        <p>
-                                            <i class="bi-chat-left custom-icon me-1"></i>
-                                            35 Comments
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="news-block-title mb-2">
-                                    <h4><a href="{{ route('berita') }}" class="news-block-title-link">Food donation
-                                            area</a>
-                                    </h4>
-                                </div>
-
-                                <div class="news-block-body">
-                                    <p>Sed leo nisl, posuere at molestie ac, suscipit auctor mauris. Etiam quis metus
-                                        elementum, tempor risus vel, condimentum orci</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @else
+                        has no data
+                    @endif
 
                     <div class="col-lg-4 col-12 mx-auto">
-                        <form class="custom-form search-form" action="#" method="post" role="form">
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <form class="custom-form search-form" action="{{ route('portal.berita.index') }}" method="get"
+                            role="form">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+                                name="q">
 
                             <button type="submit" class="form-control">
                                 <i class="bi-search"></i>
                             </button>
                         </form>
 
+
                         <h5 class="mt-5 mb-3">Recent news</h5>
 
-                        <div class="news-block news-block-two-col d-flex mt-4">
-                            <div class="news-block-two-col-image-wrap">
-                                <a href="{{ route('berita') }}">
-                                    <img src="{{ asset('portal/images/news/africa-humanitarian-aid-doctor.jpg') }}"
-                                        class="news-image img-fluid" alt="">
-                                </a>
-                            </div>
+                        @if (count($news->slice(2, 4)))
+                            @foreach ($news->slice(2, 4) as $new)
+                                <div class="news-block news-block-two-col d-flex mt-4">
+                                    <div class="news-block-two-col-image-wrap">
+                                        <a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}">
+                                            <img src="{{ asset('storage/' . $new->image) }}" class="news-image img-fluid"
+                                                alt="">
+                                        </a>
+                                    </div>
 
-                            <div class="news-block-two-col-info">
-                                <div class="news-block-title mb-2">
-                                    <h6><a href="{{ route('berita') }}" class="news-block-title-link">Food donation
-                                            area</a>
-                                    </h6>
+                                    <div class="news-block-two-col-info">
+                                        <div class="news-block-title mb-2">
+                                            <h6><a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}"
+                                                    class="news-block-title-link">{{ $new->title }}</a>
+                                            </h6>
+                                        </div>
+
+                                        <div class="news-block-date">
+                                            <p>
+                                                <i class="bi-calendar4 custom-icon me-1"></i>
+                                                {{ $new->created_at_format }}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
+                            @endforeach
+                        @else
+                            <p>-</p>
+                        @endif
 
-                                <div class="news-block-date">
-                                    <p>
-                                        <i class="bi-calendar4 custom-icon me-1"></i>
-                                        October 16, 2036
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="news-block news-block-two-col d-flex mt-4">
-                            <div class="news-block-two-col-image-wrap">
-                                <a href="{{ route('berita') }}">
-                                    <img src="{{ asset('portal/images/news/close-up-happy-people-working-together.jpg') }}"
-                                        class="news-image img-fluid" alt="">
-                                </a>
-                            </div>
-
-                            <div class="news-block-two-col-info">
-                                <div class="news-block-title mb-2">
-                                    <h6><a href="{{ route('berita') }}" class="news-block-title-link">Volunteering
-                                            Clean</a>
-                                    </h6>
-                                </div>
-
-                                <div class="news-block-date">
-                                    <p>
-                                        <i class="bi-calendar4 custom-icon me-1"></i>
-                                        October 24, 2036
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="category-block d-flex flex-column">
                             <h5 class="mb-3">Categories</h5>
 
-                            <a href="#" class="category-block-link">
-                                Drinking water
-                                <span class="badge">20</span>
-                            </a>
-
-                            <a href="#" class="category-block-link">
-                                Food Donation
-                                <span class="badge">30</span>
-                            </a>
-
-                            <a href="#" class="category-block-link">
-                                Children Education
-                                <span class="badge">10</span>
-                            </a>
-
-                            <a href="#" class="category-block-link">
-                                Poverty Development
-                                <span class="badge">15</span>
-                            </a>
-
-                            <a href="#" class="category-block-link">
-                                Clothing Donation
-                                <span class="badge">20</span>
+                            @foreach ($categories as $category)
+                                <a href="{{ route('portal.berita.index', ['category' => $category->name]) }}"
+                                    class="category-block-link">
+                                    {{ $category->name }}
+                                    <span class="badge">{{ $category->news->count() }}</span>
+                            @endforeach
                             </a>
                         </div>
-
-                        <div class="tags-block">
-                            <h5 class="mb-3">Tags</h5>
-
-                            <a href="#" class="tags-block-link">
-                                Donation
-                            </a>
-
-                            <a href="#" class="tags-block-link">
-                                Clothing
-                            </a>
-
-                            <a href="#" class="tags-block-link">
-                                Food
-                            </a>
-
-                            <a href="#" class="tags-block-link">
-                                Children
-                            </a>
-
-                            <a href="#" class="tags-block-link">
-                                Education
-                            </a>
-
-                            <a href="#" class="tags-block-link">
-                                Poverty
-                            </a>
-
-                            <a href="#" class="tags-block-link">
-                                Clean Water
-                            </a>
-                        </div>
-
-                        <form class="custom-form subscribe-form" action="#" method="post" role="form">
-                            <h5 class="mb-4">Newsletter Form</h5>
-
-                            <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
-                                class="form-control" placeholder="Email Address" required>
-
-                            <div class="col-lg-12 col-12">
-                                <button type="submit" class="form-control">Subscribe</button>
-                            </div>
-                        </form>
                     </div>
 
                 </div>
