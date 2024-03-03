@@ -13,4 +13,33 @@
         width: 50%;
         height: 50%;
     }
+
+    .whatsapp-fab {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #25D366;
+        /* WhatsApp green color */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+        text-decoration: none;
+        z-index: 1000;
+        /* Ensure it's above other elements */
+        transition: background-color 0.3s ease;
+    }
+
+    .whatsapp-fab:hover {
+        background-color: #128C7E;
+        /* Darker shade on hover */
+    }
+
+    .whatsapp-icon {
+        width: 40px;
+        height: 40px;
+    }
 </style>

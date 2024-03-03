@@ -40,7 +40,8 @@
 
                           <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                               @forelse ($menu->subMenus  as $sub)
-                                  <li><a class="dropdown-item" href="{{ route('text') }}">{{ $sub->title }}</a>
+                                  <li><a class="dropdown-item"
+                                          href="{{ route('subMenu', ['slug' => $sub->slug]) }}">{{ $sub->title }}</a>
                                   </li>
                               @empty
                                   <li>-</li>

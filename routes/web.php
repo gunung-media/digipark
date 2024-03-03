@@ -22,4 +22,4 @@ Route::name('portal.berita.')->prefix('website/berita')->group(function () {
     Route::get('{slug}', 'Berita\DetailController')->name('detail');
 });
 
-Route::get('text', fn () => view('portal.text'))->name('text');
+Route::get('menu/{slug}', 'SubMenuController')->name('subMenu');
