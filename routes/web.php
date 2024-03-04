@@ -24,10 +24,12 @@ Route::name('portal.')->group(function () {
     });
     Route::get('login', 'LoginController@index')->name('login');
     Route::post('login', 'LoginController@login')->name('login');
-    Route::get('logout', 'LoginController@logout')->name('logout');
 
-    Route::name('layanan.')->prefix('layanan')->group(function () {
-        Route::get('form', 'Layanan\PembuatanPekerjaan@index')->name('pembuatanPekerjaan');
+    Route::middleware('auth:company')->group(function () {
+        Route::get('logout', 'LoginController@logout')->name('logout');
+        Route::name('layanan.')->prefix('layanan')->group(function () {
+            Route::get('form', 'Layanan\PembuatanPekerjaan@index')->name('pembuatanPekerjaan');
+        });
     });
 });
 
