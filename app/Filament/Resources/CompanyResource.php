@@ -37,6 +37,12 @@ class CompanyResource extends Resource
                     ->required(fn (string $context): bool => $context === 'create'),
                 Forms\Components\TextInput::make('address')
                     ->required(),
+                Forms\Components\FileUpload::make('image')
+                    ->disk('public')
+                    ->directory('company')
+                    ->image()
+                    ->columnSpan(2)
+                    ->required(),
                 Forms\Components\TextInput::make('phone_number')
                     ->tel()
                     ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
@@ -54,6 +60,9 @@ class CompanyResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
                     ->searchable(),
+                Tables\Columns\ImageColumn::make('image')
+                    ->disk('public')
+                    ->square(),
                 Tables\Columns\TextColumn::make('phone_number')
                     ->searchable(),
             ])
