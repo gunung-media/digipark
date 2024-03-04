@@ -7,9 +7,19 @@
             <div class="row">
 
                 <div class="col-lg-6 col-12 mx-auto">
-                    <form class="custom-form donate-form" action="#" method="post" role="form"
-                        enctype="multipart/form-data">
+                    <form class="custom-form donate-form" action="{{ route('portal.layanan.pembuatanPekerjaan.store') }}"
+                        method="post" role="form" enctype="multipart/form-data">
                         @csrf
+                        @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <h3 class="mb-4">Pembuatan Pekerjaan</h3>
 
                         <div class="row">
@@ -18,17 +28,17 @@
                             </div>
 
                             <div class="col-lg-6 col-12 mt-2">
-                                <input type="text" name="donation-name" id="donation-name" class="form-control"
-                                    placeholder="Nama Pekerjaan" required>
+                                <input type="text" name="name_job" id="donation-name" class="form-control"
+                                    placeholder="Nama Pekerjaan*" required>
                             </div>
 
                             <div class="col-lg-6 col-12 mt-2">
-                                <input type="text" name="donation-email" id="donation-email" class="form-control"
-                                    placeholder="Alamat" required>
+                                <input type="text" name="address" id="donation-email" class="form-control"
+                                    placeholder="Alamat*" required>
                             </div>
 
                             <div class="col-12 mt-2">
-                                <textarea name="description" id="" cols="30" rows="10" placeholder="Deksripsi Pekerjaan"
+                                <textarea name="description" id="" cols="30" rows="10" placeholder="Deksripsi Pekerjaan*"
                                     class="form-control" required></textarea>
                             </div>
 

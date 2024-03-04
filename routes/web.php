@@ -29,6 +29,7 @@ Route::name('portal.')->group(function () {
         Route::get('logout', 'LoginController@logout')->name('logout');
         Route::name('layanan.')->prefix('layanan')->group(function () {
             Route::get('form', 'Layanan\PembuatanPekerjaan@index')->name('pembuatanPekerjaan');
+            Route::post('form', 'Layanan\PembuatanPekerjaan@store')->name('pembuatanPekerjaan.store');
         });
     });
 });
