@@ -33,6 +33,15 @@ class DashboardResource extends Resource
                     ->columnSpanFull()
                     ->maxLength(50)
                     ->required(),
+                Forms\Components\RichEditor::make('quote')
+                    ->default('"The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well."')
+                    ->columnSpanFull(),
+                Forms\Components\FileUpload::make('our_story_image')
+                    ->disk('public')
+                    ->directory('dashboard')
+                    ->image()
+                    ->columnSpanFull()
+                    ->required(),
                 Forms\Components\TextInput::make('facebook')
                     ->prefixIcon('icon-fb'),
                 Forms\Components\TextInput::make('instagram')
@@ -46,7 +55,9 @@ class DashboardResource extends Resource
                 Forms\Components\TextInput::make('address'),
                 Forms\Components\TextInput::make('phone_number')
                     ->prefixIcon('icon-wa'),
-                Forms\Components\TextInput::make('default_text')->default('Halo'),
+                Forms\Components\TextInput::make('default_text')
+                    ->label('Default Text WA')
+                    ->default('Halo admin digipark'),
             ]);
     }
 

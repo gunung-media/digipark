@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Dashboard;
 use App\Models\Job;
 use App\Models\News;
@@ -19,6 +20,10 @@ class PortalController extends Controller
         $news = News::active()->with('category')->limit(4)->get();
         $categories =  NewsCategory::with('news')->get();
         $jobs = Job::active()->with('company')->where('status', 1)->limit('3')->latest()->get();
-        return view('portal.index', compact('news', 'categories', 'jobs'));
+        $total = [
+            'pekerjaan' => Job::active()->count(),
+            'perusahaan' => Company::count(),
+        ];
+        return view('portal.index', compact('news', 'categories', 'jobs', 'total'));
     }
 }

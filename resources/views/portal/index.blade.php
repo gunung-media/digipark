@@ -71,7 +71,7 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                        <img src="{{ asset('portal/images/group-people-volunteering-foodbank-poor-people.jpg') }}"
+                        <img src="{{ asset($dashboard->our_story_image ? "storage/{$dashboard->our_story_image}" : 'portal/images/group-people-volunteering-foodbank-poor-people.jpg') }}"
                             class="custom-text-box-image img-fluid" alt="">
                     </div>
 
@@ -97,7 +97,7 @@
                                 <div class="custom-text-box d-flex flex-wrap d-lg-block mb-lg-0">
                                     <div class="counter-thumb">
                                         <div class="d-flex">
-                                            <span class="counter-number" data-from="1" data-to="2009"
+                                            <span class="counter-number" data-from="1" data-to="{{ $total['pekerjaan'] }}"
                                                 data-speed="1000"></span>
                                             <span class="counter-number-text"></span>
                                         </div>
@@ -107,9 +107,9 @@
 
                                     <div class="counter-thumb mt-4">
                                         <div class="d-flex">
-                                            <span class="counter-number" data-from="1" data-to="120"
+                                            <span class="counter-number" data-from="1" data-to="{{ $total['perusahaan'] }}"
                                                 data-speed="1000"></span>
-                                            <span class="counter-number-text">B</span>
+                                            <span class="counter-number-text"></span>
                                         </div>
 
                                         <span class="counter-text">Perusahaan</span>
@@ -168,14 +168,11 @@
             <div class="container">
                 <div class="row justify-content-center align-items-center">
 
-                    <div class="col-lg-5 col-12 ms-auto">
-                        <h2 class="mb-0">Make an impact. <br> Save lives.</h2>
+                    <div class="col-12">
+                        <h2 class="mb-0">{!! $dashboard->quote !!}</h2>
                     </div>
 
-                    <div class="col-lg-5 col-12">
-                        <a href="#" class="me-4">Make a donation</a>
-
-                        <a href="#section_4" class="custom-btn btn smoothscroll">Become a volunteer</a>
+                    <div class="col-12">
                     </div>
 
                 </div>
