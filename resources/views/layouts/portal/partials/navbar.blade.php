@@ -44,7 +44,6 @@
                                           href="{{ route('subMenu', ['slug' => $sub->slug]) }}">{{ $sub->title }}</a>
                                   </li>
                               @empty
-                                  <li>-</li>
                               @endforelse
                           </ul>
                       </li>

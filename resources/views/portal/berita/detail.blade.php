@@ -87,7 +87,7 @@
                                     <!-- </div> -->
                                 </div>
 
-                                @foreach ($berita->comments as $comment)
+                                @forelse ($berita->comments as $comment)
                                     <div class="author-comment d-flex mt-3 mb-4">
                                         <img src="{{ asset('portal/images/avatar/studio-portrait-emotional-happy-funny.jpg') }}"
                                             class="img-fluid avatar-image" alt="">
@@ -98,7 +98,9 @@
                                             <p class="mb-0">{{ $comment->comment }} </p>
                                         </div>
                                     </div>
-                                @endforeach
+                                @empty
+                                    <p>No Comments</p>
+                                @endforelse
                                 <div class="mb-5"></div>
 
                                 <form class="custom-form comment-form mt-4" action="#" method="post" role="form">

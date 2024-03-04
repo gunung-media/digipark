@@ -16,10 +16,9 @@ class PortalController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $dashboard = Dashboard::with(['images', 'visions'])->first();
-        $news = News::with('category')->limit(4)->get();
+        $news = News::active()->with('category')->limit(4)->get();
         $categories =  NewsCategory::with('news')->get();
-        $jobs = Job::where('status', 1)->limit('3')->get();
-        return view('portal.index', compact('dashboard', 'news', 'categories', 'jobs'));
+        $jobs = Job::active()->with('company')->where('status', 1)->limit('3')->latest()->get();
+        return view('portal.index', compact('news', 'categories', 'jobs'));
     }
 }

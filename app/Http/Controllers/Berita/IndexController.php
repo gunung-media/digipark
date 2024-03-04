@@ -12,7 +12,7 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         $name = $request->get('q');
-        $news = News::with('category');
+        $news = News::active()->with('category');
         $category = $request->get('category');
 
         if (!is_null($name)) {

@@ -361,7 +361,7 @@
                             </div>
                         @endforeach
                     @else
-                        has no data
+                        <p>has no data</p>
                     @endif
 
                     <div class="col-lg-4 col-12 mx-auto">
