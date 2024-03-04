@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->string('address');
             $table->string('image')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->boolean('status')->default(1);
             $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
             $table->timestamps();
         });
