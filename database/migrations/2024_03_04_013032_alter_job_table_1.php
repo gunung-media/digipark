@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('jobs', function (Blueprint $table) {
             $table->integer('total_needed_man')->nullable()->change();
             $table->integer('total_needed_woman')->nullable()->change();
+            $table->integer('salary')->nullable()->change();
             $table->date('start_date')->nullable()->change();
         });
     }
@@ -26,7 +27,8 @@ return new class extends Migration
         Schema::table('jobs', function (Blueprint $table) {
             $table->integer('total_needed_man')->default(0)->change();
             $table->integer('total_needed_woman')->default(0)->change();
-            $table->date('start_date');
+            $table->integer('salary')->default(0)->change();
+            $table->date('start_date')->change();
         });
     }
 };
