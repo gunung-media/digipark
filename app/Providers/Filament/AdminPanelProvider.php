@@ -66,6 +66,7 @@ class AdminPanelProvider extends PanelProvider
                     )
                     ->icon('heroicon-o-presentation-chart-line')
                     ->isActiveWhen(fn () => request()->routeIs('filament.admin.resources.dashboards.edit', 'filament.admin.resources.dashboards.create'))
+                    ->group('Settings')
             ])
             ->breadcrumbs(fn () => !request()->routeIs('filament.admin.resources.dashboards.edit', 'filament.admin.resources.dashboards.create'));
     }
