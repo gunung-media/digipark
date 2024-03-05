@@ -26,7 +26,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
         if (Schema::hasTable('dashboard') || Schema::hasTable('menus')) {
-            View::share('dashboard', Dashboard::with(['images' => fn ($query) => $query->active(), 'visions' => fn ($query) => $query->active()])->first());
+            View::share('dashboard', Dashboard::with([
+                'images' => fn ($query) => $query->active(),
+                'visions' => fn ($query) => $query->active(),
+                'testimonials' => fn ($query) => $query->active()
+            ])->first());
             View::share('menus', Menu::active()->with(['subMenus' => fn ($query) => $query->active()])->get());
         }
     }

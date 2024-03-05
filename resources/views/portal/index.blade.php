@@ -190,14 +190,9 @@
                     @forelse ($jobs as $job)
                         <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                             <div class="custom-block-wrap">
-                                @if (!is_null($job->image))
-                                    <img src="{{ asset('strorage/' . $job->image) }}" class="custom-block-image img-fluid"
-                                        alt="">
-                                @else
-                                    <img src="{{ asset('images/404.jpg') }}" class="custom-block-image img-fluid"
-                                        alt="">
-                                @endif
-
+                                <img src="{{ asset('strorage/' . $job->image) }}" class="custom-block-image img-fluid"
+                                    alt="{{ $job->name_job }}"
+                                    onerror="this.onerror=null;this.src='{{ asset('images/404.jpg') }}'">
                                 <div class="custom-block">
                                     <div class="custom-block-body">
                                         <h5 class="mb-3">{{ $job->name_job ?? '' }}</h5>
@@ -228,66 +223,27 @@
                         <div id="testimonial-carousel" class="carousel carousel-fade slide" data-bs-ride="carousel">
 
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="carousel-caption">
-                                        <h4 class="carousel-title">Lorem Ipsum dolor sit amet, consectetur adipsicing
-                                            kengan omeg kohm tokito charity theme</h4>
+                                @foreach ($dashboard->testimonials as $key => $testimonial)
+                                    <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                                        <div class="carousel-caption">
+                                            <h4 class="carousel-title">{{ $testimonial->testimonial }}</h4>
 
-                                        <small class="carousel-name"><span class="carousel-name-title">Maria</span>,
-                                            Boss</small>
+                                            <small class="carousel-name"><span
+                                                    class="carousel-name-title">{{ $testimonial->name }}</span>,
+                                                {{ $testimonial->job }}</small>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
 
-                                <div class="carousel-item">
-                                    <div class="carousel-caption">
-                                        <h4 class="carousel-title">Sed leo nisl, posuere at molestie ac, suscipit auctor
-                                            mauris quis metus tempor orci</h4>
-
-                                        <small class="carousel-name"><span class="carousel-name-title">Thomas</span>,
-                                            Partner</small>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <div class="carousel-caption">
-                                        <h4 class="carousel-title">Lorem Ipsum dolor sit amet, consectetur adipsicing
-                                            kengan omeg kohm tokito charity theme</h4>
-
-                                        <small class="carousel-name"><span class="carousel-name-title">Jane</span>,
-                                            Advisor</small>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <div class="carousel-caption">
-                                        <h4 class="carousel-title">Sed leo nisl, posuere at molestie ac, suscipit auctor
-                                            mauris quis metus tempor orci</h4>
-
-                                        <small class="carousel-name"><span class="carousel-name-title">Bob</span>,
-                                            Entreprenuer</small>
-                                    </div>
-                                </div>
 
                                 <ol class="carousel-indicators">
-                                    <li data-bs-target="#testimonial-carousel" data-bs-slide-to="0" class="active">
-                                        <img src="{{ asset('portal/images/avatar/portrait-beautiful-young-woman-standing-grey-wall.jpg') }}"
-                                            class="img-fluid rounded-circle avatar-image" alt="avatar">
-                                    </li>
-
-                                    <li data-bs-target="#testimonial-carousel" data-bs-slide-to="1" class="">
-                                        <img src="{{ asset('portal/images/avatar/portrait-young-redhead-bearded-male.jpg') }}"
-                                            class="img-fluid rounded-circle avatar-image" alt="avatar">
-                                    </li>
-
-                                    <li data-bs-target="#testimonial-carousel" data-bs-slide-to="2" class="">
-                                        <img src="{{ asset('portal/images/avatar/pretty-blonde-woman-wearing-white-t-shirt.jpg') }}"
-                                            class="img-fluid rounded-circle avatar-image" alt="avatar">
-                                    </li>
-
-                                    <li data-bs-target="#testimonial-carousel" data-bs-slide-to="3" class="">
-                                        <img src="{{ asset('portal/images/avatar/studio-portrait-emotional-happy-funny.jpg') }}"
-                                            class="img-fluid rounded-circle avatar-image" alt="avatar">
-                                    </li>
+                                    @foreach ($dashboard->testimonials as $key => $testimonial)
+                                        <li data-bs-target="#testimonial-carousel" data-bs-slide-to="{{ $key }}"
+                                            class="{{ $key === 0 ? 'active' : '' }}">
+                                            <img src="{{ !is_null($testimonial->image) ? asset('storage/' . $testimonial->image) : asset('portal/images/avatar/portrait-beautiful-young-woman-standing-grey-wall.jpg') }}"
+                                                class="img-fluid rounded-circle avatar-image" alt="avatar">
+                                        </li>
+                                    @endforeach
                                 </ol>
 
                             </div>

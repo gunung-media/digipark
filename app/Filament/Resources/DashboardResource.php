@@ -85,6 +85,7 @@ class DashboardResource extends Resource
         return [
             RelationManagers\ImagesRelationManager::class,
             RelationManagers\VisionsRelationManager::class,
+            RelationManagers\TestimonialsRelationManager::class,
         ];
     }
 

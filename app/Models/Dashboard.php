@@ -22,4 +22,9 @@ class Dashboard extends Model
     {
         return $this->hasMany(DashboardVision::class);
     }
+
+    public function testimonials(): HasMany
+    {
+        return $this->hasMany(DashboardTestimonial::class);
+    }
 }
