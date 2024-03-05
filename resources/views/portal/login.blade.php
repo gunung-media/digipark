@@ -9,6 +9,7 @@
                     <form class="custom-form donate-form" action="{{ route('portal.login') }}" method="post" role="form">
                         @csrf
                         <h3 class="mb-4">Login</h3>
+                        <p>Login to your account</p>
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -38,6 +39,8 @@
 
                             <div class="col-lg-12 col-12 mt-2">
                                 <button type="submit" class="form-control mt-4">Login</button>
+                                <p class="mt-5">Don't have an account? <a href="{{ route('portal.register') }}"
+                                        style="color: blue">Register</a> </p>
                             </div>
                         </div>
                     </form>

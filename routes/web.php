@@ -23,6 +23,7 @@ Route::name('portal.')->group(function () {
         Route::get('{slug}', 'Berita\DetailController')->name('detail');
     });
     Route::get('login', 'LoginController@index')->name('login');
+    Route::get('register', 'LoginController@index')->name('register');
     Route::post('login', 'LoginController@login')->name('login');
 
     Route::middleware('auth:company')->group(function () {

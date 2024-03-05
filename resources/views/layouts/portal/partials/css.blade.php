@@ -44,6 +44,7 @@
     }
 
     .login-section {
+        background-image: url({{ asset('images/bg.jpeg') }});
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
