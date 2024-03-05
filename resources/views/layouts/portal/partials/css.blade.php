@@ -9,6 +9,12 @@
         width: 100%;
     }
 
+    .news-image.small {
+        object-fit: cover;
+        height: 200px;
+        width: 100%;
+    }
+
     .news-block-body img {
         width: 50%;
         height: 50%;

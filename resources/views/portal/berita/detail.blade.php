@@ -194,9 +194,9 @@
                         <div class="col-lg-6 col-12">
                             <div class="news-block">
                                 <div class="news-block-top">
-                                    <a href="news-detail.html">
-                                        <img src="{{ asset('storage/' . $rb->image) }}" class="news-image img-fluid"
-                                            alt="">
+                                    <a href="{{ route('portal.berita.detail', ['slug' => $rb->slug]) }}">
+                                        <img src="{{ asset('storage/' . $rb->image) }}"
+                                            class="news-image small img-fluid" alt="">
                                     </a>
 
                                     <div class="news-category-block">
