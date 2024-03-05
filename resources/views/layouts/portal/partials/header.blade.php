@@ -7,7 +7,7 @@
                        {{ date('l, d F Y') }}
                    </p>
 
-                   @if (!is_null($dashboard->email))
+                   @if (!is_null($dashboard?->email))
                        <p class="d-flex mb-0">
                            <i class="bi-envelope me-2"></i>
 
@@ -24,7 +24,7 @@
                            $socials = ['facebook', 'twitter', 'instagram', 'youtube', ' linkedin'];
                        @endphp
                        @foreach ($socials as $social)
-                           @if (!is_null($dashboard->$social))
+                           @if (!is_null($dashboard?->$social))
                                <li class="social-icon-item">
                                    <a href="{{ $dashboard->$social }}" class="social-icon-link bi-{{ $social }}">
                                    </a>

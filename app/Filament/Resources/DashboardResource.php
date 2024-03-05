@@ -27,11 +27,11 @@ class DashboardResource extends Resource
             ->schema([
                 Forms\Components\RichEditor::make('short_description')
                     ->columnSpanFull()
-                    ->maxLength(50)
+                    ->maxLength(250)
                     ->required(),
                 Forms\Components\RichEditor::make('mission')
                     ->columnSpanFull()
-                    ->maxLength(50)
+                    ->maxLength(150)
                     ->required(),
                 Forms\Components\RichEditor::make('quote')
                     ->default('"The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well."')

@@ -9,7 +9,7 @@
                     <div class="col-lg-12 col-12 p-0">
                         <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                @foreach ($dashboard->images as $image)
+                                @foreach ($dashboard?->images ?? [] as $image)
                                     <div class="carousel-item active">
                                         <img src="{{ asset('storage/' . $image->image) }}" class="carousel-image img-fluid"
                                             alt="...">
@@ -50,7 +50,7 @@
                         <h2 class="mb-5">Unit Layanan</h2>
                     </div>
 
-                    @foreach ($dashboard->visions as $vision)
+                    @foreach ($dashboard?->visions ?? [] as $vision)
                         <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                             <div class="featured-block d-flex justify-content-center align-items-center">
                                 <a href="#" class="d-block">
@@ -71,7 +71,7 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                        <img src="{{ asset($dashboard->our_story_image ? "storage/{$dashboard->our_story_image}" : 'portal/images/group-people-volunteering-foodbank-poor-people.jpg') }}"
+                        <img src="{{ asset($dashboard?->our_story_image ? "storage/{$dashboard->our_story_image}" : 'portal/images/group-people-volunteering-foodbank-poor-people.jpg') }}"
                             class="custom-text-box-image img-fluid" alt="">
                     </div>
 
@@ -81,7 +81,7 @@
 
                             <h5 class="mb-3">Digital Palangka Raya Kreatif Ketenagakerjaan</h5>
 
-                            <p class="mb-0">{!! $dashboard->short_description ?? '' !!}</p>
+                            <p class="mb-0">{!! $dashboard?->short_description ?? '' !!}</p>
                         </div>
 
                         <div class="row">
@@ -129,33 +129,30 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-md-5 col-12">
-                        <img src="{{ asset('portal/images/potrait.jpeg') }}"
+                        <img src="{{ asset('storage/' . $departementMember->image) }}"
                             class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
                     </div>
 
                     <div class="col-lg-5 col-md-7 col-12">
                         <div class="custom-text-block">
-                            <h2 class="mb-0">AMANDUS FRENALDY, A.P, M.Si.</h2>
+                            <h2 class="mb-0">{{ $departementMember->name }}</h2>
 
-                            <p class="text-muted mb-lg-4 mb-md-4">Ketua digipark</p>
+                            <p class="text-muted mb-lg-4 mb-md-4">{{ $departementMember->position }}</p>
 
-                            <p>Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm tokito Professional
-                                charity theme based</p>
+                            <p>{{ $departementMember->description }}</p>
 
-                            <p>Sed leo nisl, posuere at molestie ac, suscipit auctor mauris. Etiam quis metus</p>
-
+                            @php
+                                $socials = ['facebook', 'x', 'instagram'];
+                            @endphp
                             <ul class="social-icon mt-4">
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-twitter"></a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-facebook"></a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-instagram"></a>
-                                </li>
+                                @foreach ($socials as $social)
+                                    @if (!is_null($departementMember->$social))
+                                        <li class="social-icon-item">
+                                            <a href="{{ $departementMember[$social . '_url'] }}"
+                                                class="social-icon-link bi-{{ $social }}"></a>
+                                        </li>
+                                    @endif
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -169,7 +166,7 @@
                 <div class="row justify-content-center align-items-center">
 
                     <div class="col-12">
-                        <h2 class="mb-0">{!! $dashboard->quote !!}</h2>
+                        <h2 class="mb-0">{!! $dashboard->quote ?? '' !!}</h2>
                     </div>
 
                     <div class="col-12">
@@ -223,7 +220,7 @@
                         <div id="testimonial-carousel" class="carousel carousel-fade slide" data-bs-ride="carousel">
 
                             <div class="carousel-inner">
-                                @foreach ($dashboard->testimonials as $key => $testimonial)
+                                @foreach ($dashboard?->testimonials ?? [] as $key => $testimonial)
                                     <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
                                         <div class="carousel-caption">
                                             <h4 class="carousel-title">{{ $testimonial->testimonial }}</h4>
@@ -237,7 +234,7 @@
 
 
                                 <ol class="carousel-indicators">
-                                    @foreach ($dashboard->testimonials as $key => $testimonial)
+                                    @foreach ($dashboard?->testimonials ?? [] as $key => $testimonial)
                                         <li data-bs-target="#testimonial-carousel" data-bs-slide-to="{{ $key }}"
                                             class="{{ $key === 0 ? 'active' : '' }}">
                                             <img src="{{ !is_null($testimonial->image) ? asset('storage/' . $testimonial->image) : asset('portal/images/avatar/portrait-beautiful-young-woman-standing-grey-wall.jpg') }}"

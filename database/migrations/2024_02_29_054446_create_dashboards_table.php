@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dashboards', function (Blueprint $table) {
             $table->id();
-            $table->string('short_description', 50)->nullable();
+            $table->string('short_description')->nullable();
             $table->string('mission')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();

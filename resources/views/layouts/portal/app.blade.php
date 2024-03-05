@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <a href="https://wa.me/{{ $dashboard->phone_number }}?message={{ $dashboard->default_text }}" class="whatsapp-fab"
+    <a href="https://wa.me/{{ $dashboard?->phone_number }}?message={{ $dashboard?->default_text }}" class="whatsapp-fab"
         target="_blank">
         <img src="{{ asset('images/WhatsApp.svg') }}" alt="WhatsApp Icon" class="whatsapp-icon">
     </a>
