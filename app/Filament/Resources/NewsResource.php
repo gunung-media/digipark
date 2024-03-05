@@ -26,6 +26,7 @@ class NewsResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
+                    ->unique(ignoreRecord: true)
                     ->required(),
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'name')

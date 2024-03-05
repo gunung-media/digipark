@@ -3,12 +3,13 @@
 @section('content')
     <main>
 
-        <section class="news-detail-header-section text-center">
+        <section class="news-detail-header-section text-center"
+            style="background-image: url({{ asset('storage/' . $berita->image) }});">
+            >
             <div class="section-overlay"></div>
 
             <div class="container">
                 <div class="row">
-
                     <div class="col-lg-12 col-12">
                         <h1 class="text-white">Berita</h1>
                     </div>
@@ -189,121 +190,58 @@
                         <h2>Related news</h2>
                     </div>
 
-                    <div class="col-lg-6 col-12">
-                        <div class="news-block">
-                            <div class="news-block-top">
-                                <a href="news-detail.html">
-                                    <img src="{{ asset('portal/images/news/medium-shot-volunteers-with-clothing-donations.jpg') }}"
-                                        class="news-image img-fluid" alt="">
-                                </a>
-
-                                <div class="news-category-block">
-                                    <a href="#" class="category-block-link">
-                                        Lifestyle,
+                    @forelse ($relatedBerita as $rb)
+                        <div class="col-lg-6 col-12">
+                            <div class="news-block">
+                                <div class="news-block-top">
+                                    <a href="news-detail.html">
+                                        <img src="{{ asset('storage/' . $rb->image) }}" class="news-image img-fluid"
+                                            alt="">
                                     </a>
 
-                                    <a href="#" class="category-block-link">
-                                        Clothing Donation
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="news-block-info">
-                                <div class="d-flex mt-2">
-                                    <div class="news-block-date">
-                                        <p>
-                                            <i class="bi-calendar4 custom-icon me-1"></i>
-                                            October 16, 2036
-                                        </p>
-                                    </div>
-
-                                    <div class="news-block-author mx-5">
-                                        <p>
-                                            <i class="bi-person custom-icon me-1"></i>
-                                            By Admin
-                                        </p>
-                                    </div>
-
-                                    <div class="news-block-comment">
-                                        <p>
-                                            <i class="bi-chat-left custom-icon me-1"></i>
-                                            24 Comments
-                                        </p>
+                                    <div class="news-category-block">
+                                        <a href="#" class="category-block-link">
+                                            {{ $rb->category->name }}
+                                        </a>
                                     </div>
                                 </div>
 
-                                <div class="news-block-title mb-2">
-                                    <h4><a href="news-detail.html" class="news-block-title-link">Clothing donation to
-                                            urban area</a></h4>
-                                </div>
+                                <div class="news-block-info">
+                                    <div class="d-flex mt-2">
+                                        <div class="news-block-date">
+                                            <p>
+                                                <i class="bi-calendar4 custom-icon me-1"></i>
+                                                {{ $rb->created_at_format }}
+                                            </p>
+                                        </div>
 
-                                <div class="news-block-body">
-                                    <p>Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm tokito
-                                        Professional charity theme based on Bootstrap</p>
+                                        <div class="news-block-author mx-5">
+                                            <p>
+                                                <i class="bi-person custom-icon me-1"></i>
+                                                By {{ $rb->author }}
+                                            </p>
+                                        </div>
+
+                                        <div class="news-block-comment">
+                                            <p>
+                                                <i class="bi-chat-left custom-icon me-1"></i>
+                                                {{ $rb->comments->count() }} Comments
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="news-block-title mb-2">
+                                        <h4><a href="{{ route('portal.berita.detail', ['slug' => $rb->slug]) }} "
+                                                class="news-block-title-link">{{ $rb->title }} </a></h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @empty
+                        <h5>No Data Available</h5>
+                    @endforelse
 
-                    <div class="col-lg-6 col-12">
-                        <div class="news-block">
-                            <div class="news-block-top">
-                                <a href="news-detail.html">
-                                    <img src="{{ asset('portal/images/news/medium-shot-people-collecting-foodstuff.jpg') }}"
-                                        class="news-image img-fluid" alt="">
-                                </a>
 
-                                <div class="news-category-block">
-                                    <a href="#" class="category-block-link">
-                                        Food,
-                                    </a>
-
-                                    <a href="#" class="category-block-link">
-                                        Donation,
-                                    </a>
-
-                                    <a href="#" class="category-block-link">
-                                        Caring
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="news-block-info">
-                                <div class="d-flex mt-2">
-                                    <div class="news-block-date">
-                                        <p>
-                                            <i class="bi-calendar4 custom-icon me-1"></i>
-                                            October 20, 2036
-                                        </p>
-                                    </div>
-
-                                    <div class="news-block-author mx-5">
-                                        <p>
-                                            <i class="bi-person custom-icon me-1"></i>
-                                            By Admin
-                                        </p>
-                                    </div>
-
-                                    <div class="news-block-comment">
-                                        <p>
-                                            <i class="bi-chat-left custom-icon me-1"></i>
-                                            36 Comments
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="news-block-title mb-2">
-                                    <h4><a href="news-detail.html" class="news-block-title-link">Food donation area</a>
-                                    </h4>
-                                </div>
-
-                                <div class="news-block-body">
-                                    <p>Sed leo nisl, posuere at molestie ac, suscipit auctor mauris. Etiam quis metus
-                                        elementum, tempor risus vel, condimentum orci</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </div>

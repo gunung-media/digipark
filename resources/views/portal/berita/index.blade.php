@@ -77,6 +77,7 @@
                                 </div>
                             </div>
                         @empty
+                            <h5>No Data Available </h5>
                         @endforelse
                     </div>
 
@@ -94,13 +95,15 @@
                         <div class="category-block d-flex flex-column">
                             <h5 class="mb-3">Categories</h5>
 
-                            @foreach ($categories as $category)
+                            @forelse ($categories as $category)
                                 <a href="{{ route('portal.berita.index', ['category' => $category->name]) }}"
                                     class="category-block-link">
                                     {{ $category->name }}
                                     <span class="badge">{{ $category->news->count() }}</span>
-                            @endforeach
-                            </a>
+                                </a>
+                            @empty
+                                <p>No Data Available </p>
+                            @endforelse
                         </div>
                     </div>
 

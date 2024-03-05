@@ -33,20 +33,23 @@
                   </li>
 
                   @foreach ($menus as $menu)
-                      <li class="nav-item dropdown">
-                          <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
-                              id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                              aria-expanded="false">{{ $menu->name }}</a>
+                      @if ($menu->subMenus->count() > 0)
+                          <li class="nav-item dropdown">
+                              <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
+                                  id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                                  aria-expanded="false">{{ $menu->name }}</a>
 
-                          <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                              @forelse ($menu->subMenus  as $sub)
-                                  <li><a class="dropdown-item"
-                                          href="{{ route('subMenu', ['slug' => $sub->slug]) }}">{{ $sub->title }}</a>
-                                  </li>
-                              @empty
-                              @endforelse
-                          </ul>
-                      </li>
+                              <ul class="dropdown-menu dropdown-menu-light"
+                                  aria-labelledby="navbarLightDropdownMenuLink">
+                                  @foreach ($menu->subMenus as $sub)
+                                      <li style="margin-top:10px">
+                                          <a class="dropdown-item"
+                                              href="{{ route('subMenu', ['slug' => $sub->slug]) }}">{{ $sub->title }}</a>
+                                      </li>
+                                  @endforeach
+                              </ul>
+                          </li>
+                      @endif
                   @endforeach
 
                   <li class="nav-item dropdown">

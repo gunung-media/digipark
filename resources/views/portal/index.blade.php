@@ -44,13 +44,13 @@
 
         <section class="section-padding" id="unit-layanan">
             <div class="container">
-                <div class="row">
+                <div class="row d-flex justify-content-center">
 
                     <div class="col-lg-10 col-12 text-center mx-auto">
                         <h2 class="mb-5">Unit Layanan</h2>
                     </div>
 
-                    @foreach ($dashboard?->visions ?? [] as $vision)
+                    @forelse ($dashboard?->visions ?? [] as $vision)
                         <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                             <div class="featured-block d-flex justify-content-center align-items-center">
                                 <a href="#" class="d-block">
@@ -61,7 +61,9 @@
                                 </a>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <h5>No Data Available</h5>
+                    @endforelse
                 </div>
             </div>
         </section>
@@ -123,44 +125,44 @@
             </div>
         </section>
 
+        @if (!is_null($departementMember))
+            <section class="about-section section-padding">
+                <div class="container">
+                    <div class="row">
 
-        <section class="about-section section-padding">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-6 col-md-5 col-12">
-                        <img src="{{ asset('storage/' . $departementMember->image) }}"
-                            class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
-                    </div>
-
-                    <div class="col-lg-5 col-md-7 col-12">
-                        <div class="custom-text-block">
-                            <h2 class="mb-0">{{ $departementMember->name }}</h2>
-
-                            <p class="text-muted mb-lg-4 mb-md-4">{{ $departementMember->position }}</p>
-
-                            <p>{{ $departementMember->description }}</p>
-
-                            @php
-                                $socials = ['facebook', 'x', 'instagram'];
-                            @endphp
-                            <ul class="social-icon mt-4">
-                                @foreach ($socials as $social)
-                                    @if (!is_null($departementMember->$social))
-                                        <li class="social-icon-item">
-                                            <a href="{{ $departementMember[$social . '_url'] }}"
-                                                class="social-icon-link bi-{{ $social }}"></a>
-                                        </li>
-                                    @endif
-                                @endforeach
-                            </ul>
+                        <div class="col-lg-6 col-md-5 col-12">
+                            <img src="{{ asset('storage/' . $departementMember->image) }}"
+                                class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
                         </div>
+
+                        <div class="col-lg-5 col-md-7 col-12">
+                            <div class="custom-text-block">
+                                <h2 class="mb-0">{{ $departementMember->name }}</h2>
+
+                                <p class="text-muted mb-lg-4 mb-md-4">{{ $departementMember->position }}</p>
+
+                                <p>{{ $departementMember->description }}</p>
+
+                                @php
+                                    $socials = ['facebook', 'twitter', 'instagram'];
+                                @endphp
+                                <ul class="social-icon mt-4">
+                                    @foreach ($socials as $social)
+                                        @if (!is_null($departementMember->$social))
+                                            <li class="social-icon-item">
+                                                <a href="{{ $departementMember->$social }}"
+                                                    class="social-icon-link bi-{{ $social }}"></a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
-        </section>
-
+            </section>
+        @endif
         <section class="cta-section section-padding section-bg">
             <div class="container">
                 <div class="row justify-content-center align-items-center">
@@ -187,14 +189,13 @@
                     @forelse ($jobs as $job)
                         <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                             <div class="custom-block-wrap">
-                                <img src="{{ asset('strorage/' . $job->image) }}" class="custom-block-image img-fluid"
+                                <img src="{{ asset('storage/' . $job->image) }}" class="custom-block-image img-fluid"
                                     alt="{{ $job->name_job }}"
                                     onerror="this.onerror=null;this.src='{{ asset('images/404.jpg') }}'">
                                 <div class="custom-block">
                                     <div class="custom-block-body">
                                         <h5 class="mb-3">{{ $job->name_job ?? '' }}</h5>
-
-                                        {!! $job->description !!}
+                                        <p>{{ $job->company->name }}</p>
                                     </div>
 
                                     <a href="donate.html" class="custom-btn btn">Detail</a>
@@ -203,53 +204,59 @@
                         </div>
                     @empty
                         <div>
-                            <h5>-</h5>
+                            <center>
+                                <h5>No Data Available </h5>
+                            </center>
                         </div>
                     @endforelse
                 </div>
             </div>
         </section>
 
-        <section class="testimonial-section section-padding section-bg">
-            <div class="container">
-                <div class="row">
 
-                    <div class="col-lg-8 col-12 mx-auto">
-                        <h2 class="mb-lg-3">Happy customers</h2>
+        @if (!is_null($dashboard?->testimonial))
+            <section class="testimonial-section section-padding section-bg">
+                <div class="container">
+                    <div class="row">
 
-                        <div id="testimonial-carousel" class="carousel carousel-fade slide" data-bs-ride="carousel">
+                        <div class="col-lg-8 col-12 mx-auto">
+                            <h2 class="mb-lg-3">Happy customers</h2>
 
-                            <div class="carousel-inner">
-                                @foreach ($dashboard?->testimonials ?? [] as $key => $testimonial)
-                                    <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                                        <div class="carousel-caption">
-                                            <h4 class="carousel-title">{{ $testimonial->testimonial }}</h4>
+                            <div id="testimonial-carousel" class="carousel carousel-fade slide" data-bs-ride="carousel">
 
-                                            <small class="carousel-name"><span
-                                                    class="carousel-name-title">{{ $testimonial->name }}</span>,
-                                                {{ $testimonial->job }}</small>
-                                        </div>
-                                    </div>
-                                @endforeach
-
-
-                                <ol class="carousel-indicators">
+                                <div class="carousel-inner">
                                     @foreach ($dashboard?->testimonials ?? [] as $key => $testimonial)
-                                        <li data-bs-target="#testimonial-carousel" data-bs-slide-to="{{ $key }}"
-                                            class="{{ $key === 0 ? 'active' : '' }}">
-                                            <img src="{{ !is_null($testimonial->image) ? asset('storage/' . $testimonial->image) : asset('portal/images/avatar/portrait-beautiful-young-woman-standing-grey-wall.jpg') }}"
-                                                class="img-fluid rounded-circle avatar-image" alt="avatar">
-                                        </li>
-                                    @endforeach
-                                </ol>
+                                        <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                                            <div class="carousel-caption">
+                                                <h4 class="carousel-title">{{ $testimonial->testimonial }}</h4>
 
+                                                <small class="carousel-name"><span
+                                                        class="carousel-name-title">{{ $testimonial->name }}</span>,
+                                                    {{ $testimonial->job }}</small>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+
+                                    <ol class="carousel-indicators">
+                                        @foreach ($dashboard?->testimonials ?? [] as $key => $testimonial)
+                                            <li data-bs-target="#testimonial-carousel"
+                                                data-bs-slide-to="{{ $key }}"
+                                                class="{{ $key === 0 ? 'active' : '' }}">
+                                                <img src="{{ !is_null($testimonial->image) ? asset('storage/' . $testimonial->image) : asset('portal/images/avatar/portrait-beautiful-young-woman-standing-grey-wall.jpg') }}"
+                                                    class="img-fluid rounded-circle avatar-image" alt="avatar">
+                                            </li>
+                                        @endforeach
+                                    </ol>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
 
         <section class="news-section section-padding" id="news">
             <div class="container">
@@ -311,7 +318,9 @@
                             </div>
                         @endforeach
                     @else
-                        <p>has no data</p>
+                        <div class="col-lg-7 col-12">
+                            <h5>No Data Available</h5>
+                        </div>
                     @endif
 
                     <div class="col-lg-4 col-12 mx-auto">

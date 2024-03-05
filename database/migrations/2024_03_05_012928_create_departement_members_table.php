@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('position');
             $table->string('image');
             $table->string('description')->nullable();
-            $table->string('x_url')->nullable();
-            $table->string('facebook_url')->nullable();
-            $table->string('instagram_url')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });

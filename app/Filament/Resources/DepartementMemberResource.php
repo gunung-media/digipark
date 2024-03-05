@@ -34,11 +34,11 @@ class DepartementMemberResource extends Resource
                     ->directory('departement-members')
                     ->image()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('facebook_url')
+                Forms\Components\TextInput::make('facebook')
                     ->prefixIcon('icon-fb'),
-                Forms\Components\TextInput::make('instagram_url')
+                Forms\Components\TextInput::make('instagram')
                     ->prefixIcon('icon-ig'),
-                Forms\Components\TextInput::make('x_url')
+                Forms\Components\TextInput::make('twitter')
                     ->prefixIcon('icon-x'),
                 Forms\Components\Select::make('is_active')
                     ->options([
