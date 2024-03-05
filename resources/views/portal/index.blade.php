@@ -189,8 +189,8 @@
                     @forelse ($jobs as $job)
                         <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                             <div class="custom-block-wrap">
-                                <img src="{{ asset('storage/' . $job->image) }}" class="custom-block-image img-fluid"
-                                    alt="{{ $job->name_job }}"
+                                <img src="{{ asset('storage/' . is_null($job->image) ? $job->company->image : $job->image) }}"
+                                    class="custom-block-image img-fluid" alt="{{ $job->name_job }}"
                                     onerror="this.onerror=null;this.src='{{ asset('images/404.jpg') }}'">
                                 <div class="custom-block">
                                     <div class="custom-block-body">
@@ -214,7 +214,7 @@
         </section>
 
 
-        @if (!is_null($dashboard?->testimonial))
+        @if (!is_null($dashboard?->testimonials))
             <section class="testimonial-section section-padding section-bg">
                 <div class="container">
                     <div class="row">
