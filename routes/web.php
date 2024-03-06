@@ -28,6 +28,7 @@ Route::name('portal.')->group(function () {
 
     Route::name('jobs.')->prefix('jobs')->namespace('Pekerjaan')->group(function () {
         Route::get('/', 'IndexController')->name('index');
+        Route::get('{jobId}', 'DetailController')->name('detail');
     });
 
     Route::middleware('auth:company')->group(function () {

@@ -42,7 +42,8 @@
                                         <p>{{ $job->company->name }}</p>
                                     </div>
 
-                                    <a href="donate.html" class="custom-btn btn">Detail</a>
+                                    <a href="{{ route('portal.jobs.detail', ['jobId' => $job->id]) }}"
+                                        class="custom-btn btn">Detail</a>
                                 </div>
                             </div>
                         </div>
