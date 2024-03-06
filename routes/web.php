@@ -21,6 +21,7 @@ Route::name('portal.')->group(function () {
     Route::name('berita.')->prefix('website/berita')->group(function () {
         Route::get('/', 'Berita\IndexController')->name('index');
         Route::get('{slug}', 'Berita\DetailController')->name('detail');
+        Route::post('comment', 'Berita\CommentController')->name('comment');
     });
     Route::get('login', 'LoginController@index')->name('login');
     Route::get('register', 'LoginController@index')->name('register');

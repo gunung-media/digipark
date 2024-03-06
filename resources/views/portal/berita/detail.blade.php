@@ -104,13 +104,16 @@
                                 @endforelse
                                 <div class="mb-5"></div>
 
-                                <form class="custom-form comment-form mt-4" action="#" method="post" role="form">
+                                <form class="custom-form comment-form mt-4" action="{{ route('portal.berita.comment') }}"
+                                    method="post" role="form">
+                                    @csrf
                                     <h6 class="mb-3">Write a comment</h6>
                                     <input type="text" name="name" class="form-control mb-3" placeholder="Your name"
                                         required />
 
-                                    <textarea name="comment-message" rows="4" class="form-control" id="comment-message"
-                                        placeholder="Your comment here"></textarea>
+                                    <textarea name="comment" rows="4" class="form-control" id="comment-message" placeholder="Your comment here"
+                                        required></textarea>
+                                    <input type="hidden" name="news_id" value="{{ $berita->id }}">
 
                                     <div class="col-lg-3 col-md-4 col-6 ms-auto">
                                         <button type="submit" class="form-control">Comment</button>
