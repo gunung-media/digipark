@@ -24,13 +24,15 @@
                           <li><a class="dropdown-item" href="/website#unit-layanan">Unit Layanan</a></li>
                           <li><a class="dropdown-item" href="/website#profil">Profil</a></li>
                           <li><a class="dropdown-item" href="/website#pekerjaan">Pekerjaan</a></li>
-                          <li><a class="dropdown-item" href="/website/berita">Berita</a></li>
+                          <li><a class="dropdown-item" href="/website#news">Berita</a></li>
+                          <li><a class="dropdown-item" href="/website#konsultasi">Konsultasi</a></li>
                       </ul>
                   </li>
 
-                  <li class="nav-item">
-                      <a class="nav-link click-scroll" href="/website#konsultasi">Konsultasi</a>
-                  </li>
+                  <li class="nav-item"><a class="nav-link click-scroll"
+                          href="{{ route('portal.berita.index') }}">Berita</a></li>
+                  <li class="nav-item"><a class="nav-link click-scroll"
+                          href="{{ route('portal.jobs.index') }}">Pekerjaan</a></li>
 
                   @foreach ($menus as $menu)
                       @if ($menu->subMenus->count() > 0)

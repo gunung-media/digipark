@@ -26,6 +26,10 @@ Route::name('portal.')->group(function () {
     Route::get('register', 'LoginController@index')->name('register');
     Route::post('login', 'LoginController@login')->name('login');
 
+    Route::name('jobs.')->prefix('jobs')->namespace('Pekerjaan')->group(function () {
+        Route::get('/', 'IndexController')->name('index');
+    });
+
     Route::middleware('auth:company')->group(function () {
         Route::get('logout', 'LoginController@logout')->name('logout');
         Route::name('layanan.')->prefix('layanan')->namespace('Layanan')->group(function () {
