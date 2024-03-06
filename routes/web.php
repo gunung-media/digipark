@@ -18,14 +18,16 @@ Route::get('website', 'PortalController')->name('portal');
 Route::get('form', fn () => view('portal.form'))->name('form');
 
 Route::name('portal.')->group(function () {
+    Route::get('login', 'LoginController@index')->name('login');
+    Route::post('login', 'LoginController@login')->name('login');
+    Route::get('register', 'RegisterController@index')->name('register');
+    Route::post('register', 'RegisterController@store')->name('register');
+
     Route::name('berita.')->prefix('website/berita')->group(function () {
         Route::get('/', 'Berita\IndexController')->name('index');
         Route::get('{slug}', 'Berita\DetailController')->name('detail');
         Route::post('comment', 'Berita\CommentController')->name('comment');
     });
-    Route::get('login', 'LoginController@index')->name('login');
-    Route::get('register', 'LoginController@index')->name('register');
-    Route::post('login', 'LoginController@login')->name('login');
 
     Route::name('jobs.')->prefix('jobs')->namespace('Pekerjaan')->group(function () {
         Route::get('/', 'IndexController')->name('index');
