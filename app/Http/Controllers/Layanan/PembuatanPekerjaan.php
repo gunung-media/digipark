@@ -23,7 +23,7 @@ class PembuatanPekerjaan extends Controller
             $image = storage_path('app/public/jobs') . '/' . $fileName;
             $file->move(storage_path('app/public/jobs'), $fileName);
         }
-        if (Job::create([...$data, "image" => $image])) {
+        if (Job::create([...$data, "image" => $image, 'status' => 0])) {
             return redirect()->back()->with('success', 'Success Input Pekerjaan');
         }
         return redirect()->back()->with('error', 'Error input pekerjaan');
