@@ -66,7 +66,12 @@ class AdminPanelProvider extends PanelProvider
                     )
                     ->icon('heroicon-o-presentation-chart-line')
                     ->isActiveWhen(fn () => request()->routeIs('filament.admin.resources.dashboards.edit', 'filament.admin.resources.dashboards.create'))
-                    ->group('Settings')
+                    ->group('Settings'),
+                NavigationItem::make('Website')
+                    ->label("Go to website")
+                    ->url(fn () => route('portal'))
+                    ->icon('heroicon-o-globe-alt')
+                    ->openUrlInNewTab()
             ])
             ->breadcrumbs(fn () => !request()->routeIs('filament.admin.resources.dashboards.edit', 'filament.admin.resources.dashboards.create'));
     }
