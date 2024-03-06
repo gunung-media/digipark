@@ -62,7 +62,7 @@
                    <div class="col-lg-6 col-md-7 col-12">
                        <p class="copyright-text mb-0">Copyright © {{ date('Y') }} <a href="#">Digital Palangka
                                Raya Kreatif Ketenagakerjaan</a>
-                           Charity Org.<brr Design: <a href="https://gunungmedia.com" target="_blank">Gunung Media</a>
+                           <br> Design: <a href="https://gunungmedia.com" target="_blank">Gunung Media</a>
                        </p>
                    </div>
 

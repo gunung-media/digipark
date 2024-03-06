@@ -58,4 +58,10 @@
         padding-top: 150px;
         padding-bottom: 150px;
     }
+
+    .job-image {
+        object-fit: cover;
+        height: 250px;
+        width: 100%;
+    }
 </style>
