@@ -266,62 +266,57 @@
                         <h2>Latest News</h2>
                     </div>
 
-                    @if (count($news->slice(0, 2)))
-                        @foreach ($news->slice(0, 2) as $new)
-                            <div class="col-lg-7 col-12">
-                                <div class="news-block">
-                                    <div class="news-block-top">
-                                        <a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}">
-                                            <img src="{{ asset('storage/' . $new->image) }}" class="news-image img-fluid"
-                                                alt="">
+                    <div class="col-lg-7 col-12">
+                        @forelse ($news->slice(0, 2) as $new)
+                            <div class="news-block" style="margin-bottom:5rem">
+                                <div class="news-block-top">
+                                    <a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}">
+                                        <img src="{{ asset('storage/' . $new->image) }}" class="news-image img-fluid"
+                                            alt="">
+                                    </a>
+
+                                    <div class="news-category-block">
+                                        <a href="#" class="category-block-link">
+                                            {{ $new->category->name }}
                                         </a>
-
-                                        <div class="news-category-block">
-                                            <a href="#" class="category-block-link">
-                                                {{ $new->category->name }}
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="news-block-info">
-                                        <div class="d-flex mt-2">
-                                            <div class="news-block-date">
-                                                <p>
-                                                    <i class="bi-calendar4 custom-icon me-1"></i>
-                                                    {{ $new->created_at_format }}
-                                                </p>
-                                            </div>
-
-                                            <div class="news-block-author mx-5">
-                                                <p>
-                                                    <i class="bi-person custom-icon me-1"></i>
-                                                    By {{ $new->author }}
-                                                </p>
-                                            </div>
-
-                                            <div class="news-block-comment">
-                                                <p>
-                                                    <i class="bi-chat-left custom-icon me-1"></i>
-                                                    {{ $new->comments->count() }} Comments
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div class="news-block-title mb-2">
-                                            <h4><a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}"
-                                                    class="news-block-title-link">{{ $new->title }}</a></h4>
-                                        </div>
-
                                     </div>
                                 </div>
 
+                                <div class="news-block-info">
+                                    <div class="d-flex mt-2">
+                                        <div class="news-block-date">
+                                            <p>
+                                                <i class="bi-calendar4 custom-icon me-1"></i>
+                                                {{ $new->created_at_format }}
+                                            </p>
+                                        </div>
+
+                                        <div class="news-block-author mx-5">
+                                            <p>
+                                                <i class="bi-person custom-icon me-1"></i>
+                                                By {{ $new->author }}
+                                            </p>
+                                        </div>
+
+                                        <div class="news-block-comment">
+                                            <p>
+                                                <i class="bi-chat-left custom-icon me-1"></i>
+                                                {{ $new->comments->count() }} Comments
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="news-block-title mb-2">
+                                        <h4><a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}"
+                                                class="news-block-title-link">{{ $new->title }}</a></h4>
+                                    </div>
+
+                                </div>
                             </div>
-                        @endforeach
-                    @else
-                        <div class="col-lg-7 col-12">
+                        @empty
                             <h5>No Data Available</h5>
-                        </div>
-                    @endif
+                        @endforelse
+                    </div>
 
                     <div class="col-lg-4 col-12 mx-auto">
                         <form class="custom-form search-form" action="{{ route('portal.berita.index') }}" method="get"
@@ -337,37 +332,33 @@
 
                         <h5 class="mt-5 mb-3">Recent news</h5>
 
-                        @if (count($news->slice(2, 4)))
-                            @foreach ($news->slice(2, 4) as $new)
-                                <div class="news-block news-block-two-col d-flex mt-4">
-                                    <div class="news-block-two-col-image-wrap">
-                                        <a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}">
-                                            <img src="{{ asset('storage/' . $new->image) }}" class="news-image img-fluid"
-                                                alt="">
-                                        </a>
+                        @forelse ($news->slice(2, 4) as $new)
+                            <div class="news-block news-block-two-col d-flex mt-4">
+                                <div class="news-block-two-col-image-wrap">
+                                    <a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}">
+                                        <img src="{{ asset('storage/' . $new->image) }}" class="news-image img-fluid"
+                                            alt="">
+                                    </a>
+                                </div>
+
+                                <div class="news-block-two-col-info">
+                                    <div class="news-block-title mb-2">
+                                        <h6><a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}"
+                                                class="news-block-title-link">{{ $new->title }}</a>
+                                        </h6>
                                     </div>
 
-                                    <div class="news-block-two-col-info">
-                                        <div class="news-block-title mb-2">
-                                            <h6><a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}"
-                                                    class="news-block-title-link">{{ $new->title }}</a>
-                                            </h6>
-                                        </div>
-
-                                        <div class="news-block-date">
-                                            <p>
-                                                <i class="bi-calendar4 custom-icon me-1"></i>
-                                                {{ $new->created_at_format }}
-                                            </p>
-                                        </div>
+                                    <div class="news-block-date">
+                                        <p>
+                                            <i class="bi-calendar4 custom-icon me-1"></i>
+                                            {{ $new->created_at_format }}
+                                        </p>
                                     </div>
                                 </div>
-                            @endforeach
-                        @else
-                            <p>-</p>
-                        @endif
-
-
+                            </div>
+                        @empty
+                            <p>No Data Available</p>
+                        @endforelse
                         <div class="category-block d-flex flex-column">
                             <h5 class="mb-3">Categories</h5>
 
