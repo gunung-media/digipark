@@ -66,14 +66,16 @@
                               </li>
                               <li>
                                   <a class="dropdown-item"
+                                      href="{{ route('portal.layanan.pelaporanPenempatan.index') }}">Pelaporan
+                                      Penempatan<a>
+                              </li>
+                              <li>
+                                  <a class="dropdown-item"
                                       href="{{ route('portal.layanan.permintaanTenagaKerja.index') }}">Permintaan Tenaga
                                       Kerja<a>
                               </li>
                           @else
                               <li><a class="dropdown-item" href="{{ route('form') }}">Pembuatan Kartu AK/I</a></li>
-                              <li><a class="dropdown-item" href="{{ route('form') }}">Lapor Lowongan</a>
-                              <li><a class="dropdown-item" href="{{ route('form') }}">Lapor Penempatan</a>
-                              <li><a class="dropdown-item" href="{{ route('form') }}">Permintaan Tenaga Kerja</a>
                               <li><a class="dropdown-item" href="{{ route('form') }}">Laporan Pemutusan Hubungan
                                       Kerja</a>
                               <li><a class="dropdown-item" href="{{ route('form') }}">Rekomendasi Klaim JHT</a>

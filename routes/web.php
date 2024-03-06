@@ -37,6 +37,10 @@ Route::name('portal.')->group(function () {
                 Route::get('form', 'PermintaanTenagaKerja@index')->name('index');
                 Route::post('form', 'PermintaanTenagaKerja@store')->name('store');
             });
+            Route::name('pelaporanPenempatan.')->prefix('pelaporan-penempatan')->group(function () {
+                Route::get('form', 'PelaporanPenempatan@index')->name('index');
+                Route::post('form', 'PelaporanPenempatan@store')->name('store');
+            });
         });
     });
 });

@@ -20,7 +20,7 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-                        <h3 class="mb-4">Pembuatan Pekerjaan</h3>
+                        <h3 class="mb-4">Pelaporan Lowongan</h3>
 
                         <div class="row">
                             <div class="col-lg-12 col-12">
