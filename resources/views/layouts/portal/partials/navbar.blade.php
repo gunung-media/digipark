@@ -59,8 +59,15 @@
 
                       <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                           @if (auth('company')->check())
-                              <li><a class="dropdown-item"
-                                      href="{{ route('portal.layanan.pembuatanPekerjaan') }}">Pembuatan Pekerjaan<a>
+                              <li>
+                                  <a class="dropdown-item"
+                                      href="{{ route('portal.layanan.pembuatanPekerjaan.index') }}">Pelaporan
+                                      Lowongan<a>
+                              </li>
+                              <li>
+                                  <a class="dropdown-item"
+                                      href="{{ route('portal.layanan.permintaanTenagaKerja.index') }}">Permintaan Tenaga
+                                      Kerja<a>
                               </li>
                           @else
                               <li><a class="dropdown-item" href="{{ route('form') }}">Pembuatan Kartu AK/I</a></li>

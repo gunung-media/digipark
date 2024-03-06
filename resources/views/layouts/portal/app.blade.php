@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') Digital Palangka Raya Kreatif Kewirausahaan</title>
     @include('layouts.portal.partials.css')
+    @yield('css')
 </head>
 
 <body>
@@ -27,6 +28,7 @@
         </div>
     </div>
     @include('layouts.portal.partials.scripts')
+    @yield('script')
 </body>
 
 </html>

@@ -28,9 +28,15 @@ Route::name('portal.')->group(function () {
 
     Route::middleware('auth:company')->group(function () {
         Route::get('logout', 'LoginController@logout')->name('logout');
-        Route::name('layanan.')->prefix('layanan')->group(function () {
-            Route::get('form', 'Layanan\PembuatanPekerjaan@index')->name('pembuatanPekerjaan');
-            Route::post('form', 'Layanan\PembuatanPekerjaan@store')->name('pembuatanPekerjaan.store');
+        Route::name('layanan.')->prefix('layanan')->namespace('Layanan')->group(function () {
+            Route::name('pembuatanPekerjaan.')->prefix('pembuatan-pekerjaan')->group(function () {
+                Route::get('form', 'PembuatanPekerjaan@index')->name('index');
+                Route::post('form', 'PembuatanPekerjaan@store')->name('store');
+            });
+            Route::name('permintaanTenagaKerja.')->prefix('permintaan-tenaga-kerja')->group(function () {
+                Route::get('form', 'PermintaanTenagaKerja@index')->name('index');
+                Route::post('form', 'PermintaanTenagaKerja@store')->name('store');
+            });
         });
     });
 });
