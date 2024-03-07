@@ -1,3 +1,5 @@
+@import '@/assets/media-queries.scss';
+
 .splash {
     position: relative;
     background: url('@/assets/images/bg.jpeg');
@@ -44,6 +46,13 @@
     z-index: 2;
     margin: 0 0 0rem -1rem;
     width: 350px;
+
+    @include lt-sm {
+        position: absolute;
+        bottom: 0;
+        width: 200px;
+    }
+
 }
 
 .kadis {
@@ -53,6 +62,12 @@
     z-index: 2;
     margin: 0 -1rem 0rem 0rem;
     width: 350px;
+
+    @include lt-sm {
+        position: absolute;
+        bottom: 0;
+        width: 200px;
+    }
 }
 
 .overlay {
@@ -110,12 +125,20 @@
             i {
                 font-size: 24px;
             }
+
+            @include lt-sm {
+                font-size: 50px;
+            }
         }
 
         h5 {
             color: #FFF;
             font-size: 20px;
             font-weight: 700;
+
+            @include lt-sm {
+                font-size: 10px;
+            }
         }
 
         .homeContentEnterBtn {
@@ -208,6 +231,10 @@
     gap: 0rem 3rem;
     max-width: 38rem;
 
+    @include lt-sm {
+        margin: 2rem;
+    }
+
     a {
         position: relative;
         z-index: 100;
@@ -231,6 +258,10 @@
             transition-property: all;
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
             transition-duration: 150ms;
+
+            @include lt-sm {
+                padding: .5rem;
+            }
 
             img {
                 width: 49px;
