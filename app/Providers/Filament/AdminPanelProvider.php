@@ -73,6 +73,8 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-globe-alt')
                     ->openUrlInNewTab()
             ])
-            ->breadcrumbs(fn () => !request()->routeIs('filament.admin.resources.dashboards.edit', 'filament.admin.resources.dashboards.create'));
+            ->breadcrumbs(fn () => !request()->routeIs('filament.admin.resources.dashboards.edit', 'filament.admin.resources.dashboards.create'))
+            ->databaseNotifications()
+            ->databaseNotificationsPolling("20s");
     }
 }
