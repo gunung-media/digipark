@@ -8,10 +8,11 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('portal.login');
+        $mode = request()->query('mode');
+        return view('portal.login', compact('mode'));
     }
 
-    public function login(Request $request)
+    public function login(Request $request, $mode)
     {
         $request->validate([
             'email' => 'required|email',
@@ -20,8 +21,8 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if (auth('company')->attempt($credentials)) {
-            return redirect(route('portal'));
+        if (auth($mode)->attempt($credentials)) {
+            return redirect(route($mode === "seeker" ? 'portal.jobs.index' : 'portal'));
         }
         return redirect()->back()->with('error', 'Login failed, please try again');
     }
@@ -29,6 +30,7 @@ class LoginController extends Controller
     public function logout()
     {
         auth('company')->logout();
+        auth('seeker')->logout();
         return redirect(route('portal.login'));
     }
 }

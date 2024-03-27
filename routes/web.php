@@ -19,7 +19,8 @@ Route::get('form', fn () => view('portal.form'))->name('form');
 
 Route::name('portal.')->group(function () {
     Route::get('login', 'LoginController@index')->name('login');
-    Route::post('login', 'LoginController@login')->name('login');
+    Route::post('login/{mode?}', 'LoginController@login')->name('login.post');
+    Route::get('logout', 'LoginController@logout')->name('logout');
     Route::get('register', 'RegisterController@index')->name('register');
     Route::post('register', 'RegisterController@store')->name('register');
 
@@ -35,7 +36,6 @@ Route::name('portal.')->group(function () {
     });
 
     Route::middleware('auth:company')->group(function () {
-        Route::get('logout', 'LoginController@logout')->name('logout');
         Route::name('layanan.')->prefix('layanan')->namespace('Layanan')->group(function () {
             Route::name('pembuatanPekerjaan.')->prefix('pembuatan-pekerjaan')->group(function () {
                 Route::get('form', 'PembuatanPekerjaan@index')->name('index');

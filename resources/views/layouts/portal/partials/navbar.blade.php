@@ -88,7 +88,7 @@
                       </ul>
                   </li>
                   <li class="nav-item ms-3">
-                      @if (auth('company')->check())
+                      @if (auth('company')->check() || auth('seeker')->check())
                           <a class="nav-link custom-btn custom-border-btn btn"
                               href="{{ route('portal.logout') }}">Logout</a>
                       @else
