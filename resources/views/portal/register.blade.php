@@ -27,16 +27,16 @@
                         @if (empty($mode))
                             <div class="row">
                                 <div class="col-md-6 col-12">
-                                    <a class="btn btn-primary" style="width:100%"
-                                        href="{{ route('portal.register', ['mode' => 'perusahaan']) }}">Badan Perusahan</a>
+                                    <a class="btn btn-primary custom-btn" style="width:100%"
+                                        href="{{ route('portal.register', ['mode' => 'company']) }}">Badan Perusahan</a>
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <a class="btn btn-primary" style="width:100%"
+                                    <a class="btn btn-primary custom-btn" style="width:100%"
                                         href="{{ route('portal.register', ['mode' => 'seeker']) }}">Pencari Kerja</a>
                                 </div>
                             </div>
                         @else
-                            @if ($mode === 'perusahaan')
+                            @if ($mode === 'company')
                                 <div class="row">
                                     <div class="col-12 form-group">
                                         <label for="">Nama Perusahaan *</label>
@@ -62,17 +62,46 @@
                                         <label for="">Image *</label>
                                         <input type="file" required="required" class="form-control" name="image">
                                     </div>
-                                @else
-                                    <div class="row">
-                                        <center>
-                                            <h3>Tahap Pengembangan</h3>
-                                        </center>
+                                </div>
+                            @else
+                                <div class="row">
+                                    <div class="col-12 form-group">
+                                        <label for="">Nama Lengkap *</label>
+                                        <input type="text" name="full_name" class="form-control" required />
                                     </div>
+                                    <div class="col-12 form-group">
+                                        <label for="">Email *</label>
+                                        <input type="email" name="email" class="form-control" required name="email" />
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <label for="">Password *</label>
+                                        <input type="password" required="required" class="form-control" name="password">
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <label for="">Alamat *</label>
+                                        <input type="text" required="required" class="form-control" name="address">
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <label for="">Phone Number *</label>
+                                        <input type="tel" required="required" class="form-control" name="phone_number">
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <label for="">Tanggal Lahir *</label>
+                                        <input type="date" required="required" class="form-control" name="date_of_birth">
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <label for="">Jenis Kelamin *</label>
+                                        <select name="gender" class="form-control">
+                                            <option value="">Pilih Jenis Kelamin</option>
+                                            <option value="male">Laki-Laki</option>
+                                            <option value="female">Perempuan</option>
+                                        </select>
+                                    </div>
+                                </div>
                             @endif
                             <div class="col-12">
                                 <input type="hidden" name="mode" value="{{ $mode }} ">
-                                <input type="submit" class="mt-4 form-control btn-primary" value="Register"
-                                    style="background-color: #007bff; color:white">
+                                <button type="submit" class="form-control mt-4">Register</button>
                             </div>
                         @endif
                     </form>

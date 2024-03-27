@@ -11,15 +11,6 @@
                     <div class="col-lg-12 col-12">
                         <h1 class="text-white">List Pekerjaan</h1>
                     </div>
-                    <form class="job-form" method="get">
-                        <div class="col-lg-5 col-12">
-                            <div class="form-group">
-                                <label for="">Nama Pekerjaan</label>
-                                <input type="" class="form-control" name="q" value="{{ $name }}">
-                            </div>
-                        </div>
-                        <button class="btn btn-primary">Seek</button>
-                    </form>
 
                 </div>
             </div>
@@ -28,7 +19,19 @@
         <section class="news-section section-padding">
             <div class="container">
                 <div class="row">
-
+                    <div class="col-12" style="margin-bottom:4rem; margin-top: -2rem;">
+                        <form class="job-form" method="get">
+                            <div class="col-lg-5 col-12">
+                                <center>
+                                    <h5 for="">Nama Pekerjaan</h5>
+                                </center>
+                                <div class="form-group">
+                                    <input type="" class="form-control" name="q" value="{{ $name }}">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">Seek</button>
+                        </form>
+                    </div>
 
                     @forelse($jobs as $job)
                         <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">

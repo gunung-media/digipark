@@ -21,7 +21,7 @@ Route::name('portal.')->group(function () {
     Route::get('login', 'LoginController@index')->name('login');
     Route::post('login/{mode?}', 'LoginController@login')->name('login.post');
     Route::get('logout', 'LoginController@logout')->name('logout');
-    Route::get('register', 'RegisterController@index')->name('register');
+    Route::get('register', 'RegisterController@index')->name('register.index');
     Route::post('register', 'RegisterController@store')->name('register');
 
     Route::name('berita.')->prefix('website/berita')->group(function () {

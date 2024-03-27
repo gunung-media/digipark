@@ -34,11 +34,11 @@
                         @if (empty($mode))
                             <div class="row">
                                 <div class="col-md-6 col-12">
-                                    <a class="btn btn-primary" style="width:100%"
+                                    <a class="btn btn-primary custom-btn" style="width:100%"
                                         href="{{ route('portal.login', ['mode' => 'company']) }}">Badan Perusahan</a>
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <a class="btn btn-primary" style="width:100%"
+                                    <a class="btn btn-primary custom-btn" style="width:100%"
                                         href="{{ route('portal.login', ['mode' => 'seeker']) }}">Pencari Kerja</a>
                                 </div>
                             </div>
@@ -56,7 +56,8 @@
 
                                 <div class="col-lg-12 col-12 mt-2">
                                     <button type="submit" class="form-control mt-4">Login</button>
-                                    <p class="mt-5">Don't have an account? <a href="{{ route('portal.register') }}"
+                                    <p class="mt-5">Don't have an account? <a
+                                            href="{{ route('portal.register.index', ['mode' => $mode]) }}"
                                             style="color: blue">Register</a> </p>
                                 </div>
                             </div>
