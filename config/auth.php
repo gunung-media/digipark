@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'company',
         ],
+        'seeker' => [
+            'driver' => 'session',
+            'provider' => 'seeker',
+        ],
     ],
 
     /*
@@ -71,6 +75,10 @@ return [
         'company' => [
             'driver' => 'eloquent',
             'model' => App\Models\Company::class,
+        ],
+        'seeker' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Seeker::class,
         ],
 
         // 'users' => [
