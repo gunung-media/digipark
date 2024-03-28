@@ -34,6 +34,7 @@ Route::name('portal.')->group(function () {
         Route::get('/', 'IndexController')->name('index');
         Route::get('{jobId}', 'DetailController')->name('detail');
     });
+    Route::post('jobs/apply', 'Seeker\ApplyJobController')->name('jobs.apply');
 
     Route::middleware('auth:company')->group(function () {
         Route::name('layanan.')->prefix('layanan')->namespace('Layanan')->group(function () {

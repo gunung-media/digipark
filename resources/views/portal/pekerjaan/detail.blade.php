@@ -74,6 +74,12 @@
                                 @endif
                             @endforeach
                         </table>
+                        <form action="{{ route('portal.jobs.apply') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="job_id" value="{{ $job->id }}">
+                            <input type="submit" value="Apply" class="custom-btn btn-primary"
+                                style="margin-top:2rem; width:55%" />
+                        </form>
                     </div>
                 </div>
             </div>

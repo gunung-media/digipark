@@ -31,8 +31,8 @@ class JobResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('address')
                     ->required()
-                    ->default(function (RelationManager $livewire) {
-                        return $livewire->ownerRecord->address;
+                    ->default(function ($livewire) {
+                        return optional($livewire)->ownerRecord?->address ?? '';
                     })
                     ->maxLength(255),
                 TinyEditor::make('description')
