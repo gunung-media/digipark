@@ -20,6 +20,9 @@ class ApplyJobController extends Controller
         if (!auth('seeker')->check())
             return redirect()->route('portal.login', ['mode' => 'seeker'])->with('error', 'Anda perlu login!');
 
+        if (JobApplicant::where('job_id', $request->job_id)->where('seeker_id', auth('seeker')->user()->id)->first())
+            return redirect()->back()->with('error', 'Anda Sudah Mengapply Pekerjaan');
+
         $data = ['job_id' => $request->input('job_id'), 'seeker_id' => auth('seeker')->user()->id];
         if (JobApplicant::create($data)) {
             Notification::make()
