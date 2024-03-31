@@ -17,7 +17,12 @@ class IndexController extends Controller
         $jobs = Job::active();
 
         if (!is_null($name)) {
-            $jobs = $jobs->where('name_job', 'like', '%' . $name . '%');
+            $jobs = $jobs->where(function ($query) use ($name) {
+                $query->where('name_job', 'like', '%' . $name . '%')
+                    ->orWhereHas('company', function ($query) use ($name) {
+                        $query->where('name', 'like', '%' . $name . '%');
+                    });
+            });
         }
 
         $jobs = $jobs->get();

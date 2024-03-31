@@ -22,14 +22,14 @@
                     <div class="col-12" style="margin-bottom:4rem; margin-top: -2rem;">
                         <form class="job-form custom-form" method="get">
                             <div class="col-lg-5 col-12">
-                                <center>
-                                    <h5 for="">Nama Pekerjaan</h5>
-                                </center>
                                 <div class="form-group">
-                                    <input type="" class="form-control" name="q" value="{{ $name }}">
+                                    <input type="" class="form-control" name="q" value="{{ $name }}"
+                                        placeholder="Nama Pekerjaan/Perusahaan">
                                 </div>
                             </div>
-                            <button class="btn btn-primary custom-btn">Seek</button>
+                            <div class="form-group">
+                                <button class="btn btn-primary custom-btn">Cari</button>
+                            </div>
                         </form>
                     </div>
 
@@ -69,7 +69,7 @@
         .job-form {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             gap: 2rem;
 
         }
