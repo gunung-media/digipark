@@ -23,6 +23,7 @@ Route::name('portal.')->group(function () {
     Route::get('logout', 'LoginController@logout')->name('logout');
     Route::get('register', 'RegisterController@index')->name('register.index');
     Route::post('register', 'RegisterController@store')->name('register');
+    Route::post('consultation', 'PostConsultationController')->name('consultation');
 
     Route::name('berita.')->prefix('website/berita')->group(function () {
         Route::get('/', 'Berita\IndexController')->name('index');
