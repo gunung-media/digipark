@@ -19,6 +19,7 @@
         "malzariey/filament-daterangepicker-filter": "^2.4",
         "mohamedsabil83/filament-forms-tinyeditor": "^2.2",
         "rawilk/filament-password-input": "^2.0",
+        "saade/filament-autograph": "^3.1",
         "symfony/filesystem": "^7.0",
         "tightenco/ziggy": "^1.8"
     },

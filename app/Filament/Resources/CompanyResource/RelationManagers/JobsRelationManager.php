@@ -64,7 +64,7 @@ class JobsRelationManager extends RelationManager
                     ->required(),
                 Forms\Components\TextInput::make('salary')
                     ->numeric()->default(0),
-                Forms\Components\Select::make('status')
+                Forms\Components\Select::make('is_active')
                     ->options([
                         1 => 'Active',
                         0 => 'Inactive',
@@ -78,11 +78,11 @@ class JobsRelationManager extends RelationManager
             ->recordTitleAttribute('name_job')
             ->columns([
                 Tables\Columns\TextColumn::make('name_job'),
-                Tables\Columns\IconColumn::make('status')
+                Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
             ])
             ->filters([
-                SelectFilter::make('status')
+                SelectFilter::make('is_active')
                     ->options([
                         1 => 'Active',
                         0 => 'Inactive',
@@ -94,16 +94,16 @@ class JobsRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\Action::make('active')
                     ->action(function (Job $record) {
-                        $record->status = true;
+                        $record->is_active = true;
                         $record->save();
                     })
-                    ->hidden(fn (Job $record): bool => $record->status),
+                    ->hidden(fn (Job $record): bool => $record->is_active),
                 Tables\Actions\Action::make('inactive')
                     ->action(function (Job $record) {
-                        $record->status = false;
+                        $record->is_active = false;
                         $record->save();
                     })
-                    ->visible(fn (Job $record): bool => $record->status),
+                    ->visible(fn (Job $record): bool => $record->is_active),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

@@ -51,6 +51,6 @@ class Job extends Model
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('status', 1);
+        $query->where('is_active', 1);
     }
 }

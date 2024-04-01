@@ -6,6 +6,9 @@ use App\Filament\Company\Resources\JobResource\Pages;
 use App\Filament\Company\Resources\JobResource\RelationManagers;
 use App\Models\Job;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
@@ -15,6 +18,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
+use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 class JobResource extends Resource
 {
@@ -26,49 +30,62 @@ class JobResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name_job')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('address')
-                    ->required()
-                    ->default(function ($livewire) {
-                        return optional($livewire)->ownerRecord?->address ?? '';
-                    })
-                    ->maxLength(255),
-                TinyEditor::make('description')
-                    ->columnSpanFull()
-                    ->fileAttachmentsDisk('public')
-                    ->fileAttachmentsVisibility('private')
-                    ->fileAttachmentsDirectory('jobs/description')
-                    ->required(),
-                Forms\Components\FileUpload::make('image')
-                    ->disk('public')
-                    ->directory('jobs')
-                    ->image()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('total_needed_man')
-                    ->numeric()
-                    ->required()
-                    ->default(0),
-                Forms\Components\TextInput::make('total_needed_woman')
-                    ->numeric()
-                    ->required()
-                    ->default(0),
-                Forms\Components\Select::make('minimal_education')
-                    ->options([
-                        "Tidak Ada" => 'Tidak Ada',
-                        "SD" => 'SD',
-                        "SMP" => 'SMP',
-                        "SMA/SMK" => 'SMA/SMK',
-                        "Kuliah" => 'KuliahSMA',
-                    ]),
-                Forms\Components\TextInput::make('special')
-                    ->label('Kelebihan'),
-                Forms\Components\DatePicker::make('deadline'),
-                Forms\Components\DatePicker::make('start_date')
-                    ->required(),
-                Forms\Components\TextInput::make('salary')
-                    ->numeric()->default(0),
+                Tabs::make()->tabs([
+                    Tab::make('Main Data')->schema([
+                        Forms\Components\TextInput::make('name_job')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('address')
+                            ->required()
+                            ->default(function ($livewire) {
+                                return optional($livewire)->ownerRecord?->address ?? '';
+                            })
+                            ->maxLength(255),
+                        TinyEditor::make('description')
+                            ->columnSpanFull()
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsVisibility('private')
+                            ->fileAttachmentsDirectory('jobs/description')
+                            ->required(),
+                        Forms\Components\FileUpload::make('image')
+                            ->disk('public')
+                            ->directory('jobs')
+                            ->image()
+                            ->columnSpanFull(),
+                    ])->columns(2),
+                    Tab::make('Data Tambahan')->schema([
+                        Forms\Components\TextInput::make('total_needed_man')
+                            ->numeric()
+                            ->required()
+                            ->default(0),
+                        Forms\Components\TextInput::make('total_needed_woman')
+                            ->numeric()
+                            ->required()
+                            ->default(0),
+                        Forms\Components\Select::make('minimal_education')
+                            ->options([
+                                "Tidak Ada" => 'Tidak Ada',
+                                "SD" => 'SD',
+                                "SMP" => 'SMP',
+                                "SMA/SMK" => 'SMA/SMK',
+                                "Kuliah" => 'KuliahSMA',
+                            ]),
+                        Forms\Components\TextInput::make('special')
+                            ->label('Kelebihan'),
+                        Forms\Components\DatePicker::make('deadline'),
+                        Forms\Components\DatePicker::make('start_date')
+                            ->required(),
+                        Forms\Components\TextInput::make('salary')
+                            ->numeric()
+                            ->prefix('Rp.')
+                            ->default(0),
+                    ])->columns(2),
+                    Tab::make('Tanda Tangan')->schema([
+                        SignaturePad::make('signature')
+                            ->columnSpanFull()
+                            ->downloadable(),
+                    ])
+                ])->columnSpanFull(),
             ]);
     }
 
@@ -77,11 +94,11 @@ class JobResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name_job'),
-                Tables\Columns\IconColumn::make('status')
+                Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
             ])
             ->filters([
-                SelectFilter::make('status')
+                SelectFilter::make('is_active')
                     ->options([
                         1 => 'Active',
                         0 => 'Inactive',
