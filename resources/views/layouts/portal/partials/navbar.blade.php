@@ -3,7 +3,7 @@
           <a class="navbar-brand" href="{{ route('portal') }}">
               <img src="{{ asset('portal/images/logo.png') }}" class="logo img-fluid" alt="Kind Heart Charity">
               <span>
-                  <small>Digital Palangka Raya Kreatif Ketenagakerjaan</small>
+                  <!-- <small>Digital Palangka Raya Kreatif Ketenagakerjaan</small> -->
               </span>
           </a>
 
@@ -33,6 +33,8 @@
                           href="{{ route('portal.berita.index') }}">Berita</a></li>
                   <li class="nav-item"><a class="nav-link click-scroll"
                           href="{{ route('portal.jobs.index') }}">Pekerjaan</a></li>
+                  <li class="nav-item"><a class="nav-link click-scroll"
+                          href="{{ route('portal.consultation') }}">Konsultasi</a></li>
 
                   @foreach ($menus as $menu)
                       @if ($menu->subMenus->count() > 0)
@@ -73,7 +75,8 @@
                               </li>
                               <li>
                                   <a class="dropdown-item"
-                                      href="{{ route('portal.layanan.permintaanTenagaKerja.index') }}">Permintaan Tenaga
+                                      href="{{ route('portal.layanan.permintaanTenagaKerja.index') }}">Permintaan
+                                      Tenaga
                                       Kerja<a>
                               </li>
                           @else

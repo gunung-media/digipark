@@ -24,6 +24,7 @@ Route::name('portal.')->group(function () {
     Route::get('register', 'RegisterController@index')->name('register.index');
     Route::post('register', 'RegisterController@store')->name('register');
     Route::post('consultation', 'PostConsultationController')->name('consultation');
+    Route::get('konsultasi', 'IndexConsultationController')->name('consultation');
 
     Route::name('berita.')->prefix('website/berita')->group(function () {
         Route::get('/', 'Berita\IndexController')->name('index');
