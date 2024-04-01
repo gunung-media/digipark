@@ -19,7 +19,7 @@ class PostConsultationController extends Controller
             'email' => 'required|email',
             'description' => 'required',
             'subject' => 'required',
-            'file' => 'mimes:pdf|docx|max:2048',
+            'file' => 'mimes:pdf,jpg,png,jpeg,docx,max:2048',
         ]);
 
         if ($validate->fails()) {
@@ -27,7 +27,7 @@ class PostConsultationController extends Controller
         }
 
         if ($request->hasFile('file')) {
-            $data['file'] = $request->file('file')->store('uploads', 'public');
+            $data['file'] = $request->file('file')->store('consultations', 'public');
         }
 
         if (Consultation::create($data)) {
