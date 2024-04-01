@@ -47,7 +47,7 @@
                 <div class="row d-flex justify-content-center">
 
                     <div class="col-lg-10 col-12 text-center mx-auto">
-                        <h2 class="mb-5">Unit Layanan</h2>
+                        <h2 class="mb-5">Visi</h2>
                     </div>
 
                     @forelse ($dashboard?->visions ?? [] as $vision)
