@@ -56,40 +56,6 @@
                       @endif
                   @endforeach
 
-                  <li class="nav-item dropdown">
-                      <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
-                          id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                          aria-expanded="false">Layanan Online</a>
-
-                      <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                          @if (auth('company')->check())
-                              <li>
-                                  <a class="dropdown-item"
-                                      href="{{ route('portal.layanan.pembuatanPekerjaan.index') }}">Pelaporan
-                                      Lowongan<a>
-                              </li>
-                              <li>
-                                  <a class="dropdown-item"
-                                      href="{{ route('portal.layanan.pelaporanPenempatan.index') }}">Pelaporan
-                                      Penempatan<a>
-                              </li>
-                              <li>
-                                  <a class="dropdown-item"
-                                      href="{{ route('portal.layanan.permintaanTenagaKerja.index') }}">Permintaan
-                                      Tenaga
-                                      Kerja<a>
-                              </li>
-                          @else
-                              <li><a class="dropdown-item" href="{{ route('form') }}">Pembuatan Kartu AK/I</a></li>
-                              <li><a class="dropdown-item" href="{{ route('form') }}">Laporan Pemutusan Hubungan
-                                      Kerja</a>
-                              <li><a class="dropdown-item" href="{{ route('form') }}">Rekomendasi Klaim JHT</a>
-                              <li><a class="dropdown-item" href="{{ route('form') }}">Pengesahan Peraturan
-                                      Perusahaan</a>
-                              </li>
-                          @endif
-                      </ul>
-                  </li>
                   <li class="nav-item ms-3">
                       @if (auth('company')->check() || auth('seeker')->check())
                           <a class="nav-link custom-btn custom-border-btn btn"

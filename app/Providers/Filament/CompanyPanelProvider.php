@@ -24,7 +24,7 @@ class CompanyPanelProvider extends PanelProvider
     {
         return $panel
             ->id('company')
-            ->path('company')
+            ->path('perusahaan')
             ->authGuard('company')
             ->login()
             ->colors([

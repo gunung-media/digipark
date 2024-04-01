@@ -25,7 +25,7 @@ class SeekerPanelProvider extends PanelProvider
     {
         return $panel
             ->id('seeker')
-            ->path('seeker')
+            ->path('member')
             ->authGuard('seeker')
             ->login()
             ->registration(Register::class)
