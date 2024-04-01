@@ -27,7 +27,7 @@ class DepartementMemberResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('position')
                     ->required(),
-                Forms\Components\TextInput::make('description')
+                Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image')
                     ->disk('public')

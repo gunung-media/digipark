@@ -141,7 +141,7 @@
 
                                 <p class="text-muted mb-lg-4 mb-md-4">{{ $departementMember->position }}</p>
 
-                                <p>{{ $departementMember->description }}</p>
+                                <p>{!! $departementMember->description !!}</p>
 
                                 @php
                                     $socials = ['facebook', 'twitter', 'instagram'];
