@@ -12,6 +12,7 @@ use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 class AppliedJob extends BaseWidget
 {
     protected int | string | array $columnSpan = 2;
+    protected static ?string $heading = "Pekerjaan Yang Anda Lamar";
 
     public function table(Table $table): Table
     {
@@ -21,14 +22,20 @@ class AppliedJob extends BaseWidget
                     ->where('seeker_id', auth('seeker')->user()->id)
             )
             ->columns([
-                TextColumn::make('job.name_job')->searchable(),
-                TextColumn::make('job.company.name')->searchable(),
+                TextColumn::make('job.name_job')
+                    ->label("Pekerjaan")
+                    ->searchable(),
+                TextColumn::make('job.company.name')
+                    ->label("Perusahaan")
+                    ->searchable(),
                 TextColumn::make('created_at')
-                    ->label('Applied At')
+                    ->label("Melamar pada")
                     ->date(),
-                IconColumn::make('is_accepted')->boolean(),
+                IconColumn::make('is_accepted')
+                    ->label("Diterima?")
+                    ->boolean(),
                 TextColumn::make('updated_at')
-                    ->label('Accepted At')
+                    ->label("Diterima pada")
             ])
             ->filters([
                 DateRangeFilter::make('created_at')->label('Applied At'),

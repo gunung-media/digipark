@@ -9,7 +9,7 @@
                 <div class="row">
 
                     <div class="col-lg-12 col-12">
-                        <h1 class="text-white">List Pekerjaan</h1>
+                        <h1 class="text-white">List Pelatihan dan Magang</h1>
                     </div>
 
                 </div>
@@ -23,8 +23,8 @@
                         <form class="job-form custom-form" method="get">
                             <div class="col-lg-5 col-12">
                                 <div class="form-group">
-                                    <input type="" class="form-control" name="q" value="{{ $name }}"
-                                        placeholder="Nama Pekerjaan/Perusahaan">
+                                    <input type="" class="form-control" name="q" value=""
+                                        placeholder="Nama Pelatihan/Magang">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -33,20 +33,18 @@
                         </form>
                     </div>
 
-                    @forelse($jobs as $job)
+                    @forelse([1,2,3,4] as $job)
                         <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 mt-5">
                             <div class="custom-block-wrap">
-                                <img src="{{ asset(is_null($job->image) ? 'storage/' . $job->company->image : 'storage/' . $job->image) }}"
-                                    class="custom-block-image img-fluid job-image" alt="{{ $job->name_job }}"
+                                <img src="{{ asset('test') }}" class="custom-block-image img-fluid job-image" alt="Test"
                                     onerror="this.onerror=null;this.src='{{ asset('images/404.jpg') }}'">
                                 <div class="custom-block">
                                     <div class="custom-block-body">
-                                        <h5 class="mb-3">{{ $job->name_job ?? '' }}</h5>
-                                        <p>{{ $job->company->name }}</p>
+                                        <h5 class="mb-3">Latihan Pemrograman</h5>
+                                        <p>1 Maret 2024 - 11 Maret 2024</p>
                                     </div>
 
-                                    <a href="{{ route('portal.jobs.detail', ['jobId' => $job->id]) }}"
-                                        class="custom-btn btn">Detail</a>
+                                    <a href="#" class="custom-btn btn">Detail</a>
                                 </div>
                             </div>
                         </div>

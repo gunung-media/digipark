@@ -33,8 +33,19 @@
                           href="{{ route('portal.news.index') }}">Berita</a></li>
                   <li class="nav-item"><a class="nav-link click-scroll"
                           href="{{ route('portal.jobs.index') }}">Pekerjaan</a></li>
-                  <li class="nav-item"><a class="nav-link click-scroll"
-                          href="{{ route('portal.consultation') }}">Konsultasi</a></li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
+                          id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                          aria-expanded="false">Layanan Masyarakat</a>
+
+                      <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                          <li><a class="dropdown-item" href="{{ route('portal.consultation') }}">Konsultasi</a></li>
+                          <li><a class="dropdown-item" href="{{ route('portal.dummies.magang') }}">Informasi
+                                  Pelatihan dan Magang</a></li>
+                          <li><a class="dropdown-item" href="{{ route('portal.dummies.info') }}">Informasi
+                                  Ketenagakerjaan</a></li>
+                      </ul>
+                  </li>
 
                   @foreach ($menus as $menu)
                       @if ($menu->subMenus->count() > 0)

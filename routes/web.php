@@ -57,4 +57,10 @@ Route::name('portal.')->prefix('website')->group(function () {
             Route::get('{jobId}', 'DetailController')->name('detail');
             Route::post('apply', 'ApplyJobController')->name('apply');
         });
+
+    Route::name('dummies.')
+        ->group(function () {
+            Route::get('magang', fn () => view('portal.dummies.magang'))->name('magang');
+            Route::get('info', fn () => view('portal.dummies.info'))->name('info');
+        });
 });

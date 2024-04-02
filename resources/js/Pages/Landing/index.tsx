@@ -22,12 +22,12 @@ export default function Landing() {
             title: "Layanan Konsultasi"
         },
         {
-            href: route('filament.seeker.resources.claim-jhts.index'),
+            href: route('filament.seeker.resources.claim-jhts.create'),
             imgSrc: guideIcon,
             title: "Klaim JHT"
         },
         {
-            href: route('filament.company.resources.company-laid-offs.index'),
+            href: route('filament.company.resources.company-laid-offs.create'),
             imgSrc: graphicIcon,
             title: "Laporan PHK"
         },
@@ -37,27 +37,27 @@ export default function Landing() {
             title: "Pengesahan Peraturan Perusahaan"
         },
         {
-            href: route('filament.company.resources.jobs.index'),
+            href: route('filament.company.resources.jobs.create'),
             imgSrc: proposalIcon,
             title: "Pelaporan Lowongan"
         },
         {
-            href: route('filament.company.resources.placements.index'),
+            href: route('filament.company.resources.placements.create'),
             imgSrc: reportIcon,
             title: "Pelaporan Penempatan"
         },
         {
-            href: route('filament.company.resources.labor-demands.index'),
+            href: route('filament.company.resources.labor-demands.create'),
             imgSrc: trackingIcon,
             title: "Permintaan Tenaga Kerja"
         },
         {
-            href: route('portal'),
+            href: route('portal.dummies.magang'),
             imgSrc: dpIcon,
             title: "Pelatihan Dan Pemagangan"
         },
         {
-            href: route('portal'),
+            href: route('portal.dummies.info'),
             imgSrc: guideIcon,
             title: "Info Data Ketenagakerjaan"
         },
