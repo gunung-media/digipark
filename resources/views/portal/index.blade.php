@@ -215,7 +215,7 @@
         </section>
 
 
-        @if (!is_null($dashboard?->testimonials))
+        @if (!is_null($dashboard?->testimonials) || count($dashboard?->testimonials) > 0)
             <section class="testimonial-section section-padding section-bg">
                 <div class="container">
                     <div class="row">
