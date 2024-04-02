@@ -74,6 +74,8 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-globe-alt')
                     ->openUrlInNewTab()
             ])
+            ->brandLogo(asset('portal/images/logo.png'))
+            ->brandLogoHeight('3rem')
             ->breadcrumbs(fn () => !request()->routeIs('filament.admin.resources.dashboards.edit', 'filament.admin.resources.dashboards.create'))
             ->databaseNotifications()
             ->databaseNotificationsPolling("20s");
