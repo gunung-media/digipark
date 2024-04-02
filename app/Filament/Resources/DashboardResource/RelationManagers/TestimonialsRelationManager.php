@@ -2,14 +2,12 @@
 
 namespace App\Filament\Resources\DashboardResource\RelationManagers;
 
-use App\Models\DashboardTestimonial;
+use App\Models\Admin\Settings\DashboardTestimonial;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TestimonialsRelationManager extends RelationManager
 {

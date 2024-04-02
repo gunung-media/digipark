@@ -2,15 +2,13 @@
 
 namespace App\Filament\Resources\DashboardResource\RelationManagers;
 
-use App\Models\DashboardVision;
+use App\Models\Admin\Settings\DashboardVision;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class VisionsRelationManager extends RelationManager
 {

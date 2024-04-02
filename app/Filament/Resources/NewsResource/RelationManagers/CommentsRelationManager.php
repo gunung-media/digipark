@@ -2,15 +2,13 @@
 
 namespace App\Filament\Resources\NewsResource\RelationManagers;
 
-use App\Models\NewsComment;
+use App\Models\Admin\News\NewsComment;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CommentsRelationManager extends RelationManager
 {

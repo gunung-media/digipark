@@ -2,7 +2,7 @@
 
 namespace App\Filament\Seeker\Widgets;
 
-use App\Models\JobApplicant;
+use App\Models\Seeker\JobApplicant;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;

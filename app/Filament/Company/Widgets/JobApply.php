@@ -2,7 +2,7 @@
 
 namespace App\Filament\Company\Widgets;
 
-use App\Models\JobApplicant;
+use App\Models\Seeker\JobApplicant;
 use Carbon\Carbon;
 use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;

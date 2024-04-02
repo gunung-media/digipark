@@ -2,7 +2,7 @@
 
 namespace App\Filament\Company\Resources\JobResource\RelationManagers;
 
-use App\Models\Seeker;
+use App\Models\Seeker\Seeker;
 use Filament\Forms;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -13,8 +13,6 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 
 class ApplicantRelationManager extends RelationManager

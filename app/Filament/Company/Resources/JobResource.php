@@ -4,19 +4,15 @@ namespace App\Filament\Company\Resources;
 
 use App\Filament\Company\Resources\JobResource\Pages;
 use App\Filament\Company\Resources\JobResource\RelationManagers;
-use App\Models\Job;
+use App\Models\Company\Job;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 

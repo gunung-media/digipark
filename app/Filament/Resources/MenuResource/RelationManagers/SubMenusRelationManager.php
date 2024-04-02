@@ -3,15 +3,13 @@
 namespace App\Filament\Resources\MenuResource\RelationManagers;
 
 use App\Filament\Resources\SubMenuResource;
-use App\Models\SubMenu;
+use App\Models\Admin\Menu\SubMenu;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SubMenusRelationManager extends RelationManager
 {

@@ -2,8 +2,8 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\News;
-use App\Models\NewsCategory;
+use App\Models\Admin\News\News;
+use App\Models\Admin\News\NewsCategory;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 

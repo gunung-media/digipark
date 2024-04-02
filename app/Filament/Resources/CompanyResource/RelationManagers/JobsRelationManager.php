@@ -2,15 +2,13 @@
 
 namespace App\Filament\Resources\CompanyResource\RelationManagers;
 
-use App\Models\Job;
+use App\Models\Company\Job;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
 class JobsRelationManager extends RelationManager
