@@ -3,7 +3,6 @@
 namespace App\Filament\Company\Resources;
 
 use App\Filament\Company\Resources\LaborDemandResource\Pages;
-use App\Filament\Company\Resources\LaborDemandResource\RelationManagers;
 use App\Models\Company\LaborDemand;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
@@ -14,8 +13,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
