@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -18,6 +19,8 @@ use Filament\Models\Contracts\HasName;
 class Seeker extends Authenticatable implements FilamentUser, HasName
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $with = ['additional'];
 
     public function getFilamentName(): string
     {
@@ -32,5 +35,15 @@ class Seeker extends Authenticatable implements FilamentUser, HasName
     public function jobs(): HasMany
     {
         return $this->hasMany(Job::class);
+    }
+
+    public function additional(): HasOne
+    {
+        return $this->hasOne(SeekerAdditional::class);
+    }
+
+    public function claimJhts(): HasMany
+    {
+        return $this->hasMany(ClaimJht::class);
     }
 }

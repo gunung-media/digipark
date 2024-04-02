@@ -33,14 +33,18 @@ class LaborDemandResource extends Resource
                         ->description('INFORMASI LOWONGAN JABATAN / PEKERJAAN')
                         ->schema([
                             Forms\Components\DatePicker::make('request_deadline')
+                                ->label('Batas Waktu Permintaan')
                                 ->required(),
                             Forms\Components\TextInput::make('name_job')
+                                ->label('Nama Jabatan / Pekerjaan')
                                 ->required()
                                 ->maxLength(255),
                             Forms\Components\TextInput::make('total_man_needs')
+                                ->label('Jumlah Tenaga Kerja Pria yang dibutuhkan')
                                 ->numeric()
                                 ->required(),
                             Forms\Components\TextInput::make('total_woman_needs')
+                                ->label('Jumlah Tenaga Kerja Perempuan yang dibutuhkan')
                                 ->numeric()
                                 ->required(),
                         ])->columns(2),
@@ -58,14 +62,18 @@ class LaborDemandResource extends Resource
                                     "Kuliah" => 'KuliahSMA',
                                 ]),
                             Forms\Components\TextInput::make('major')
+                                ->label('Jurusan')
                                 ->required(),
                             Forms\Components\RichEditor::make('skills')
+                                ->label('Keterampilan / Keahlian')
                                 ->required()
                                 ->columnSpanFull(),
                             Forms\Components\RichEditor::make('experience')
+                                ->label('Pengalaman')
                                 ->required()
                                 ->columnSpanFull(),
                             Forms\Components\RichEditor::make('special_conditions')
+                                ->label('Syarat Khusus')
                                 ->required()
                                 ->columnSpanFull(),
                         ])->columns(2),
@@ -84,10 +92,12 @@ class LaborDemandResource extends Resource
                                     ->mapWithKeys(fn ($val) => [$val => $val])
                                     ->toArray()),
                             Forms\Components\TextInput::make('salary')
+                                ->label('Gaji / Upah Sebulan')
                                 ->numeric()
                                 ->prefix('Rp')
                                 ->required(),
                             Forms\Components\Select::make('work_status')
+                                ->label('Status Hubungan Kerja')
                                 ->required()
                                 ->options(collect([
                                     'Waktu Tak Tertentu',
@@ -96,10 +106,12 @@ class LaborDemandResource extends Resource
                                     ->mapWithKeys(fn ($val) => [$val => $val])
                                     ->toArray()),
                             Forms\Components\TextInput::make('total_hours_per_week')
+                                ->label('Jumlah jam kerja dalam seminggu')
                                 ->numeric()
                                 ->prefix('Jam')
                                 ->required(),
                             Forms\Components\Select::make('social_guarantee')
+                                ->label('Jaminan Sosial Lainnya')
                                 ->required()
                                 ->multiple()
                                 ->searchable()
@@ -120,6 +132,7 @@ class LaborDemandResource extends Resource
                                     ->mapWithKeys(fn ($val) => [$val => $val])
                                     ->toArray()),
                             TinyEditor::make('work_description')
+                                ->label('Uraian Tugas')
                                 ->columnSpanFull()
                                 ->fileAttachmentsDisk('public')
                                 ->fileAttachmentsVisibility('private')
@@ -130,6 +143,7 @@ class LaborDemandResource extends Resource
                     Step::make('Tanda Tangan')->schema([
                         SignaturePad::make('signature')
                             ->columnSpanFull()
+                            ->label('Tanda Tangan')
                             ->required()
                             ->downloadable(),
                     ])

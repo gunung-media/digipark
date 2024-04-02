@@ -32,6 +32,7 @@ class PlacementResource extends Resource
                     Tab::make('Main Data')->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
+                            ->label('Nama Tenaga Kerja')
                             ->maxLength(255)
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make('identity_number')
@@ -40,6 +41,7 @@ class PlacementResource extends Resource
                             ->maxLength(255)
                             ->columnSpanFull(),
                         Forms\Components\Select::make('gender')
+                            ->label('Jenis Kelamin')
                             ->required()
                             ->options([
                                 'male' => 'Laki-laki',
@@ -47,9 +49,11 @@ class PlacementResource extends Resource
                             ])
                             ->columnSpanFull(),
                         Forms\Components\Textarea::make('address')
+                            ->label('Alamat Domisili')
                             ->required()
                             ->columnSpanFull(),
                         Forms\Components\Select::make('education')
+                            ->label('Pendidikan Terakhir')
                             ->required()
                             ->options([
                                 "Tidak Ada" => 'Tidak Ada',
@@ -59,14 +63,16 @@ class PlacementResource extends Resource
                                 "Kuliah" => 'KuliahSMA',
                             ]),
                         Forms\Components\TextInput::make('phone')
+                            ->label('Nomor Kontak')
                             ->required(),
                         Forms\Components\DatePicker::make('date_worked')
                             ->label('Tanggal Mulai Bekerja')
                             ->required(),
                         Forms\Components\TextInput::make('position')
-                            ->label('Posisi')
+                            ->label('Jabatan')
                             ->required(),
                         TinyEditor::make('description')
+                            ->label('Katerangan')
                             ->columnSpanFull()
                             ->fileAttachmentsDisk('public')
                             ->fileAttachmentsVisibility('private')
@@ -76,6 +82,7 @@ class PlacementResource extends Resource
                     ])->columns(2),
                     Tab::make('Tanda Tangan')->schema([
                         SignaturePad::make('signature')
+                            ->label('Tanda Tangan')
                             ->columnSpanFull()
                             ->required()
                             ->downloadable(),

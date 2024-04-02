@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Clusters\Company\CompanyResource\RelationManagers;
+namespace App\Filament\Admin\Resources\CompanyResource\RelationManagers;
 
 use App\Models\Company\Job;
 use Filament\Forms;

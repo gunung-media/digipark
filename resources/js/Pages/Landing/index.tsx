@@ -11,38 +11,43 @@ import reportIcon from '@/assets/icons/landing/report.png'
 import trackingIcon from '@/assets/icons/landing/tracking.png'
 import dpIcon from '@/assets/icons/landing/development-plan.png'
 import guideIcon from '@/assets/icons/landing/workshop.png'
-import { Fragment, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 
 export default function Landing() {
     const menus = [
         {
-            href: route('portal'),
+            href: route('portal.consultation'),
             imgSrc: mapIcon,
             title: "Layanan Konsultasi"
         },
         {
-            href: route('portal'),
+            href: route('filament.seeker.resources.claim-jhts.index'),
+            imgSrc: guideIcon,
+            title: "Klaim JHT"
+        },
+        {
+            href: route('filament.company.resources.company-laid-offs.index'),
             imgSrc: graphicIcon,
             title: "Laporan PHK"
         },
         {
-            href: route('portal'),
+            href: route('filament.company.pages.edit-profile'),
             imgSrc: statisticIcon,
             title: "Pengesahan Peraturan Perusahaan"
         },
         {
-            href: route('portal'),
+            href: route('filament.company.resources.jobs.index'),
             imgSrc: proposalIcon,
             title: "Pelaporan Lowongan"
         },
         {
-            href: route('portal'),
+            href: route('filament.company.resources.placements.index'),
             imgSrc: reportIcon,
             title: "Pelaporan Penempatan"
         },
         {
-            href: route('portal'),
+            href: route('filament.company.resources.labor-demands.index'),
             imgSrc: trackingIcon,
             title: "Permintaan Tenaga Kerja"
         },
@@ -108,7 +113,7 @@ export default function Landing() {
                                 <div className="heading">
                                     <img src={kaltengLogo} alt="Kalimantan Tengah" />
                                     <h1>digi<span>park.</span></h1>
-                                    <h5>Digital Palangka Raya Kreatif Ketenagakerjaan</h5>
+                                    <h5>Digital Palangka Raya Ketenagakerjaan</h5>
 
                                     <a className="homeContentEnterBtn" href={route('portal')} style={{ top: "0px", visibility: "visible" }}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 51" version="1.1">

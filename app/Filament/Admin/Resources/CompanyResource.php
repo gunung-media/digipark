@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Admin\Clusters\Company;
+namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Clusters\Company\CompanyResource\Pages;
-use App\Filament\Admin\Clusters\Company\CompanyResource\RelationManagers;
+use App\Filament\Admin\Resources\CompanyResource\Pages;
+use App\Filament\Admin\Resources\CompanyResource\RelationManagers;
 use App\Models\Company\Company;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -15,8 +15,9 @@ use Rawilk\FilamentPasswordInput\Password;
 
 class CompanyResource extends Resource
 {
+    protected static ?string $label = "Perusahaan";
+    protected static ?string $navigationGroup = 'Layanan';
     protected static ?string $model = Company::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
     public static function form(Form $form): Form

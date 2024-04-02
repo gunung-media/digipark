@@ -21,11 +21,8 @@ use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 class JobResource extends Resource
 {
     protected static ?string $label = "Laporan Lowongan";
-
     protected static ?string $model = Job::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function form(Form $form): Form
@@ -35,21 +32,25 @@ class JobResource extends Resource
                 Tabs::make()->tabs([
                     Tab::make('Main Data')->schema([
                         Forms\Components\TextInput::make('name_job')
+                            ->label('Nama Jabatan')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('address')
+                            ->label('Lokasi Pekerjaan')
                             ->required()
                             ->default(function ($livewire) {
                                 return FilamentUtil::getUser()->address;
                             })
                             ->maxLength(255),
                         TinyEditor::make('description')
+                            ->label('Deskripsi Pekerjaan')
                             ->columnSpanFull()
                             ->fileAttachmentsDisk('public')
                             ->fileAttachmentsVisibility('private')
                             ->fileAttachmentsDirectory('jobs/description')
                             ->required(),
                         Forms\Components\FileUpload::make('image')
+                            ->label('Gambar')
                             ->disk('public')
                             ->directory('jobs')
                             ->image()
@@ -57,14 +58,17 @@ class JobResource extends Resource
                     ])->columns(2),
                     Tab::make('Data Tambahan')->schema([
                         Forms\Components\TextInput::make('total_needed_man')
+                            ->label('Jumlah Lelaki yang dibutuhkan')
                             ->numeric()
                             ->required()
                             ->default(0),
                         Forms\Components\TextInput::make('total_needed_woman')
+                            ->label('Jumlah Wanita yang dibutuhkan')
                             ->numeric()
                             ->required()
                             ->default(0),
                         Forms\Components\Select::make('minimal_education')
+                            ->label('Pendidikan')
                             ->options([
                                 "Tidak Ada" => 'Tidak Ada',
                                 "SD" => 'SD',
@@ -73,11 +77,14 @@ class JobResource extends Resource
                                 "Kuliah" => 'KuliahSMA',
                             ]),
                         Forms\Components\TextInput::make('special')
-                            ->label('Kelebihan'),
-                        Forms\Components\DatePicker::make('deadline'),
+                            ->label('Keahlian Khusus'),
+                        Forms\Components\DatePicker::make('deadline')
+                            ->label('Deadline Lowongan Pekerjaan'),
                         Forms\Components\DatePicker::make('start_date')
+                            ->label('Gaji')
                             ->required(),
                         Forms\Components\TextInput::make('salary')
+                            ->label('Mulai Pekerjaan')
                             ->numeric()
                             ->prefix('Rp.')
                             ->default(0),
@@ -85,6 +92,7 @@ class JobResource extends Resource
                     ])->columns(2),
                     Tab::make('Tanda Tangan')->schema([
                         SignaturePad::make('signature')
+                            ->label('Tanda Tangan')
                             ->columnSpanFull()
                             ->downloadable(),
                     ])
