@@ -3,7 +3,6 @@
 namespace App\Filament\Admin\Clusters\Company\Resources\PlacementResource\Pages;
 
 use App\Filament\Admin\Clusters\Company\Resources\PlacementResource;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListPlacements extends ListRecords
@@ -12,8 +11,6 @@ class ListPlacements extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\CreateAction::make(),
-        ];
+        return [];
     }
 }

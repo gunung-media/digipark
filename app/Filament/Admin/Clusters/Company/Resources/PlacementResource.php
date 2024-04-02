@@ -5,11 +5,17 @@ namespace App\Filament\Admin\Clusters\Company\Resources;
 use App\Filament\Admin\Clusters\Company;
 use App\Filament\Admin\Clusters\Company\Resources\PlacementResource\Pages;
 use App\Models\Company\Placement;
+use App\Utils\FilamentUtil;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
+use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 class PlacementResource extends Resource
 {
@@ -23,7 +29,66 @@ class PlacementResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Tabs::make()->tabs([
+                    Tab::make('Main Data')->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->label('Nama Tenaga Kerja')
+                            ->maxLength(255)
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('identity_number')
+                            ->label('NIK')
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpanFull(),
+                        Forms\Components\Select::make('gender')
+                            ->label('Jenis Kelamin')
+                            ->required()
+                            ->options([
+                                'male' => 'Laki-laki',
+                                'female' => 'Perempuan',
+                            ])
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('address')
+                            ->label('Alamat Domisili')
+                            ->required()
+                            ->columnSpanFull(),
+                        Forms\Components\Select::make('education')
+                            ->label('Pendidikan Terakhir')
+                            ->required()
+                            ->options([
+                                "Tidak Ada" => 'Tidak Ada',
+                                "SD" => 'SD',
+                                "SMP" => 'SMP',
+                                "SMA/SMK" => 'SMA/SMK',
+                                "Kuliah" => 'KuliahSMA',
+                            ]),
+                        Forms\Components\TextInput::make('phone')
+                            ->label('Nomor Kontak')
+                            ->required(),
+                        Forms\Components\DatePicker::make('date_worked')
+                            ->label('Tanggal Mulai Bekerja')
+                            ->required(),
+                        Forms\Components\TextInput::make('position')
+                            ->label('Jabatan')
+                            ->required(),
+                        TinyEditor::make('description')
+                            ->label('Katerangan')
+                            ->columnSpanFull()
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsVisibility('private')
+                            ->fileAttachmentsDirectory('placement/description')
+                            ->required(),
+                        Forms\Components\Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
+                    ])->columns(2)->disabled(),
+                    Tab::make('Tanda Tangan')->schema([
+                        SignaturePad::make('signature')
+                            ->label('Tanda Tangan')
+                            ->columnSpanFull()
+                            ->required()
+                            ->downloadable(),
+                    ])->disabled()
+                ])->columnSpanFull(),
             ]);
     }
 
