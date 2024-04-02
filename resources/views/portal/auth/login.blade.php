@@ -10,7 +10,9 @@
                         method="post" role="form">
                         @csrf
                         <h3 class="mb-4">Login</h3>
-                        <p>{{ empty($mode) ? 'Login sebagai apa?' : "Login $mode" }}</p>
+                        <p>
+                            {{ (empty($mode) ? 'Login sebagai apa?' : $mode == 'company') ? 'Badan Perusahaan' : 'Member' }}
+                        </p>
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -39,7 +41,7 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <a class="btn btn-primary custom-btn" style="width:100%"
-                                        href="{{ route('portal.login', ['mode' => 'seeker']) }}">Pencari Kerja</a>
+                                        href="{{ route('portal.login', ['mode' => 'seeker']) }}">Member</a>
                                 </div>
                             </div>
                         @else

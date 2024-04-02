@@ -38,8 +38,8 @@ class RegisterController extends Controller
                 'password' => bcrypt($request->input('password')),
             ])
         )) {
-            return redirect()->route('portal.auth.login', ['mode' => $mode])->with('status', 'Register berhasil');
+            return redirect()->route('portal.login', ['mode' => $mode])->with('status', 'Register berhasil');
         }
-        return redirect()->route('portal.auth.register', ['mode' => $mode])->with('error', 'Register gagal');
+        return redirect()->route('portal.register', ['mode' => $mode])->with('error', 'Register gagal');
     }
 }
