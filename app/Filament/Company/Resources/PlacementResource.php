@@ -3,7 +3,6 @@
 namespace App\Filament\Company\Resources;
 
 use App\Filament\Company\Resources\PlacementResource\Pages;
-use App\Filament\Company\Resources\PlacementResource\RelationManagers;
 use App\Models\Company\Placement;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
@@ -12,14 +11,15 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PlacementResource extends Resource
 {
+    protected static ?string $label = "Laporan Penempatan";
+
     protected static ?string $model = Placement::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -88,10 +88,32 @@ class PlacementResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nama')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('identity_number')
+                    ->label('NIK')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('position')
+                    ->label('Jabatar')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'diterima' => 'gray',
+                        'ditunda' => 'warning',
+                        'diproses' => 'success',
+                        'ditolak' => 'danger',
+                    })
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options([
+                        'diterima' => 'Diterima',
+                        'ditunda' => 'Ditunda',
+                        'diproses' => 'Diproses',
+                        'ditolak' => 'Ditolak',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
