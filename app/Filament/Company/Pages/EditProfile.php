@@ -2,6 +2,7 @@
 
 namespace App\Filament\Company\Pages;
 
+use App\Utils\FilamentUtil;
 use Exception;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Actions\Action;
@@ -86,7 +87,7 @@ class EditProfile extends Page implements HasForms
                             ->required()
                     ])
             ])
-            ->model($this->getUser())
+            ->model(FilamentUtil::getUser())
             ->statePath('profileData');
     }
 
@@ -116,22 +117,13 @@ class EditProfile extends Page implements HasForms
                             ->dehydrated(false),
                     ]),
             ])
-            ->model($this->getUser())
+            ->model(FilamentUtil::getUser())
             ->statePath('passwordData');
-    }
-
-    protected function getUser(): Authenticatable & Model
-    {
-        $user = Filament::auth()->user();
-        if (!$user instanceof Model) {
-            throw new Exception('The authenticated user object must be an Eloquent model to allow the profile page to update it.');
-        }
-        return $user;
     }
 
     protected function fillForms(): void
     {
-        $data = $this->getUser()->attributesToArray();
+        $data = FilamentUtil::getUser()->attributesToArray();
         $this->editProfileForm->fill($data);
         $this->editPasswordForm->fill();
     }
@@ -156,14 +148,14 @@ class EditProfile extends Page implements HasForms
     public function updateProfile(): void
     {
         $data = $this->editProfileForm->getState();
-        $this->handleRecordUpdate($this->getUser(), $data);
+        $this->handleRecordUpdate(FilamentUtil::getUser(), $data);
         $this->sendSuccessNotification();
     }
 
     public function updatePassword(): void
     {
         $data = $this->editPasswordForm->getState();
-        $this->handleRecordUpdate($this->getUser(), $data);
+        $this->handleRecordUpdate(FilamentUtil::getUser(), $data);
         if (request()->hasSession() && array_key_exists('password', $data)) {
             request()->session()->put(['password_hash_' . Filament::getAuthGuard() => $data['password']]);
         }

@@ -4,6 +4,7 @@ namespace App\Filament\Company\Resources;
 
 use App\Filament\Company\Resources\JobResource\Pages;
 use App\Models\Company\Job;
+use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -37,7 +38,7 @@ class JobResource extends Resource
                         Forms\Components\TextInput::make('address')
                             ->required()
                             ->default(function ($livewire) {
-                                return optional($livewire)->ownerRecord?->address ?? '';
+                                return FilamentUtil::getUser()->address;
                             })
                             ->maxLength(255),
                         TinyEditor::make('description')
