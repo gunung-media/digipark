@@ -50,49 +50,63 @@ class EditProfile extends Page
                         Tab::make('Profile Information')
                             ->schema([
                                 TextInput::make('full_name')
-                                    ->required(),
-                                TextInput::make('additional.identity_number')
                                     ->label('Nama Lengkap')
                                     ->required(),
+                                TextInput::make('additional.identity_number')
+                                    ->label('NIK')
+                                    ->required(),
                                 TextInput::make('phone_number')
+                                    ->label('No. Telpon')
                                     ->required(),
                                 Select::make('gender')
+                                    ->label('Jenis Kelamin')
                                     ->options([
                                         'male' => 'Male',
                                         'female' => 'Female',
                                     ])
                                     ->required(),
                                 TextInput::make('additional.birth_place')
+                                    ->label('Tempat Lahir')
                                     ->required(),
-                                DatePicker::make('date_of_birth')->required(),
+                                DatePicker::make('date_of_birth')
+                                    ->label('Tanggal Lahir')
+                                    ->required(),
                                 TextInput::make('address')
+                                    ->label('Alamat')
                                     ->required(),
                                 TextInput::make('additional.postal_code')
+                                    ->label('Kode Pos')
                                     ->required(),
                                 TextInput::make('additional.rt')
+                                    ->label('RT')
                                     ->required(),
                                 TextInput::make('additional.rw')
+                                    ->label('RW')
                                     ->required(),
                             ])
                             ->columns(2),
                         Tab::make('Additional Data')
                             ->schema([
                                 FileUpload::make('additional.doc_ktp')
+                                    ->label('KTP')
                                     ->disk('public')
                                     ->directory('seeker/additional')
                                     ->downloadable()
                                     ->columnSpanFull(),
                                 FileUpload::make('additional.doc_bpjs_card')
+                                    ->label('BPJS Card')
                                     ->disk('public')
                                     ->directory('seeker/additional')
                                     ->downloadable()
                                     ->columnSpanFull(),
                                 FileUpload::make('additional.doc_cv')
+                                    ->label('Surat Pengalaman Kerja / CV / Resume')
                                     ->disk('public')
                                     ->directory('seeker/additional')
                                     ->downloadable()
                                     ->columnSpanFull(),
                                 SignaturePad::make('additional.signature')
+                                    ->label('Tanda Tangan')
                                     ->columnSpanFull()
                                     ->downloadable(),
                             ])

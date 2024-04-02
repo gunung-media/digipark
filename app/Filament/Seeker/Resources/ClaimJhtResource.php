@@ -20,7 +20,7 @@ use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 class ClaimJhtResource extends Resource
 {
     protected static ?string $model = ClaimJht::class;
-
+    protected static ?string $label = 'Klaim JHT';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
