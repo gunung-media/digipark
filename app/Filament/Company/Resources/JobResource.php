@@ -81,6 +81,7 @@ class JobResource extends Resource
                             ->numeric()
                             ->prefix('Rp.')
                             ->default(0),
+                        Forms\Components\Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
                     ])->columns(2),
                     Tab::make('Tanda Tangan')->schema([
                         SignaturePad::make('signature')
