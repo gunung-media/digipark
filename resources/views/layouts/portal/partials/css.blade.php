@@ -5,13 +5,13 @@
 <style>
     .news-image {
         object-fit: cover;
-        height: 500px;
+        /* height: 500px; */
         width: 100%;
     }
 
     .news-image.small {
         object-fit: cover;
-        height: 200px;
+        /* height: 200px; */
         width: 100%;
     }
 
