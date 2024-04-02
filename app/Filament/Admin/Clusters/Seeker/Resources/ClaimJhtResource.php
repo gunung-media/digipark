@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Filament\Seeker\Resources;
+namespace App\Filament\Admin\Clusters\Seeker\Resources;
 
-use App\Filament\Seeker\Resources\ClaimJhtResource\Pages;
+use App\Filament\Admin\Clusters\Seeker;
+use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource\Pages;
+use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource\RelationManagers;
 use App\Models\Seeker\ClaimJht;
-use App\Utils\FilamentUtil;
-use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Radio;
-use Filament\Forms\Components\Section;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Saade\FilamentAutograph\Forms\Components\SignaturePad;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ClaimJhtResource extends Resource
 {
@@ -23,31 +22,13 @@ class ClaimJhtResource extends Resource
     protected static ?string $label = 'Klaim JHT';
     protected static ?string $pluralModelLabel = 'Klaim JHT';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Layanan';
+    protected static ?string $cluster = Seeker::class;
 
     public static function form(Form $form): Form
     {
-        $user = FilamentUtil::getUser();
         return $form
             ->schema([
-                Section::make('Member')->schema([
-                    Placeholder::make('full_name')->content(fn () => $user->full_name),
-                    Placeholder::make('identity_number')->content(fn () => $user->additional->identity_number),
-                    Placeholder::make('phone_number')->content(fn () => $user->phone_number),
-                    Placeholder::make('Address')->content(fn () => $user->phone_number),
-                    Placeholder::make('gender')->content(fn () => $user->gender),
-                ])->columns(2),
-                Section::make('Klaim JHT')->schema([
-                    Radio::make('type')
-                        ->options([
-                            'pengunduran_diri' => 'Pengunduran Diri',
-                            'pemutusan_hubungan_kerja' => 'Pemutusan Hubungan Kerja',
-                        ]),
-                    SignaturePad::make('signature')
-                        ->columnSpanFull()
-                        ->downloadable(),
-                    Hidden::make('seeker_id')->default($user->id),
-                ])->columns(2)
+                //
             ]);
     }
 
@@ -55,7 +36,10 @@ class ClaimJhtResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('seeker.full_name')
+                    ->searchable(),
                 TextColumn::make('type')
+                    ->badge()
                     ->formatStateUsing(fn (string $state): string => __($state === 'pengunduran_diri' ? 'Pengunduran Diri' : 'Pemutusan Hubungan Kerja')),
                 TextColumn::make('created_at')->date(),
                 TextColumn::make('status')

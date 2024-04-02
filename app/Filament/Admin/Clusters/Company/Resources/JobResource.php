@@ -21,11 +21,9 @@ use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 class JobResource extends Resource
 {
     protected static ?string $model = Job::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
     protected static ?string $label = "Pekerjaan";
-
+    protected static ?string $pluralModelLabel = 'Laporan Pekerjaan';
     protected static ?string $cluster = Company::class;
 
     public static function form(Form $form): Form

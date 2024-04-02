@@ -19,10 +19,10 @@ use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 class CompanyLaidOffResource extends Resource
 {
     protected static ?string $label = "Laporan PHK";
-
+    protected static ?string $pluralModelLabel = 'Laporan PHK';
     protected static ?string $model = CompanyLaidOff::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Layanan';
 
     public static function form(Form $form): Form
     {

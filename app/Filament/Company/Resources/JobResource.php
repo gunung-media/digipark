@@ -21,9 +21,11 @@ use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 class JobResource extends Resource
 {
     protected static ?string $label = "Laporan Lowongan";
+    protected static ?string $pluralModelLabel = 'Laporan Lowongan';
     protected static ?string $model = Job::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
+    protected static ?string $navigationGroup = 'Layanan';
 
     public static function form(Form $form): Form
     {
