@@ -2,23 +2,25 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\ConsultationResource\Pages;
-use App\Models\Admin\Consultation;
+use App\Filament\Admin\Resources\SeekerResource\Pages;
+use App\Filament\Admin\Resources\SeekerResource\RelationManagers;
+use App\Models\Seeker\Seeker;
+use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ConsultationResource extends Resource
+class SeekerResource extends Resource
 {
-    protected static ?string $model = Consultation::class;
+    protected static ?string $model = Seeker::class;
+    protected static ?string $label = "Member";
+    protected static ?string $pluralModelLabel = "Member";
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Layanan';
-    protected static ?string $pluralModelLabel = "Konsultasi";
-    protected static ?string $label = "Konsultasi";
+    protected static ?string $navigationGroup = 'Akun';
 
     public static function form(Form $form): Form
     {
@@ -32,10 +34,12 @@ class ConsultationResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('email'),
-                TextColumn::make('subject'),
-                TextColumn::make('created_at')->date()
+                TextColumn::make('full_name')
+                    ->searchable(),
+                TextColumn::make('email')->searchable(),
+                TextColumn::make('address')->searchable(),
+                TextColumn::make('phone_number')->searchable(),
+                TextColumn::make('gender')->sortable(),
             ])
             ->filters([
                 //
@@ -60,9 +64,9 @@ class ConsultationResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListConsultations::route('/'),
-            'create' => Pages\CreateConsultation::route('/create'),
-            'edit' => Pages\EditConsultation::route('/{record}/edit'),
+            'index' => Pages\ListSeekers::route('/'),
+            'create' => Pages\CreateSeeker::route('/create'),
+            'edit' => Pages\EditSeeker::route('/{record}/edit'),
         ];
     }
 }

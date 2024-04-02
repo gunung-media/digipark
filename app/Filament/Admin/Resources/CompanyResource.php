@@ -16,9 +16,10 @@ use Rawilk\FilamentPasswordInput\Password;
 class CompanyResource extends Resource
 {
     protected static ?string $label = "Perusahaan";
-    protected static ?string $navigationGroup = 'Layanan';
+    protected static ?string $pluralModelLabel = "Perusahaan";
     protected static ?string $model = Company::class;
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
+    protected static ?string $navigationGroup = 'Akun';
 
     public static function form(Form $form): Form
     {
