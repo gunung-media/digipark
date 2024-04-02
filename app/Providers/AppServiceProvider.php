@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Dashboard;
-use App\Models\Menu;
+use App\Models\Admin\Menu\Menu;
+use App\Models\Admin\Settings\Dashboard;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
