@@ -34,7 +34,7 @@
                         @forelse ($news as $new)
                             <div class="news-block mt-3">
                                 <div class="news-block-top">
-                                    <a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}">
+                                    <a href="{{ route('portal.news.detail', ['slug' => $new->slug]) }}">
                                         <img src="{{ asset('storage/' . $new->image) }}" class="news-image img-fluid"
                                             alt="">
                                     </a>
@@ -71,7 +71,7 @@
                                     </div>
 
                                     <div class="news-block-title mb-2">
-                                        <h4><a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}"
+                                        <h4><a href="{{ route('portal.news.detail', ['slug' => $new->slug]) }}"
                                                 class="news-block-title-link">{{ $new->title }}</a></h4>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="col-lg-4 col-12 mx-auto mt-4 mt-lg-0">
-                        <form class="custom-form search-form" action="{{ route('portal.berita.index') }}" method="get"
+                        <form class="custom-form search-form" action="{{ route('portal.news.index') }}" method="get"
                             role="form">
                             <input class="form-control" type="search" placeholder="Search" aria-label="Search"
                                 name="q">
@@ -96,7 +96,7 @@
                             <h5 class="mb-3">Categories</h5>
 
                             @forelse ($categories as $category)
-                                <a href="{{ route('portal.berita.index', ['category' => $category->name]) }}"
+                                <a href="{{ route('portal.news.index', ['category' => $category->name]) }}"
                                     class="category-block-link">
                                     {{ $category->name }}
                                     <span class="badge">{{ $category->news->count() }}</span>

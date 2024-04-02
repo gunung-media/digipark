@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
-use App\Models\Dashboard;
-use App\Models\DepartementMember;
-use App\Models\Job;
-use App\Models\News;
-use App\Models\NewsCategory;
-use App\Models\NewsTag;
+use App\Models\Company\Company;
+use App\Models\Admin\DepartementMember;
+use App\Models\Company\Job;
+use App\Models\Admin\News\News;
+use App\Models\Admin\News\NewsCategory;
 use Illuminate\Http\Request;
 
 class PortalController extends Controller
@@ -20,7 +18,7 @@ class PortalController extends Controller
     {
         $news = News::active()->with('category')->limit(4)->get();
         $categories =  NewsCategory::with('news')->get();
-        $jobs = Job::active()->with('company')->where('status', 1)->limit('3')->latest()->get();
+        $jobs = Job::active()->with('company')->limit('3')->latest()->get();
         $departementMember = DepartementMember::active()->first();
         $total = [
             'pekerjaan' => Job::active()->count(),

@@ -43,18 +43,18 @@ Route::name('portal.')->prefix('website')->group(function () {
         ->prefix('berita')
         ->namespace('News')
         ->group(function () {
-            Route::get('/', 'Berita\IndexController')->name('index');
-            Route::get('{slug}', 'Berita\DetailController')->name('detail');
-            Route::post('comment', 'Berita\CommentController')->name('comment');
+            Route::get('/', 'IndexController')->name('index');
+            Route::get('{slug}', 'DetailController')->name('detail');
+            Route::post('comment', 'CommentController')->name('comment');
         });
 
     // Jobs Routes
     Route::name('jobs.')
-        ->prefix('jobs')
-        ->namespace('Job')
-        ->namespace('Job')->group(function () {
+        ->prefix('pekerjaan')
+        ->namespace('Jobs')
+        ->group(function () {
             Route::get('/', 'IndexController')->name('index');
             Route::get('{jobId}', 'DetailController')->name('detail');
-            Route::post('apply', 'Seeker\ApplyJobController')->name('apply');
+            Route::post('apply', 'ApplyJobController')->name('apply');
         });
 });

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Berita;
+namespace App\Http\Controllers\News;
 
 use App\Http\Controllers\Controller;
-use App\Models\News;
-use App\Models\NewsCategory;
+use App\Models\Admin\News\News;
+use App\Models\Admin\News\NewsCategory;
 use Illuminate\Http\Request;
 
 class DetailController extends Controller
@@ -20,6 +20,6 @@ class DetailController extends Controller
             ->get();
         $news = News::with(['category'])->limit(4)->get();
         $categories =  NewsCategory::with('news')->get();
-        return view('portal.berita.detail', compact('berita', 'news', 'categories', 'relatedBerita'));
+        return view('portal.news.detail', compact('berita', 'news', 'categories', 'relatedBerita'));
     }
 }

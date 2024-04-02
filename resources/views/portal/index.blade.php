@@ -271,7 +271,7 @@
                         @forelse ($news->slice(0, 2) as $new)
                             <div class="news-block" style="margin-bottom:5rem">
                                 <div class="news-block-top">
-                                    <a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}">
+                                    <a href="{{ route('portal.news.detail', ['slug' => $new->slug]) }}">
                                         <img src="{{ asset('storage/' . $new->image) }}" class="news-image img-fluid"
                                             alt="">
                                     </a>
@@ -308,7 +308,7 @@
                                     </div>
 
                                     <div class="news-block-title mb-2">
-                                        <h4><a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}"
+                                        <h4><a href="{{ route('portal.news.detail', ['slug' => $new->slug]) }}"
                                                 class="news-block-title-link">{{ $new->title }}</a></h4>
                                     </div>
 
@@ -320,7 +320,7 @@
                     </div>
 
                     <div class="col-lg-4 col-12 mx-auto">
-                        <form class="custom-form search-form" action="{{ route('portal.berita.index') }}" method="get"
+                        <form class="custom-form search-form" action="{{ route('portal.news.index') }}" method="get"
                             role="form">
                             <input class="form-control" type="search" placeholder="Search" aria-label="Search"
                                 name="q">
@@ -336,7 +336,7 @@
                         @forelse ($news->slice(2, 4) as $new)
                             <div class="news-block news-block-two-col d-flex mt-4">
                                 <div class="news-block-two-col-image-wrap">
-                                    <a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}">
+                                    <a href="{{ route('portal.news.detail', ['slug' => $new->slug]) }}">
                                         <img src="{{ asset('storage/' . $new->image) }}" class="news-image img-fluid"
                                             alt="">
                                     </a>
@@ -344,7 +344,7 @@
 
                                 <div class="news-block-two-col-info">
                                     <div class="news-block-title mb-2">
-                                        <h6><a href="{{ route('portal.berita.detail', ['slug' => $new->slug]) }}"
+                                        <h6><a href="{{ route('portal.news.detail', ['slug' => $new->slug]) }}"
                                                 class="news-block-title-link">{{ $new->title }}</a>
                                         </h6>
                                     </div>
@@ -364,7 +364,7 @@
                             <h5 class="mb-3">Categories</h5>
 
                             @foreach ($categories as $category)
-                                <a href="{{ route('portal.berita.index', ['category' => $category->name]) }}"
+                                <a href="{{ route('portal.news.index', ['category' => $category->name]) }}"
                                     class="category-block-link">
                                     {{ $category->name }}
                                     <span class="badge">{{ $category->news->count() }}</span>

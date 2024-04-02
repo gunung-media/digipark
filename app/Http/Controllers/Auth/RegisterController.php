@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
-use App\Models\Company;
-use App\Models\Seeker;
+use App\Http\Controllers\Controller;
+use App\Models\Company\Company;
+use App\Models\Seeker\Seeker;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -11,7 +12,7 @@ class RegisterController extends Controller
     public function index()
     {
         $mode = request()->query('mode');
-        return view('portal.register', compact('mode'));
+        return view('portal.auth.register', compact('mode'));
     }
 
     public function store(Request $request)
@@ -37,8 +38,8 @@ class RegisterController extends Controller
                 'password' => bcrypt($request->input('password')),
             ])
         )) {
-            return redirect()->route('portal.login', ['mode' => $mode])->with('status', 'Register berhasil');
+            return redirect()->route('portal.auth.login', ['mode' => $mode])->with('status', 'Register berhasil');
         }
-        return redirect()->route('portal.register', ['mode' => $mode])->with('error', 'Fitur belum tersedia');
+        return redirect()->route('portal.auth.register', ['mode' => $mode])->with('error', 'Register gagal');
     }
 }

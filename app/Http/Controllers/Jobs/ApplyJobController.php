@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Seeker;
+namespace App\Http\Controllers\Jobs;
 
 use App\Filament\Company\Resources\JobResource;
 use App\Http\Controllers\Controller;
-use App\Models\Company;
-use App\Models\JobApplicant;
+use App\Models\Company\Company;
+use App\Models\Seeker\JobApplicant;
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Illuminate\Http\Request;

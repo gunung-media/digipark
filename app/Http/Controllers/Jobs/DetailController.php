@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Pekerjaan;
+namespace App\Http\Controllers\Jobs;
 
 use App\Http\Controllers\Controller;
-use App\Models\Job;
+use App\Models\Company\Job;
 use Illuminate\Http\Request;
 
 class DetailController extends Controller
@@ -14,6 +14,6 @@ class DetailController extends Controller
     public function __invoke(Request $request, $jobId)
     {
         $job = Job::with('company')->findOrFail($jobId);
-        return view('portal.pekerjaan.detail', compact('job'));
+        return view('portal.jobs.detail', compact('job'));
     }
 }

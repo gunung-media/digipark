@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SubMenu;
+use App\Models\Admin\Menu\SubMenu;
 use Illuminate\Http\Request;
 
 class SubMenuController extends Controller

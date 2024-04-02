@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Berita;
+namespace App\Http\Controllers\News;
 
-use App\Filament\Resources\NewsResource;
+use App\Filament\Admin\Resources\NewsResource;
 use App\Models\User;
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
-
 use App\Http\Controllers\Controller;
-use App\Models\NewsComment;
+use App\Models\Admin\News\NewsComment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller

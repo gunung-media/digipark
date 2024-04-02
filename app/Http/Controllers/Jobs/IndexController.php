@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Pekerjaan;
+namespace App\Http\Controllers\Jobs;
 
 use App\Http\Controllers\Controller;
-use App\Models\Job;
+use App\Models\Company\Job;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -26,6 +26,6 @@ class IndexController extends Controller
         }
 
         $jobs = $jobs->get();
-        return view('portal.pekerjaan.index', compact('jobs', 'name'));
+        return view('portal.jobs.index', compact('jobs', 'name'));
     }
 }

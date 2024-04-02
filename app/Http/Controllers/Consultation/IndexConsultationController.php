@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Consultation;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class IndexConsultationController extends Controller
@@ -11,6 +12,6 @@ class IndexConsultationController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('portal.konsultasi');
+        return view('portal.consultation');
     }
 }

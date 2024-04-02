@@ -30,7 +30,7 @@
                   </li>
 
                   <li class="nav-item"><a class="nav-link click-scroll"
-                          href="{{ route('portal.berita.index') }}">Berita</a></li>
+                          href="{{ route('portal.news.index') }}">Berita</a></li>
                   <li class="nav-item"><a class="nav-link click-scroll"
                           href="{{ route('portal.jobs.index') }}">Pekerjaan</a></li>
                   <li class="nav-item"><a class="nav-link click-scroll"
@@ -48,7 +48,7 @@
                                   @foreach ($menu->subMenus as $sub)
                                       <li style="margin-top:10px">
                                           <a class="dropdown-item"
-                                              href="{{ route('subMenu', ['slug' => $sub->slug]) }}">{{ $sub->title }}</a>
+                                              href="{{ route('portal.sub-menu', ['slug' => $sub->slug]) }}">{{ $sub->title }}</a>
                                       </li>
                                   @endforeach
                               </ul>

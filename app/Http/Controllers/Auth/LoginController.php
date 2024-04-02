@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -9,7 +10,7 @@ class LoginController extends Controller
     public function index()
     {
         $mode = request()->query('mode');
-        return view('portal.login', compact('mode'));
+        return view('portal.auth.login', compact('mode'));
     }
 
     public function login(Request $request, $mode)

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Berita;
+namespace App\Http\Controllers\News;
 
 use App\Http\Controllers\Controller;
-use App\Models\News;
-use App\Models\NewsCategory;
+use App\Models\Admin\News\News;
+use App\Models\Admin\News\NewsCategory;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -27,6 +27,6 @@ class IndexController extends Controller
         $news = $news->get();
         $categories =  NewsCategory::with('news')->get();
 
-        return view('portal.berita.index', compact('news', 'categories', 'name', 'category'));
+        return view('portal.news.index', compact('news', 'categories', 'name', 'category'));
     }
 }
