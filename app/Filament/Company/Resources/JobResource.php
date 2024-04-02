@@ -93,9 +93,20 @@ class JobResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name_job'),
+                Tables\Columns\TextColumn::make('name_job')
+                    ->label('Nama Pekerjaan')
+                    ->searchable(isIndividual: true),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label("Aktif Di Web")
                     ->boolean(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'diterima' => 'gray',
+                        'ditunda' => 'warning',
+                        'diproses' => 'success',
+                        'ditolak' => 'danger',
+                    })
             ])
             ->filters([
                 SelectFilter::make('is_active')
@@ -103,9 +114,13 @@ class JobResource extends Resource
                         1 => 'Active',
                         0 => 'Inactive',
                     ]),
-            ])
-            ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options([
+                        'diterima' => 'Diterima',
+                        'ditunda' => 'Ditunda',
+                        'diproses' => 'Diproses',
+                        'ditolak' => 'Ditolak',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
