@@ -3,7 +3,6 @@
 namespace App\Filament\Company\Resources;
 
 use App\Filament\Company\Resources\CompanyLaidOffResource\Pages;
-use App\Filament\Company\Resources\CompanyLaidOffResource\RelationManagers;
 use App\Models\Company\CompanyLaidOff;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
@@ -13,11 +12,9 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
-use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CompanyLaidOffResource extends Resource
 {
@@ -92,10 +89,29 @@ class CompanyLaidOffResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('responsible_name')
+                    ->label('Nama Penanggung Jawab')
+                    ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nama Karyawan PHK')
+                    ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'diterima' => 'gray',
+                        'ditunda' => 'warning',
+                        'diproses' => 'success',
+                        'ditolak' => 'danger',
+                    })
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options([
+                        'diterima' => 'Diterima',
+                        'ditunda' => 'Ditunda',
+                        'diproses' => 'Diproses',
+                        'ditolak' => 'Ditolak',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
