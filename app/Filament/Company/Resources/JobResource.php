@@ -3,12 +3,13 @@
 namespace App\Filament\Company\Resources;
 
 use App\Filament\Company\Resources\JobResource\Pages;
-use App\Filament\Company\Resources\JobResource\RelationManagers;
 use App\Models\Company\Job;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
@@ -21,6 +22,8 @@ class JobResource extends Resource
     protected static ?string $model = Job::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function form(Form $form): Form
     {
@@ -113,10 +116,18 @@ class JobResource extends Resource
             ]);
     }
 
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            Pages\EditJob::class,
+            Pages\Applicant::class,
+        ]);
+    }
+
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ApplicantRelationManager::class,
+            // RelationManagers\ApplicantRelationManager::class,
         ];
     }
 
@@ -126,6 +137,7 @@ class JobResource extends Resource
             'index' => Pages\ListJobs::route('/'),
             'create' => Pages\CreateJob::route('/create'),
             'edit' => Pages\EditJob::route('/{record}/edit'),
+            'applicants' => Pages\Applicant::route('/{record}/applicants'),
         ];
     }
 }
