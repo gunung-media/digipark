@@ -30,11 +30,11 @@
                         @if (empty($mode))
                             <div class="row">
                                 <div class="col-md-6 col-12">
-                                    <a class="btn btn-primary custom-btn" style="width:100%"
+                                    <a class="btn btn-primary custom-btn auth" style="width:100%"
                                         href="{{ route('portal.register', ['mode' => 'company']) }}">Badan Perusahan</a>
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <a class="btn btn-primary custom-btn" style="width:100%"
+                                    <a class="btn btn-primary custom-btn auth" style="width:100%"
                                         href="{{ route('portal.register', ['mode' => 'seeker']) }}">Member</a>
                                 </div>
                             </div>

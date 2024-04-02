@@ -64,4 +64,10 @@
         height: 250px;
         width: 100%;
     }
+
+    .custom-btn.auth {
+        background-image: url({{ asset('images/gradient.webp') }});
+        rackground-repeat: no-repeat;
+        background-position: left;
+    }
 </style>
