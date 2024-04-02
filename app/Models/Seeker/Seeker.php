@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Seeker;
 
+use App\Models\Company\Job;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;

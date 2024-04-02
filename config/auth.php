@@ -74,11 +74,11 @@ return [
         ],
         'company' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Company::class,
+            'model' => App\Models\Company\Company::class,
         ],
         'seeker' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Seeker::class,
+            'model' => App\Models\Seeker\Seeker::class,
         ],
 
         // 'users' => [

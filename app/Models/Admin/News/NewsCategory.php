@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin\News;
 
 use Filament\Forms\Components\Concerns\HasMeta;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Seeker;
 
+use App\Models\Company\Job;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

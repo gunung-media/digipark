@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin\Settings;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class DashboardImage extends Model
+class DashboardTestimonial extends Model
 {
     use HasFactory;
 

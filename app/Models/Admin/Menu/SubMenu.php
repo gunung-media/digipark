@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin\Menu;
 
+use App\Models\Admin\Menu\Menu;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class News extends Model
+class SubMenu extends Model
 {
     use HasFactory;
 
@@ -31,8 +30,9 @@ class News extends Model
         });
     }
 
+
     protected $casts = [
-        'status' => 'boolean',
+        'is_active' => 'boolean',
     ];
 
     protected $appends = ['created_at_format'];
@@ -44,23 +44,13 @@ class News extends Model
         );
     }
 
-    public function category(): BelongsTo
+    public function menu(): BelongsTo
     {
-        return $this->belongsTo(NewsCategory::class);
-    }
-
-    public function tags(): BelongsToMany
-    {
-        return $this->belongsToMany(NewsTag::class, 'news_has_tags', 'news_id', 'tags_id');
-    }
-
-    public function comments(): HasMany
-    {
-        return $this->hasMany(NewsComment::class);
+        return $this->belongsTo(Menu::class);
     }
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('status', 1);
+        $query->where('is_active', 1);
     }
 }

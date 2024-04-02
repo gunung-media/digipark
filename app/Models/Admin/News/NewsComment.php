@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin\News;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,17 +10,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class DashboardTestimonial extends Model
+class NewsComment extends Model
 {
     use HasFactory;
 
-    public function dashboard(): BelongsTo
+    protected $casts = [
+        'is_show' => 'boolean',
+    ];
+
+    public function news(): BelongsTo
     {
-        return $this->belongsTo(Dashboard::class);
+        return $this->belongsTo(News::class);
     }
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('is_active', 1);
+        $query->where('is_show', 1);
     }
 }

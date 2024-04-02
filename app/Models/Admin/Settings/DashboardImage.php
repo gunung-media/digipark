@@ -1,30 +1,26 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin\Settings;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class NewsComment extends Model
+class DashboardImage extends Model
 {
     use HasFactory;
 
-    protected $casts = [
-        'is_show' => 'boolean',
-    ];
-
-    public function news(): BelongsTo
+    public function dashboard(): BelongsTo
     {
-        return $this->belongsTo(News::class);
+        return $this->belongsTo(Dashboard::class);
     }
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('is_show', 1);
+        $query->where('is_active', 1);
     }
 }

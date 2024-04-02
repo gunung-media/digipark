@@ -1,26 +1,22 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin\Settings;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Menu extends Model
+class DashboardVision extends Model
 {
     use HasFactory;
 
-    protected $casts = [
-        'is_active' => 'boolean',
-    ];
-
-    public function subMenus(): HasMany
+    public function dashboard(): BelongsTo
     {
-        return $this->hasMany(SubMenu::class);
+        return $this->belongsTo(Dashboard::class);
     }
 
     public function scopeActive(Builder $query): void
