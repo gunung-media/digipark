@@ -1,6 +1,6 @@
 import { Head } from "@inertiajs/react"
 import './style.scss'
-import kaltengLogo from '@/assets/images/kalteng-logo.png'
+import logo from '@/assets/images/logo_digipark.png'
 import gubWagub from '@/assets/images/gubWagub.png'
 import kadis from '@/assets/images/kadis.png'
 import mapIcon from '@/assets/icons/landing/map.png'
@@ -92,7 +92,7 @@ export default function Landing() {
                             key="splash2"
                         />
                         <motion.img
-                            src={kaltengLogo}
+                            src={logo}
                             alt="Kalimantan Tengah"
                             exit={{ translateY: '500%' }}
                             className="kalteng-logo"
@@ -111,9 +111,9 @@ export default function Landing() {
                         <div className="overlay">
                             <div className="landing-container">
                                 <div className="heading">
-                                    <img src={kaltengLogo} alt="Kalimantan Tengah" />
-                                    <h1>digi<span>park.</span></h1>
-                                    <h5>Digital Palangka Raya Ketenagakerjaan</h5>
+                                    <img src={logo} alt="Kalimantan Tengah" />
+                                    {/* <h1>digi<span>park.</span></h1> */}
+                                    {/* <h5>Digital Palangka Raya Ketenagakerjaan</h5> */}
 
                                     <a className="homeContentEnterBtn" href={route('portal')} style={{ top: "0px", visibility: "visible" }}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 51" version="1.1">
