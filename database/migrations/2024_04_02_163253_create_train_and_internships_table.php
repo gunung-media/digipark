@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('train_and_internships', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->string('location');
             $table->enum('type', ['train', 'internship']);
             $table->longText('description');

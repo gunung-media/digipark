@@ -3,7 +3,6 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\TrainAndInternshipResource\Pages;
-use App\Filament\Admin\Resources\TrainAndInternshipResource\RelationManagers;
 use App\Models\Admin\TrainAndInternship;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
@@ -12,8 +11,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TrainAndInternshipResource extends Resource
 {
@@ -29,7 +26,11 @@ class TrainAndInternshipResource extends Resource
             ->schema([
                 Section::make('')
                     ->schema([
-                        Forms\Components\FileUpload::make('Gambar')
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Gambar')
+                            ->image()
+                            ->disk('public')
+                            ->directory('news')
                             ->image()
                             ->required(),
                     ]),
@@ -38,6 +39,7 @@ class TrainAndInternshipResource extends Resource
                         ->schema([
                             Forms\Components\TextInput::make('name')
                                 ->label('Nama Pelatihan/Pemagangan')
+                                ->unique(ignoreRecord: true)
                                 ->required(),
                             Forms\Components\TextInput::make('location')
                                 ->label('Lokasi Pelaksanaan')
@@ -60,6 +62,7 @@ class TrainAndInternshipResource extends Resource
                             Forms\Components\RichEditor::make('requirement')
                                 ->label('Persyaratan Peserta')
                                 ->columnSpanFull(),
+
                         ])
                         ->columns(2),
                     Section::make('')->schema([
@@ -82,13 +85,34 @@ class TrainAndInternshipResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('slug')
+                    ->searchable(),
+                Tables\Columns\ImageColumn::make('image')
+                    ->disk('public')
+                    ->square(),
+                Tables\Columns\IconColumn::make('is_active')
+                    ->boolean(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('active')
+                    ->action(function (TrainAndInternship $record) {
+                        $record->is_active = true;
+                        $record->save();
+                    })
+                    ->hidden(fn (TrainAndInternship $record): bool => $record->is_active),
+                Tables\Actions\Action::make('inactive')
+                    ->action(function (TrainAndInternship $record) {
+                        $record->is_active = false;
+                        $record->save();
+                    })
+                    ->visible(fn (TrainAndInternship $record): bool => $record->is_active),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
