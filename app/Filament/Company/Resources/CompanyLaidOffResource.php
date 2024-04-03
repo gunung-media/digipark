@@ -21,7 +21,7 @@ class CompanyLaidOffResource extends Resource
     protected static ?string $label = "Laporan PHK";
     protected static ?string $pluralModelLabel = 'Laporan PHK';
     protected static ?string $model = CompanyLaidOff::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-minus';
     protected static ?string $navigationGroup = 'Layanan';
 
     public static function form(Form $form): Form
@@ -36,19 +36,19 @@ class CompanyLaidOffResource extends Resource
                         return FilamentUtil::getUser()->address;
                     })
                 ])->disabled(),
+                Section::make('Penanggung Jawab')->schema([
+                    Forms\Components\TextInput::make('responsible_name')
+                        ->label('Nama')
+                        ->required(),
+                    Forms\Components\TextInput::make('responsible_position')
+                        ->label('Posisi')
+                        ->required(),
+                    SignaturePad::make('signature')
+                        ->label('Tanda Tangan')
+                        ->columnSpanFull()
+                        ->downloadable(),
+                ])->columns(2),
                 Tabs::make()->tabs([
-                    Tab::make('Penanggung Jawab')->schema([
-                        Forms\Components\TextInput::make('responsible_name')
-                            ->label('Nama')
-                            ->required(),
-                        Forms\Components\TextInput::make('responsible_position')
-                            ->label('Posisi')
-                            ->required(),
-                        SignaturePad::make('signature')
-                            ->label('Tanda Tangan')
-                            ->columnSpanFull()
-                            ->downloadable(),
-                    ])->columns(2),
                     Tab::make('Data')->schema([
                         Forms\Components\RichEditor::make('response_worker')
                             ->label('Tanggapan pekerja')
@@ -104,10 +104,10 @@ class CompanyLaidOffResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('responsible_name')
                     ->label('Nama Penanggung Jawab')
-                    ->searchable(isIndividual: true),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama Karyawan PHK')
-                    ->searchable(isIndividual: true),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {

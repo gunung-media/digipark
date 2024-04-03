@@ -6,8 +6,9 @@ use App\Filament\Company\Resources\LaborDemandResource\Pages;
 use App\Models\Company\LaborDemand;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\Wizard\Step;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -21,35 +22,32 @@ class LaborDemandResource extends Resource
     protected static ?string $label = "Laporan Permintaan Tenaga Kerja";
     protected static ?string $pluralModelLabel = 'Laporan Permintaan Tenaga Kerja';
     protected static ?string $model = LaborDemand::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
     protected static ?string $navigationGroup = 'Layanan';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Wizard::make([
-                    Step::make('Informasi')
-                        ->description('INFORMASI LOWONGAN JABATAN / PEKERJAAN')
-                        ->schema([
-                            Forms\Components\DatePicker::make('request_deadline')
-                                ->label('Batas Waktu Permintaan')
-                                ->required(),
-                            Forms\Components\TextInput::make('name_job')
-                                ->label('Nama Jabatan / Pekerjaan')
-                                ->required()
-                                ->maxLength(255),
-                            Forms\Components\TextInput::make('total_man_needs')
-                                ->label('Jumlah Tenaga Kerja Pria yang dibutuhkan')
-                                ->numeric()
-                                ->required(),
-                            Forms\Components\TextInput::make('total_woman_needs')
-                                ->label('Jumlah Tenaga Kerja Perempuan yang dibutuhkan')
-                                ->numeric()
-                                ->required(),
-                        ])->columns(2),
-                    Step::make('Persyarat')
-                        ->description('PERSYARATAN JABATAN')
+                Section::make('Informasi')->schema([
+                    Forms\Components\DatePicker::make('request_deadline')
+                        ->label('Batas Waktu Permintaan')
+                        ->required(),
+                    Forms\Components\TextInput::make('name_job')
+                        ->label('Nama Jabatan / Pekerjaan')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('total_man_needs')
+                        ->label('Jumlah Tenaga Kerja Pria yang dibutuhkan')
+                        ->numeric()
+                        ->required(),
+                    Forms\Components\TextInput::make('total_woman_needs')
+                        ->label('Jumlah Tenaga Kerja Perempuan yang dibutuhkan')
+                        ->numeric()
+                        ->required(),
+                ])->columns(2),
+                Tabs::make()->schema([
+                    Tab::make('Persyarat')
                         ->schema([
                             Forms\Components\Select::make('education')
                                 ->label('Pendidikan Tertinggi')
@@ -77,8 +75,7 @@ class LaborDemandResource extends Resource
                                 ->required()
                                 ->columnSpanFull(),
                         ])->columns(2),
-                    Step::make('Pekerjaan')
-                        ->description('SISTEM PENGUPAHAN')
+                    Tab::make('Pekerjaan')
                         ->schema([
                             Forms\Components\Select::make('wage_system')
                                 ->label('Sistem Pengupahan')
@@ -140,7 +137,7 @@ class LaborDemandResource extends Resource
                                 ->required(),
                             Forms\Components\Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
                         ])->columns(2),
-                    Step::make('Tanda Tangan')->schema([
+                    Tab::make('Tanda Tangan')->schema([
                         SignaturePad::make('signature')
                             ->columnSpanFull()
                             ->label('Tanda Tangan')
@@ -148,7 +145,6 @@ class LaborDemandResource extends Resource
                             ->downloadable(),
                     ])
                 ])
-                    ->skippable()
                     ->columnSpanFull(),
             ]);
     }

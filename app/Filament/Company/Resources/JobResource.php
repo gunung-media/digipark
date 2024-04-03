@@ -6,6 +6,7 @@ use App\Filament\Company\Resources\JobResource\Pages;
 use App\Models\Company\Job;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
@@ -23,7 +24,7 @@ class JobResource extends Resource
     protected static ?string $label = "Laporan Lowongan";
     protected static ?string $pluralModelLabel = 'Laporan Lowongan';
     protected static ?string $model = Job::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
     protected static ?string $navigationGroup = 'Layanan';
 
@@ -31,33 +32,33 @@ class JobResource extends Resource
     {
         return $form
             ->schema([
+                Section::make('Main Data')->schema([
+                    Forms\Components\TextInput::make('name_job')
+                        ->label('Nama Jabatan')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('address')
+                        ->label('Lokasi Pekerjaan')
+                        ->required()
+                        ->default(function () {
+                            return FilamentUtil::getUser()->address;
+                        })
+                        ->maxLength(255),
+                    TinyEditor::make('description')
+                        ->label('Deskripsi Pekerjaan')
+                        ->columnSpanFull()
+                        ->fileAttachmentsDisk('public')
+                        ->fileAttachmentsVisibility('private')
+                        ->fileAttachmentsDirectory('jobs/description')
+                        ->required(),
+                    Forms\Components\FileUpload::make('image')
+                        ->label('Gambar')
+                        ->disk('public')
+                        ->directory('jobs')
+                        ->image()
+                        ->columnSpanFull(),
+                ])->columns(2),
                 Tabs::make()->tabs([
-                    Tab::make('Main Data')->schema([
-                        Forms\Components\TextInput::make('name_job')
-                            ->label('Nama Jabatan')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('address')
-                            ->label('Lokasi Pekerjaan')
-                            ->required()
-                            ->default(function ($livewire) {
-                                return FilamentUtil::getUser()->address;
-                            })
-                            ->maxLength(255),
-                        TinyEditor::make('description')
-                            ->label('Deskripsi Pekerjaan')
-                            ->columnSpanFull()
-                            ->fileAttachmentsDisk('public')
-                            ->fileAttachmentsVisibility('private')
-                            ->fileAttachmentsDirectory('jobs/description')
-                            ->required(),
-                        Forms\Components\FileUpload::make('image')
-                            ->label('Gambar')
-                            ->disk('public')
-                            ->directory('jobs')
-                            ->image()
-                            ->columnSpanFull(),
-                    ])->columns(2),
                     Tab::make('Data Tambahan')->schema([
                         Forms\Components\TextInput::make('total_needed_man')
                             ->label('Jumlah Lelaki yang dibutuhkan')
@@ -83,13 +84,14 @@ class JobResource extends Resource
                         Forms\Components\DatePicker::make('deadline')
                             ->label('Deadline Lowongan Pekerjaan'),
                         Forms\Components\DatePicker::make('start_date')
-                            ->label('Gaji')
+                            ->label('Mulai Pekerjaan')
                             ->required(),
                         Forms\Components\TextInput::make('salary')
-                            ->label('Mulai Pekerjaan')
+                            ->label('Gaji')
                             ->numeric()
                             ->prefix('Rp.')
-                            ->default(0),
+                            ->default(0)
+                            ->columnSpanFull(),
                         Forms\Components\Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
                     ])->columns(2),
                     Tab::make('Tanda Tangan')->schema([
@@ -108,7 +110,7 @@ class JobResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name_job')
                     ->label('Nama Pekerjaan')
-                    ->searchable(isIndividual: true),
+                    ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->label("Aktif Di Web")
                     ->boolean(),

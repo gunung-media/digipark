@@ -29,7 +29,7 @@ class EditProfile extends Page implements HasForms
     use InteractsWithForms;
 
     protected static string $view = 'filament.company.pages.edit-profile';
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public ?array $profileData = [];
     public ?array $passwordData = [];
