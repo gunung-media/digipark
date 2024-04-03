@@ -117,7 +117,7 @@ class SeekerResource extends Resource
                                             ->label('Tanda Tangan')
                                             ->columnSpanFull()
                                             ->downloadable(),
-                                    ]),
+                                    ])->columnSpanFull()
                             ])
                             ->columns(2),
                     ])->columnSpanFull()
