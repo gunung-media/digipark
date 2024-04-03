@@ -105,9 +105,8 @@ export default function Landing() {
                         initial={{ opacity: "0.5" }}
                         animate={{ opacity: 1 }}
                         key="bg"
+
                     >
-                        <img src={gubWagub} alt="Gubenur & Wakil Gubenur" className="gub-wagub" />
-                        <img src={kadis} alt="Kepala Dinas" className="kadis" />
                         <div className="overlay">
                             <div className="landing-container">
                                 <div className="heading">
@@ -131,6 +130,11 @@ export default function Landing() {
                                             <p>{menu.title}</p>
                                         </a>
                                     ))}
+                                </div>
+
+                                <div className="photos">
+                                    <img src={gubWagub} alt="Gubenur & Wakil Gubenur" className="gub-wagub" />
+                                    <img src={kadis} alt="Kepala Dinas" className="kadis" />
                                 </div>
                             </div>
                         </div>
