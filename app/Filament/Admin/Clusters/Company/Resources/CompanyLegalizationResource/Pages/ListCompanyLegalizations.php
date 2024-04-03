@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Filament\Admin\Clusters\Company\Resources\CompanyLaidOffResource\Pages;
+namespace App\Filament\Admin\Clusters\Company\Resources\CompanyLegalizationResource\Pages;
 
-use App\Filament\Admin\Clusters\Company\Resources\CompanyLaidOffResource;
+use App\Filament\Admin\Clusters\Company\Resources\CompanyLegalizationResource;
 use Filament\Pages\Concerns\ExposesTableToWidgets;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 
-class ListCompanyLaidOffs extends ListRecords
+class ListCompanyLegalizations extends ListRecords
 {
     use ExposesTableToWidgets;
-    protected static string $resource = CompanyLaidOffResource::class;
+    protected static string $resource = CompanyLegalizationResource::class;
 
     protected function getHeaderActions(): array
     {
@@ -19,7 +19,7 @@ class ListCompanyLaidOffs extends ListRecords
 
     protected function getHeaderWidgets(): array
     {
-        return CompanyLaidOffResource::getWidgets();
+        return CompanyLegalizationResource::getWidgets();
     }
 
     public function getTabs(): array
