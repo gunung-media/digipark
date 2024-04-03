@@ -9,9 +9,12 @@ use App\Models\Company\Job;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Split;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
@@ -31,81 +34,104 @@ class JobResource extends Resource
     {
         return $form
             ->schema([
-                Tabs::make()->tabs([
-                    Tab::make('Main Data')
+                Split::make([
+                    Tabs::make()->tabs([
+                        Tab::make('Main Data')
+                            ->schema([
+                                Forms\Components\TextInput::make('name_job')
+                                    ->label('Nama Jabatan')
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\TextInput::make('address')
+                                    ->label('Lokasi Pekerjaan')
+                                    ->required()
+                                    ->default(function ($livewire) {
+                                        return FilamentUtil::getUser()->address;
+                                    })
+                                    ->maxLength(255),
+                                TinyEditor::make('description')
+                                    ->label('Deskripsi Pekerjaan')
+                                    ->columnSpanFull()
+                                    ->fileAttachmentsDisk('public')
+                                    ->fileAttachmentsVisibility('private')
+                                    ->fileAttachmentsDirectory('jobs/description')
+                                    ->required(),
+                                Forms\Components\FileUpload::make('image')
+                                    ->label('Gambar')
+                                    ->disk('public')
+                                    ->directory('jobs')
+                                    ->image()
+                                    ->columnSpanFull(),
+                            ])
+                            ->columns(2)
+                            ->disabled(),
+                        Tab::make('Data Tambahan')
+                            ->schema([
+                                Forms\Components\TextInput::make('total_needed_man')
+                                    ->label('Jumlah Lelaki yang dibutuhkan')
+                                    ->numeric()
+                                    ->required()
+                                    ->default(0),
+                                Forms\Components\TextInput::make('total_needed_woman')
+                                    ->label('Jumlah Wanita yang dibutuhkan')
+                                    ->numeric()
+                                    ->required()
+                                    ->default(0),
+                                Forms\Components\Select::make('minimal_education')
+                                    ->label('Pendidikan')
+                                    ->options([
+                                        "Tidak Ada" => 'Tidak Ada',
+                                        "SD" => 'SD',
+                                        "SMP" => 'SMP',
+                                        "SMA/SMK" => 'SMA/SMK',
+                                        "Kuliah" => 'KuliahSMA',
+                                    ]),
+                                Forms\Components\TextInput::make('special')
+                                    ->label('Keahlian Khusus'),
+                                Forms\Components\DatePicker::make('deadline')
+                                    ->label('Deadline Lowongan Pekerjaan'),
+                                Forms\Components\DatePicker::make('start_date')
+                                    ->label('Gaji')
+                                    ->required(),
+                                Forms\Components\TextInput::make('salary')
+                                    ->label('Mulai Pekerjaan')
+                                    ->numeric()
+                                    ->prefix('Rp.')
+                                    ->default(0),
+                                Forms\Components\Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
+                            ])
+                            ->columns(2)
+                            ->disabled(),
+                        Tab::make('Tanda Tangan')
+                            ->schema([
+                                SignaturePad::make('signature')
+                                    ->label('Tanda Tangan')
+                                    ->columnSpanFull()
+                                    ->downloadable(),
+                            ])
+                            ->disabled()
+                    ])->columnSpanFull(),
+                    Section::make('')
                         ->schema([
-                            Forms\Components\TextInput::make('name_job')
-                                ->label('Nama Jabatan')
-                                ->required()
-                                ->maxLength(255),
-                            Forms\Components\TextInput::make('address')
-                                ->label('Lokasi Pekerjaan')
-                                ->required()
-                                ->default(function ($livewire) {
-                                    return FilamentUtil::getUser()->address;
-                                })
-                                ->maxLength(255),
-                            TinyEditor::make('description')
-                                ->label('Deskripsi Pekerjaan')
-                                ->columnSpanFull()
-                                ->fileAttachmentsDisk('public')
-                                ->fileAttachmentsVisibility('private')
-                                ->fileAttachmentsDirectory('jobs/description')
-                                ->required(),
-                            Forms\Components\FileUpload::make('image')
-                                ->label('Gambar')
-                                ->disk('public')
-                                ->directory('jobs')
-                                ->image()
-                                ->columnSpanFull(),
-                        ])
-                        ->columns(2)
-                        ->disabled(),
-                    Tab::make('Data Tambahan')
-                        ->schema([
-                            Forms\Components\TextInput::make('total_needed_man')
-                                ->label('Jumlah Lelaki yang dibutuhkan')
-                                ->numeric()
-                                ->required()
-                                ->default(0),
-                            Forms\Components\TextInput::make('total_needed_woman')
-                                ->label('Jumlah Wanita yang dibutuhkan')
-                                ->numeric()
-                                ->required()
-                                ->default(0),
-                            Forms\Components\Select::make('minimal_education')
-                                ->label('Pendidikan')
+                            ToggleButtons::make('status')
                                 ->options([
-                                    "Tidak Ada" => 'Tidak Ada',
-                                    "SD" => 'SD',
-                                    "SMP" => 'SMP',
-                                    "SMA/SMK" => 'SMA/SMK',
-                                    "Kuliah" => 'KuliahSMA',
-                                ]),
-                            Forms\Components\TextInput::make('special')
-                                ->label('Keahlian Khusus'),
-                            Forms\Components\DatePicker::make('deadline')
-                                ->label('Deadline Lowongan Pekerjaan'),
-                            Forms\Components\DatePicker::make('start_date')
-                                ->label('Gaji')
-                                ->required(),
-                            Forms\Components\TextInput::make('salary')
-                                ->label('Mulai Pekerjaan')
-                                ->numeric()
-                                ->prefix('Rp.')
-                                ->default(0),
-                            Forms\Components\Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
-                        ])
-                        ->columns(2)
-                        ->disabled(),
-                    Tab::make('Tanda Tangan')
-                        ->schema([
-                            SignaturePad::make('signature')
-                                ->label('Tanda Tangan')
-                                ->columnSpanFull()
-                                ->downloadable(),
-                        ])
-                        ->disabled()
+                                    'diterima' => 'Diterima',
+                                    'diproses' => 'Diproses',
+                                    'ditunda' => 'Ditunda',
+                                    'ditolak' => 'Ditolak',
+                                ])
+                                ->reactive()
+                                ->afterStateUpdated(function ($record, $state) {
+                                    $record->status = $state;
+                                    $record->save();
+                                    Notification::make()
+                                        ->success()
+                                        ->title(__("Saved"))
+                                        ->send();
+                                })
+                                ->required()
+                        ])->compact()
+                        ->grow(false),
                 ])->columnSpanFull(),
             ]);
     }
@@ -159,7 +185,7 @@ class JobResource extends Resource
                         $record->save();
                     })
                     ->visible(fn (Job $record): bool => $record->is_active),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label("View")->icon('heroicon-o-eye'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -16,8 +16,8 @@ use Filament\Tables\Table;
 class ClaimJhtResource extends Resource
 {
     protected static ?string $model = ClaimJht::class;
-    protected static ?string $label = 'Klaim JHT';
-    protected static ?string $pluralModelLabel = 'Klaim JHT';
+    protected static ?string $label = 'Laporan Klaim JHT';
+    protected static ?string $pluralModelLabel = 'Laporan Klaim JHT';
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
     protected static ?string $cluster = Seeker::class;
 
@@ -59,7 +59,7 @@ class ClaimJhtResource extends Resource
                     ]),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label("View")->icon('heroicon-o-eye'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

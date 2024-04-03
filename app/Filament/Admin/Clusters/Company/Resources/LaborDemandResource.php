@@ -8,10 +8,14 @@ use App\Filament\Admin\Clusters\Company\Resources\LaborDemandResource\Widgets\La
 use App\Models\Company\LaborDemand;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Split;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
@@ -31,125 +35,148 @@ class LaborDemandResource extends Resource
     {
         return $form
             ->schema([
-                Tabs::make()->tabs([
-                    Tab::make('Informasi')
-                        ->schema([
-                            Forms\Components\DatePicker::make('request_deadline')
-                                ->label('Batas Waktu Permintaan')
-                                ->required(),
-                            Forms\Components\TextInput::make('name_job')
-                                ->label('Nama Jabatan / Pekerjaan')
-                                ->required()
-                                ->maxLength(255),
-                            Forms\Components\TextInput::make('total_man_needs')
-                                ->label('Jumlah Tenaga Kerja Pria yang dibutuhkan')
-                                ->numeric()
-                                ->required(),
-                            Forms\Components\TextInput::make('total_woman_needs')
-                                ->label('Jumlah Tenaga Kerja Perempuan yang dibutuhkan')
-                                ->numeric()
-                                ->required(),
-                        ])->columns(2),
-                    Tab::make('Persyarat')
-                        ->schema([
-                            Forms\Components\Select::make('education')
-                                ->label('Pendidikan Tertinggi')
-                                ->required()
-                                ->options([
-                                    "Tidak Ada" => 'Tidak Ada',
-                                    "SD" => 'SD',
-                                    "SMP" => 'SMP',
-                                    "SMA/SMK" => 'SMA/SMK',
-                                    "Kuliah" => 'KuliahSMA',
-                                ]),
-                            Forms\Components\TextInput::make('major')
-                                ->label('Jurusan')
-                                ->required(),
-                            Forms\Components\RichEditor::make('skills')
-                                ->label('Keterampilan / Keahlian')
-                                ->required()
-                                ->columnSpanFull(),
-                            Forms\Components\RichEditor::make('experience')
-                                ->label('Pengalaman')
-                                ->required()
-                                ->columnSpanFull(),
-                            Forms\Components\RichEditor::make('special_conditions')
-                                ->label('Syarat Khusus')
-                                ->required()
-                                ->columnSpanFull(),
-                        ])->columns(2),
-                    Tab::make('Pekerjaan')
-                        ->schema([
-                            Forms\Components\Select::make('wage_system')
-                                ->label('Sistem Pengupahan')
-                                ->required()
-                                ->options(collect([
-                                    'Borongan',
-                                    'Harian',
-                                    'Mingguan',
-                                    'Bulanan'
-                                ])
-                                    ->mapWithKeys(fn ($val) => [$val => $val])
-                                    ->toArray()),
-                            Forms\Components\TextInput::make('salary')
-                                ->label('Gaji / Upah Sebulan')
-                                ->numeric()
-                                ->prefix('Rp')
-                                ->required(),
-                            Forms\Components\Select::make('work_status')
-                                ->label('Status Hubungan Kerja')
-                                ->required()
-                                ->options(collect([
-                                    'Waktu Tak Tertentu',
-                                    'Waktu Tertentu',
-                                ])
-                                    ->mapWithKeys(fn ($val) => [$val => $val])
-                                    ->toArray()),
-                            Forms\Components\TextInput::make('total_hours_per_week')
-                                ->label('Jumlah jam kerja dalam seminggu')
-                                ->numeric()
-                                ->prefix('Jam')
-                                ->required(),
-                            Forms\Components\Select::make('social_guarantee')
-                                ->label('Jaminan Sosial Lainnya')
-                                ->required()
-                                ->multiple()
-                                ->searchable()
-                                ->options(collect([
-                                    'Tidak Ada',
-                                    'Makan',
-                                    'Lembur',
-                                    'Pakaian Kerja',
-                                    'Transport',
-                                    'Waktu Istirahat',
-                                    'Kecelakaan',
-                                    'Kesehataan',
-                                    'Cuti',
-                                    'Hari Raya',
-                                    'Premi/Bonus',
-                                    'Hari Tua',
-                                ])
-                                    ->mapWithKeys(fn ($val) => [$val => $val])
-                                    ->toArray()),
-                            TinyEditor::make('work_description')
-                                ->label('Uraian Tugas')
+                Split::make([
+                    Tabs::make()->tabs([
+                        Tab::make('Informasi')
+                            ->schema([
+                                Forms\Components\DatePicker::make('request_deadline')
+                                    ->label('Batas Waktu Permintaan')
+                                    ->required(),
+                                Forms\Components\TextInput::make('name_job')
+                                    ->label('Nama Jabatan / Pekerjaan')
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\TextInput::make('total_man_needs')
+                                    ->label('Jumlah Tenaga Kerja Pria yang dibutuhkan')
+                                    ->numeric()
+                                    ->required(),
+                                Forms\Components\TextInput::make('total_woman_needs')
+                                    ->label('Jumlah Tenaga Kerja Perempuan yang dibutuhkan')
+                                    ->numeric()
+                                    ->required(),
+                            ])->columns(2),
+                        Tab::make('Persyaratan')
+                            ->schema([
+                                Forms\Components\Select::make('education')
+                                    ->label('Pendidikan Tertinggi')
+                                    ->required()
+                                    ->options([
+                                        "Tidak Ada" => 'Tidak Ada',
+                                        "SD" => 'SD',
+                                        "SMP" => 'SMP',
+                                        "SMA/SMK" => 'SMA/SMK',
+                                        "Kuliah" => 'KuliahSMA',
+                                    ]),
+                                Forms\Components\TextInput::make('major')
+                                    ->label('Jurusan')
+                                    ->required(),
+                                Forms\Components\RichEditor::make('skills')
+                                    ->label('Keterampilan / Keahlian')
+                                    ->required()
+                                    ->columnSpanFull(),
+                                Forms\Components\RichEditor::make('experience')
+                                    ->label('Pengalaman')
+                                    ->required()
+                                    ->columnSpanFull(),
+                                Forms\Components\RichEditor::make('special_conditions')
+                                    ->label('Syarat Khusus')
+                                    ->required()
+                                    ->columnSpanFull(),
+                            ])->columns(2),
+                        Tab::make('Pekerjaan')
+                            ->schema([
+                                Forms\Components\Select::make('wage_system')
+                                    ->label('Sistem Pengupahan')
+                                    ->required()
+                                    ->options(collect([
+                                        'Borongan',
+                                        'Harian',
+                                        'Mingguan',
+                                        'Bulanan'
+                                    ])
+                                        ->mapWithKeys(fn ($val) => [$val => $val])
+                                        ->toArray()),
+                                Forms\Components\TextInput::make('salary')
+                                    ->label('Gaji / Upah Sebulan')
+                                    ->numeric()
+                                    ->prefix('Rp')
+                                    ->required(),
+                                Forms\Components\Select::make('work_status')
+                                    ->label('Status Hubungan Kerja')
+                                    ->required()
+                                    ->options(collect([
+                                        'Waktu Tak Tertentu',
+                                        'Waktu Tertentu',
+                                    ])
+                                        ->mapWithKeys(fn ($val) => [$val => $val])
+                                        ->toArray()),
+                                Forms\Components\TextInput::make('total_hours_per_week')
+                                    ->label('Jumlah jam kerja dalam seminggu')
+                                    ->numeric()
+                                    ->prefix('Jam')
+                                    ->required(),
+                                Forms\Components\Select::make('social_guarantee')
+                                    ->label('Jaminan Sosial Lainnya')
+                                    ->required()
+                                    ->multiple()
+                                    ->searchable()
+                                    ->options(collect([
+                                        'Tidak Ada',
+                                        'Makan',
+                                        'Lembur',
+                                        'Pakaian Kerja',
+                                        'Transport',
+                                        'Waktu Istirahat',
+                                        'Kecelakaan',
+                                        'Kesehataan',
+                                        'Cuti',
+                                        'Hari Raya',
+                                        'Premi/Bonus',
+                                        'Hari Tua',
+                                    ])
+                                        ->mapWithKeys(fn ($val) => [$val => $val])
+                                        ->toArray()),
+                                TinyEditor::make('work_description')
+                                    ->label('Uraian Tugas')
+                                    ->columnSpanFull()
+                                    ->fileAttachmentsDisk('public')
+                                    ->fileAttachmentsVisibility('private')
+                                    ->fileAttachmentsDirectory('placement/description')
+                                    ->required(),
+                                Forms\Components\Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
+                            ])->columns(2),
+                        Tab::make('Tanda Tangan')->schema([
+                            SignaturePad::make('signature')
                                 ->columnSpanFull()
-                                ->fileAttachmentsDisk('public')
-                                ->fileAttachmentsVisibility('private')
-                                ->fileAttachmentsDirectory('placement/description')
-                                ->required(),
-                            Forms\Components\Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
-                        ])->columns(2),
-                    Step::make('Tanda Tangan')->schema([
-                        SignaturePad::make('signature')
-                            ->columnSpanFull()
-                            ->label('Tanda Tangan')
-                            ->required()
-                            ->downloadable(),
+                                ->label('Tanda Tangan')
+                                ->required()
+                                ->downloadable(),
+                        ])
                     ])
-                ])
-                    ->disabled()
-                    ->columnSpanFull(),
+                        ->disabled()
+                        ->columnSpanFull(),
+                    Section::make('')
+                        ->schema([
+                            ToggleButtons::make('status')
+                                ->options([
+                                    'diterima' => 'Diterima',
+                                    'diproses' => 'Diproses',
+                                    'ditunda' => 'Ditunda',
+                                    'ditolak' => 'Ditolak',
+                                ])
+                                ->reactive()
+                                ->afterStateUpdated(function ($record, $state) {
+                                    $record->status = $state;
+                                    $record->save();
+                                    Notification::make()
+                                        ->success()
+                                        ->title(__("Saved"))
+                                        ->send();
+                                })
+                                ->required()
+                        ])->compact()
+                        ->grow(false),
+                ])->columnSpanFull()
             ]);
     }
 
@@ -184,7 +211,7 @@ class LaborDemandResource extends Resource
                     ]),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label("View")->icon('heroicon-o-eye'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

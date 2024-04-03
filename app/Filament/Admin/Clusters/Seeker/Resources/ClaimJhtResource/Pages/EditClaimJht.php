@@ -8,6 +8,7 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditClaimJht extends EditRecord
 {
+    protected static ?string $title = 'View Laporan Klaim JHT';
     protected static string $resource = ClaimJhtResource::class;
 
     protected function getHeaderActions(): array

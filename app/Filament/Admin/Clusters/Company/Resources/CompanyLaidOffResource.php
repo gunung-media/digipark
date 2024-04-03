@@ -9,9 +9,12 @@ use App\Models\Company\CompanyLaidOff;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Split;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -29,17 +32,40 @@ class CompanyLaidOffResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('Main Data')
-                    ->description('Perusahaan')
-                    ->schema([
-                        Forms\Components\Placeholder::make('company.name')->content(function () {
-                            return FilamentUtil::getUser()->name;
-                        }),
-                        Forms\Components\Placeholder::make('company.address')->content(function () {
-                            return FilamentUtil::getUser()->address;
-                        })
-                    ])
-                    ->disabled(),
+                Split::make([
+                    Section::make('Main Data')
+                        ->description('Perusahaan')
+                        ->schema([
+                            Forms\Components\Placeholder::make('company.name')->content(function () {
+                                return FilamentUtil::getUser()->name;
+                            }),
+                            Forms\Components\Placeholder::make('company.address')->content(function () {
+                                return FilamentUtil::getUser()->address;
+                            })
+                        ])
+                        ->disabled(),
+                    Section::make('')
+                        ->schema([
+                            ToggleButtons::make('status')
+                                ->options([
+                                    'diterima' => 'Diterima',
+                                    'diproses' => 'Diproses',
+                                    'ditunda' => 'Ditunda',
+                                    'ditolak' => 'Ditolak',
+                                ])
+                                ->reactive()
+                                ->afterStateUpdated(function ($record, $state) {
+                                    $record->status = $state;
+                                    $record->save();
+                                    Notification::make()
+                                        ->success()
+                                        ->title(__("Saved"))
+                                        ->send();
+                                })
+                                ->required()
+                        ])->compact()
+                        ->grow(false),
+                ])->columnSpanFull(),
                 Tabs::make()->tabs([
                     Tab::make('Penanggung Jawab')->schema([
                         Forms\Components\TextInput::make('responsible_name')
@@ -128,8 +154,7 @@ class CompanyLaidOffResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label("View")->icon('heroicon-o-eye'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
