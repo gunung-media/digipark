@@ -20,28 +20,37 @@ class DepartementMemberResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required(),
-                Forms\Components\TextInput::make('position')
-                    ->required(),
-                Forms\Components\RichEditor::make('description')
-                    ->columnSpanFull(),
-                Forms\Components\FileUpload::make('image')
-                    ->disk('public')
-                    ->directory('departement-members')
-                    ->image()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('facebook')
-                    ->prefixIcon('icon-fb'),
-                Forms\Components\TextInput::make('instagram')
-                    ->prefixIcon('icon-ig'),
-                Forms\Components\TextInput::make('twitter')
-                    ->prefixIcon('icon-x'),
-                Forms\Components\Select::make('is_active')
-                    ->options([
-                        1 => 'Active',
-                        0 => 'Inactive',
-                    ])->default(1),
+                Forms\Components\Split::make([
+                    Forms\Components\Section::make()
+                        ->schema([
+                            Forms\Components\TextInput::make('name')
+                                ->required(),
+                            Forms\Components\TextInput::make('position')
+                                ->required(),
+                            Forms\Components\RichEditor::make('description')
+                                ->columnSpanFull(),
+                            Forms\Components\TextInput::make('facebook')
+                                ->prefixIcon('icon-fb'),
+                            Forms\Components\TextInput::make('instagram')
+                                ->prefixIcon('icon-ig'),
+                            Forms\Components\TextInput::make('twitter')
+                                ->prefixIcon('icon-x'),
+                        ])
+                        ->columns(2),
+                    Forms\Components\Section::make()
+                        ->schema([
+                            Forms\Components\Toggle::make('is_active')
+                                ->label('Apakah Ini Tampil Di Website?')
+                                ->default(false)
+                        ])->grow(false)
+                ])->columnSpanFull(),
+                Forms\Components\Section::make()->schema([
+                    Forms\Components\FileUpload::make('image')
+                        ->disk('public')
+                        ->directory('departement-members')
+                        ->image()
+                        ->columnSpanFull(),
+                ])
             ]);
     }
 
