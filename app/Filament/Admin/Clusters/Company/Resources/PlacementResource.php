@@ -21,7 +21,7 @@ use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 class PlacementResource extends Resource
 {
     protected static ?string $model = Placement::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-check-circle';
     protected static ?string $label = 'Laporan Penempatan';
     protected static ?string $pluralModelLabel = 'Laporan Penempatan';
     protected static ?string $cluster = Company::class;

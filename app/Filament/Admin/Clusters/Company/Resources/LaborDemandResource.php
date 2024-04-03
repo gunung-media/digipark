@@ -24,7 +24,7 @@ class LaborDemandResource extends Resource
     protected static ?string $model = LaborDemand::class;
     protected static ?string $label = 'Laporan Permintaan Tenaga Kerja';
     protected static ?string $pluralModelLabel = 'Laporan Permintaan Tenaga Kerja';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
     protected static ?string $cluster = Company::class;
 
     public static function form(Form $form): Form

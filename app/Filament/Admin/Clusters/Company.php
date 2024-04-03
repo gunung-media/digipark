@@ -8,5 +8,5 @@ class Company extends Cluster
 {
     protected static ?string $navigationGroup = 'Layanan';
     protected static ?string $title = 'Laporan Perusahaan';
-    protected static ?string $navigationIcon = 'heroicon-o-building-office';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
 }

@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TrainAndInternshipResource extends Resource
 {
     protected static ?string $model = TrainAndInternship::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
     protected static ?string $pluralModelLabel = 'Info Pelatihan Dan Magang';
     protected static ?string $label = 'Info Pelatihan Dan Magang';
     protected static ?string $navigationGroup = 'Layanan';

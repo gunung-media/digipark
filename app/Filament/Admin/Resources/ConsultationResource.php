@@ -15,7 +15,7 @@ use Filament\Tables\Table;
 class ConsultationResource extends Resource
 {
     protected static ?string $model = Consultation::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
     protected static ?string $navigationGroup = 'Layanan';
     protected static ?string $pluralModelLabel = "Konsultasi";
     protected static ?string $label = "Konsultasi";

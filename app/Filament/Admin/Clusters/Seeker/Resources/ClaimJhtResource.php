@@ -4,24 +4,21 @@ namespace App\Filament\Admin\Clusters\Seeker\Resources;
 
 use App\Filament\Admin\Clusters\Seeker;
 use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource\Pages;
-use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource\RelationManagers;
+use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource\Widgets\ClaimJhtStat;
 use App\Models\Seeker\ClaimJht;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ClaimJhtResource extends Resource
 {
     protected static ?string $model = ClaimJht::class;
     protected static ?string $label = 'Klaim JHT';
     protected static ?string $pluralModelLabel = 'Klaim JHT';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
     protected static ?string $cluster = Seeker::class;
 
     public static function form(Form $form): Form
@@ -37,6 +34,7 @@ class ClaimJhtResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('seeker.full_name')
+                    ->label('Member')
                     ->searchable(),
                 TextColumn::make('type')
                     ->badge()
@@ -74,6 +72,13 @@ class ClaimJhtResource extends Resource
     {
         return [
             //
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            ClaimJhtStat::class,
         ];
     }
 

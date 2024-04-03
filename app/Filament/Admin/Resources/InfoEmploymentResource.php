@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class InfoEmploymentResource extends Resource
 {
     protected static ?string $model = InfoEmployment::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
     protected static ?string $navigationGroup = 'Layanan';
     protected static ?string $label = "Informasi Ketenagakerjaan";
     protected static ?string $pluralModelLabel = "Informasi Ketenagakerjaan";

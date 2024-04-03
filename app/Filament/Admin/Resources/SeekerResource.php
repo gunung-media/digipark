@@ -19,7 +19,7 @@ class SeekerResource extends Resource
     protected static ?string $model = Seeker::class;
     protected static ?string $label = "Member";
     protected static ?string $pluralModelLabel = "Member";
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $navigationGroup = 'Akun';
 
     public static function form(Form $form): Form

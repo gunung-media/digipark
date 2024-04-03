@@ -22,7 +22,7 @@ class CompanyLaidOffResource extends Resource
     protected static ?string $label = "Laporan PHK";
     protected static ?string $pluralModelLabel = 'Laporan PHK';
     protected static ?string $model = CompanyLaidOff::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-minus';
     protected static ?string $cluster = Company::class;
 
     public static function form(Form $form): Form
