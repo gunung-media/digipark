@@ -3,18 +3,18 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\InfoEmploymentResource\Pages;
-use App\Filament\Admin\Resources\InfoEmploymentResource\RelationManagers;
 use App\Models\Admin\InfoEmployment;
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
+use KodePandai\Indonesia\Models\District;
+use KodePandai\Indonesia\Models\Village;
 
 class InfoEmploymentResource extends Resource
 {
@@ -29,11 +29,30 @@ class InfoEmploymentResource extends Resource
         return $form
             ->schema([
                 Section::make()->schema([
-                    TextInput::make('jumlah_pengangguran')->required(),
-                    Select::make('nama_kelurahan')->required(),
-                    Select::make('nama_kecamatan')->required(),
-                    TextInput::make('tahun_perolehan_data')->required(),
-                ])
+                    Select::make('district')
+                        ->options(District::query()
+                            ->where('city_code', 6271)
+                            ->pluck('name', 'code'))
+                        ->searchable()
+                        ->dehydrated(false)
+                        ->live(),
+                    Select::make('village_code')
+                        ->options(fn (Get $get): Collection => Village::query()
+                            ->where('district_code', $get('district'))
+                            ->pluck('name', 'code'))
+                        ->searchable()
+                        ->required(),
+                ])->columns(2),
+                Section::make()->schema([
+                    TextInput::make('year')
+                        ->label('Tahun Perolehan Data')
+                        ->numeric()
+                        ->required(),
+                    TextInput::make('count')
+                        ->label('Jumlah Pengangguran')
+                        ->numeric()
+                        ->required(),
+                ]),
             ]);
     }
 
@@ -41,11 +60,16 @@ class InfoEmploymentResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('village.name')
+                    ->label('Kecamatan')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('year')
+                    ->badge()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('count')
+                    ->searchable(),
             ])
-            ->filters([
-                //
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
