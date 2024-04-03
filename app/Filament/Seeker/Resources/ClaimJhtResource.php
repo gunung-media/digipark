@@ -15,6 +15,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 class ClaimJhtResource extends Resource
@@ -24,6 +25,11 @@ class ClaimJhtResource extends Resource
     protected static ?string $pluralModelLabel = 'Klaim JHT';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Layanan';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('seeker_id', FilamentUtil::getUser()->id);
+    }
 
     public static function form(Form $form): Form
     {

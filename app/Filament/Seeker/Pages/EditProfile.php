@@ -23,7 +23,7 @@ use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 class EditProfile extends Page
 {
     protected static string $view = 'filament.seeker.pages.edit-profile';
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public ?array $profileData = [];
     public ?array $passwordData = [];
