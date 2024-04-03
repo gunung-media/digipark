@@ -24,30 +24,36 @@ class SubMenuResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('author')->default('Admin'),
-                Forms\Components\Select::make('menu_id')
-                    ->relationship('menu', 'name')
-                    ->required()
-                    ->default(request()->query('ownerRecord')),
-                Forms\Components\Select::make('is_active')
-                    ->options([
-                        1 => 'Active',
-                        0 => 'Inactive',
-                    ])->default(1),
-                Forms\Components\FileUpload::make('image')
-                    ->disk('public')
-                    ->directory('news')
-                    ->image()
-                    ->columnSpan(2),
-                TinyEditor::make('body')
-                    ->columnSpan(2)
-                    ->fileAttachmentsDisk('public')
-                    ->fileAttachmentsVisibility('private')
-                    ->fileAttachmentsDirectory('news/body')
-                    ->required(),
+                Forms\Components\Split::make([
+                    Forms\Components\Section::make()->schema([
+                        Forms\Components\Select::make('menu_id')
+                            ->relationship('menu', 'name')
+                            ->required()
+                            ->default(request()->query('ownerRecord')),
+                        Forms\Components\TextInput::make('author')->default('Admin'),
+                    ])->columns(2),
+                    Forms\Components\Section::make()->schema([
+                        Forms\Components\Toggle::make('is_active')
+                            ->label('Apakah Ini Tampil Di Website?')
+                            ->default(false),
+                    ])->grow(false)
+                ])->columnSpanFull(),
+                Forms\Components\Section::make()->schema([
+                    Forms\Components\TextInput::make('title')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\FileUpload::make('image')
+                        ->disk('public')
+                        ->directory('news')
+                        ->image()
+                        ->columnSpan(2),
+                    TinyEditor::make('body')
+                        ->columnSpan(2)
+                        ->fileAttachmentsDisk('public')
+                        ->fileAttachmentsVisibility('private')
+                        ->fileAttachmentsDirectory('news/body')
+                        ->required(),
+                ]),
             ]);
     }
 

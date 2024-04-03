@@ -15,22 +15,22 @@ use Filament\Tables\Table;
 class MenuResource extends Resource
 {
     protected static ?string $model = Menu::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-bars-4';
-
     protected static ?string $navigationGroup = 'Settings';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required(),
-                Forms\Components\Select::make('is_active')
-                    ->options([
-                        1 => 'Active',
-                        0 => 'Inactive',
-                    ])->default(0),
+                Forms\Components\Section::make()->schema([
+                    Forms\Components\TextInput::make('name')
+                        ->required(),
+                    Forms\Components\Select::make('is_active')
+                        ->options([
+                            1 => 'Active',
+                            0 => 'Inactive',
+                        ])->default(0),
+                ])
             ]);
     }
 

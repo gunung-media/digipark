@@ -25,28 +25,47 @@ class CompanyResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required(),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->unique('companies', 'email', null, true)
-                    ->required(),
-                Password::make('password')
-                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                    ->dehydrated(fn ($state) => filled($state))
-                    ->required(fn (string $context): bool => $context === 'create'),
-                Forms\Components\TextInput::make('address')
-                    ->required(),
-                Forms\Components\FileUpload::make('image')
-                    ->disk('public')
-                    ->directory('company')
-                    ->image()
-                    ->columnSpan(2)
-                    ->required(),
-                Forms\Components\TextInput::make('phone_number')
-                    ->tel()
-                    ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
-                    ->required(),
+                Forms\Components\Section::make()->schema([
+                    Forms\Components\TextInput::make('name')
+                        ->required(),
+                    Forms\Components\TextInput::make('email')
+                        ->email()
+                        ->unique('companies', 'email', null, true)
+                        ->required(),
+                    Forms\Components\TextInput::make('phone_number')
+                        ->tel()
+                        ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
+                        ->required(),
+                    Forms\Components\TextInput::make('address')
+                        ->required(),
+                    Forms\Components\TextInput::make('company_type'),
+                    Forms\Components\Select::make('company_status')->options(
+                        collect([
+                            'pt',
+                            'cv',
+                            'perorangan',
+                            'badan usaha negara',
+                            'parsero',
+                            'pma',
+                            'perusahaan',
+                            'joint venture',
+                            'pmdn'
+                        ])->mapWithKeys(fn ($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
+                            ->toArray()
+                    ),
+                ])->columns(2),
+                // Password::make('password')
+                //     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                //     ->dehydrated(fn ($state) => filled($state))
+                //     ->required(fn (string rcontext): bool => $context === 'create'),
+                Forms\Components\Section::make()->schema([
+                    Forms\Components\FileUpload::make('image')
+                        ->disk('public')
+                        ->directory('company')
+                        ->image()
+                        ->columnSpan(2)
+                        ->required(),
+                ])
             ]);
     }
 
@@ -82,7 +101,7 @@ class CompanyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\JobsRelationManager::class,
+            // RelationManagers\JobsRelationManager::class,
         ];
     }
 
