@@ -4,11 +4,12 @@ namespace App\Filament\Admin\Clusters\Company\Resources;
 
 use App\Filament\Admin\Clusters\Company;
 use App\Filament\Admin\Clusters\Company\Resources\LaborDemandResource\Pages;
-use App\Filament\Admin\Clusters\Company\Resources\LaborDemandResource\RelationManagers;
+use App\Filament\Admin\Clusters\Company\Resources\LaborDemandResource\Widgets\LaborDemandStat;
 use App\Models\Company\LaborDemand;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
-use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,9 +17,7 @@ use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
-use Illuminate\Database\Eloquent\Builder;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class LaborDemandResource extends Resource
 {
@@ -32,9 +31,8 @@ class LaborDemandResource extends Resource
     {
         return $form
             ->schema([
-                Wizard::make([
-                    Step::make('Informasi')
-                        ->description('INFORMASI LOWONGAN JABATAN / PEKERJAAN')
+                Tabs::make()->tabs([
+                    Tab::make('Informasi')
                         ->schema([
                             Forms\Components\DatePicker::make('request_deadline')
                                 ->label('Batas Waktu Permintaan')
@@ -52,8 +50,7 @@ class LaborDemandResource extends Resource
                                 ->numeric()
                                 ->required(),
                         ])->columns(2),
-                    Step::make('Persyarat')
-                        ->description('PERSYARATAN JABATAN')
+                    Tab::make('Persyarat')
                         ->schema([
                             Forms\Components\Select::make('education')
                                 ->label('Pendidikan Tertinggi')
@@ -81,8 +78,7 @@ class LaborDemandResource extends Resource
                                 ->required()
                                 ->columnSpanFull(),
                         ])->columns(2),
-                    Step::make('Pekerjaan')
-                        ->description('SISTEM PENGUPAHAN')
+                    Tab::make('Pekerjaan')
                         ->schema([
                             Forms\Components\Select::make('wage_system')
                                 ->label('Sistem Pengupahan')
@@ -153,7 +149,6 @@ class LaborDemandResource extends Resource
                     ])
                 ])
                     ->disabled()
-                    ->skippable()
                     ->columnSpanFull(),
             ]);
     }
@@ -162,6 +157,9 @@ class LaborDemandResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('company.name')
+                    ->label('Nama Perusahaan')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('name_job')
                     ->label('Nama')
                     ->searchable(),
@@ -199,6 +197,13 @@ class LaborDemandResource extends Resource
     {
         return [
             //
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            LaborDemandStat::class,
         ];
     }
 
