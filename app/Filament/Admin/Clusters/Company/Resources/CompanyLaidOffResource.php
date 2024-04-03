@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Clusters\Company\Resources;
 
 use App\Filament\Admin\Clusters\Company;
 use App\Filament\Admin\Clusters\Company\Resources\CompanyLaidOffResource\Pages;
+use App\Filament\Admin\Clusters\Company\Resources\CompanyLaidOffResource\Widgets\CompanyLaidOffStats;
 use App\Models\Company\CompanyLaidOff;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
@@ -39,69 +40,65 @@ class CompanyLaidOffResource extends Resource
                         })
                     ])
                     ->disabled(),
-                Section::make('Main Data')
-                    ->description('PHK')
-                    ->schema([
-                        Tabs::make()->tabs([
-                            Tab::make('Penanggung Jawab')->schema([
-                                Forms\Components\TextInput::make('responsible_name')
-                                    ->label('Nama')
-                                    ->required(),
-                                Forms\Components\TextInput::make('responsible_position')
-                                    ->label('Posisi')
-                                    ->required(),
-                                SignaturePad::make('signature')
-                                    ->label('Tanda Tangan')
-                                    ->columnSpanFull()
-                                    ->downloadable(),
-                            ])->columns(2),
-                            Tab::make('Data')->schema([
-                                Forms\Components\RichEditor::make('response_worker')
-                                    ->label('Tanggapan pekerja')
-                                    ->columnSpanFull(),
-                                Forms\Components\TextInput::make('name')
-                                    ->label('Nama')
-                                    ->required()
-                                    ->columnSpanFull(),
-                                Forms\Components\TextInput::make('position')
-                                    ->label('Jabatan')
-                                    ->required(),
-                                Forms\Components\TextInput::make('division')
-                                    ->label('Divisi')
-                                    ->required(),
-                                Forms\Components\DatePicker::make('start_contract')
-                                    ->label('Tanggal Perjanjian Kerja')
-                                    ->required(),
-                                Forms\Components\DatePicker::make('end_contract')
-                                    ->label('Kompensasi pemutusan hubungan kerja dan hak-hak lainnya dibayar pada tanggal')
-                                    ->required(),
-                                Forms\Components\RichEditor::make('reason')
-                                    ->label('Alasan pemutusan hubungan kerja')
-                                    ->columnSpanFull()->required(),
-                                Forms\Components\Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
-                            ])->columns(2),
-                            Tab::make('Dokumen')->schema([
-                                Forms\Components\FileUpload::make('doc_joint_agreement')
-                                    ->label('Surat Perjanjian Bersama')
-                                    ->disk('public')
-                                    ->directory('company/laid-off')
-                                    ->downloadable()
-                                    ->columnSpanFull(),
-                                Forms\Components\FileUpload::make('doc_not_rejecting_layoff')
-                                    ->label('Surat Tidak Menolak PHK')
-                                    ->disk('public')
-                                    ->directory('company/laid-off')
-                                    ->downloadable()
-                                    ->columnSpanFull(),
-                                Forms\Components\FileUpload::make('doc_layoff_notification')
-                                    ->label('Surat Pemberitahuan PHK')
-                                    ->disk('public')
-                                    ->directory('company/laid-off')
-                                    ->downloadable()
-                                    ->columnSpanFull(),
-                            ])->columns(2)
-                        ])->columnSpanFull(),
-                    ])->disabled()
+                Tabs::make()->tabs([
+                    Tab::make('Penanggung Jawab')->schema([
+                        Forms\Components\TextInput::make('responsible_name')
+                            ->label('Nama')
+                            ->required(),
+                        Forms\Components\TextInput::make('responsible_position')
+                            ->label('Posisi')
+                            ->required(),
+                        SignaturePad::make('signature')
+                            ->label('Tanda Tangan')
+                            ->columnSpanFull()
+                            ->downloadable(),
+                    ])->columns(2),
+                    Tab::make('Data')->schema([
+                        Forms\Components\RichEditor::make('response_worker')
+                            ->label('Tanggapan pekerja')
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nama')
+                            ->required()
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('position')
+                            ->label('Jabatan')
+                            ->required(),
+                        Forms\Components\TextInput::make('division')
+                            ->label('Divisi')
+                            ->required(),
+                        Forms\Components\DatePicker::make('start_contract')
+                            ->label('Tanggal Perjanjian Kerja')
+                            ->required(),
+                        Forms\Components\DatePicker::make('end_contract')
+                            ->label('Kompensasi pemutusan hubungan kerja dan hak-hak lainnya dibayar pada tanggal')
+                            ->required(),
+                        Forms\Components\RichEditor::make('reason')
+                            ->label('Alasan pemutusan hubungan kerja')
+                            ->columnSpanFull()->required(),
+                        Forms\Components\Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
+                    ])->columns(2),
+                    Tab::make('Dokumen')->schema([
+                        Forms\Components\FileUpload::make('doc_joint_agreement')
+                            ->label('Surat Perjanjian Bersama')
+                            ->disk('public')
+                            ->directory('company/laid-off')
+                            ->downloadable()
+                            ->columnSpanFull(),
+                        Forms\Components\FileUpload::make('doc_not_rejecting_layoff')
+                            ->label('Surat Tidak Menolak PHK')
+                            ->disk('public')
+                            ->directory('company/laid-off')
+                            ->downloadable()
+                            ->columnSpanFull(),
+                        Forms\Components\FileUpload::make('doc_layoff_notification')
+                            ->label('Surat Pemberitahuan PHK')
+                            ->disk('public')
+                            ->directory('company/laid-off')
+                            ->downloadable()
+                            ->columnSpanFull(),
+                    ])->columns(2)
+                ])->disabled()->columnSpanFull()
             ]);
     }
 
@@ -109,12 +106,15 @@ class CompanyLaidOffResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('company.name')
+                    ->label('Nama Perusahaan')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('responsible_name')
                     ->label('Nama Penanggung Jawab')
-                    ->searchable(isIndividual: true),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama Karyawan PHK')
-                    ->searchable(isIndividual: true),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
@@ -136,6 +136,13 @@ class CompanyLaidOffResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            CompanyLaidOffStats::class,
+        ];
     }
 
     public static function getRelations(): array
