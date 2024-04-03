@@ -27,10 +27,12 @@ class DashboardResource extends Resource
                         ->tabs([
                             Forms\Components\Tabs\Tab::make('Our Story Section')->schema([
                                 Forms\Components\RichEditor::make('short_description')
+                                    ->helperText('Maximal 250 Kata')
                                     ->columnSpanFull()
                                     ->maxLength(250)
                                     ->required(),
                                 Forms\Components\RichEditor::make('mission')
+                                    ->helperText('Maximal 250 Kata')
                                     ->columnSpanFull()
                                     ->maxLength(150)
                                     ->required(),
@@ -43,6 +45,7 @@ class DashboardResource extends Resource
                             ]),
                             Forms\Components\Tabs\Tab::make('Additional')
                                 ->schema([
+                                    Forms\Components\TextInput::make('address'),
                                     Forms\Components\RichEditor::make('quote')
                                         ->default('"The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well."')
                                         ->columnSpanFull(),
@@ -59,7 +62,6 @@ class DashboardResource extends Resource
                             ->prefixIcon('icon-yt'),
                         Forms\Components\TextInput::make('linkedin')
                             ->prefixIcon('icon-linkedin'),
-                        Forms\Components\TextInput::make('address'),
                         Forms\Components\TextInput::make('phone_number')
                             ->prefixIcon('icon-wa'),
                         Forms\Components\TextInput::make('default_text')

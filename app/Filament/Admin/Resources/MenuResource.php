@@ -6,6 +6,7 @@ use App\Filament\Admin\Resources\MenuResource\Pages;
 use App\Filament\Admin\Resources\MenuResource\RelationManagers;
 use App\Models\Admin\Menu\Menu;
 use Filament\Forms;
+use Filament\Forms\Components\Split;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -22,15 +23,17 @@ class MenuResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make()->schema([
-                    Forms\Components\TextInput::make('name')
-                        ->required(),
-                    Forms\Components\Select::make('is_active')
-                        ->options([
-                            1 => 'Active',
-                            0 => 'Inactive',
-                        ])->default(0),
-                ])
+                Split::make([
+                    Forms\Components\Section::make()->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required(),
+                    ]),
+                    Forms\Components\Section::make()->schema([
+                        Forms\Components\Toggle::make('is_active')
+                            ->label('Apakah Ini Tampil Di Website?')
+                            ->default(false),
+                    ])->grow(false)
+                ])->columnSpanFull()
             ]);
     }
 
