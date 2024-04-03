@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Clusters\Company\Resources;
 
 use App\Filament\Admin\Clusters\Company;
 use App\Filament\Admin\Clusters\Company\Resources\JobResource\Pages;
+use App\Filament\Admin\Clusters\Company\Resources\JobResource\Widgets\JobStats;
 use App\Models\Company\Job;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
@@ -113,9 +114,12 @@ class JobResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('company.name')
+                    ->label('Nama Perusahaan')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('name_job')
                     ->label('Nama Pekerjaan')
-                    ->searchable(isIndividual: true),
+                    ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->label("Aktif Di Web")
                     ->boolean(),
@@ -162,6 +166,13 @@ class JobResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            JobStats::class,
+        ];
     }
 
     public static function getRelations(): array
