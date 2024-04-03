@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Clusters\Company\Resources;
 
 use App\Filament\Admin\Clusters\Company;
 use App\Filament\Admin\Clusters\Company\Resources\PlacementResource\Pages;
+use App\Filament\Admin\Clusters\Company\Resources\PlacementResource\Widgets\PlacementStats;
 use App\Models\Company\Placement;
 use App\Utils\FilamentUtil;
 use Filament\Forms\Components\Tabs;
@@ -96,6 +97,9 @@ class PlacementResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('company.name')
+                    ->label('Nama Perusahaan')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->searchable(),
@@ -103,7 +107,7 @@ class PlacementResource extends Resource
                     ->label('NIK')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('position')
-                    ->label('Jabatar')
+                    ->label('Jabatan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
@@ -137,6 +141,13 @@ class PlacementResource extends Resource
     {
         return [
             //
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            PlacementStats::class,
         ];
     }
 

@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Filament\Admin\Clusters\Company\Resources\LaborDemandResource\Widgets;
+namespace App\Filament\Admin\Clusters\Company\Resources\PlacementResource\Widgets;
 
-use App\Filament\Admin\Clusters\Company\Resources\LaborDemandResource\Pages\ListLaborDemands;
-use App\Models\Company\LaborDemand;
+use App\Filament\Admin\Clusters\Company\Resources\PlacementResource\Pages\ListPlacements;
+use App\Models\Company\Placement;
 use Filament\Widgets\Concerns\InteractsWithPageTable;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Flowframe\Trend\TrendValue;
 use Flowframe\Trend\Trend;
 
-class LaborDemandStat extends BaseWidget
+class PlacementStats extends BaseWidget
 {
     use InteractsWithPageTable;
 
     protected function getTablePage(): string
     {
-        return ListLaborDemands::class;
+        return ListPlacements::class;
     }
 
     protected function getStats(): array
     {
-        $data = Trend::model(LaborDemand::class)
+        $data = Trend::model(Placement::class)
             ->between(
                 start: now()->subYear(),
                 end: now(),
@@ -29,7 +29,7 @@ class LaborDemandStat extends BaseWidget
             ->perMonth()
             ->count();
         return [
-            Stat::make('Laporan Permintaan Tenaga Kerja', $this->getPageTableQuery()->count())
+            Stat::make('Laporan Penempatan', $this->getPageTableQuery()->count())
                 ->chart(
                     $data
                         ->map(fn (TrendValue $value) => $value->aggregate)
