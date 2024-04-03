@@ -23,47 +23,54 @@ class NewsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->unique(ignoreRecord: true)
-                    ->required(),
-                Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
-                            ->required()
-                            ->maxLength(255),
-                    ])
-                    ->required(),
-                Forms\Components\Select::make('tags')
-                    ->relationship('tags', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->multiple()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
-                            ->required()
-                            ->maxLength(255),
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')
+                            ->disk('public')
+                            ->directory('news')
+                            ->image()
+                            ->columnSpan(2)
+                            ->required(),
                     ]),
-                TinyEditor::make('body')
-                    ->columnSpan(2)
-                    ->fileAttachmentsDisk('public')
-                    ->fileAttachmentsVisibility('private')
-                    ->fileAttachmentsDirectory('news/body')
-                    ->required(),
-                Forms\Components\FileUpload::make('image')
-                    ->disk('public')
-                    ->directory('news')
-                    ->image()
-                    ->columnSpan(2)
-                    ->required(),
-                Forms\Components\Select::make('status')
-                    ->options([
-                        1 => 'Active',
-                        0 => 'Inactive',
-                    ])->default(1),
-                Forms\Components\TextInput::make('author')->default('Admin'),
+                Forms\Components\Split::make([
+                    Forms\Components\Section::make()->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->unique(ignoreRecord: true)
+                            ->required(),
+                        Forms\Components\TextInput::make('author')->default('Admin'),
+                        TinyEditor::make('body')
+                            ->columnSpan(2)
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsVisibility('private')
+                            ->fileAttachmentsDirectory('news/body')
+                            ->required(),
+                    ]),
+                    Forms\Components\Section::make()->schema([
+                        Forms\Components\Select::make('category_id')
+                            ->relationship('category', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->createOptionForm([
+                                Forms\Components\TextInput::make('name')
+                                    ->required()
+                                    ->maxLength(255),
+                            ])
+                            ->required(),
+                        Forms\Components\Select::make('tags')
+                            ->relationship('tags', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->multiple()
+                            ->createOptionForm([
+                                Forms\Components\TextInput::make('name')
+                                    ->required()
+                                    ->maxLength(255),
+                            ]),
+                        Forms\Components\Toggle::make('status')
+                            ->label('Apakah Ini Tampil Di Website?')
+                            ->default(false),
+                    ])->grow(false),
+                ])->columnSpanFull(),
             ]);
     }
 
