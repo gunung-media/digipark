@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
@@ -23,6 +24,11 @@ class PlacementResource extends Resource
     protected static ?string $model = Placement::class;
     protected static ?string $navigationIcon = 'heroicon-o-check-circle';
     protected static ?string $navigationGroup = 'Layanan';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('company_id', FilamentUtil::getUser()->id);
+    }
 
     public static function form(Form $form): Form
     {

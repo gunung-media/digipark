@@ -16,6 +16,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
@@ -27,6 +28,11 @@ class JobResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
     protected static ?string $navigationGroup = 'Layanan';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('company_id', FilamentUtil::getUser()->id);
+    }
 
     public static function form(Form $form): Form
     {

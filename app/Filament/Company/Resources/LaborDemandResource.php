@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
@@ -24,6 +25,11 @@ class LaborDemandResource extends Resource
     protected static ?string $model = LaborDemand::class;
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
     protected static ?string $navigationGroup = 'Layanan';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('company_id', FilamentUtil::getUser()->id);
+    }
 
     public static function form(Form $form): Form
     {
