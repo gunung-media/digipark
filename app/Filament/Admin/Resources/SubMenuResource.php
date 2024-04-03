@@ -40,9 +40,12 @@ class SubMenuResource extends Resource
                 ])->columnSpanFull(),
                 Forms\Components\Section::make()->schema([
                     Forms\Components\TextInput::make('title')
+                        ->label('Judul')
                         ->required()
-                        ->maxLength(255),
+                        ->helperText('Maximal Kata 250')
+                        ->maxLength(250),
                     Forms\Components\FileUpload::make('image')
+                        ->label('Gambar')
                         ->disk('public')
                         ->directory('news')
                         ->image()

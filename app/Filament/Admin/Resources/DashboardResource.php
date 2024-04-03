@@ -27,14 +27,10 @@ class DashboardResource extends Resource
                         ->tabs([
                             Forms\Components\Tabs\Tab::make('Our Story Section')->schema([
                                 Forms\Components\RichEditor::make('short_description')
-                                    ->helperText('Maximal 250 Kata')
                                     ->columnSpanFull()
-                                    ->maxLength(250)
                                     ->required(),
                                 Forms\Components\RichEditor::make('mission')
-                                    ->helperText('Maximal 250 Kata')
                                     ->columnSpanFull()
-                                    ->maxLength(150)
                                     ->required(),
                                 Forms\Components\FileUpload::make('our_story_image')
                                     ->disk('public')

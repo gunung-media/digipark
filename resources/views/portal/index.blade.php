@@ -87,7 +87,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
+                            <div class="col-12">
                                 <div class="custom-text-box mb-lg-0">
                                     <h5 class="mb-3">Our Mission</h5>
 
@@ -95,29 +95,29 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="custom-text-box d-flex flex-wrap d-lg-block mb-lg-0">
-                                    <div class="counter-thumb">
-                                        <div class="d-flex">
-                                            <span class="counter-number" data-from="1" data-to="{{ $total['pekerjaan'] }}"
-                                                data-speed="1000"></span>
-                                            <span class="counter-number-text"></span>
-                                        </div>
-
-                                        <span class="counter-text">Lowongan Pekerjaan</span>
-                                    </div>
-
-                                    <div class="counter-thumb mt-4">
-                                        <div class="d-flex">
-                                            <span class="counter-number" data-from="1" data-to="{{ $total['perusahaan'] }}"
-                                                data-speed="1000"></span>
-                                            <span class="counter-number-text"></span>
-                                        </div>
-
-                                        <span class="counter-text">Perusahaan</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- <div class="col-lg-6 col-md-6 col-12"> -->
+                            <!--     <div class="custom-text-box d-flex flex-wrap d-lg-block mb-lg-0"> -->
+                            <!--         <div class="counter-thumb"> -->
+                            <!--             <div class="d-flex"> -->
+                            <!--                 <span class="counter-number" data-from="1" data-to="{{ $total['pekerjaan'] }}" -->
+                            <!--                     data-speed="1000"></span> -->
+                            <!--                 <span class="counter-number-text"></span> -->
+                            <!--             </div> -->
+                            <!---->
+                            <!--             <span class="counter-text">Lowongan Pekerjaan</span> -->
+                            <!--         </div> -->
+                            <!---->
+                            <!--         <div class="counter-thumb mt-4"> -->
+                            <!--             <div class="d-flex"> -->
+                            <!--                 <span class="counter-number" data-from="1" data-to="{{ $total['perusahaan'] }}" -->
+                            <!--                     data-speed="1000"></span> -->
+                            <!--                 <span class="counter-number-text"></span> -->
+                            <!--             </div> -->
+                            <!---->
+                            <!--             <span class="counter-text">Perusahaan</span> -->
+                            <!--         </div> -->
+                            <!--     </div> -->
+                            <!-- </div> -->
                         </div>
                     </div>
 
