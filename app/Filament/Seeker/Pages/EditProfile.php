@@ -49,6 +49,10 @@ class EditProfile extends Page
                     ->tabs([
                         Tab::make('Profile Information')
                             ->schema([
+                                TextInput::make('email')
+                                    ->label('Email')
+                                    ->readOnly()
+                                    ->columnSpanFull(),
                                 TextInput::make('full_name')
                                     ->label('Nama Lengkap')
                                     ->required(),

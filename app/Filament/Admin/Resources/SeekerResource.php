@@ -3,16 +3,20 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\SeekerResource\Pages;
-use App\Filament\Admin\Resources\SeekerResource\RelationManagers;
 use App\Models\Seeker\Seeker;
-use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SeekerResource extends Resource
 {
@@ -26,7 +30,97 @@ class SeekerResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Tabs::make()
+                    ->tabs([
+                        Tab::make('Profile Information')
+                            ->schema([
+                                TextInput::make('email')
+                                    ->label('Email')
+                                    ->required()->columnSpanFull(),
+                                TextInput::make('full_name')
+                                    ->label('Nama Lengkap')
+                                    ->required(),
+                                Group::make()
+                                    ->relationship('additional')
+                                    ->schema([
+                                        TextInput::make('identity_number')
+                                            ->label('NIK')
+                                            ->required(),
+                                    ]),
+                                TextInput::make('phone_number')
+                                    ->label('No. Telpon')
+                                    ->required(),
+                                Select::make('gender')
+                                    ->label('Jenis Kelamin')
+                                    ->options([
+                                        'male' => 'Male',
+                                        'female' => 'Female',
+                                    ])
+                                    ->required(),
+                                Group::make()
+                                    ->relationship('additional')
+                                    ->schema([
+                                        TextInput::make('birth_place')
+                                            ->label('Tempat Lahir')
+                                            ->required(),
+                                    ]),
+                                DatePicker::make('date_of_birth')
+                                    ->label('Tanggal Lahir')
+                                    ->required(),
+                                TextInput::make('address')
+                                    ->label('Alamat')
+                                    ->required(),
+                                Group::make()
+                                    ->relationship('additional')
+                                    ->schema([
+                                        TextInput::make('postal_code')
+                                            ->label('Kode Pos')
+                                            ->required(),
+                                    ]),
+                                Group::make()
+                                    ->relationship('additional')
+                                    ->schema([
+                                        TextInput::make('rt')
+                                            ->label('RT')
+                                            ->required(),
+                                        TextInput::make('rw')
+                                            ->label('RW')
+                                            ->required(),
+                                    ])->columns(2)
+                                    ->columnSpanFull()
+                            ])
+                            ->columns(2),
+                        Tab::make('Additional Data')
+                            ->schema([
+                                Group::make()
+                                    ->relationship('additional')
+                                    ->schema([
+                                        FileUpload::make('doc_ktp')
+                                            ->label('KTP')
+                                            ->disk('public')
+                                            ->directory('seeker/additional')
+                                            ->downloadable()
+                                            ->columnSpanFull(),
+                                        FileUpload::make('doc_bpjs_card')
+                                            ->label('BPJS Card')
+                                            ->disk('public')
+                                            ->directory('seeker/additional')
+                                            ->downloadable()
+                                            ->columnSpanFull(),
+                                        FileUpload::make('doc_cv')
+                                            ->label('Surat Pengalaman Kerja / CV / Resume')
+                                            ->disk('public')
+                                            ->directory('seeker/additional')
+                                            ->downloadable()
+                                            ->columnSpanFull(),
+                                        SignaturePad::make('signature')
+                                            ->label('Tanda Tangan')
+                                            ->columnSpanFull()
+                                            ->downloadable(),
+                                    ]),
+                            ])
+                            ->columns(2),
+                    ])->columnSpanFull()
             ]);
     }
 
