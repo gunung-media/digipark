@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use KodePandai\Indonesia\IndonesiaDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,10 +15,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-
-        \App\Models\User::factory()->create([
-            'name' => 'Richie Zakaria',
-            'email' => 'admin@admin.com',
-        ]);
+        $this->call(IndonesiaDatabaseSeeder::class);
+        if (User::first() == null) {
+            User::factory()->create([
+                'name' => 'Richie Zakaria',
+                'email' => 'admin@admin.com',
+            ]);
+        }
     }
 }

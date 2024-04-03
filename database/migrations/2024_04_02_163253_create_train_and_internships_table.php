@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('train_and_internships', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('location');
+            $table->enum('type', ['train', 'internship']);
+            $table->longText('description');
+            $table->string('start_date');
+            $table->string('end_date');
+            $table->string('fee');
+            $table->string('image');
+            $table->text('requirement')->nullable();
+            $table->boolean('is_active')->default(0);
             $table->timestamps();
         });
     }

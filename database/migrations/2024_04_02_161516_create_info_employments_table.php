@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('info_employments', function (Blueprint $table) {
             $table->id();
+            $table->string('year');
+            $table->string('village_code');
+            $table->bigInteger('count');
             $table->timestamps();
         });
     }

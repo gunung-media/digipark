@@ -7,6 +7,7 @@ use App\Filament\Admin\Resources\TrainAndInternshipResource\RelationManagers;
 use App\Models\Admin\TrainAndInternship;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Split;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,36 +29,52 @@ class TrainAndInternshipResource extends Resource
             ->schema([
                 Section::make('')
                     ->schema([
-                        Forms\Components\TextInput::make('Nama Pelatihan/Pemagangan')
-                            ->required(),
-                        Forms\Components\Select::make('Jenis Informasi')
-                            ->options([
-                                'Pelatihan' => 'Pelatihan',
-                                'Magang' => 'Magang',
-                            ])
-                            ->required(),
-                        Forms\Components\RichEditor::make('Deskripsi')
-                            ->columnSpanFull()
-                            ->required(),
-                        Forms\Components\TextInput::make('Lokasi Pelaksanaan')
-                            ->columnSpanFull()
-                            ->required(),
-                        Forms\Components\DatePicker::make('Tanggal Pelaksanaan')
-                            ->required(),
-                        Forms\Components\DatePicker::make('Akhir Pelaksanaan')
-                            ->required(),
-                        Forms\Components\TextInput::make('Biaya')
-                            ->prefix('Rp.')
-                            ->required(),
-                        Forms\Components\TextInput::make('Persyaratan Peserta'),
-                    ])
-                    ->columns(2),
-                Section::make('')
-                    ->schema([
                         Forms\Components\FileUpload::make('Gambar')
                             ->image()
                             ->required(),
-                    ])
+                    ]),
+                Split::make([
+                    Section::make('')
+                        ->schema([
+                            Forms\Components\TextInput::make('name')
+                                ->label('Nama Pelatihan/Pemagangan')
+                                ->required(),
+                            Forms\Components\TextInput::make('location')
+                                ->label('Lokasi Pelaksanaan')
+                                ->required(),
+                            Forms\Components\RichEditor::make('description')
+                                ->label('Deskripsi')
+                                ->columnSpanFull()
+                                ->required(),
+                            Forms\Components\DatePicker::make('start_date')
+                                ->label('Tanggal Pelaksanaan')
+                                ->required(),
+                            Forms\Components\DatePicker::make('end_date')
+                                ->label('Akhir Pelaksanaan')
+                                ->required(),
+                            Forms\Components\TextInput::make('fee')
+                                ->label('Biaya')
+                                ->prefix('Rp.')
+                                ->required()
+                                ->columnSpanFull(),
+                            Forms\Components\RichEditor::make('requirement')
+                                ->label('Persyaratan Peserta')
+                                ->columnSpanFull(),
+                        ])
+                        ->columns(2),
+                    Section::make('')->schema([
+                        Forms\Components\Select::make('type')
+                            ->label('Jenis Informasi')
+                            ->options([
+                                'train' => 'Pelatihan',
+                                'internship' => 'Magang',
+                            ])
+                            ->required(),
+                        Forms\Components\Toggle::make('is_active')
+                            ->label('Apakah Ini Tampil Di Website?')
+                            ->default(false),
+                    ])->grow(false)
+                ])->columnSpanFull(),
             ]);
     }
 
