@@ -6,14 +6,19 @@ use App\Filament\Admin\Clusters\Seeker;
 use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource\Pages;
 use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource\Widgets\ClaimJhtStat;
 use App\Models\Seeker\ClaimJht;
+use App\Models\Seeker\TrackClaimJht;
+use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Split;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
+use Filament\Resources\Pages\EditRecord;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -29,52 +34,76 @@ class ClaimJhtResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
     protected static ?string $cluster = Seeker::class;
 
+    public static ?array $feedBackData = [];
+
     public static function form(Form $form): Form
     {
+        TrackClaimJht::latest()->first();
         return $form
             ->schema([
+                Section::make('Member')->schema([
+                    Group::make()->relationship('seeker')->schema([
+                        TextInput::make('full_name')->label('Nama Lengkap'),
+                        TextInput::make('additional.identity_number')->label('NIK'),
+                        TextInput::make('phone_number')->label('Telepon'),
+                        TextInput::make('address')->label('Alamat'),
+                        TextInput::make('gender')->label('Jenis Kelamin'),
+                    ])->columns(2)
+                ])->columnSpanFull()->disabled(),
                 Split::make([
-                    Section::make('Member')->schema([
-                        Group::make()->relationship('seeker')->schema([
-                            TextInput::make('full_name')->label('Nama Lengkap'),
-                            TextInput::make('additional.identity_number')->label('NIK'),
-                            TextInput::make('phone_number')->label('Telepon'),
-                            TextInput::make('address')->label('Alamat'),
-                            TextInput::make('gender')->label('Jenis Kelamin'),
-                        ])->columns(2)
-                    ])->columnSpanFull()->disabled(),
-                    Section::make('')
+                    Section::make('Klaim JHT')->schema([
+                        Radio::make('type')
+                            ->options([
+                                'pengunduran_diri' => 'Pengunduran Diri',
+                                'pemutusan_hubungan_kerja' => 'Pemutusan Hubungan Kerja',
+                            ]),
+                        SignaturePad::make('signature')
+                            ->columnSpanFull()
+                            ->downloadable(),
+                    ])->columns(2)->disabled(),
+                    Section::make('Feedback')
+                        ->headerActions([
+                            Action::make('Kirim')
+                                ->action(function (Section $component, EditRecord $livewire, $state) {
+                                    $component->getChildComponentContainer()->validate();
+                                    $record = $livewire->record;
+
+                                    $data = [
+                                        'message' => $state['message'],
+                                        'status' => $state['status'],
+                                    ];
+                                    foreach ($state['file'] as $f) {
+                                        $data['file'] = $f->store('seeker/claim_jht', 'public');
+                                        break;
+                                    }
+
+                                    $record->tracks()->create($data);
+
+                                    Notification::make()
+                                        ->title('Saved')
+                                        ->success()
+                                        ->send();
+                                }),
+                        ])
                         ->schema([
                             ToggleButtons::make('status')
                                 ->options([
-                                    'diterima' => 'Diterima',
                                     'diproses' => 'Diproses',
                                     'ditunda' => 'Ditunda',
                                     'ditolak' => 'Ditolak',
                                 ])
-                                ->reactive()
-                                ->afterStateUpdated(function ($record, $state) {
-                                    $record->status = $state;
-                                    $record->save();
-                                    Notification::make()
-                                        ->success()
-                                        ->title(__("Saved"))
-                                        ->send();
-                                })
-                                ->required()
-                        ])->compact()
-                        ->grow(false),
+                                ->inline()
+                                ->required(),
+                            Textarea::make('message')
+                                ->label('Pesan')
+                                ->required(),
+                            FileUpload::make('file')
+                                ->label('Dokumen Pendukung')
+                                ->disk('public')
+                                ->directory('seeker/claim_jht')
+                                ->downloadable(),
+                        ])->compact()->grow(false)
                 ])->columnSpanFull(),
-                Section::make('Klaim JHT')->schema([
-                    Radio::make('type')
-                        ->options([
-                            'pengunduran_diri' => 'Pengunduran Diri',
-                            'pemutusan_hubungan_kerja' => 'Pemutusan Hubungan Kerja',
-                        ]),
-                    SignaturePad::make('signature')
-                        ->columnSpanFull()
-                        ->downloadable(),
-                ])->columns(2)->disabled()
             ]);
     }
 

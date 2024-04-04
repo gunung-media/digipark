@@ -15,7 +15,8 @@ class ClaimJht extends Model
 {
     use HasFactory;
 
-    protected $appends = ['status'];
+    protected $appends = ['status', 'message', 'file'];
+    protected $with = ['tracks'];
 
     public function seeker(): BelongsTo
     {
@@ -31,6 +32,20 @@ class ClaimJht extends Model
     {
         return Attribute::make(
             get: fn () => $this->tracks->last() ? $this->tracks->last()->status : 'diterima'
+        );
+    }
+
+    public function message(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->tracks->last() ? $this->tracks->last()->message : ''
+        );
+    }
+
+    public function file(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->tracks->last() ? $this->tracks->last()->file : ''
         );
     }
 }
