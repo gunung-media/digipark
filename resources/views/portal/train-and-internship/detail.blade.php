@@ -58,10 +58,12 @@
                                 <div class="news-block-body">
                                     {!! $data->description !!}
                                 </div>
-                                <div class="news-block-body mt-2">
-                                    <h5>Persyarayan Peserta</h5>
-                                    {!! $data->requirement !!}
-                                </div>
+                                @if (!is_null($data->requirement))
+                                    <div class="news-block-body mt-2">
+                                        <h5>Persyarayan Peserta</h5>
+                                        {!! $data->requirement !!}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
