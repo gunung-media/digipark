@@ -31,7 +31,7 @@ class FilamentUtil
             ->body($body)
             ->info()
             ->actions([
-                Action::make('View')->url($url)->button(),
+                Action::make('View')->url($url)->button()->markAsRead(),
             ])
             ->sendToDatabase(User::all());
     }
@@ -43,7 +43,7 @@ class FilamentUtil
             ->body($body)
             ->info()
             ->actions([
-                Action::make('View')->url($url)->button(),
+                Action::make('View')->url($url)->button()->markAsRead(),
             ])
             ->sendToDatabase(Company::find($companyId));
     }
@@ -55,7 +55,7 @@ class FilamentUtil
             ->body($body)
             ->info()
             ->actions([
-                Action::make('View')->url($url)->button(),
+                Action::make('View')->url($url)->button()->markAsRead(),
             ])
             ->sendToDatabase(Seeker::find($seekerId));
     }
