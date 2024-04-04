@@ -36,11 +36,11 @@ class ClaimJhtResource extends Resource
                 Split::make([
                     Section::make('Member')->schema([
                         Group::make()->relationship('seeker')->schema([
-                            TextInput::make('full_name'),
-                            TextInput::make('identity_number'),
-                            TextInput::make('phone_number'),
-                            TextInput::make('address'),
-                            TextInput::make('gender'),
+                            TextInput::make('full_name')->label('Nama Lengkap'),
+                            TextInput::make('additional.identity_number')->label('NIK'),
+                            TextInput::make('phone_number')->label('Telepon'),
+                            TextInput::make('address')->label('Alamat'),
+                            TextInput::make('gender')->label('Jenis Kelamin'),
                         ])->columns(2)
                     ])->columnSpanFull()->disabled(),
                     Section::make('')

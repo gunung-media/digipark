@@ -36,12 +36,12 @@ class ClaimJhtResource extends Resource
         $user = FilamentUtil::getUser();
         return $form
             ->schema([
-                Section::make('Member')->schema([
-                    Placeholder::make('full_name')->content(fn () => $user->full_name),
-                    Placeholder::make('identity_number')->content(fn () => $user->additional->identity_number),
-                    Placeholder::make('phone_number')->content(fn () => $user->phone_number),
-                    Placeholder::make('Address')->content(fn () => $user->phone_number),
-                    Placeholder::make('gender')->content(fn () => $user->gender),
+                Section::make('Data Diri')->schema([
+                    Placeholder::make('Nama Lengkap')->content(fn () => $user->full_name),
+                    Placeholder::make('NIK')->label('NIK')->content(fn () => $user->additional->identity_number),
+                    Placeholder::make('Nomor Telpon')->content(fn () => $user->phone_number),
+                    Placeholder::make('Alamat')->content(fn () => $user->phone_number),
+                    Placeholder::make('Jenis Kelamin')->content(fn () => $user->gender === 'male' ? 'Laki-laki' : 'Perempuan'),
                 ])->columns(2),
                 Section::make('Klaim JHT')->schema([
                     Radio::make('type')
