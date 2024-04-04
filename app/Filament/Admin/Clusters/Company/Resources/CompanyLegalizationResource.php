@@ -6,6 +6,7 @@ use App\Filament\Admin\Clusters\Company;
 use App\Filament\Admin\Clusters\Company\Resources\CompanyLegalizationResource\Pages;
 use App\Filament\Admin\Clusters\Company\Resources\CompanyLegalizationResource\Widgets\CompanyLegalizationStats;
 use App\Models\Company\CompanyLegalization;
+use App\Utils\FilamentUtil;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
@@ -103,6 +104,12 @@ class CompanyLegalizationResource extends Resource
                                         ->success()
                                         ->title(__("Saved"))
                                         ->send();
+                                    FilamentUtil::sendNotifToCompany(
+                                        url: route('filament.company.resources.company-legalizations.index'),
+                                        title: "Laporan Pengesahan {$state} oleh Admin",
+                                        body: "Laporan Pengesahan {$state} oleh Admin",
+                                        companyId: $record->company_id
+                                    );
                                 })
                                 ->required()
                         ])->compact()

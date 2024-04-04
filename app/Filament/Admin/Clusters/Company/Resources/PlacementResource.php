@@ -112,6 +112,13 @@ class PlacementResource extends Resource
                                         ->success()
                                         ->title(__("Saved"))
                                         ->send();
+
+                                    FilamentUtil::sendNotifToCompany(
+                                        url: route('filament.company.resources.placements.index'),
+                                        title: "Laporan Penempatan {$state} oleh Admin",
+                                        body: "Laporan Penempatan {$record->name} {$state} oleh Admin",
+                                        companyId: $record->company_id
+                                    );
                                 })
                                 ->required()
                         ])->compact()

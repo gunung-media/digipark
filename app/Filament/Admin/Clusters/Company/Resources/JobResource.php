@@ -128,6 +128,12 @@ class JobResource extends Resource
                                         ->success()
                                         ->title(__("Saved"))
                                         ->send();
+                                    FilamentUtil::sendNotifToCompany(
+                                        url: route('filament.company.resources.jobs.index'),
+                                        title: "Laporan Lowongan {$state} oleh Admin",
+                                        body: "Laporan Lowongan {$record->name_job} {$state} oleh Admin",
+                                        companyId: $record->company_id
+                                    );
                                 })
                                 ->required()
                         ])->compact()

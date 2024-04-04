@@ -61,6 +61,12 @@ class CompanyLaidOffResource extends Resource
                                         ->success()
                                         ->title(__("Saved"))
                                         ->send();
+                                    FilamentUtil::sendNotifToCompany(
+                                        url: route('filament.company.resources.company-laid-offs.index'),
+                                        title: "Laporan PHK {$state} oleh Admin",
+                                        body: "Laporan PHK {$record->responsible_name} {$state} oleh Admin",
+                                        companyId: $record->company_id
+                                    );
                                 })
                                 ->required()
                         ])->compact()
