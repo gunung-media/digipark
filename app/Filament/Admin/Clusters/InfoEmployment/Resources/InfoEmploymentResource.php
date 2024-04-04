@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Filament\Admin\Resources;
+namespace App\Filament\Admin\Clusters\InfoEmployment\Resources;
 
-use App\Filament\Admin\Resources\InfoEmploymentResource\Pages;
+use App\Filament\Admin\Clusters\InfoEmployment as Cluster;
+use App\Filament\Admin\Clusters\InfoEmployment\Resources\InfoEmploymentResource\Pages;
 use App\Models\Admin\InfoEmployment;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -20,9 +22,10 @@ class InfoEmploymentResource extends Resource
 {
     protected static ?string $model = InfoEmployment::class;
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
-    protected static ?string $navigationGroup = 'Layanan';
+    protected static ?string $cluster = Cluster::class;
     protected static ?string $label = "Informasi Ketenagakerjaan";
     protected static ?string $pluralModelLabel = "Informasi Ketenagakerjaan";
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function form(Form $form): Form
     {

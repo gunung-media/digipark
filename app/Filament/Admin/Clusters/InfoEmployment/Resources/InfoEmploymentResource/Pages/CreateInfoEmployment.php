@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Admin\Resources\InfoEmploymentResource\Pages;
+namespace App\Filament\Admin\Clusters\InfoEmployment\Resources\InfoEmploymentResource\Pages;
 
-use App\Filament\Admin\Resources\InfoEmploymentResource;
+use App\Filament\Admin\Clusters\InfoEmployment\Resources\InfoEmploymentResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;

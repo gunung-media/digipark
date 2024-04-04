@@ -3,10 +3,8 @@
 namespace App\Filament\Company\Resources;
 
 use App\Filament\Company\Resources\CompanyLegalizationResource\Pages;
-use App\Filament\Company\Resources\CompanyLegalizationResource\RelationManagers;
 use App\Models\Company\CompanyLegalization;
 use App\Utils\FilamentUtil;
-use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Radio;
@@ -14,16 +12,12 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CompanyLegalizationResource extends Resource
 {
