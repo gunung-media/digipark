@@ -60,7 +60,7 @@
                                 </div>
                                 @if (!is_null($data->requirement))
                                     <div class="news-block-body mt-2">
-                                        <h5>Persyarayan Peserta</h5>
+                                        <h5>Persyaratan Peserta</h5>
                                         {!! $data->requirement !!}
                                     </div>
                                 @endif
