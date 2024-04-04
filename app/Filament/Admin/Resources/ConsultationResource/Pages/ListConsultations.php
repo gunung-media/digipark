@@ -3,17 +3,19 @@
 namespace App\Filament\Admin\Resources\ConsultationResource\Pages;
 
 use App\Filament\Admin\Resources\ConsultationResource;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListConsultations extends ListRecords
 {
     protected static string $resource = ConsultationResource::class;
 
+    protected function getHeaderWidgets(): array
+    {
+        return ConsultationResource::getWidgets();
+    }
+
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\CreateAction::make(),
-        ];
+        return [];
     }
 }

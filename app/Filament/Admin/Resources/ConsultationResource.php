@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\ConsultationResource\Pages;
+use App\Filament\Admin\Resources\ConsultationResource\Widgets\ConsultationStat;
 use App\Models\Admin\Consultation;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\TextEntry;
@@ -32,22 +33,33 @@ class ConsultationResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('email'),
-                TextColumn::make('subject'),
-                TextColumn::make('created_at')->date()
+                TextColumn::make('name')->searchable(),
+                TextColumn::make('email')->searchable(),
+                TextColumn::make('subject')->toggleable(),
+                TextColumn::make('created_at')->date()->sortable()
             ])
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+            ->actions([])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->groups([
+                Tables\Grouping\Group::make('created_at')
+                    ->label('Order Date')
+                    ->date()
+                    ->collapsible(),
+            ]);;
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            ConsultationStat::class,
+        ];
     }
 
     public static function getRelations(): array
@@ -61,8 +73,8 @@ class ConsultationResource extends Resource
     {
         return [
             'index' => Pages\ListConsultations::route('/'),
-            'create' => Pages\CreateConsultation::route('/create'),
-            'edit' => Pages\EditConsultation::route('/{record}/edit'),
+            // 'create' => Pages\CreateConsultation::route('/create'),
+            // 'edit' => Pages\EditConsultation::route('/{record}/edit'),
         ];
     }
 }
