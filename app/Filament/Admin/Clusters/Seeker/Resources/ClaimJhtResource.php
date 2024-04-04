@@ -7,6 +7,7 @@ use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource\Pages;
 use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource\Widgets\ClaimJhtStat;
 use App\Models\Seeker\ClaimJht;
 use App\Models\Seeker\TrackClaimJht;
+use App\Utils\FilamentUtil;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
@@ -72,8 +73,10 @@ class ClaimJhtResource extends Resource
                                         'message' => $state['message'],
                                         'status' => $state['status'],
                                     ];
+
                                     foreach ($state['file'] as $f) {
-                                        $data['file'] = $f->store('seeker/claim_jht', 'public');
+                                        if (!is_string($f))
+                                            $data['file'] = $f->store('seeker/claim_jht', 'public');
                                         break;
                                     }
 
@@ -83,6 +86,13 @@ class ClaimJhtResource extends Resource
                                         ->title('Saved')
                                         ->success()
                                         ->send();
+
+                                    FilamentUtil::sendNotifToSeeker(
+                                        url: route('filament.seeker.resources.claim-jhts.index'),
+                                        title: "Laporan Claim JHT {$state['status']} oleh Admin",
+                                        body: "Laporan Claim JHT {$state['status']} oleh Admin",
+                                        seekerId: $record->seeker_id
+                                    );
                                 }),
                         ])
                         ->schema([
