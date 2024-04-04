@@ -22,9 +22,7 @@ use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 class Applicant extends ManageRelatedRecords
 {
     protected static string $resource = JobResource::class;
-
     protected static string $relationship = 'applicants';
-
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
 
     public function getTitle(): string | Htmlable

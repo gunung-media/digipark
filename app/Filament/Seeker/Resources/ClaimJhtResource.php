@@ -10,6 +10,8 @@ use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -25,6 +27,7 @@ class ClaimJhtResource extends Resource
     protected static ?string $pluralModelLabel = 'Klaim JHT';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Layanan';
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function getEloquentQuery(): Builder
     {
@@ -92,6 +95,14 @@ class ClaimJhtResource extends Resource
             ]);
     }
 
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            Pages\EditClaimJht::class,
+            Pages\TrackClaimJht::class,
+        ]);
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -105,6 +116,7 @@ class ClaimJhtResource extends Resource
             'index' => Pages\ListClaimJhts::route('/'),
             'create' => Pages\CreateClaimJht::route('/create'),
             'edit' => Pages\EditClaimJht::route('/{record}/edit'),
+            'tracks' => Pages\TrackClaimJht::route('/{record}/track'),
         ];
     }
 }
