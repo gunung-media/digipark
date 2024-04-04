@@ -62,6 +62,7 @@ class TrainAndInternshipResource extends Resource
                             Forms\Components\TextInput::make('fee')
                                 ->label('Biaya')
                                 ->prefix('Rp.')
+                                ->numeric()
                                 ->required()
                                 ->columnSpanFull(),
                             TinyEditor::make('requirement')

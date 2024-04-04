@@ -50,7 +50,7 @@
                                     <div class="news-block-author mx-5">
                                         <p>
                                             Rp.
-                                            {{ number_format($data->fee, 2) }}
+                                            {{ number_format(is_string($data->fee) ? 0 : $data->fee, 2) }}
                                         </p>
                                     </div>
                                 </div>
