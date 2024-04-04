@@ -3,12 +3,12 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Admin\Resources\DashboardResource;
+use App\Filament\Admin\Pages;
 use App\Models\Admin\Settings\Dashboard;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationItem;
-use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
