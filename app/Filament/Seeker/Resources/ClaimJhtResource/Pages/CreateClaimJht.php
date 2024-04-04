@@ -2,6 +2,7 @@
 
 namespace App\Filament\Seeker\Resources\ClaimJhtResource\Pages;
 
+use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource as ResourcesClaimJhtResource;
 use App\Filament\Seeker\Pages\EditProfile;
 use App\Filament\Seeker\Resources\ClaimJhtResource;
 use App\Utils\FilamentUtil;
@@ -23,5 +24,15 @@ class CreateClaimJht extends CreateRecord
             $this->redirect(EditProfile::getUrl());
         }
         parent::mount();
+    }
+
+    protected function afterCreate(): void
+    {
+        $user = FilamentUtil::getUser();
+        FilamentUtil::sendNotifToAdmin(
+            url: route('filament.admin.seeker.resources.claim-jhts.index', ['activeTab' => 'diterima', 'tableSearch' => $user->full_name]),
+            title: "Ada Laporan Claim JHT Baru!",
+            body: "Laporan Claim JHT Baru dari " . $user->full_name
+        );
     }
 }

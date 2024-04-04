@@ -4,7 +4,7 @@ namespace App\Utils;
 
 use App\Models\User;
 use Exception;
-use Filament\Actions\Action;
+use Filament\Notifications\Actions\Action;
 use Filament\Facades\Filament;
 
 use Filament\Notifications\Notification;

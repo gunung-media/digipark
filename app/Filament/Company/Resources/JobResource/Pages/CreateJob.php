@@ -3,10 +3,20 @@
 namespace App\Filament\Company\Resources\JobResource\Pages;
 
 use App\Filament\Company\Resources\JobResource;
-use Filament\Actions;
+use App\Utils\FilamentUtil;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateJob extends CreateRecord
 {
     protected static string $resource = JobResource::class;
+
+    protected function afterCreate(): void
+    {
+        $user = FilamentUtil::getUser();
+        FilamentUtil::sendNotifToAdmin(
+            url: route('filament.admin.company.resources.jobs.index', ['activeTab' => 'diterima', 'tableSearch' => $user->name]),
+            title: "Ada Laporan Lowongan Baru!",
+            body: "Laporan Lowongan Baru dari " . $user->name
+        );
+    }
 }
