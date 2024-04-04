@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
 class TrainAndInternshipResource extends Resource
 {
@@ -44,8 +45,12 @@ class TrainAndInternshipResource extends Resource
                             Forms\Components\TextInput::make('location')
                                 ->label('Lokasi Pelaksanaan')
                                 ->required(),
-                            Forms\Components\RichEditor::make('description')
+                            TinyEditor::make('description')
                                 ->label('Deskripsi')
+                                ->fileAttachmentsDisk('public')
+                                ->fileAttachmentsVisibility('private')
+                                ->fileAttachmentsDirectory('train-internship')
+                                ->setConvertUrls(false)
                                 ->columnSpanFull()
                                 ->required(),
                             Forms\Components\DatePicker::make('start_date')
@@ -59,9 +64,14 @@ class TrainAndInternshipResource extends Resource
                                 ->prefix('Rp.')
                                 ->required()
                                 ->columnSpanFull(),
-                            Forms\Components\RichEditor::make('requirement')
+                            TinyEditor::make('requirement')
                                 ->label('Persyaratan Peserta')
-                                ->columnSpanFull(),
+                                ->columnSpan(2)
+                                ->fileAttachmentsDisk('public')
+                                ->fileAttachmentsVisibility('private')
+                                ->fileAttachmentsDirectory('train-internship/requirement')
+                                ->setConvertUrls(false)
+                                ->required(),
 
                         ])
                         ->columns(2),
