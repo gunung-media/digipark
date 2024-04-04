@@ -52,12 +52,12 @@ export default function Landing() {
             title: "Permintaan Tenaga Kerja"
         },
         {
-            href: route('portal.dummies.magang'),
+            href: route('portal.train-and-internship.index'),
             imgSrc: dpIcon,
             title: "Pelatihan Dan Pemagangan"
         },
         {
-            href: route('portal.dummies.info'),
+            href: route('filament.admin.info-employment'),
             imgSrc: guideIcon,
             title: "Info Data Ketenagakerjaan"
         },
