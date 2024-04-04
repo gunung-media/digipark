@@ -58,6 +58,16 @@ Route::name('portal.')->prefix('website')->group(function () {
             Route::post('apply', 'ApplyJobController')->name('apply');
         });
 
+    // News Routes
+    Route::name('train-and-internship.')
+        ->prefix('latihan-dan-magang')
+        ->namespace('TrainAndInternship')
+        ->group(function () {
+            Route::get('/', 'IndexController')->name('index');
+            // Route::get('{slug}', 'DetailController')->name('detail');
+        });
+
+    // Dummies Routes
     Route::name('dummies.')
         ->group(function () {
             Route::get('magang', fn () => view('portal.dummies.magang'))->name('magang');

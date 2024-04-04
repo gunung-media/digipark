@@ -40,10 +40,15 @@
 
                       <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                           <li><a class="dropdown-item" href="{{ route('portal.consultation') }}">Konsultasi</a></li>
-                          <li><a class="dropdown-item" href="{{ route('portal.dummies.magang') }}">Informasi
-                                  Pelatihan dan Magang</a></li>
-                          <li><a class="dropdown-item" href="{{ route('portal.dummies.info') }}">Informasi
-                                  Ketenagakerjaan</a></li>
+                          <li>
+                              <a class="dropdown-item" href="{{ route('portal.train-and-internship.index') }}">
+                                  Informasi Pelatihan dan Magang
+                              </a>
+                          </li>
+                          <!-- <li><a class="dropdown-item" href="{{ route('portal.dummies.magang') }}">Informasi -->
+                          <!--         Pelatihan dan Magang</a></li> -->
+                          <!-- <li><a class="dropdown-item" href="{{ route('portal.dummies.info') }}">Informasi -->
+                          <!--         Ketenagakerjaan</a></li> -->
                       </ul>
                   </li>
 

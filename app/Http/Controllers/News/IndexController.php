@@ -5,11 +5,13 @@ namespace App\Http\Controllers\News;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\News\News;
 use App\Models\Admin\News\NewsCategory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): View|Factory
     {
         $name = $request->get('q');
         $news = News::active()->with('category');
