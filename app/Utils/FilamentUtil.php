@@ -2,6 +2,7 @@
 
 namespace App\Utils;
 
+use App\Models\Company\Company;
 use App\Models\User;
 use Exception;
 use Filament\Notifications\Actions\Action;
@@ -32,5 +33,17 @@ class FilamentUtil
                 Action::make('View')->url($url)->button(),
             ])
             ->sendToDatabase(User::all());
+    }
+
+    public static function sendNotifToCompany(string $url, string $title, ?string $body, int $companyId): void
+    {
+        Notification::make()
+            ->title($title)
+            ->body($body)
+            ->info()
+            ->actions([
+                Action::make('View')->url($url)->button(),
+            ])
+            ->sendToDatabase(Company::find($companyId));
     }
 }
