@@ -53,7 +53,8 @@
                                         <p>{{ $data->type === 'train' ? 'Pelatihan' : 'Magang' }}</p>
                                     </div>
 
-                                    <a href="#" class="custom-btn btn">Detail</a>
+                                    <a href="{{ route('portal.train-and-internship.detail', ['slug' => $data->slug]) }}"
+                                        class="custom-btn btn">Detail</a>
                                 </div>
                             </div>
                         </div>

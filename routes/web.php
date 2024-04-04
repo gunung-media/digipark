@@ -64,7 +64,7 @@ Route::name('portal.')->prefix('website')->group(function () {
         ->namespace('TrainAndInternship')
         ->group(function () {
             Route::get('/', 'IndexController')->name('index');
-            // Route::get('{slug}', 'DetailController')->name('detail');
+            Route::get('{slug}', 'DetailController')->name('detail');
         });
 
     // Dummies Routes
