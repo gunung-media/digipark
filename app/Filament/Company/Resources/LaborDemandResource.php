@@ -140,6 +140,7 @@ class LaborDemandResource extends Resource
                                 ->fileAttachmentsDisk('public')
                                 ->fileAttachmentsVisibility('private')
                                 ->fileAttachmentsDirectory('placement/description')
+                                ->setConvertUrls(false)
                                 ->required(),
                             Forms\Components\Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
                         ])->columns(2),

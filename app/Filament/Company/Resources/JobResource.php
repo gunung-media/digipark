@@ -56,6 +56,7 @@ class JobResource extends Resource
                         ->fileAttachmentsDisk('public')
                         ->fileAttachmentsVisibility('private')
                         ->fileAttachmentsDirectory('jobs/description')
+                        ->setConvertUrls(false)
                         ->required(),
                     Forms\Components\FileUpload::make('image')
                         ->label('Gambar')

@@ -55,6 +55,7 @@ class SubMenuResource extends Resource
                         ->fileAttachmentsDisk('public')
                         ->fileAttachmentsVisibility('private')
                         ->fileAttachmentsDirectory('news/body')
+                        ->setConvertUrls(false)
                         ->required(),
                 ]),
             ]);

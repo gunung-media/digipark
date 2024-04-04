@@ -43,6 +43,7 @@ class NewsResource extends Resource
                             ->fileAttachmentsDisk('public')
                             ->fileAttachmentsVisibility('private')
                             ->fileAttachmentsDirectory('news/body')
+                            ->setConvertUrls(false)
                             ->required(),
                     ]),
                     Forms\Components\Section::make()->schema([

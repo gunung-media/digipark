@@ -33,6 +33,7 @@ class JobsRelationManager extends RelationManager
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsVisibility('private')
                     ->fileAttachmentsDirectory('jobs/description')
+                    ->setConvertUrls(false)
                     ->required(),
                 Forms\Components\FileUpload::make('image')
                     ->disk('public')
