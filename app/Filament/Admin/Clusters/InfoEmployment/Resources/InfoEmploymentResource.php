@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Clusters\InfoEmployment\Resources;
 use App\Filament\Admin\Clusters\InfoEmployment as Cluster;
 use App\Filament\Admin\Clusters\InfoEmployment\Resources\InfoEmploymentResource\Pages;
 use App\Models\Admin\InfoEmployment;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -45,11 +46,10 @@ class InfoEmploymentResource extends Resource
                             ->pluck('name', 'code'))
                         ->searchable()
                         ->required(),
-                ])->columns(2),
+                ])->columns(2)->disabled(fn ($record) => !is_null($record)),
                 Section::make()->schema([
-                    TextInput::make('year')
-                        ->label('Tahun Perolehan Data')
-                        ->numeric()
+                    DatePicker::make('date_in')
+                        ->label('Tanggal Perolehan Data')
                         ->required(),
                     TextInput::make('count')
                         ->label('Jumlah Pengangguran')
@@ -66,7 +66,9 @@ class InfoEmploymentResource extends Resource
                 Tables\Columns\TextColumn::make('village.name')
                     ->label('Kecamatan')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('year')
+                Tables\Columns\TextColumn::make('date_in')
+                    ->label('Tanggal Perolehan Data')
+                    ->date()
                     ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('count')

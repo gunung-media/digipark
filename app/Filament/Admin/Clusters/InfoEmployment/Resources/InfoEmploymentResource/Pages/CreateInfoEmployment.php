@@ -13,6 +13,6 @@ class CreateInfoEmployment extends CreateRecord
 
     public function handleRecordCreation(array $data): Model
     {
-        return static::getModel()::updateOrCreate(['year' => $data['year'], 'village_code' => $data['village_code']], $data);
+        return static::getModel()::updateOrCreate(['date_in' => $data['date_in'], 'village_code' => $data['village_code']], $data);
     }
 }
