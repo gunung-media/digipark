@@ -5,6 +5,7 @@ namespace App\Filament\Company\Resources;
 use App\Filament\Company\Resources\CompanyLegalizationResource\Pages;
 use App\Filament\Company\Resources\CompanyLegalizationResource\RelationManagers;
 use App\Models\Company\CompanyLegalization;
+use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\DatePicker;
@@ -31,6 +32,11 @@ class CompanyLegalizationResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
     protected static ?string $model = CompanyLegalization::class;
     protected static ?string $navigationGroup = 'Layanan';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('company_id', FilamentUtil::getUser()->id);
+    }
 
     public static function form(Form $form): Form
     {
