@@ -70,8 +70,9 @@ class InfoEmploymentResource extends Resource
                     ->label('Tanggal Perolehan Data')
                     ->date()
                     ->badge()
-                    ->searchable(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('count')
+                    ->sortable()
                     ->searchable(),
             ])
             ->filters([])
@@ -82,7 +83,13 @@ class InfoEmploymentResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->groups([
+                Tables\Grouping\Group::make('date_in')
+                    ->label('Tanggal Perolehan Data')
+                    ->date()
+                    ->collapsible(),
+            ]);;
     }
 
     public static function getRelations(): array
