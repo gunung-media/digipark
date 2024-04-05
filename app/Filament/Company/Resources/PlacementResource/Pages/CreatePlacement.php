@@ -4,7 +4,9 @@ namespace App\Filament\Company\Resources\PlacementResource\Pages;
 
 use App\Filament\Company\Resources\PlacementResource;
 use App\Utils\FilamentUtil;
+use App\Utils\Helper;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class CreatePlacement extends CreateRecord
 {
@@ -18,5 +20,10 @@ class CreatePlacement extends CreateRecord
             title: "Ada Laporan Penempatan Baru!",
             body: "Laporan Penempatan Baru dari " . $user->name
         );
+    }
+
+    protected function handleRecordCreation(array $data): Model
+    {
+        return parent::handleRecordCreation(Helper::manipulateDataHasSignature($data));
     }
 }

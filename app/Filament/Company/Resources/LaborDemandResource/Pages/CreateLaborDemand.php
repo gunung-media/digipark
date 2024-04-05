@@ -4,11 +4,18 @@ namespace App\Filament\Company\Resources\LaborDemandResource\Pages;
 
 use App\Filament\Company\Resources\LaborDemandResource;
 use App\Utils\FilamentUtil;
+use App\Utils\Helper;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class CreateLaborDemand extends CreateRecord
 {
     protected static string $resource = LaborDemandResource::class;
+
+    protected function handleRecordCreation(array $data): Model
+    {
+        return parent::handleRecordCreation(Helper::manipulateDataHasSignature($data));
+    }
 
     protected function afterCreate(): void
     {

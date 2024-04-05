@@ -2,13 +2,13 @@
 
 namespace App\Filament\Seeker\Resources\ClaimJhtResource\Pages;
 
-use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource as ResourcesClaimJhtResource;
 use App\Filament\Seeker\Pages\EditProfile;
 use App\Filament\Seeker\Resources\ClaimJhtResource;
 use App\Utils\FilamentUtil;
-use Filament\Actions;
+use App\Utils\Helper;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class CreateClaimJht extends CreateRecord
 {
@@ -24,6 +24,11 @@ class CreateClaimJht extends CreateRecord
             $this->redirect(EditProfile::getUrl());
         }
         parent::mount();
+    }
+
+    protected function handleRecordCreation(array $data): Model
+    {
+        return parent::handleRecordCreation(Helper::manipulateDataHasSignature($data));
     }
 
     protected function afterCreate(): void

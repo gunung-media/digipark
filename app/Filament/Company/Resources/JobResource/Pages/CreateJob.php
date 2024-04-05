@@ -4,7 +4,9 @@ namespace App\Filament\Company\Resources\JobResource\Pages;
 
 use App\Filament\Company\Resources\JobResource;
 use App\Utils\FilamentUtil;
+use App\Utils\Helper;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class CreateJob extends CreateRecord
 {
@@ -18,5 +20,10 @@ class CreateJob extends CreateRecord
             title: "Ada Laporan Lowongan Baru!",
             body: "Laporan Lowongan Baru dari " . $user->name
         );
+    }
+
+    protected function handleRecordCreation(array $data): Model
+    {
+        return parent::handleRecordCreation(Helper::manipulateDataHasSignature($data));
     }
 }

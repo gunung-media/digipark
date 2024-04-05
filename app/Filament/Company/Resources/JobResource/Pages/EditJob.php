@@ -3,8 +3,10 @@
 namespace App\Filament\Company\Resources\JobResource\Pages;
 
 use App\Filament\Company\Resources\JobResource;
+use App\Utils\Helper;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class EditJob extends EditRecord
 {
@@ -15,5 +17,10 @@ class EditJob extends EditRecord
         return [
             Actions\DeleteAction::make(),
         ];
+    }
+
+    protected function handleRecordUpdate(Model $record, array $data): Model
+    {
+        return parent::handleRecordUpdate($record, Helper::manipulateDataHasSignature($data));
     }
 }
