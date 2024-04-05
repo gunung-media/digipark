@@ -76,6 +76,9 @@ Route::name('portal.')->prefix('website')->group(function () {
                 Route::get('claim-jht', fn () => view('pdf.claim-jht', ['record' => App\Models\Seeker\ClaimJht::first()]));
                 Route::get('job', fn () => view('pdf.job', ['record' => App\Models\Company\Job::first()]));
                 Route::get('company-laid-off', fn () => view('pdf.company-laid-off', ['record' => App\Models\Company\CompanyLaidOff::first()]));
+                Route::get('company-legalization', fn () => view('pdf.company-legalization', ['record' => App\Models\Company\CompanyLegalization::first()]));
+                Route::get('labor-demand', fn () => view('pdf.labor-demand', ['record' => App\Models\Company\LaborDemand::first()]));
+                Route::get('placement', fn () => view('pdf.placement', ['record' => App\Models\Company\Placement::first()]));
             });
         });
 });

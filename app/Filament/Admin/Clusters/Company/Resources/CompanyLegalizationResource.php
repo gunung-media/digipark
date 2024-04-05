@@ -7,6 +7,7 @@ use App\Filament\Admin\Clusters\Company\Resources\CompanyLegalizationResource\Pa
 use App\Filament\Admin\Clusters\Company\Resources\CompanyLegalizationResource\Widgets\CompanyLegalizationStats;
 use App\Models\Company\CompanyLegalization;
 use App\Utils\FilamentUtil;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
@@ -23,6 +24,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Blade;
 
 class CompanyLegalizationResource extends Resource
 {
@@ -259,6 +261,17 @@ class CompanyLegalizationResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('pdf')
+                    ->label('PDF')
+                    ->color('success')
+                    ->icon('heroicon-o-arrow-down-on-square')
+                    ->action(function (CompanyLegalization $record) {
+                        return response()->streamDownload(function () use ($record) {
+                            echo Pdf::loadHtml(
+                                Blade::render('pdf.company-legalization', ['record' => $record])
+                            )->stream();
+                        }, "laporan-pengesahaan-{$record->id}-" . now()->format('d_m_Y') . ".pdf", ['content-type' => 'application/pdf']);
+                    }),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
