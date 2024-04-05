@@ -7,6 +7,7 @@ use App\Filament\Admin\Clusters\Company\Resources\LaborDemandResource\Pages;
 use App\Filament\Admin\Clusters\Company\Resources\LaborDemandResource\Widgets\LaborDemandStat;
 use App\Models\Company\LaborDemand;
 use App\Utils\FilamentUtil;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Split;
@@ -20,6 +21,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Blade;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
@@ -218,6 +220,17 @@ class LaborDemandResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\Action::make('pdf')
+                    ->label('PDF')
+                    ->color('success')
+                    ->icon('heroicon-o-arrow-down-on-square')
+                    ->action(function (LaborDemand $record) {
+                        return response()->streamDownload(function () use ($record) {
+                            echo Pdf::loadHtml(
+                                Blade::render('pdf.labor-demand', ['record' => $record])
+                            )->stream();
+                        }, "laporan-permintaan-tenaga-kerja-{$record->id}-" . now()->format('d_m_Y') . ".pdf", ['content-type' => 'application/pdf']);
+                    }),
                 Tables\Actions\EditAction::make()->label("View")->icon('heroicon-o-eye'),
             ])
             ->bulkActions([
