@@ -75,6 +75,7 @@ Route::name('portal.')->prefix('website')->group(function () {
             Route::prefix('pdf')->group(function () {
                 Route::get('claim-jht', fn () => view('pdf.claim-jht', ['record' => App\Models\Seeker\ClaimJht::first()]));
                 Route::get('job', fn () => view('pdf.job', ['record' => App\Models\Company\Job::first()]));
+                Route::get('company-laid-off', fn () => view('pdf.company-laid-off', ['record' => App\Models\Company\CompanyLaidOff::first()]));
             });
         });
 });

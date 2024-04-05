@@ -7,6 +7,7 @@ use App\Filament\Admin\Clusters\Company\Resources\CompanyLaidOffResource\Pages;
 use App\Filament\Admin\Clusters\Company\Resources\CompanyLaidOffResource\Widgets\CompanyLaidOffStats;
 use App\Models\Company\CompanyLaidOff;
 use App\Utils\FilamentUtil;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Split;
@@ -18,6 +19,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Blade;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 class CompanyLaidOffResource extends Resource
@@ -160,6 +162,17 @@ class CompanyLaidOffResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('pdf')
+                    ->label('PDF')
+                    ->color('success')
+                    ->icon('heroicon-o-arrow-down-on-square')
+                    ->action(function (CompanyLaidOff $record) {
+                        return response()->streamDownload(function () use ($record) {
+                            echo Pdf::loadHtml(
+                                Blade::render('pdf.company-laid-off', ['record' => $record])
+                            )->stream();
+                        }, "laporan-phk-{$record->id}-" . now()->format('d_m_Y') . ".pdf", ['content-type' => 'application/pdf']);
+                    }),
                 Tables\Actions\EditAction::make()->label("View")->icon('heroicon-o-eye'),
             ])
             ->bulkActions([
