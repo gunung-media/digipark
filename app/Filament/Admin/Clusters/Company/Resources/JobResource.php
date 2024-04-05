@@ -7,6 +7,7 @@ use App\Filament\Admin\Clusters\Company\Resources\JobResource\Pages;
 use App\Filament\Admin\Clusters\Company\Resources\JobResource\Widgets\JobStats;
 use App\Models\Company\Job;
 use App\Utils\FilamentUtil;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Split;
@@ -19,6 +20,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Blade;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
@@ -179,6 +181,17 @@ class JobResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\Action::make('pdf')
+                    ->label('PDF')
+                    ->color('success')
+                    ->icon('heroicon-o-arrow-down-on-square')
+                    ->action(function (Job $record) {
+                        return response()->streamDownload(function () use ($record) {
+                            echo Pdf::loadHtml(
+                                Blade::render('pdf.job', ['record' => $record])
+                            )->stream();
+                        }, "laporan-pekerjaan-{$record->id}-" . now()->format('d_m_Y') . ".pdf", ['content-type' => 'application/pdf']);
+                    }),
                 Tables\Actions\Action::make('active')
                     ->action(function (Job $record) {
                         $record->is_active = true;
