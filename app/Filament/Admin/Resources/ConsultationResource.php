@@ -56,7 +56,7 @@ class ConsultationResource extends Resource
                     ->label('Order Date')
                     ->date()
                     ->collapsible(),
-            ]);;
+            ]);
     }
 
     public static function getWidgets(): array

@@ -3,10 +3,11 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\NewsResource\Pages;
-use App\Filament\Admin\Resources\NewsResource\RelationManagers;
 use App\Models\Admin\News\News;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
@@ -16,8 +17,8 @@ use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 class NewsResource extends Resource
 {
     protected static ?string $model = News::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function form(Form $form): Form
     {
@@ -121,9 +122,15 @@ class NewsResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            RelationManagers\CommentsRelationManager::class,
-        ];
+        return [];
+    }
+
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            Pages\EditNews::class,
+            Pages\NewsComment::class,
+        ]);
     }
 
     public static function getPages(): array
@@ -132,6 +139,7 @@ class NewsResource extends Resource
             'index' => Pages\ListNews::route('/'),
             'create' => Pages\CreateNews::route('/create'),
             'edit' => Pages\EditNews::route('/{record}/edit'),
+            'comments' => Pages\NewsComment::route('/{record}/comments'),
         ];
     }
 }

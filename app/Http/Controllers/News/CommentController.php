@@ -24,7 +24,10 @@ class CommentController extends Controller
                 ->body('There is a new comment from ' . $request->name)
                 ->info()
                 ->actions([
-                    Action::make('View')->url(NewsResource::getUrl('edit', ['record' => $request->news_id]))->button(),
+                    Action::make('View')
+                        ->url(NewsResource::getUrl('comments', ['record' => $request->news_id, 'tableSearch' => $request->name]))
+                        ->button()
+                        ->markAsRead(),
                 ])
                 ->sendToDatabase(User::all());
             return redirect()->back()->with('success', 'Success Input Komentar');
