@@ -105,9 +105,12 @@
                             <div class="col-12">
                                 <input type="hidden" name="mode" value="{{ $mode }} ">
                                 <button type="submit" class="form-control mt-4">Register</button>
-                                <p class="mt-5">Sudah Punya Akun?<a
-                                        href="{{ route('portal.login', ['mode' => $mode]) }}" style="color: blue">
-                                        Login</a> </p>
+                                <p class="mt-5">Sudah Punya Akun?
+                                    <a href="{{ route('portal.login', ['mode' => $mode]) }}"
+                                        style="color: var(--primary-color)">
+                                        Login
+                                    </a>
+                                </p>
                             </div>
                         @endif
                     </form>

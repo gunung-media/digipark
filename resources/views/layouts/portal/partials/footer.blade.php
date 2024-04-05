@@ -9,16 +9,18 @@
                    <h5 class="site-footer-title mb-3">Quick Links</h5>
 
                    <ul class="footer-menu">
-                       <li class="footer-menu-item"><a href="/website#unit-layanan" class="footer-menu-link">Unit
-                               Layanan</a>
+                       <li class="footer-menu-item"><a href="/website#unit-layanan" class="footer-menu-link">Visi</a>
                        </li>
-
                        <li class="footer-menu-item"><a href="/website#profil" class="footer-menu-link">Profil</a></li>
-
                        <li class="footer-menu-item"><a href="/website#pekerjaan" class="footer-menu-link">Pekerjaan</a>
                        </li>
-
                        <li class="footer-menu-item"><a href="/website/berita" class="footer-menu-link">Berita</a>
+                       </li>
+                       <li class="footer-menu-item"><a href="/website/konsultasi"
+                               class="footer-menu-link">Konsultasi</a>
+                       </li>
+                       <li class="footer-menu-item"><a href="/website/latihan-dan-magang"
+                               class="footer-menu-link">Informasi Latihan dan Magang</a>
                        </li>
                    </ul>
                </div>
@@ -61,7 +63,7 @@
 
                    <div class="col-lg-6 col-md-7 col-12">
                        <p class="copyright-text mb-0">Copyright © {{ date('Y') }} <a href="#">Digital Palangka
-                               Raya Kreatif Ketenagakerjaan</a>
+                               Raya Ketenagakerjaan</a>
                            <br> Design: <a href="https://gunungmedia.com" target="_blank">Gunung Media</a>
                        </p>
                    </div>
