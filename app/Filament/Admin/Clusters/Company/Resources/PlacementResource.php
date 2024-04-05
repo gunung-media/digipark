@@ -7,6 +7,7 @@ use App\Filament\Admin\Clusters\Company\Resources\PlacementResource\Pages;
 use App\Filament\Admin\Clusters\Company\Resources\PlacementResource\Widgets\PlacementStats;
 use App\Models\Company\Placement;
 use App\Utils\FilamentUtil;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Split;
 use Filament\Forms\Components\Tabs;
@@ -19,6 +20,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Blade;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
@@ -163,6 +165,17 @@ class PlacementResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\Action::make('pdf')
+                    ->label('PDF')
+                    ->color('success')
+                    ->icon('heroicon-o-arrow-down-on-square')
+                    ->action(function (Placement $record) {
+                        return response()->streamDownload(function () use ($record) {
+                            echo Pdf::loadHtml(
+                                Blade::render('pdf.placement', ['record' => $record])
+                            )->stream();
+                        }, "laporan-penempatan-{$record->id}-" . now()->format('d_m_Y') . ".pdf", ['content-type' => 'application/pdf']);
+                    }),
                 Tables\Actions\EditAction::make()->label("View")->icon('heroicon-o-eye'),
             ])
             ->bulkActions([
