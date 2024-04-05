@@ -8,6 +8,7 @@ use App\Filament\Admin\Clusters\Seeker\Resources\ClaimJhtResource\Widgets\ClaimJ
 use App\Models\Seeker\ClaimJht;
 use App\Models\Seeker\TrackClaimJht;
 use App\Utils\FilamentUtil;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
@@ -25,6 +26,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Blade;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 class ClaimJhtResource extends Resource
@@ -147,6 +149,17 @@ class ClaimJhtResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\Action::make('pdf')
+                    ->label('PDF')
+                    ->color('success')
+                    ->icon('heroicon-o-arrow-down-on-square')
+                    ->action(function (ClaimJht $record) {
+                        return response()->streamDownload(function () use ($record) {
+                            echo Pdf::loadHtml(
+                                Blade::render('pdf.claim-jht', ['record' => $record])
+                            )->stream();
+                        }, "laporan-claim-jht-{$record->id}-" . now()->format('d_m_Y') . ".pdf", ['content-type' => 'application/pdf']);
+                    }),
                 Tables\Actions\EditAction::make()->label("View")->icon('heroicon-o-eye'),
             ])
             ->bulkActions([

@@ -16,7 +16,7 @@ class ClaimJht extends Model
     use HasFactory;
 
     protected $appends = ['status', 'message', 'file'];
-    protected $with = ['tracks'];
+    protected $with = ['tracks', 'seeker'];
 
     public function seeker(): BelongsTo
     {

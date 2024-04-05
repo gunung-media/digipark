@@ -72,5 +72,8 @@ Route::name('portal.')->prefix('website')->group(function () {
         ->group(function () {
             Route::get('magang', fn () => view('portal.dummies.magang'))->name('magang');
             Route::get('info', fn () => view('portal.dummies.info'))->name('info');
+            Route::prefix('pdf')->group(function () {
+                Route::get('claim-jht', fn () => view('pdf.claim-jht', ['record' => App\Models\Seeker\ClaimJht::first()]));
+            });
         });
 });
