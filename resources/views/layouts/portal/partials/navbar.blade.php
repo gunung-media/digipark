@@ -78,7 +78,7 @@
                               href="{{ route('portal.logout') }}">Logout</a>
                       @else
                           <a class="nav-link custom-btn custom-border-btn btn"
-                              href="{{ route('portal.login') }}">Login</a>
+                              href="{{ route('portal.login', ['mode' => 'seeker']) }}">Login</a>
                       @endif
                   </li>
               </ul>

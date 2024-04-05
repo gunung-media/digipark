@@ -11,7 +11,7 @@
                         @csrf
                         <h3 class="mb-4">Login</h3>
                         <p>
-                            {{ (empty($mode) ? 'Login sebagai apa?' : $mode == 'company') ? 'Badan Perusahaan' : 'Member' }}
+                            <!-- {{ (empty($mode) ? 'Login sebagai apa?' : $mode == 'company') ? 'Badan Perusahaan' : 'Member' }} -->
                         </p>
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -47,20 +47,22 @@
                         @else
                             <div class="row">
                                 <div class="col-12 mt-2">
+                                    <label class="required">Email</label>
                                     <input type="email" name="email" id="donation-name" class="form-control"
                                         placeholder="Email" pattern="[^ @]*@[^ @]*" required>
                                 </div>
 
                                 <div class="col-12 mt-2">
+                                    <label class="required">Password</label>
                                     <input type="password" name="password" id="donation-email" class="form-control"
                                         placeholder="Password" required>
                                 </div>
 
                                 <div class="col-lg-12 col-12 mt-2">
                                     <button type="submit" class="form-control mt-4">Login</button>
-                                    <p class="mt-5">Don't have an account? <a
-                                            href="{{ route('portal.register', ['mode' => $mode]) }}"
-                                            style="color: blue">Register</a> </p>
+                                    <p class="mt-5">Belum Punya Akun?<a
+                                            href="{{ route('portal.register', ['mode' => $mode]) }}" style="color: blue">
+                                            Register</a> </p>
                                 </div>
                             </div>
                         @endif
