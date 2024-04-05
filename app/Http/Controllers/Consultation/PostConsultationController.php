@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Consultation;
 
+use App\Filament\Admin\Resources\ConsultationResource;
+use App\Filament\Admin\Resources\NewsResource;
 use App\Http\Controllers\Controller;
-use App\Models\Consultation;
+use App\Models\Admin\Consultation;
+use App\Models\User;
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,7 +23,6 @@ class PostConsultationController extends Controller
         $validate = Validator::make($data, [
             'name' => 'required',
             'email' => 'required|email',
-            'description' => 'required',
             'subject' => 'required',
             'file' => 'mimes:pdf,jpg,png,jpeg,docx,max:2048',
         ]);
@@ -32,6 +36,15 @@ class PostConsultationController extends Controller
         }
 
         if (Consultation::create($data)) {
+            Notification::make()->title('Ada Konsultasi Baru')
+                ->body('There is a new consulation from ' . $request->name)
+                ->info()
+                ->actions([
+                    Action::make('View')->url(ConsultationResource::getUrl('index', ['tableSearch' => $request->name]))
+                        ->button()
+                        ->markAsRead(),
+                ])
+                ->sendToDatabase(User::all());
             return redirect()->back()->with('success', 'Your consultation has been sent successfully.');
         }
         return redirect()->back()->with('error', 'Something went wrong.');

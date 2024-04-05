@@ -3,6 +3,11 @@
 <link rel="stylesheet" href="{{ asset('portal/css/bootstrap-icons.css') }}">
 <link rel="stylesheet" href="{{ asset('portal/css/templatemo-kind-heart-charity.css') }}">
 <style>
+    .required:after {
+        content: " *";
+        color: red;
+    }
+
     .news-image {
         object-fit: cover;
         /* height: 500px; */
@@ -47,6 +52,28 @@
     .whatsapp-icon {
         width: 40px;
         height: 40px;
+    }
+
+    .volunteer-section {
+        background-image: url({{ asset('images/bg.jpeg') }});
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .consultation-container {
+        z-index: 1;
+        position: relative;
     }
 
     .login-section {

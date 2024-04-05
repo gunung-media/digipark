@@ -33,9 +33,13 @@ class ConsultationResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('index')
+                    ->label('No.')
+                    ->rowIndex(),
                 TextColumn::make('name')->searchable(),
+                TextColumn::make('identity_number')->searchable()->default('-'),
                 TextColumn::make('email')->searchable(),
-                TextColumn::make('subject')->toggleable(),
+                TextColumn::make('subject')->toggleable()->description(fn ($record) => $record->description),
                 TextColumn::make('created_at')->date()->sortable()
             ])
             ->filters([
