@@ -88,7 +88,8 @@
 
     .job-image {
         object-fit: cover;
-        height: 250px;
+        max-height: 250px;
+        min-height: 250px;
         width: 100%;
     }
 
