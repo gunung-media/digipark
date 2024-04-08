@@ -20,8 +20,8 @@ class CommentController extends Controller
         $data = $request->except('_token');
 
         if (NewsComment::create($data)) {
-            Notification::make()->title('There is a new comment')
-                ->body('There is a new comment from ' . $request->name)
+            Notification::make()->title('Ada Komentar Baru')
+                ->body('Ada Komentar Baru oleh ' . $request->name)
                 ->info()
                 ->actions([
                     Action::make('View')

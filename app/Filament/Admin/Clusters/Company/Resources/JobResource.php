@@ -38,7 +38,7 @@ class JobResource extends Resource
             ->schema([
                 Split::make([
                     Tabs::make()->tabs([
-                        Tab::make('Main Data')
+                        Tab::make('Data Utama')
                             ->schema([
                                 Forms\Components\TextInput::make('name_job')
                                     ->label('Nama Jabatan')

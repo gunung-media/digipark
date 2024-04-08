@@ -26,6 +26,7 @@ class MenuResource extends Resource
                 Split::make([
                     Forms\Components\Section::make()->schema([
                         Forms\Components\TextInput::make('name')
+                            ->label("Nama Menu")
                             ->required(),
                     ]),
                     Forms\Components\Section::make()->schema([
@@ -42,24 +43,30 @@ class MenuResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label("Nama Menu")
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label('Aktif di Web')
                     ->boolean(),
             ])
             ->filters([
-                SelectFilter::make('is_active')->options([
-                    1 => 'Active',
-                    0 => 'Inactive',
-                ]),
+                SelectFilter::make('is_active')
+                    ->label('Aktif di Web')
+                    ->options([
+                        1 => 'Active',
+                        0 => 'Inactive',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\Action::make('active')
+                    ->label('Aktifkan')
                     ->action(function (Menu $record) {
                         $record->is_active = true;
                         $record->save();
                     })
                     ->hidden(fn (Menu $record): bool => $record->is_active),
                 Tables\Actions\Action::make('inactive')
+                    ->label('Non Aktifkan')
                     ->action(function (Menu $record) {
                         $record->is_active = false;
                         $record->save();

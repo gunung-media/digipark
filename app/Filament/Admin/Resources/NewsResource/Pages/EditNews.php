@@ -10,6 +10,11 @@ class EditNews extends EditRecord
 {
     protected static string $resource = NewsResource::class;
 
+    public static function getNavigationLabel(): string
+    {
+        return 'Edit Berita';
+    }
+
     protected function getHeaderActions(): array
     {
         return [

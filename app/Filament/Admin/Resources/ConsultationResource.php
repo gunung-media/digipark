@@ -6,8 +6,6 @@ use App\Filament\Admin\Resources\ConsultationResource\Pages;
 use App\Filament\Admin\Resources\ConsultationResource\Widgets\ConsultationStat;
 use App\Models\Admin\Consultation;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -36,8 +34,13 @@ class ConsultationResource extends Resource
                 TextColumn::make('index')
                     ->label('No.')
                     ->rowIndex(),
-                TextColumn::make('name')->searchable(),
-                TextColumn::make('identity_number')->searchable()->default('-'),
+                TextColumn::make('name')
+                    ->label('Nama')
+                    ->searchable(),
+                TextColumn::make('identity_number')
+                    ->label('NIK')
+                    ->searchable()
+                    ->default('-'),
                 TextColumn::make('email')->searchable(),
                 TextColumn::make('subject')->toggleable()->description(fn ($record) => $record->description),
                 TextColumn::make('created_at')->date()->sortable()

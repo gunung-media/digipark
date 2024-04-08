@@ -58,6 +58,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])->navigationItems([
                 NavigationItem::make('Website Content')
+                    ->label('Konten Website')
                     ->url(
                         fn () =>
                         Dashboard::count() === 0
@@ -68,7 +69,7 @@ class AdminPanelProvider extends PanelProvider
                     ->isActiveWhen(fn () => request()->routeIs('filament.admin.resources.dashboards.edit', 'filament.admin.resources.dashboards.create'))
                     ->group('Settings'),
                 NavigationItem::make('Website')
-                    ->label("Go to website")
+                    ->label("Pergi ke Website")
                     ->url(fn () => route('portal'))
                     ->icon('heroicon-o-globe-alt')
                     ->openUrlInNewTab()

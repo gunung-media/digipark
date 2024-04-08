@@ -16,6 +16,8 @@ class DashboardResource extends Resource
     protected static ?string $model = Dashboard::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $label = "Konten Website";
+    protected static ?string $pluralModelLabel = "Konten Website";
     protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
@@ -25,29 +27,32 @@ class DashboardResource extends Resource
                 Forms\Components\Split::make([
                     Forms\Components\Tabs::make()
                         ->tabs([
-                            Forms\Components\Tabs\Tab::make('Our Story Section')->schema([
+                            Forms\Components\Tabs\Tab::make('Tentang Kami Section')->schema([
                                 Forms\Components\RichEditor::make('short_description')
+                                    ->label("Deskripsi")
                                     ->columnSpanFull()
                                     ->required(),
                                 Forms\Components\RichEditor::make('mission')
+                                    ->label("Misi")
                                     ->columnSpanFull()
                                     ->required(),
                                 Forms\Components\FileUpload::make('our_story_image')
+                                    ->label('Gambar')
                                     ->disk('public')
                                     ->directory('dashboard')
                                     ->image()
                                     ->columnSpanFull()
                                     ->required(),
                             ]),
-                            Forms\Components\Tabs\Tab::make('Additional')
+                            Forms\Components\Tabs\Tab::make('Data Tambahan')
                                 ->schema([
-                                    Forms\Components\TextInput::make('address'),
+                                    Forms\Components\TextInput::make('address')->label('Alamat'),
                                     Forms\Components\RichEditor::make('quote')
                                         ->default('"The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well."')
                                         ->columnSpanFull(),
                                 ])
                         ]),
-                    Forms\Components\Section::make('Contact')->schema([
+                    Forms\Components\Section::make('Kontak')->schema([
                         Forms\Components\TextInput::make('facebook')
                             ->prefixIcon('icon-fb'),
                         Forms\Components\TextInput::make('instagram')
@@ -59,6 +64,7 @@ class DashboardResource extends Resource
                         Forms\Components\TextInput::make('linkedin')
                             ->prefixIcon('icon-linkedin'),
                         Forms\Components\TextInput::make('phone_number')
+                            ->label('No. Telp')
                             ->prefixIcon('icon-wa'),
                         Forms\Components\TextInput::make('default_text')
                             ->label('Default Text WA')

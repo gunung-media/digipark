@@ -26,8 +26,8 @@ class ApplyJobController extends Controller
         $data = ['job_id' => $request->input('job_id'), 'seeker_id' => auth('seeker')->user()->id];
         if (JobApplicant::create($data)) {
             Notification::make()
-                ->title('There is a new applicant')
-                ->body('There is a new applicant' . auth('seeker')->user()->name)
+                ->title('Ada Pendaftar Pekerja Baru')
+                ->body('Ada Pendaftar Pekerja baru bernama' . auth('seeker')->user()->name)
                 ->info()
                 ->actions([
                     Action::make('View')->url(JobResource::getUrl('edit', ['record' => $request->job_id], true, 'company'))->button(),

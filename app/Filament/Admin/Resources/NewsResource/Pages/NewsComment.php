@@ -4,15 +4,12 @@ namespace App\Filament\Admin\Resources\NewsResource\Pages;
 
 use App\Filament\Admin\Resources\NewsResource;
 use App\Models\Admin\News\NewsComment as Model;
-use Filament\Actions;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class NewsComment extends ManageRelatedRecords
 {

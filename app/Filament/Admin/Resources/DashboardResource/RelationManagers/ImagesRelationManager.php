@@ -13,16 +13,23 @@ use Filament\Tables\Table;
 class ImagesRelationManager extends RelationManager
 {
     protected static string $relationship = 'images';
+    protected static ?string $label = "Gambar";
+    protected static ?string $title = "Gambar";
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
+                    ->label('Judul')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('subtitle'),
+                Forms\Components\TextInput::make('subtitle')
+                    ->label('Sub Judul')
+                    ->helperText('Maksimal 50 karakter')
+                    ->maxLength(50),
                 Forms\Components\FileUpload::make('image')
+                    ->label('Gambar')
                     ->disk('public')
                     ->directory('dashboard_images')
                     ->image()
@@ -36,19 +43,23 @@ class ImagesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('title')
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('subtitle'),
+                Tables\Columns\TextColumn::make('title')->label('Judul'),
+                Tables\Columns\TextColumn::make('subtitle')->label('Sub Judul'),
                 Tables\Columns\ImageColumn::make('image')
+                    ->label('Gambar')
                     ->disk('public')
                     ->square(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label('Aktif di Web')
                     ->boolean(),
             ])
             ->filters([
-                SelectFilter::make('is_active')->options([
-                    1 => 'Active',
-                    0 => 'Inactive',
-                ]),
+                SelectFilter::make('is_active')
+                    ->label('Aktif di Web')
+                    ->options([
+                        1 => 'Active',
+                        0 => 'Inactive',
+                    ]),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
@@ -56,12 +67,14 @@ class ImagesRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\Action::make('active')
+                    ->label('Aktifkan')
                     ->action(function (DashboardImage $record) {
                         $record->is_active = true;
                         $record->save();
                     })
                     ->hidden(fn (DashboardImage $record): bool => $record->is_active),
                 Tables\Actions\Action::make('inactive')
+                    ->label('Non Aktifkan')
                     ->action(function (DashboardImage $record) {
                         $record->is_active = false;
                         $record->save();

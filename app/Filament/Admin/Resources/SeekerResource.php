@@ -32,7 +32,7 @@ class SeekerResource extends Resource
             ->schema([
                 Tabs::make()
                     ->tabs([
-                        Tab::make('Profile Information')
+                        Tab::make('Data Pribadi')
                             ->schema([
                                 TextInput::make('email')
                                     ->label('Email')
@@ -90,7 +90,7 @@ class SeekerResource extends Resource
                                     ->columnSpanFull()
                             ])
                             ->columns(2),
-                        Tab::make('Additional Data')
+                        Tab::make('Dokumen Tambahan')
                             ->schema([
                                 Group::make()
                                     ->relationship('additional')
@@ -102,7 +102,7 @@ class SeekerResource extends Resource
                                             ->downloadable()
                                             ->columnSpanFull(),
                                         FileUpload::make('doc_bpjs_card')
-                                            ->label('BPJS Card')
+                                            ->label('Kartu BPJS')
                                             ->disk('public')
                                             ->directory('seeker/additional')
                                             ->downloadable()
@@ -129,11 +129,18 @@ class SeekerResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('full_name')
+                    ->label('Nama Lengkap')
                     ->searchable(),
                 TextColumn::make('email')->searchable(),
-                TextColumn::make('address')->searchable(),
-                TextColumn::make('phone_number')->searchable(),
-                TextColumn::make('gender')->sortable(),
+                TextColumn::make('address')->label('Alamat')
+                    ->searchable(),
+                TextColumn::make('phone_number')
+                    ->label('No. Telpon')
+                    ->searchable(),
+                TextColumn::make('gender')
+                    ->label('Jenis Kelamin')
+                    ->formatStateUsing(fn (string $state): string => __($state === 'male' ? 'Laki-laki' : 'Perempuan'))
+                    ->sortable(),
             ])
             ->filters([
                 //

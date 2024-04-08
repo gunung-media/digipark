@@ -15,9 +15,7 @@ use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 class SubMenuResource extends Resource
 {
     protected static ?string $model = SubMenu::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-bars-3';
-
     protected static ?string $navigationGroup = 'Settings';
 
     public static function form(Form $form): Form
@@ -66,18 +64,23 @@ class SubMenuResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Judul')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('menu.name')
+                    ->label('Menu')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('author')
+                    ->label('Pengarang')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image')
+                    ->label('Gambar')
                     ->defaultImageUrl(url('/portal/images/news/close-up-volunteer-oganizing-stuff-donation.jpg'))
                     ->disk('public')
                     ->square(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label('Aktif di Web')
                     ->boolean(),
             ])
             ->filters([
@@ -85,12 +88,14 @@ class SubMenuResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('active')
+                    ->label('Aktifkan')
                     ->action(function (SubMenu $record) {
                         $record->is_active = true;
                         $record->save();
                     })
                     ->hidden(fn (SubMenu $record): bool => $record->is_active),
                 Tables\Actions\Action::make('inactive')
+                    ->label('Non Aktifkan')
                     ->action(function (SubMenu $record) {
                         $record->is_active = false;
                         $record->save();

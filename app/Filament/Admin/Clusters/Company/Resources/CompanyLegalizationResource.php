@@ -39,7 +39,7 @@ class CompanyLegalizationResource extends Resource
         return $form
             ->schema([
                 Split::make([
-                    Section::make('Profile Information')
+                    Section::make('Data Perusahaan')
                         ->schema([
                             Group::make()
                                 ->relationship('company')
@@ -119,7 +119,7 @@ class CompanyLegalizationResource extends Resource
                 ])->columnSpanFull(),
 
                 Tabs::make()->tabs([
-                    Tab::make('Main Data')->schema([
+                    Tab::make('Data Utama')->schema([
                         Radio::make('company_regulation_concept')
                             ->label('Konsep Peraturan Perusahaan')
                             ->options([
@@ -198,7 +198,7 @@ class CompanyLegalizationResource extends Resource
                             ->numeric()
                             ->required(),
                     ])->columns(2),
-                    Tab::make('Dokument')->schema([
+                    Tab::make('Dokumen')->schema([
                         FileUpload::make('doc_pp')
                             ->label('Naskah PP')
                             ->disk('public')

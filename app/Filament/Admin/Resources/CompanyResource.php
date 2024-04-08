@@ -3,15 +3,12 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\CompanyResource\Pages;
-use App\Filament\Admin\Resources\CompanyResource\RelationManagers;
 use App\Models\Company\Company;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Hash;
-use Rawilk\FilamentPasswordInput\Password;
 
 class CompanyResource extends Resource
 {
@@ -27,32 +24,38 @@ class CompanyResource extends Resource
             ->schema([
                 Forms\Components\Section::make()->schema([
                     Forms\Components\TextInput::make('name')
+                        ->label('Nama Perusahaan')
                         ->required(),
                     Forms\Components\TextInput::make('email')
                         ->email()
                         ->unique('companies', 'email', null, true)
                         ->required(),
                     Forms\Components\TextInput::make('phone_number')
+                        ->label('No. Telp')
                         ->tel()
                         ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
                         ->required(),
                     Forms\Components\TextInput::make('address')
+                        ->label('Alamat')
                         ->required(),
-                    Forms\Components\TextInput::make('company_type'),
-                    Forms\Components\Select::make('company_status')->options(
-                        collect([
-                            'pt',
-                            'cv',
-                            'perorangan',
-                            'badan usaha negara',
-                            'parsero',
-                            'pma',
-                            'perusahaan',
-                            'joint venture',
-                            'pmdn'
-                        ])->mapWithKeys(fn ($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
-                            ->toArray()
-                    ),
+                    Forms\Components\TextInput::make('company_type')
+                        ->label('Jenis/ Bidang Usaha'),
+                    Forms\Components\Select::make('company_status')
+                        ->label('Status Perusahaan')
+                        ->options(
+                            collect([
+                                'pt',
+                                'cv',
+                                'perorangan',
+                                'badan usaha negara',
+                                'parsero',
+                                'pma',
+                                'perusahaan',
+                                'joint venture',
+                                'pmdn'
+                            ])->mapWithKeys(fn ($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
+                                ->toArray()
+                        ),
                 ])->columns(2),
                 // Password::make('password')
                 //     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
@@ -60,6 +63,7 @@ class CompanyResource extends Resource
                 //     ->required(fn (string rcontext): bool => $context === 'create'),
                 Forms\Components\Section::make()->schema([
                     Forms\Components\FileUpload::make('image')
+                        ->label('Logo')
                         ->disk('public')
                         ->directory('company')
                         ->image()
@@ -74,15 +78,20 @@ class CompanyResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label("Nama Perusahaan")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->label('Email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
+                    ->label("Alamat")
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image')
+                    ->label("Logo")
                     ->disk('public')
                     ->square(),
                 Tables\Columns\TextColumn::make('phone_number')
+                    ->label("No. Telp")
                     ->searchable(),
             ])
             ->filters([

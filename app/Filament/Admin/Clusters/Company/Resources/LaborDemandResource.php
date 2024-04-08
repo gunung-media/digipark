@@ -200,6 +200,7 @@ class LaborDemandResource extends Resource
                     ->label('Nama')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('request_deadline')
+                    ->label('Batas Waktu Permintaan')
                     ->date(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()

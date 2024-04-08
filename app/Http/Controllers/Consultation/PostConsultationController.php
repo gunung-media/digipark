@@ -37,7 +37,7 @@ class PostConsultationController extends Controller
 
         if (Consultation::create($data)) {
             Notification::make()->title('Ada Konsultasi Baru')
-                ->body('There is a new consulation from ' . $request->name)
+                ->body('Ada Konsultasi baru oleh ' . $request->name)
                 ->info()
                 ->actions([
                     Action::make('View')->url(ConsultationResource::getUrl('index', ['tableSearch' => $request->name]))

@@ -30,16 +30,20 @@ class SubMenusRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('title')
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Judul'),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('author')
+                    ->label('Pengarang')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image')
+                    ->label('Gambar')
                     ->defaultImageUrl(url('/portal/images/news/close-up-volunteer-oganizing-stuff-donation.jpg'))
                     ->disk('public')
                     ->square(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label('Aktif di Web')
                     ->boolean(),
             ])
             ->filters([
@@ -51,12 +55,14 @@ class SubMenusRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\Action::make('active')
+                    ->label('Aktifkan')
                     ->action(function (SubMenu $record) {
                         $record->is_active = true;
                         $record->save();
                     })
                     ->hidden(fn (SubMenu $record): bool => $record->is_active),
                 Tables\Actions\Action::make('inactive')
+                    ->label('Non Aktifkan')
                     ->action(function (SubMenu $record) {
                         $record->is_active = false;
                         $record->save();

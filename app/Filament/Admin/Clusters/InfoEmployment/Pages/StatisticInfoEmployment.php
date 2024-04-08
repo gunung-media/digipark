@@ -30,6 +30,7 @@ class StatisticInfoEmployment extends Page
                 Section::make()
                     ->schema([
                         TextInput::make('month')
+                            ->label("Bulan")
                             ->type('month'),
                     ])
                     ->columnSpanFull(),

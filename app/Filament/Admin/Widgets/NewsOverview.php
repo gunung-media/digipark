@@ -12,9 +12,9 @@ class NewsOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('News Active', News::active()->count()),
-            Stat::make('News Non Active', News::where('status', 0)->count()),
-            Stat::make('News Category', NewsCategory::count()),
+            Stat::make('Berita Aktif', News::active()->count()),
+            Stat::make('Berita Tidak Aktif', News::where('status', 0)->count()),
+            Stat::make('Kategori', NewsCategory::count()),
         ];
     }
 }

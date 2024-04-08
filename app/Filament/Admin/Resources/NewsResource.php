@@ -19,6 +19,8 @@ class NewsResource extends Resource
     protected static ?string $model = News::class;
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
+    protected static ?string $label = "Berita";
+    protected static ?string $pluralModelLabel = "Berita";
 
     public static function form(Form $form): Form
     {
@@ -27,6 +29,7 @@ class NewsResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\FileUpload::make('image')
+                            ->label('Gambar')
                             ->disk('public')
                             ->directory('news')
                             ->image()
@@ -36,10 +39,14 @@ class NewsResource extends Resource
                 Forms\Components\Split::make([
                     Forms\Components\Section::make()->schema([
                         Forms\Components\TextInput::make('title')
+                            ->label('Judul')
                             ->unique(ignoreRecord: true)
                             ->required(),
-                        Forms\Components\TextInput::make('author')->default('Admin'),
+                        Forms\Components\TextInput::make('author')
+                            ->label('Pembuat Berita')
+                            ->default('Admin'),
                         TinyEditor::make('body')
+                            ->label('Isi Berita')
                             ->columnSpan(2)
                             ->fileAttachmentsDisk('public')
                             ->fileAttachmentsVisibility('private')
@@ -49,6 +56,7 @@ class NewsResource extends Resource
                     ]),
                     Forms\Components\Section::make()->schema([
                         Forms\Components\Select::make('category_id')
+                            ->label('Kategori')
                             ->relationship('category', 'name')
                             ->searchable()
                             ->preload()
@@ -59,6 +67,7 @@ class NewsResource extends Resource
                             ])
                             ->required(),
                         Forms\Components\Select::make('tags')
+                            ->label('Tag')
                             ->relationship('tags', 'name')
                             ->searchable()
                             ->preload()
@@ -81,30 +90,39 @@ class NewsResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Judul')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
+                    ->label('Kategori')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('author')
+                    ->label('Pembuat Berita')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image')
+                    ->label('Gambar')
                     ->disk('public')
                     ->square(),
                 Tables\Columns\IconColumn::make('status')
+                    ->label('Aktif di Web')
                     ->boolean(),
             ])
             ->filters([
-                SelectFilter::make('category')->relationship('category', 'name'),
+                SelectFilter::make('category')
+                    ->label('Kategori')
+                    ->relationship('category', 'name'),
             ])
             ->actions([
                 Tables\Actions\Action::make('active')
+                    ->label('Aktifkan')
                     ->action(function (News $record) {
                         $record->status = true;
                         $record->save();
                     })
                     ->hidden(fn (News $record): bool => $record->status),
                 Tables\Actions\Action::make('inactive')
+                    ->label('Non Aktifkan')
                     ->action(function (News $record) {
                         $record->status = false;
                         $record->save();

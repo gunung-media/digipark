@@ -38,7 +38,7 @@ class PlacementResource extends Resource
             ->schema([
                 Split::make([
                     Tabs::make()->tabs([
-                        Tab::make('Main Data')->schema([
+                        Tab::make('Data Utama')->schema([
                             Forms\Components\TextInput::make('name')
                                 ->required()
                                 ->label('Nama Tenaga Kerja')

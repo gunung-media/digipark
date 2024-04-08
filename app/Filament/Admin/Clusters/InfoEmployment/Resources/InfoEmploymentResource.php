@@ -34,6 +34,7 @@ class InfoEmploymentResource extends Resource
             ->schema([
                 Section::make()->schema([
                     Select::make('district')
+                        ->label('Kecamatan')
                         ->options(District::query()
                             ->where('city_code', 6271)
                             ->pluck('name', 'code'))
@@ -41,6 +42,7 @@ class InfoEmploymentResource extends Resource
                         ->dehydrated(false)
                         ->live(),
                     Select::make('village_code')
+                        ->label('Kelurahan/Desa')
                         ->options(fn (Get $get): Collection => Village::query()
                             ->where('district_code', $get('district'))
                             ->pluck('name', 'code'))
@@ -63,8 +65,11 @@ class InfoEmploymentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('village.name')
+                Tables\Columns\TextColumn::make('village.district.name')
                     ->label('Kecamatan')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('village.name')
+                    ->label('Kelurahan/Desa')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date_in')
                     ->label('Tanggal Perolehan Data')
@@ -72,6 +77,7 @@ class InfoEmploymentResource extends Resource
                     ->badge()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('count')
+                    ->label('Jumlah Pengangguran')
                     ->sortable()
                     ->searchable(),
             ])
@@ -85,6 +91,12 @@ class InfoEmploymentResource extends Resource
                 ]),
             ])
             ->groups([
+                Tables\Grouping\Group::make('village.district.name')
+                    ->label('Kecamatan')
+                    ->collapsible(),
+                Tables\Grouping\Group::make('village.name')
+                    ->label('Kelurahan')
+                    ->collapsible(),
                 Tables\Grouping\Group::make('date_in')
                     ->label('Tanggal Perolehan Data')
                     ->date()
