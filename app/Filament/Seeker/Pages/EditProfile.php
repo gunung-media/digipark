@@ -45,76 +45,82 @@ class EditProfile extends Page
     {
         return $form
             ->schema([
-                Tabs::make()
-                    ->tabs([
-                        Tab::make('Profile Information')
-                            ->schema([
-                                TextInput::make('email')
-                                    ->label('Email')
-                                    ->readOnly()
-                                    ->columnSpanFull(),
-                                TextInput::make('full_name')
-                                    ->label('Nama Lengkap')
-                                    ->required(),
-                                TextInput::make('additional.identity_number')
-                                    ->label('NIK')
-                                    ->required(),
-                                TextInput::make('phone_number')
-                                    ->label('No. Telpon')
-                                    ->required(),
-                                Select::make('gender')
-                                    ->label('Jenis Kelamin')
-                                    ->options([
-                                        'male' => 'Male',
-                                        'female' => 'Female',
+                Section::make('Update Profile')
+                    ->aside()
+                    ->description('Pastikan semua data yang dimasukkan benar')
+                    ->compact()
+                    ->schema([
+                        Tabs::make()
+                            ->tabs([
+                                Tab::make('Data Pribadi')
+                                    ->schema([
+                                        TextInput::make('email')
+                                            ->label('Email')
+                                            ->readOnly()
+                                            ->columnSpanFull(),
+                                        TextInput::make('full_name')
+                                            ->label('Nama Lengkap')
+                                            ->required(),
+                                        TextInput::make('additional.identity_number')
+                                            ->label('NIK')
+                                            ->required(),
+                                        TextInput::make('phone_number')
+                                            ->label('No. Telpon')
+                                            ->required(),
+                                        Select::make('gender')
+                                            ->label('Jenis Kelamin')
+                                            ->options([
+                                                'male' => 'Male',
+                                                'female' => 'Female',
+                                            ])
+                                            ->required(),
+                                        TextInput::make('additional.birth_place')
+                                            ->label('Tempat Lahir')
+                                            ->required(),
+                                        DatePicker::make('date_of_birth')
+                                            ->label('Tanggal Lahir')
+                                            ->required(),
+                                        TextInput::make('address')
+                                            ->label('Alamat')
+                                            ->required(),
+                                        TextInput::make('additional.postal_code')
+                                            ->label('Kode Pos')
+                                            ->required(),
+                                        TextInput::make('additional.rt')
+                                            ->label('RT')
+                                            ->required(),
+                                        TextInput::make('additional.rw')
+                                            ->label('RW')
+                                            ->required(),
                                     ])
-                                    ->required(),
-                                TextInput::make('additional.birth_place')
-                                    ->label('Tempat Lahir')
-                                    ->required(),
-                                DatePicker::make('date_of_birth')
-                                    ->label('Tanggal Lahir')
-                                    ->required(),
-                                TextInput::make('address')
-                                    ->label('Alamat')
-                                    ->required(),
-                                TextInput::make('additional.postal_code')
-                                    ->label('Kode Pos')
-                                    ->required(),
-                                TextInput::make('additional.rt')
-                                    ->label('RT')
-                                    ->required(),
-                                TextInput::make('additional.rw')
-                                    ->label('RW')
-                                    ->required(),
+                                    ->columns(2),
+                                Tab::make('Dokumen Tambahan')
+                                    ->schema([
+                                        FileUpload::make('additional.doc_ktp')
+                                            ->label('KTP')
+                                            ->disk('public')
+                                            ->directory('seeker/additional')
+                                            ->downloadable()
+                                            ->columnSpanFull(),
+                                        FileUpload::make('additional.doc_bpjs_card')
+                                            ->label('Kartu BPJS')
+                                            ->disk('public')
+                                            ->directory('seeker/additional')
+                                            ->downloadable()
+                                            ->columnSpanFull(),
+                                        FileUpload::make('additional.doc_cv')
+                                            ->label('Surat Pengalaman Kerja / CV / Resume')
+                                            ->disk('public')
+                                            ->directory('seeker/additional')
+                                            ->downloadable()
+                                            ->columnSpanFull(),
+                                        SignaturePad::make('additional.signature')
+                                            ->label('Tanda Tangan')
+                                            ->columnSpanFull()
+                                            ->downloadable(),
+                                    ])
+                                    ->columns(2),
                             ])
-                            ->columns(2),
-                        Tab::make('Additional Data')
-                            ->schema([
-                                FileUpload::make('additional.doc_ktp')
-                                    ->label('KTP')
-                                    ->disk('public')
-                                    ->directory('seeker/additional')
-                                    ->downloadable()
-                                    ->columnSpanFull(),
-                                FileUpload::make('additional.doc_bpjs_card')
-                                    ->label('BPJS Card')
-                                    ->disk('public')
-                                    ->directory('seeker/additional')
-                                    ->downloadable()
-                                    ->columnSpanFull(),
-                                FileUpload::make('additional.doc_cv')
-                                    ->label('Surat Pengalaman Kerja / CV / Resume')
-                                    ->disk('public')
-                                    ->directory('seeker/additional')
-                                    ->downloadable()
-                                    ->columnSpanFull(),
-                                SignaturePad::make('additional.signature')
-                                    ->label('Tanda Tangan')
-                                    ->columnSpanFull()
-                                    ->downloadable(),
-                            ])
-                            ->columns(2),
                     ])
             ])
             ->model(FilamentUtil::getUser())
@@ -127,13 +133,15 @@ class EditProfile extends Page
             ->schema([
                 Section::make('Update Password')
                     ->aside()
-                    ->description('Ensure your account is using long, random password to stay secure.')
+                    ->description('Pastikan password yang dimasukkan benar dan sesuai dengan konfirmasi password yang dimasukkan')
                     ->schema([
                         TextInput::make('Current password')
+                            ->label('Password Saat Ini')
                             ->password()
                             ->required()
                             ->currentPassword(),
                         TextInput::make('password')
+                            ->label('Password Baru')
                             ->password()
                             ->required()
                             ->rule(Password::default())
@@ -142,6 +150,7 @@ class EditProfile extends Page
                             ->live(debounce: 500)
                             ->same('passwordConfirmation'),
                         TextInput::make('passwordConfirmation')
+                            ->label('Konfirmasi Password Baru')
                             ->password()
                             ->required()
                             ->dehydrated(false),

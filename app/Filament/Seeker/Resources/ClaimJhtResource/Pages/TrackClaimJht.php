@@ -4,10 +4,9 @@ namespace App\Filament\Seeker\Resources\ClaimJhtResource\Pages;
 
 use App\Filament\Seeker\Resources\ClaimJhtResource;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -20,15 +19,16 @@ class TrackClaimJht extends ManageRelatedRecords
 
     public static function getNavigationLabel(): string
     {
-        return 'Tracks';
+        return 'Lacak';
     }
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('message')
-                    ->label("Pesan"),
+                Textarea::make('message')
+                    ->label("Pesan")
+                    ->columnSpanFull(),
                 FileUpload::make('file')
                     ->label('Dokumen Pendukung')
                     ->disk('public')
@@ -43,9 +43,13 @@ class TrackClaimJht extends ManageRelatedRecords
         return $table
             ->recordTitleAttribute('message')
             ->columns([
-                Tables\Columns\TextColumn::make('index')->rowIndex()->sortable(),
-                Tables\Columns\TextColumn::make('message')->searchable(),
-                Tables\Columns\TextColumn::make('created_at')->date(),
+                Tables\Columns\TextColumn::make('No.')->rowIndex(),
+                Tables\Columns\TextColumn::make('message')
+                    ->label('Pesan')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Dibuat pada')
+                    ->date(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {

@@ -15,27 +15,30 @@ class Register extends BaseRegisterProfile
         return $form
             ->schema([
                 TextInput::make('full_name')
-                    ->label('Full Name')
+                    ->label('Nama Lengkap')
                     ->required()
                     ->maxLength(255),
                 $this->getEmailFormComponent(),
                 $this->getPasswordFormComponent(),
                 $this->getPasswordConfirmationFormComponent(),
                 TextInput::make('phone_number')
-                    ->label('Phone Number')
+                    ->label('Nomor Telepon')
                     ->tel()
                     ->required()
                     ->maxLength(255),
                 TextInput::make('address')
+                    ->label('Alamat')
                     ->required()
                     ->maxLength(255),
                 Select::make('gender')
                     ->options([
-                        'male' => 'Male',
-                        'female' => 'Female',
+                        'male' => 'Laki-laki',
+                        'female' => 'Perempuan',
                     ])
                     ->required(),
-                DatePicker::make('date_of_birth')->required()
+                DatePicker::make('date_of_birth')
+                    ->label('Tangal Lahir')
+                    ->required()
             ]);
     }
 }

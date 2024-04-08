@@ -65,8 +65,16 @@ class ClaimJhtResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('type')
+                    ->label('Jenis Klaim')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pengunduran_diri' => 'gray',
+                        'pemutusan_hubungan_kerja' => 'danger',
+                    })
                     ->formatStateUsing(fn (string $state): string => __($state === 'pengunduran_diri' ? 'Pengunduran Diri' : 'Pemutusan Hubungan Kerja')),
-                TextColumn::make('created_at')->date(),
+                TextColumn::make('created_at')
+                    ->label('Dibuat pada')
+                    ->date(),
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
