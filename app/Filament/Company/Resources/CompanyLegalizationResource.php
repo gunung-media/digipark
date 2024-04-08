@@ -7,6 +7,7 @@ use App\Models\Company\CompanyLegalization;
 use App\Utils\FilamentUtil;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Tabs;
@@ -154,6 +155,7 @@ class CompanyLegalizationResource extends Resource
                         ->directory('company/legalization')
                         ->downloadable()
                         ->columnSpanFull(),
+                    Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
                 ])
             ]);
     }
