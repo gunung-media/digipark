@@ -59,7 +59,7 @@
 
                     <div class="col-lg-6 col-12">
                         <div class="custom-block-body">
-                            <h4 class="text-white mt-lg-3 mb-lg-3">Contact Information</h4>
+                            <h4 class="text-white mt-lg-3 mb-lg-3">Kontak Informasi</h4>
 
                             <div class="container">
                                 @if (!is_null($dashboard?->phone_number))

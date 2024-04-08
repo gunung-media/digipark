@@ -6,7 +6,7 @@
                </div>
 
                <div class="col-lg-4 col-md-6 col-12 mb-4">
-                   <h5 class="site-footer-title mb-3">Quick Links</h5>
+                   <h5 class="site-footer-title mb-3">Akses Cepat</h5>
 
                    <ul class="footer-menu">
                        <li class="footer-menu-item"><a href="/website#unit-layanan" class="footer-menu-link">Visi</a>
@@ -26,7 +26,7 @@
                </div>
 
                <div class="col-lg-4 col-md-6 col-12 mx-auto">
-                   <h5 class="site-footer-title mb-3">Contact Infomation</h5>
+                   <h5 class="site-footer-title mb-3">Kontak Informasi</h5>
 
                    @if (!is_null($dashboard?->phone_number))
                        <p class="text-white d-flex mb-2">

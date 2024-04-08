@@ -42,8 +42,8 @@
 
                                     <div class="news-block-author mx-5">
                                         <p>
-                                            <i class="bi-person custom-icon me-1"></i>
-                                            {{ $data->type }}
+                                            <i class="bi-hash custom-icon me-1"></i>
+                                            {{ $data->type == 'train' ? 'Pelatihan' : 'Magang' }}
                                         </p>
                                     </div>
 

@@ -58,14 +58,14 @@
                                         <div class="news-block-author mx-5">
                                             <p>
                                                 <i class="bi-person custom-icon me-1"></i>
-                                                By {{ $new->author }}
+                                                Oleh {{ $new->author }}
                                             </p>
                                         </div>
 
                                         <div class="news-block-comment">
                                             <p>
                                                 <i class="bi-chat-left custom-icon me-1"></i>
-                                                {{ $new->comments->count() }} Comments
+                                                {{ $new->comments->count() }} Komentar
                                             </p>
                                         </div>
                                     </div>
@@ -77,15 +77,14 @@
                                 </div>
                             </div>
                         @empty
-                            <h5>No Data Available </h5>
+                            <h5>Tidak Ada Berita</h5>
                         @endforelse
                     </div>
 
                     <div class="col-lg-4 col-12 mx-auto mt-4 mt-lg-0">
                         <form class="custom-form search-form" action="{{ route('portal.news.index') }}" method="get"
                             role="form">
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-                                name="q">
+                            <input class="form-control" type="search" placeholder="Cari" aria-label="Cari" name="q">
 
                             <button type="submit" class="form-control">
                                 <i class="bi-search"></i>
@@ -93,7 +92,7 @@
                         </form>
 
                         <div class="category-block d-flex flex-column">
-                            <h5 class="mb-3">Categories</h5>
+                            <h5 class="mb-3">Kategori</h5>
 
                             @forelse ($categories as $category)
                                 <a href="{{ route('portal.news.index', ['category' => $category->name]) }}"
@@ -102,7 +101,7 @@
                                     <span class="badge">{{ $category->news->count() }}</span>
                                 </a>
                             @empty
-                                <p>No Data Available </p>
+                                <p>Tidak Ada Berita</p>
                             @endforelse
                         </div>
                     </div>

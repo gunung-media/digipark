@@ -79,9 +79,9 @@
 
                     <div class="col-lg-6 col-12">
                         <div class="custom-text-box">
-                            <h2 class="mb-2">Our Story</h2>
+                            <h2 class="mb-2">Tentang Kami</h2>
 
-                            <h5 class="mb-3">Digital Palangka Raya Kreatif Ketenagakerjaan</h5>
+                            <h5 class="mb-3">Digital Ketenagakerjaan Palangka Raya</h5>
 
                             <p class="mb-0">{!! $dashboard?->short_description ?? '' !!}</p>
                         </div>
@@ -89,7 +89,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="custom-text-box mb-lg-0">
-                                    <h5 class="mb-3">Our Mission</h5>
+                                    <h5 class="mb-3">Misi Kami</h5>
 
                                     <p>{!! $dashboard->mission ?? '' !!}</p>
                                 </div>
@@ -221,7 +221,7 @@
                     <div class="row">
 
                         <div class="col-lg-8 col-12 mx-auto">
-                            <h2 class="mb-lg-3">Happy customers</h2>
+                            <h2 class="mb-lg-3">Apa yang mereka sampaikan</h2>
 
                             <div id="testimonial-carousel" class="carousel carousel-fade slide" data-bs-ride="carousel">
 
@@ -264,7 +264,7 @@
                 <div class="row">
 
                     <div class="col-lg-12 col-12 mb-5">
-                        <h2>Latest News</h2>
+                        <h2>Berita Terbaru</h2>
                     </div>
 
                     <div class="col-lg-7 col-12">
@@ -295,14 +295,14 @@
                                         <div class="news-block-author mx-5">
                                             <p>
                                                 <i class="bi-person custom-icon me-1"></i>
-                                                By {{ $new->author }}
+                                                Oleh {{ $new->author }}
                                             </p>
                                         </div>
 
                                         <div class="news-block-comment">
                                             <p>
                                                 <i class="bi-chat-left custom-icon me-1"></i>
-                                                {{ $new->comments->count() }} Comments
+                                                {{ $new->comments->count() }} Komentar
                                             </p>
                                         </div>
                                     </div>
@@ -315,14 +315,14 @@
                                 </div>
                             </div>
                         @empty
-                            <h5>No Data Available</h5>
+                            <h5>Tidak Ada Berita</h5>
                         @endforelse
                     </div>
 
                     <div class="col-lg-4 col-12 mx-auto">
                         <form class="custom-form search-form" action="{{ route('portal.news.index') }}" method="get"
                             role="form">
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+                            <input class="form-control" type="search" placeholder="Cari" aria-label="Cari"
                                 name="q">
 
                             <button type="submit" class="form-control">
@@ -331,7 +331,7 @@
                         </form>
 
 
-                        <h5 class="mt-5 mb-3">Recent news</h5>
+                        <h5 class="mt-5 mb-3">Berita Lainnya</h5>
 
                         @forelse ($news->slice(2, 4) as $new)
                             <div class="news-block news-block-two-col d-flex mt-4">
@@ -358,10 +358,10 @@
                                 </div>
                             </div>
                         @empty
-                            <p>No Data Available</p>
+                            <p>Tidak Ada Berita</p>
                         @endforelse
                         <div class="category-block d-flex flex-column">
-                            <h5 class="mb-3">Categories</h5>
+                            <h5 class="mb-3">Kategori</h5>
 
                             @foreach ($categories as $category)
                                 <a href="{{ route('portal.news.index', ['category' => $category->name]) }}"

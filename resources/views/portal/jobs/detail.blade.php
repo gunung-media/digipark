@@ -37,8 +37,8 @@
 
                                     <div class="news-block-author mx-5">
                                         <p>
-                                            <i class="bi-person custom-icon me-1"></i>
-                                            By {{ $job->company->name }}
+                                            <i class="bi-building custom-icon me-1"></i>
+                                            {{ $job->company->name }}
                                         </p>
                                     </div>
                                 </div>
@@ -51,24 +51,24 @@
                         </div>
                     </div>
                     <div class="col-lg-5 col-12">
-                        <table class="mt-5">
+                        <table class="mt-5" style="border-spacing: 0 10px; border-collapse: separate;   ">
                             @php
                                 $additional = [
-                                    'address' => 'Address',
-                                    'total_needed_man' => 'Total Needed Man',
-                                    'total_needed_woman' => 'Total Needed Woman',
-                                    'minimal_education' => 'Minimal Education',
-                                    'special' => 'Special',
-                                    'salary' => 'Salary',
-                                    'deadline_format' => 'Deadline',
-                                    'start_date_format' => 'Start Date',
+                                    'address' => 'Alamat',
+                                    'total_needed_man' => 'Total Pria dibutuhkan',
+                                    'total_needed_woman' => 'Total Wanita dibutuhkan',
+                                    'minimal_education' => 'Pendidikan Minimal',
+                                    'special' => 'Spesialisasi',
+                                    'salary' => 'Gaji',
+                                    'deadline_format' => 'Tgl Deadline Penerimaan Kerja',
+                                    'start_date_format' => 'Tgl Mulai Bekerja',
                                 ];
                             @endphp
                             @foreach ($additional as $field => $val)
                                 @if (!is_null($job->$field))
                                     <tr>
                                         <th>{{ $val }}</th>
-                                        <td>:</td>
+                                        <td style="padding: 0 1rem">:</td>
                                         <td>{{ $job->$field }}</td>
                                     </tr>
                                 @endif
@@ -77,7 +77,7 @@
                         <form action="{{ route('portal.jobs.apply') }}" method="post">
                             @csrf
                             <input type="hidden" name="job_id" value="{{ $job->id }}">
-                            <input type="submit" value="Apply" class="custom-btn btn-primary"
+                            <input type="submit" value="Daftar" class="custom-btn btn-primary"
                                 style="margin-top:2rem; width:55%" />
                         </form>
                     </div>

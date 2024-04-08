@@ -100,23 +100,24 @@
                                         </div>
                                     </div>
                                 @empty
-                                    <p>No Comments</p>
+                                    <div class="mt-5">
+                                        <p>Tidak Ada Komentar</p>
+                                    </div>
                                 @endforelse
                                 <div class="mb-5"></div>
 
                                 <form class="custom-form comment-form mt-4" action="{{ route('portal.news.comment') }}"
                                     method="post" role="form">
                                     @csrf
-                                    <h6 class="mb-3">Write a comment</h6>
-                                    <input type="text" name="name" class="form-control mb-3" placeholder="Your name"
+                                    <h6 class="mb-3">Tulis Komentar</h6>
+                                    <input type="text" name="name" class="form-control mb-3" placeholder="Nama Anda"
                                         required />
 
-                                    <textarea name="comment" rows="4" class="form-control" id="comment-message" placeholder="Your comment here"
-                                        required></textarea>
+                                    <textarea name="comment" rows="4" class="form-control" id="comment-message" placeholder="Komentar Anda" required></textarea>
                                     <input type="hidden" name="news_id" value="{{ $berita->id }}">
 
                                     <div class="col-lg-3 col-md-4 col-6 ms-auto">
-                                        <button type="submit" class="form-control">Comment</button>
+                                        <button type="submit" class="form-control">Kirim</button>
                                     </div>
                                 </form>
                             </div>
@@ -126,8 +127,7 @@
                     <div class="col-lg-4 col-12 mx-auto">
                         <form class="custom-form search-form" action="{{ route('portal.news.index') }}" method="get"
                             role="form">
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-                                name="q">
+                            <input class="form-control" type="search" placeholder="Cari" aria-label="Cari" name="q">
 
                             <button type="submit" class="form-control">
                                 <i class="bi-search"></i>
@@ -135,7 +135,7 @@
                         </form>
 
 
-                        <h5 class="mt-5 mb-3">Recent news</h5>
+                        <h5 class="mt-5 mb-3">Berita Lainnya</h5>
 
                         @if (count($news->slice(2, 4)))
                             @foreach ($news->slice(2, 4) as $new)
@@ -169,7 +169,7 @@
 
 
                         <div class="category-block d-flex flex-column">
-                            <h5 class="mb-3">Categories</h5>
+                            <h5 class="mb-3">Kategori</h5>
 
                             @foreach ($categories as $category)
                                 <a href="{{ route('portal.news.index', ['category' => $category->name]) }}"
@@ -185,69 +185,67 @@
             </div>
         </section>
 
-        <section class="news-section section-padding section-bg">
-            <div class="container">
-                <div class="row">
 
-                    <div class="col-lg-12 col-12 mb-4">
-                        <h2>Related news</h2>
-                    </div>
+        @if (count($relatedBerita))
+            <section class="news-section section-padding section-bg">
+                <div class="container">
+                    <div class="row">
 
-                    @forelse ($relatedBerita as $rb)
-                        <div class="col-lg-6 col-12">
-                            <div class="news-block">
-                                <div class="news-block-top">
-                                    <a href="{{ route('portal.news.detail', ['slug' => $rb->slug]) }}">
-                                        <img src="{{ asset('storage/' . $rb->image) }}"
-                                            class="news-image small img-fluid" alt="">
-                                    </a>
+                        <div class="col-lg-12 col-12 mb-4">
+                            <h2>Berita Terkait</h2>
+                        </div>
 
-                                    <div class="news-category-block">
-                                        <a href="#" class="category-block-link">
-                                            {{ $rb->category->name }}
+                        @foreach ($relatedBerita as $rb)
+                            <div class="col-lg-6 col-12">
+                                <div class="news-block">
+                                    <div class="news-block-top">
+                                        <a href="{{ route('portal.news.detail', ['slug' => $rb->slug]) }}">
+                                            <img src="{{ asset('storage/' . $rb->image) }}"
+                                                class="news-image small img-fluid" alt="">
                                         </a>
-                                    </div>
-                                </div>
 
-                                <div class="news-block-info">
-                                    <div class="d-flex mt-2">
-                                        <div class="news-block-date">
-                                            <p>
-                                                <i class="bi-calendar4 custom-icon me-1"></i>
-                                                {{ $rb->created_at_format }}
-                                            </p>
-                                        </div>
-
-                                        <div class="news-block-author mx-5">
-                                            <p>
-                                                <i class="bi-person custom-icon me-1"></i>
-                                                By {{ $rb->author }}
-                                            </p>
-                                        </div>
-
-                                        <div class="news-block-comment">
-                                            <p>
-                                                <i class="bi-chat-left custom-icon me-1"></i>
-                                                {{ $rb->comments->count() }} Comments
-                                            </p>
+                                        <div class="news-category-block">
+                                            <a href="#" class="category-block-link">
+                                                {{ $rb->category->name }}
+                                            </a>
                                         </div>
                                     </div>
 
-                                    <div class="news-block-title mb-2">
-                                        <h4><a href="{{ route('portal.news.detail', ['slug' => $rb->slug]) }} "
-                                                class="news-block-title-link">{{ $rb->title }} </a></h4>
+                                    <div class="news-block-info">
+                                        <div class="d-flex mt-2">
+                                            <div class="news-block-date">
+                                                <p>
+                                                    <i class="bi-calendar4 custom-icon me-1"></i>
+                                                    {{ $rb->created_at_format }}
+                                                </p>
+                                            </div>
+
+                                            <div class="news-block-author mx-5">
+                                                <p>
+                                                    <i class="bi-person custom-icon me-1"></i>
+                                                    Oleh {{ $rb->author }}
+                                                </p>
+                                            </div>
+
+                                            <div class="news-block-comment">
+                                                <p>
+                                                    <i class="bi-chat-left custom-icon me-1"></i>
+                                                    {{ $rb->comments->count() }} Komentar
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="news-block-title mb-2">
+                                            <h4><a href="{{ route('portal.news.detail', ['slug' => $rb->slug]) }} "
+                                                    class="news-block-title-link">{{ $rb->title }} </a></h4>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @empty
-                        <h5>No Data Available</h5>
-                    @endforelse
-
-
-
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
     </main>
 @endsection
