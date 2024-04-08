@@ -47,7 +47,7 @@ class EditProfile extends Page
             ->schema([
                 Section::make('Update Profile')
                     ->aside()
-                    ->description('Pastikan semua data yang dimasukkan benar')
+                    ->description('Pastikan semua data yang dimasukkan benar.')
                     ->compact()
                     ->schema([
                         Tabs::make()
@@ -133,7 +133,7 @@ class EditProfile extends Page
             ->schema([
                 Section::make('Update Password')
                     ->aside()
-                    ->description('Pastikan password yang dimasukkan benar dan sesuai dengan konfirmasi password yang dimasukkan')
+                    ->description('Pastikan password yang dimasukkan benar dan sesuai dengan konfirmasi password yang dimasukkan.')
                     ->schema([
                         TextInput::make('Current password')
                             ->label('Password Saat Ini')

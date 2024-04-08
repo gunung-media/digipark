@@ -34,14 +34,19 @@ class CompanyLaidOffResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('Main Data')->description('Perusahaan')->schema([
-                    Forms\Components\Placeholder::make('company.name')->content(function () {
-                        return FilamentUtil::getUser()->name;
-                    }),
-                    Forms\Components\Placeholder::make('company.address')->content(function () {
-                        return FilamentUtil::getUser()->address;
-                    })
-                ])->disabled(),
+                Section::make('Main Data')
+                    ->description('Perusahaan')->schema([
+                        Forms\Components\Placeholder::make('company.name')
+                            ->label('Nama Perusahaan')
+                            ->content(function () {
+                                return FilamentUtil::getUser()->name;
+                            }),
+                        Forms\Components\Placeholder::make('company.address')
+                            ->label('Alamat Perusahaar')
+                            ->content(function () {
+                                return FilamentUtil::getUser()->address;
+                            })
+                    ])->disabled(),
                 Section::make('Penanggung Jawab')->schema([
                     Forms\Components\TextInput::make('responsible_name')
                         ->label('Nama')

@@ -31,7 +31,7 @@ class Applicant extends ManageRelatedRecords
 
         $recordTitle = $recordTitle instanceof Htmlable ? $recordTitle->toHtml() : $recordTitle;
 
-        return "Manage {$recordTitle} Comments";
+        return "List Pendaftar";
     }
 
     public function getBreadcrumb(): string
@@ -61,21 +61,20 @@ class Applicant extends ManageRelatedRecords
             ->columns([
                 Tables\Columns\TextColumn::make('index')
                     ->label('No.')
-                    ->sortable()
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('seeker.full_name')->searchable(),
+                Tables\Columns\TextColumn::make('seeker.full_name')->label('Pendaftar')->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Applied At')
+                    ->label('Mendaftar Pada')
                     ->sortable()
                     ->date(),
             ])
             ->filters([
-                DateRangeFilter::make('created_at'),
+                DateRangeFilter::make('created_at')->label('Mendaftar Pada'),
             ])
             ->headerActions([])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Action::make('accept')
+                Action::make('Terima')
                     ->form(function ($record) {
                         return [
                             // TextInput::make('full_name')

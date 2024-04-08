@@ -10,7 +10,7 @@ use Flowframe\Trend\TrendValue;
 
 class JobApply extends ChartWidget
 {
-    protected static ?string $heading = 'Jumlah Pengapply';
+    protected static ?string $heading = 'Jumlah Pendaftar';
 
     protected int | string | array $columnSpan = 2;
 
@@ -29,7 +29,7 @@ class JobApply extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Jumlah Pengapply',
+                    'label' => 'Pendaftar',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
                 ],
             ],

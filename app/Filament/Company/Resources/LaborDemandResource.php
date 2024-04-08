@@ -115,6 +115,7 @@ class LaborDemandResource extends Resource
                                 ->required(),
                             Forms\Components\Select::make('social_guarantee')
                                 ->label('Jaminan Sosial Lainnya')
+                                ->columnSpanFull()
                                 ->required()
                                 ->multiple()
                                 ->searchable()
@@ -161,9 +162,10 @@ class LaborDemandResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name_job')
-                    ->label('Nama')
+                    ->label('Nama Pekerjaan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('request_deadline')
+                    ->label('Batas Waktu Permintaan')
                     ->date(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()

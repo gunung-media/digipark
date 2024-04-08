@@ -51,8 +51,8 @@ class EditProfile extends Page implements HasForms
     {
         return $form
             ->schema([
-                Section::make('Profile Information')
-                    ->description('Update your account information.')
+                Section::make('Update Profile')
+                    ->description('Pastikan semua data yang dimasukkan benar.')
                     ->aside()
                     ->schema([
                         TextInput::make('name')
@@ -109,13 +109,15 @@ class EditProfile extends Page implements HasForms
             ->schema([
                 Section::make('Update Password')
                     ->aside()
-                    ->description('Ensure your account is using long, random password to stay secure.')
+                    ->description('Pastikan password yang dimasukkan benar dan sesuai dengan konfirmasi password yang dimasukkan.')
                     ->schema([
                         TextInput::make('Current password')
+                            ->label('Password Saat Ini')
                             ->password()
                             ->required()
                             ->currentPassword(),
                         TextInput::make('password')
+                            ->label('Password Baru')
                             ->password()
                             ->required()
                             ->rule(Password::default())
@@ -124,6 +126,7 @@ class EditProfile extends Page implements HasForms
                             ->live(debounce: 500)
                             ->same('passwordConfirmation'),
                         TextInput::make('passwordConfirmation')
+                            ->label('Konfirmasi Password Baru')
                             ->password()
                             ->required()
                             ->dehydrated(false),

@@ -117,7 +117,7 @@ class CompanyLegalizationResource extends Resource
                             ->required(),
                     ])->columns(2),
                 ])->columnSpanFull(),
-                Section::make('Dokument')->schema([
+                Section::make('Dokumen')->schema([
                     FileUpload::make('doc_pp')
                         ->label('Naskah PP')
                         ->disk('public')
