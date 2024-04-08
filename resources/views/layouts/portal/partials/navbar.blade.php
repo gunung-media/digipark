@@ -14,23 +14,28 @@
 
           <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ms-auto">
-
+                  <li class="nav-item">
+                      <a class="nav-link click-scroll" href="{{ route('landing') }}">Portal Layanan</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link click-scroll" href="{{ route('portal') }}">Beranda</a>
+                  </li>
                   <li class="nav-item dropdown">
                       <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
                           id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                          aria-expanded="false">Home</a>
+                          aria-expanded="false">Profil</a>
 
                       <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                          <li><a class="dropdown-item" href="/website#unit-layanan">Unit Layanan</a></li>
+                          <li><a class="dropdown-item" href="/website#unit-layanan">Visi</a></li>
                           <li><a class="dropdown-item" href="/website#profil">Profil</a></li>
                           <li><a class="dropdown-item" href="/website#pekerjaan">Pekerjaan</a></li>
                           <li><a class="dropdown-item" href="/website#news">Berita</a></li>
                           <li><a class="dropdown-item" href="/website#konsultasi">Konsultasi</a></li>
                       </ul>
                   </li>
-
-                  <li class="nav-item"><a class="nav-link click-scroll"
-                          href="{{ route('portal.news.index') }}">Berita</a></li>
+                  <li class="nav-item">
+                      <a class="nav-link click-scroll" href="{{ route('portal.news.index') }}">Berita</a>
+                  </li>
                   <li class="nav-item"><a class="nav-link click-scroll"
                           href="{{ route('portal.jobs.index') }}">Pekerjaan</a></li>
                   <li class="nav-item dropdown">
