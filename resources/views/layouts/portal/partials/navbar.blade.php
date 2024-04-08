@@ -21,16 +21,14 @@
                       <a class="nav-link click-scroll" href="{{ route('portal') }}">Beranda</a>
                   </li>
                   <li class="nav-item dropdown">
-                      <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
-                          id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                          aria-expanded="false">Profil</a>
+                      <a class="nav-link click-scroll dropdown-toggle" href="#profile" id="navbarLightDropdownMenuLink"
+                          role="button" data-bs-toggle="dropdown" aria-expanded="false">Profil</a>
 
                       <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                           <li><a class="dropdown-item" href="/website#unit-layanan">Visi</a></li>
                           <li><a class="dropdown-item" href="/website#profil">Profil</a></li>
                           <li><a class="dropdown-item" href="/website#pekerjaan">Pekerjaan</a></li>
                           <li><a class="dropdown-item" href="/website#news">Berita</a></li>
-                          <li><a class="dropdown-item" href="/website#konsultasi">Konsultasi</a></li>
                       </ul>
                   </li>
                   <li class="nav-item">
@@ -39,9 +37,8 @@
                   <li class="nav-item"><a class="nav-link click-scroll"
                           href="{{ route('portal.jobs.index') }}">Pekerjaan</a></li>
                   <li class="nav-item dropdown">
-                      <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
-                          id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                          aria-expanded="false">Layanan Masyarakat</a>
+                      <a class="nav-link click-scroll dropdown-toggle" href="#layanan" id="navbarLightDropdownMenuLink"
+                          role="button" data-bs-toggle="dropdown" aria-expanded="false">Layanan Masyarakat</a>
 
                       <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                           <li><a class="dropdown-item" href="{{ route('portal.consultation') }}">Konsultasi</a></li>
@@ -57,10 +54,10 @@
                       </ul>
                   </li>
 
-                  @foreach ($menus as $menu)
+                  @foreach ($menus as $key => $menu)
                       @if ($menu->subMenus->count() > 0)
                           <li class="nav-item dropdown">
-                              <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
+                              <a class="nav-link click-scroll dropdown-toggle" href="{{ $key }}"
                                   id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
                                   aria-expanded="false">{{ $menu->name }}</a>
 
