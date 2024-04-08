@@ -69,8 +69,11 @@ class DashboardResource extends Resource
                         Forms\Components\TextInput::make('default_text')
                             ->label('Default Text WA')
                             ->default('Halo admin digipark'),
-                    ])->grow(false)
-                ])->columnSpanFull(),
+                    ])
+                        ->grow(false)
+                ])
+                    ->from('md')
+                    ->columnSpanFull(),
             ]);
     }
 

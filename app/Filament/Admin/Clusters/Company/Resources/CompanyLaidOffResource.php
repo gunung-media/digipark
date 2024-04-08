@@ -73,7 +73,9 @@ class CompanyLaidOffResource extends Resource
                                 ->required()
                         ])->compact()
                         ->grow(false),
-                ])->columnSpanFull(),
+                ])
+                    ->from('md')
+                    ->columnSpanFull(),
                 Tabs::make()->tabs([
                     Tab::make('Penanggung Jawab')->schema([
                         Forms\Components\TextInput::make('responsible_name')
@@ -132,7 +134,9 @@ class CompanyLaidOffResource extends Resource
                             ->downloadable()
                             ->columnSpanFull(),
                     ])->columns(2)
-                ])->disabled()->columnSpanFull()
+                ])
+                    ->disabled()
+                    ->columnSpanFull()
             ]);
     }
 

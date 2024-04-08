@@ -48,12 +48,13 @@ class NewsResource extends Resource
                         TinyEditor::make('body')
                             ->label('Isi Berita')
                             ->columnSpan(2)
+                            ->columnSpanFull()
                             ->fileAttachmentsDisk('public')
                             ->fileAttachmentsVisibility('private')
                             ->fileAttachmentsDirectory('news/body')
                             ->setConvertUrls(false)
                             ->required(),
-                    ]),
+                    ])->columns(2),
                     Forms\Components\Section::make()->schema([
                         Forms\Components\Select::make('category_id')
                             ->label('Kategori')
@@ -81,7 +82,9 @@ class NewsResource extends Resource
                             ->label('Apakah Ini Tampil Di Website?')
                             ->default(false),
                     ])->grow(false),
-                ])->columnSpanFull(),
+                ])
+                    ->from('md')
+                    ->columnSpanFull(),
             ]);
     }
 

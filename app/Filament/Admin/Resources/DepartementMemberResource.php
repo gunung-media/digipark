@@ -47,7 +47,9 @@ class DepartementMemberResource extends Resource
                                 ->label('Apakah Ini Tampil Di Website?')
                                 ->default(false),
                         ])->grow(false)
-                ])->columnSpanFull(),
+                ])
+                    ->from('md')
+                    ->columnSpanFull(),
                 Forms\Components\Section::make()->schema([
                     Forms\Components\FileUpload::make('image')
                         ->label('Gambar')

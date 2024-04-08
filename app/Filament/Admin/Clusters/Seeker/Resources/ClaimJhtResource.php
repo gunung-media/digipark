@@ -115,7 +115,9 @@ class ClaimJhtResource extends Resource
                                 ->directory('seeker/claim_jht')
                                 ->downloadable(),
                         ])->compact()->grow(false)
-                ])->columnSpanFull(),
+                ])
+                    ->from('md')
+                    ->columnSpanFull(),
             ]);
     }
 

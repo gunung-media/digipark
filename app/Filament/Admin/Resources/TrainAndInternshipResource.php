@@ -52,6 +52,7 @@ class TrainAndInternshipResource extends Resource
                                 ->fileAttachmentsDirectory('train-internship')
                                 ->setConvertUrls(false)
                                 ->columnSpanFull()
+                                ->columnSpan(2)
                                 ->required(),
                             Forms\Components\DatePicker::make('start_date')
                                 ->label('Tanggal Pelaksanaan')
@@ -64,9 +65,11 @@ class TrainAndInternshipResource extends Resource
                                 ->prefix('Rp.')
                                 ->numeric()
                                 ->required()
+                                ->columns(1)
                                 ->columnSpanFull(),
                             TinyEditor::make('requirement')
                                 ->label('Persyaratan Peserta')
+                                ->columnSpanFull()
                                 ->columnSpan(2)
                                 ->fileAttachmentsDisk('public')
                                 ->fileAttachmentsVisibility('private')
@@ -88,7 +91,9 @@ class TrainAndInternshipResource extends Resource
                             ->label('Apakah Ini Tampil Di Website?')
                             ->default(false),
                     ])->grow(false)
-                ])->columnSpanFull(),
+                ])
+                    ->from('md')
+                    ->columnSpanFull(),
             ]);
     }
 

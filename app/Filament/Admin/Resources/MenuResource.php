@@ -34,7 +34,9 @@ class MenuResource extends Resource
                             ->label('Apakah Ini Tampil Di Website?')
                             ->default(false),
                     ])->grow(false)
-                ])->columnSpanFull()
+                ])
+                    ->from('md')
+                    ->columnSpanFull(),
             ]);
     }
 

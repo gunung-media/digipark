@@ -140,7 +140,9 @@ class JobResource extends Resource
                                 ->required()
                         ])->compact()
                         ->grow(false),
-                ])->columnSpanFull(),
+                ])
+                    ->from('md')
+                    ->columnSpanFull(),
             ]);
     }
 
