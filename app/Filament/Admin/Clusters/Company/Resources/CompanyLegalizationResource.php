@@ -116,7 +116,9 @@ class CompanyLegalizationResource extends Resource
                                 ->required()
                         ])->compact()
                         ->grow(false),
-                ])->columnSpanFull(),
+                ])
+                    ->from('md')
+                    ->columnSpanFull(),
 
                 Tabs::make()->tabs([
                     Tab::make('Data Utama')->schema([
@@ -236,7 +238,8 @@ class CompanyLegalizationResource extends Resource
                             ->downloadable()
                             ->columnSpanFull(),
                     ])
-                ])->disabled()
+                ])
+                    ->disabled()
                     ->columnSpanFull(),
             ]);
     }
