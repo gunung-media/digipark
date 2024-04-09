@@ -101,6 +101,14 @@
 
     .custom-block-wrap {
         height: 100%;
-        /* min-height: 200px; */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .custom-block {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 </style>
