@@ -98,4 +98,8 @@
         rackground-repeat: no-repeat;
         background-position: left;
     }
+
+    .custom-block {
+        min-height: 200px;
+    }
 </style>
