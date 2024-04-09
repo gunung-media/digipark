@@ -99,7 +99,8 @@
         background-position: left;
     }
 
-    .custom-block {
-        min-height: 200px;
+    .custom-block-wrap {
+        height: 100%;
+        /* min-height: 200px; */
     }
 </style>
