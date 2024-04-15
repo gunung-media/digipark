@@ -1,16 +1,17 @@
 import { Head } from "@inertiajs/react"
 import './style.scss'
-import logo from '@/assets/images/logo_digipark.png'
+import logo from '@/assets/images/logo.png'
 import gubWagub from '@/assets/images/gubWagub.png'
 import kadis from '@/assets/images/kadis.png'
 import mapIcon from '@/assets/icons/landing/map.png'
-import graphicIcon from '@/assets/icons/landing/pie-chart.png'
+import checkoutIcon from '@/assets/icons/landing/check-out.png'
 import statisticIcon from '@/assets/icons/landing/table.png'
 import proposalIcon from '@/assets/icons/landing/proposal.png'
 import reportIcon from '@/assets/icons/landing/report.png'
 import trackingIcon from '@/assets/icons/landing/tracking.png'
 import dpIcon from '@/assets/icons/landing/development-plan.png'
 import guideIcon from '@/assets/icons/landing/workshop.png'
+import helpingHandIcon from '@/assets/icons/landing/helping-hand.png'
 import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 
@@ -18,23 +19,28 @@ export default function Landing() {
     const menus = [
         {
             href: route('portal.consultation'),
-            imgSrc: mapIcon,
+            imgSrc: reportIcon,
             title: "Layanan Konsultasi"
         },
         {
+            href: route('portal.train-and-internship.index'),
+            imgSrc: dpIcon,
+            title: "Pelatihan Dan Pemagangan"
+        },
+        {
             href: route('filament.seeker.resources.claim-jhts.create'),
-            imgSrc: guideIcon,
+            imgSrc: helpingHandIcon,
             title: "Klaim JHT"
         },
         {
-            href: route('filament.company.resources.company-laid-offs.create'),
-            imgSrc: graphicIcon,
-            title: "Laporan PHK"
-        },
-        {
-            href: route('filament.company.pages.edit-profile'),
+            href: route('filament.company.resources.company-legalizations.create'),
             imgSrc: statisticIcon,
             title: "Pengesahan Peraturan Perusahaan"
+        },
+        {
+            href: route('filament.company.resources.company-laid-offs.create'),
+            imgSrc: checkoutIcon,
+            title: "Laporan PHK"
         },
         {
             href: route('filament.company.resources.jobs.create'),
@@ -43,18 +49,13 @@ export default function Landing() {
         },
         {
             href: route('filament.company.resources.placements.create'),
-            imgSrc: reportIcon,
+            imgSrc: mapIcon,
             title: "Pelaporan Penempatan"
         },
         {
             href: route('filament.company.resources.labor-demands.create'),
             imgSrc: trackingIcon,
             title: "Permintaan Tenaga Kerja"
-        },
-        {
-            href: route('portal.train-and-internship.index'),
-            imgSrc: dpIcon,
-            title: "Pelatihan Dan Pemagangan"
         },
         {
             href: route('filament.admin.info-employment'),
