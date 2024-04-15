@@ -32,6 +32,6 @@ class LoginController extends Controller
     {
         auth('company')->logout();
         auth('seeker')->logout();
-        return redirect(route('portal.login'));
+        return redirect(route('portal.login', ['mode' => 'seeker']));
     }
 }
