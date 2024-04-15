@@ -25,14 +25,18 @@
                 <div class="row">
                     <div class="col-12" style="margin-bottom:0rem; margin-top: -2rem;">
                         <form class="job-form custom-form" method="get">
-                            <div class="col-lg-5 col-12">
-                                <div class="form-group">
-                                    <input type="" class="form-control" name="q" value="{{ $name }}"
-                                        placeholder="Nama Pelatihan/Magang">
+                            <div class="row" style="width:100%; justify-content:center">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <input type="" class="form-control" name="q"
+                                            value="{{ $name }}" placeholder="Nama Pelatihan/Magang">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary custom-btn">Cari</button>
+                                <div class="col-md-1 col-12">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary custom-btn">Cari</button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
