@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Seeker\Pages\Auth\Login;
 use App\Filament\Seeker\Pages\EditProfile;
 use App\Filament\Seeker\Pages\Auth\Register;
 use Filament\Http\Middleware\Authenticate;
@@ -28,7 +29,7 @@ class SeekerPanelProvider extends PanelProvider
             ->id('seeker')
             ->path('member')
             ->authGuard('seeker')
-            ->login()
+            ->login(Login::class)
             ->registration(Register::class)
             ->colors([
                 'primary' => "#209926",
