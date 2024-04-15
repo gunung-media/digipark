@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Company\Pages\EditProfile;
+use App\Filament\Company\Pages\Auth\Register;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -28,6 +29,7 @@ class CompanyPanelProvider extends PanelProvider
             ->id('company')
             ->path('perusahaan')
             ->authGuard('company')
+            ->registration(Register::class)
             ->login()
             ->colors([
                 'primary' => "#209926",
