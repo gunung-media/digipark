@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
                 'email' => 'admin@admin.com',
             ]);
         }
+        $this->call(PanduanSeeder::class);
     }
 }
