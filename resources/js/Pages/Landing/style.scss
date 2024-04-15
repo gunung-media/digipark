@@ -2,7 +2,7 @@
 
 .splash {
     position: relative;
-    background: url('@/assets/images/bg.jpeg');
+    background: url('@/assets/images/bg.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -15,6 +15,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        filter: brightness(50%);
     }
 
     .right-half {
@@ -22,6 +23,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        filter: brightness(50%);
     }
 
     .kalteng-logo {
@@ -83,7 +85,7 @@
 
 .overlay {
     position: relative;
-    background: url('@/assets/images/bg.jpeg');
+    background: url('@/assets/images/bg.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
