@@ -118,7 +118,7 @@ export default function Landing() {
                                     <a className="homeContentEnterBtn" href={route('portal')} style={{ top: "0px", visibility: "visible" }}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 51" version="1.1">
                                             <path d="M 3 4 L 8 27 L 3 51 L 248 51 L 243 27 L 248 4 z" fill="#000" fill-opacity="0.2"></path>
-                                            <path d="M 0 0 L 5 23 L 0 47 L 245 47 L 240 23 L 245 0 z" fill="rgb(176, 51, 34)"></path>
+                                            <path d="M 0 0 L 5 23 L 0 47 L 245 47 L 240 23 L 245 0 z" fill="rgb(24,75,129)"></path>
                                         </svg><div className="homeContentEnterLabel">MASUK WEBSITE</div>
                                     </a>
                                 </div>
