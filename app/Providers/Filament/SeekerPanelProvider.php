@@ -32,7 +32,7 @@ class SeekerPanelProvider extends PanelProvider
             ->login()
             ->registration(Register::class)
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => "#949010",
             ])
             ->discoverResources(in: app_path('Filament/Seeker/Resources'), for: 'App\\Filament\\Seeker\\Resources')
             ->discoverPages(in: app_path('Filament/Seeker/Pages'), for: 'App\\Filament\\Seeker\\Pages')

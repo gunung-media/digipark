@@ -30,7 +30,7 @@ class CompanyPanelProvider extends PanelProvider
             ->authGuard('company')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => "#949010",
             ])
             ->discoverResources(in: app_path('Filament/Company/Resources'), for: 'App\\Filament\\Company\\Resources')
             ->discoverPages(in: app_path('Filament/Company/Pages'), for: 'App\\Filament\\Company\\Pages')
