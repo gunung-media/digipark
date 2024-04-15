@@ -107,15 +107,32 @@
                       @endif
                   @endforeach
 
-                  <li class="nav-item ms-3">
-                      @if (auth('seeker')->check())
-                          <a class="nav-link custom-btn custom-border-btn btn"
-                              href="{{ route('portal.logout') }}">Logout</a>
-                      @else
-                          <a class="nav-link custom-btn custom-border-btn btn"
-                              href="{{ route('portal.login', ['mode' => 'seeker']) }}">Login</a>
-                      @endif
+                  <li class="nav-item dropdown">
+                      <a class="nav-link click-scroll dropdown-toggle" href="#profile" id="navbarLightDropdownMenuLink"
+                          role="button" data-bs-toggle="dropdown" aria-expanded="false">Login</a>
+
+                      <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                          <li><a class="dropdown-item" href="/member" target="__blank">Member</a></li>
+                          <li><a class="dropdown-item" href="/perusahaan" target="__blank">Perusahaan</a></li>
+                          <li><a class="dropdown-item" href="/admin" target="__blank">Admin</a></li>
+                          <!-- <li><a class="dropdown-item" href="/website#pekerjaan">Pekerjaan</a></li> -->
+                          <!-- <li><a class="dropdown-item" href="/website#news">Berita</a></li> -->
+                      </ul>
                   </li>
+
+                  <!-- <li class="nav-item ms-3"> -->
+                  <!--     @if (auth('seeker')->check())
+-->
+                  <!--         <a class="nav-link custom-btn custom-border-btn btn" -->
+                  <!--             href="{{ route('portal.logout') }}">Logout</a> -->
+                  <!--
+@else
+-->
+                  <!--         <a class="nav-link custom-btn custom-border-btn btn" -->
+                  <!--             href="{{ route('portal.login', ['mode' => 'seeker']) }}">Login</a> -->
+                  <!--
+@endif -->
+                  <!-- </li> -->
               </ul>
           </div>
       </div>
