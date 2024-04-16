@@ -72,8 +72,32 @@
                                   href="{{ route('filament.company.resources.labor-demands.create') }}">Permintaan
                                   Tenaga Kerja</a>
                           </li>
-                          <li><a class="dropdown-item" href="{{ route('filament.admin.info-employment') }}">Info Data
-                                  Ketenagakerjaan</a>
+
+                          <li class="dropdown-submenu">
+                              <a class="dropdown-item dropdown-toggle" href="#">Info Data Ketenagakerjaan</a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{ route('portal.news.index') }}">Berita</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('portal.info-employment') }}">Data
+                                          Statistik
+                                          dan Grafik Ketenagakerjaan</a></li>
+
+                                  @foreach ($menus as $key => $menu)
+                                      @if ($menu->subMenus->count() > 0)
+                                          <li class="dropdown-submenu">
+                                              <a class="dropdown-item dropdown-toggle"
+                                                  href="#">{{ $menu->name }}</a>
+                                              <ul class="dropdown-menu">
+                                                  @foreach ($menu->subMenus as $sub)
+                                                      <li>
+                                                          <a class="dropdown-item"
+                                                              href="{{ route('portal.sub-menu', ['slug' => $sub->slug]) }}">{{ $sub->title }}</a>
+                                                      </li>
+                                                  @endforeach
+                                              </ul>
+                                          </li>
+                                      @endif
+                                  @endforeach
+                              </ul>
                           </li>
                           <li>
                               <a class="dropdown-item" href="https://account.kemnaker.go.id/register" target="_blank">
@@ -87,29 +111,23 @@
                       </ul>
                   </li>
 
-                  @foreach ($menus as $key => $menu)
-                      @if ($menu->subMenus->count() > 0)
-                          <li class="nav-item dropdown">
-                              <a class="nav-link click-scroll dropdown-toggle" href="{{ $key }}"
-                                  id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                                  aria-expanded="false">{{ $menu->name }}</a>
+                  <li class="nav-item drrpdown">
+                      <a class="nav-link click-scroll dropdown-toggle" href="#" id="navbarLightDropdownMenuLink"
+                          role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ $panduan->name }}</a>
 
-                              <ul class="dropdown-menu dropdown-menu-light"
-                                  aria-labelledby="navbarLightDropdownMenuLink">
-                                  @foreach ($menu->subMenus as $sub)
-                                      <li style="margin-top:10px">
-                                          <a class="dropdown-item"
-                                              href="{{ route('portal.sub-menu', ['slug' => $sub->slug]) }}">{{ $sub->title }}</a>
-                                      </li>
-                                  @endforeach
-                              </ul>
-                          </li>
-                      @endif
-                  @endforeach
-
+                      <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                          @foreach ($panduan->subMenus as $sub)
+                              <li style="margin-top:10px">
+                                  <a class="dropdown-item"
+                                      href="{{ route('portal.sub-menu', ['slug' => $sub->slug]) }}">{{ $sub->title }}</a>
+                              </li>
+                          @endforeach
+                      </ul>
+                  </li>
                   <li class="nav-item dropdown">
-                      <a class="nav-link click-scroll dropdown-toggle" href="#profile" id="navbarLightDropdownMenuLink"
-                          role="button" data-bs-toggle="dropdown" aria-expanded="false">Login</a>
+                      <a class="nav-link click-scroll dropdown-toggle" href="#profile"
+                          id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                          aria-expanded="false">Login</a>
 
                       <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                           <li><a class="dropdown-item" href="/member" target="__blank">Member</a></li>

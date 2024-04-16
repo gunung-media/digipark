@@ -19,6 +19,7 @@ Route::get('/', 'LandingController')->name('landing');
 Route::get('website', 'PortalController')->name('portal');
 Route::name('portal.')->prefix('website')->group(function () {
     Route::get('menu/{slug}', 'SubMenuController')->name('sub-menu');
+    Route::get('ketenagakerjaan', 'InfoEmploymentController')->name('info-employment');
     // Auth Routes
     Route::namespace('Auth')
         ->group(function () {
