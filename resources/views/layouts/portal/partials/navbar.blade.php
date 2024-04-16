@@ -72,7 +72,11 @@
                                   href="{{ route('filament.company.resources.labor-demands.create') }}">Permintaan
                                   Tenaga Kerja</a>
                           </li>
-
+                          <li>
+                              <a class="dropdown-item" href="https://account.kemnaker.go.id/register" target="_blank">
+                                  Pembuatan AK 1
+                              </a>
+                          </li>
                           <li class="dropdown-submenu">
                               <a class="dropdown-item dropdown-toggle" href="#">Info Data Ketenagakerjaan</a>
                               <ul class="dropdown-menu">
@@ -86,7 +90,7 @@
                                           <li class="dropdown-submenu">
                                               <a class="dropdown-item dropdown-toggle"
                                                   href="#">{{ $menu->name }}</a>
-                                              <ul class="dropdown-menu">
+                                              <ul class="dropdown-menu-2">
                                                   @foreach ($menu->subMenus as $sub)
                                                       <li>
                                                           <a class="dropdown-item"
@@ -98,11 +102,6 @@
                                       @endif
                                   @endforeach
                               </ul>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="https://account.kemnaker.go.id/register" target="_blank">
-                                  Pembuatan AK 1
-                              </a>
                           </li>
                           <!-- <li><a class="dropdown-item" href="{{ route('portal.dummies.magang') }}">Informasi -->
                           <!--         Pelatihan dan Magang</a></li> -->
