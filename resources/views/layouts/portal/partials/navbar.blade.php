@@ -87,7 +87,7 @@
 
                                   @foreach ($menus as $key => $menu)
                                       @if ($menu->subMenus->count() > 0)
-                                          <li class="dropdown-submenu">
+                                          <li class="dropdown-submenu-2">
                                               <a class="dropdown-item dropdown-toggle"
                                                   href="#">{{ $menu->name }}</a>
                                               <ul class="dropdown-menu-2">
@@ -110,7 +110,7 @@
                       </ul>
                   </li>
 
-                  <li class="nav-item drrpdown">
+                  <li class="nav-item dropdown">
                       <a class="nav-link click-scroll dropdown-toggle" href="#" id="navbarLightDropdownMenuLink"
                           role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ $panduan->name }}</a>
 
