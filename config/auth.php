@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'seeker',
         ],
+        'content' => [
+            'driver' => 'session',
+            'provider' => 'content',
+        ],
     ],
 
     /*
@@ -80,7 +84,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Seeker\Seeker::class,
         ],
-
+        'seeker' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminContent::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
