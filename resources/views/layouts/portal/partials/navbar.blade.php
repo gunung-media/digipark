@@ -132,6 +132,7 @@
                           <li><a class="dropdown-item" href="/member" target="__blank">Member</a></li>
                           <li><a class="dropdown-item" href="/perusahaan" target="__blank">Perusahaan</a></li>
                           <li><a class="dropdown-item" href="/admin" target="__blank">Admin</a></li>
+                          <li><a class="dropdown-item" href="/content" target="__blank">Admin Bidang</a></li>
                           <!-- <li><a class="dropdown-item" href="/website#pekerjaan">Pekerjaan</a></li> -->
                           <!-- <li><a class="dropdown-item" href="/website#news">Berita</a></li> -->
                       </ul>
