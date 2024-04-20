@@ -1,8 +1,10 @@
 @import '@/assets/media-queries.scss';
 
+$bg-image: url('@/assets/images/bg1.jpg');
+
 .splash {
     position: relative;
-    background: url('@/assets/images/bg.jpg');
+    background: $bg-image;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -85,7 +87,7 @@
 
 .overlay {
     position: relative;
-    background: url('@/assets/images/bg.jpg');
+    background: $bg-image;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
