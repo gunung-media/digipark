@@ -24,6 +24,7 @@ class NewsResource extends Resource
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
     protected static ?string $label = "Berita";
     protected static ?string $pluralModelLabel = "Berita";
+    protected static ?string $navigationGroup = 'Konten';
 
     public static function getEloquentQuery(): Builder
     {
