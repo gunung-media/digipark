@@ -90,7 +90,7 @@
                                           <li class="dropdown-submenu-2">
                                               <a class="dropdown-item dropdown-toggle"
                                                   href="#">{{ $menu->name }}</a>
-                                              <ul class="dropdown-menu-2">
+                                              <ul class="dropdown-menu-2 left">
                                                   @foreach ($menu->subMenus as $sub)
                                                       <li>
                                                           <a class="dropdown-item"
@@ -114,7 +114,8 @@
                       <a class="nav-link click-scroll dropdown-toggle" href="#" id="navbarLightDropdownMenuLink"
                           role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ $panduan->name }}</a>
 
-                      <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                      <ul class="dropdown-menu dropdown-menu-light left"
+                          aria-labelledby="navbarLightDropdownMenuLink">
                           @foreach ($panduan->subMenus as $sub)
                               <li style="margin-top:10px">
                                   <a class="dropdown-item"

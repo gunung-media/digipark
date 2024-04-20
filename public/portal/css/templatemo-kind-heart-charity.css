@@ -497,6 +497,15 @@ strong {
     display: block !important;
 }
 
+.dropdown-menu.left {
+    left: -150%;
+}
+
+.dropdown-menu-2.left {
+    left: -10%;
+    right: 0;
+}
+
 @media screen and (min-width: 992px) {
     .dropdown:hover .dropdown-menu {
         display: block;
