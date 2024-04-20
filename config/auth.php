@@ -84,7 +84,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Seeker\Seeker::class,
         ],
-        'seeker' => [
+        'content' => [
             'driver' => 'eloquent',
             'model' => App\Models\AdminContent::class,
         ],
