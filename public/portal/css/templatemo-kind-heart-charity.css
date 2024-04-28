@@ -489,11 +489,13 @@ strong {
 }
 
 .dropdown-submenu:hover .dropdown-menu {
+    top: 80%;
     display: block !important;
 }
 
 
 .dropdown-submenu-2:hover .dropdown-menu-2 {
+    top: 80%;
     display: block !important;
 }
 
