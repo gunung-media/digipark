@@ -498,11 +498,11 @@ strong {
 }
 
 .dropdown-menu.left {
-    left: -150%;
+    left: 0 !important;
 }
 
 .dropdown-menu-2.left {
-    left: -100%;
+    left: 0;
     right: 0;
 }
 
@@ -520,6 +520,16 @@ strong {
     .dropdown-submenu-2:hover .dropdown-menu-2 {
         top: 80%;
         display: block !important;
+    }
+
+    .dropdown-menu.left {
+        left: -150%;
+    }
+
+
+    .dropdown-menu-2.left {
+        left: -100%;
+        right: 0;
     }
 }
 
