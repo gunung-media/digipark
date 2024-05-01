@@ -16,6 +16,8 @@ class GuideResource extends Resource
     protected static ?string $model = Guide::class;
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $label = "Panduan";
+    protected static ?string $pluralModelLabel = "Panduan";
 
     public static function form(Form $form): Form
     {
