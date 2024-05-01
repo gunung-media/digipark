@@ -31,8 +31,7 @@ class AppServiceProvider extends ServiceProvider
                 'visions' => fn ($query) => $query->active(),
                 'testimonials' => fn ($query) => $query->active()
             ])->first());
-            View::share('menus', Menu::active()->with(['subMenus' => fn ($query) => $query->active()])->where('name', '!=', 'Panduan')->get());
-            View::share('panduan', Menu::active()->with(['subMenus' => fn ($query) => $query->active()])->where('name', 'Panduan')->first());
+            View::share('menus', Menu::active()->with(['subMenus' => fn ($query) => $query->active()])->get());
         }
     }
 }
