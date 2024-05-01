@@ -42,31 +42,33 @@
         </section>
 
 
-        <section class="section-padding" id="unit-layanan">
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-
-                    <div class="col-lg-10 col-12 text-center mx-auto">
-                        <h2 class="mb-5">Visi</h2>
-                    </div>
-
-                    @forelse ($dashboard?->visions ?? [] as $vision)
-                        <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                            <div class="featured-block d-flex justify-content-center align-items-center">
-                                <a href="#" class="d-block">
-                                    <img src="{{ asset('storage/' . $vision->image) }}"
-                                        class="featured-block-image img-fluid" alt="">
-
-                                    <p class="featured-block-text">{{ $vision->title }}</p>
-                                </a>
-                            </div>
-                        </div>
-                    @empty
-                        <h5>No Data Available</h5>
-                    @endforelse
-                </div>
-            </div>
-        </section>
+        <!-- <section class="section-padding" id="unit-layanan"> -->
+        <!--     <div class="container"> -->
+        <!--         <div class="row d-flex justify-content-center"> -->
+        <!---->
+        <!--             <div class="col-lg-10 col-12 text-center mx-auto"> -->
+        <!--                 <h2 class="mb-5">Visi</h2> -->
+        <!--             </div> -->
+        <!---->
+        <!--             @forelse ($dashboard?->visions ?? [] as $vision)
+    -->
+        <!--                 <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0"> -->
+        <!--                     <div class="featured-block d-flex justify-content-center align-items-center"> -->
+        <!--                         <a href="#" class="d-block"> -->
+        <!--                             <img src="{{ asset('storage/' . $vision->image) }}" -->
+        <!--                                 class="featured-block-image img-fluid" alt=""> -->
+        <!---->
+        <!--                             <p class="featured-block-text">{{ $vision->title }}</p> -->
+        <!--                         </a> -->
+        <!--                     </div> -->
+        <!--                 </div> -->
+    <!--             @empty -->
+        <!--                 <h5>No Data Available</h5> -->
+        <!--
+    @endforelse -->
+        <!--         </div> -->
+        <!--     </div> -->
+        <!-- </section> -->
 
         <section class="section-padding section-bg" id="profil">
             <div class="container">
@@ -84,6 +86,18 @@
                             <h5 class="mb-3">Digital Ketenagakerjaan Palangka Raya</h5>
 
                             <p class="mb-0">{!! $dashboard?->short_description ?? '' !!}</p>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="custom-text-box">
+                                <h5 class="mb-3">Visi Kami</h5>
+
+                                <ul>
+                                    @foreach ($dashboard?->visions ?? [] as $item)
+                                        <li>{{ $item->title }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="row">
