@@ -503,6 +503,15 @@ strong {
     left: 0 !important;
 }
 
+.wrapped-dropdown {
+    max-width: 400px;
+    white-space: normal;
+
+    .dropdown-item{
+        white-space: inherit;
+    }
+}
+
 .dropdown-menu-2.left {
     left: 0;
     right: 0;

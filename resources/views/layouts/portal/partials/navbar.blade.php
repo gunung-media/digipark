@@ -89,14 +89,14 @@
                               <a class="nav-link click-scroll dropdown-toggle" href="#"
                                   id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
                                   aria-expanded="false">{{ $menu->name }}</a>
-                              <ul class="dropdown-menu dropdown-menu-light"
-                                  aria-labelledby="navbarLightDropdownMenuLink"r
+                              <ul class="dropdown-menu wrapped-dropdown" aria-labelledby="navbarLightDropdownMenuLink">
                                   @foreach ($menu->subMenus as $sub)
                                       <li>
                                           <a class="dropdown-item"
                                               href="{{ route('portal.sub-menu', ['slug' => $sub->slug]) }}">{{ $sub->title }}</a>
-                                      </li> @endforeach
-                                  </ul>
+                                      </li>
+                                  @endforeach
+                              </ul>
                           </li>
                       @endif
                   @endforeach
