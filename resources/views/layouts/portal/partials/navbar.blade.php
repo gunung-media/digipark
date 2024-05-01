@@ -24,7 +24,7 @@
                       <a class="nav-link click-scroll" href="{{ route('portal.jobs.index') }}">Pekerjaan</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link click-scroll" href="#">Panduan</a>
+                      <a class="nav-link click-scroll" href="{{ route('portal.guide') }}">Panduan</a>
                   </li>
                   <li class="nav-item dropdown">
                       <a class="nav-link click-scroll dropdown-toggle" href="#layanan" id="navbarLightDropdownMenuLink"

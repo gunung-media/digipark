@@ -62,6 +62,14 @@
         position: relative;
     }
 
+    .guide-section {
+        background-image: url({{ asset('images/books.jpg') }});
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+    }
+
     .overlay {
         position: absolute;
         top: 0;
