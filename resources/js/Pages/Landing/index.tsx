@@ -12,7 +12,7 @@ import trackingIcon from '@/assets/icons/landing/tracking.png'
 import dpIcon from '@/assets/icons/landing/development-plan.png'
 import guideIcon from '@/assets/icons/landing/workshop.png'
 import helpingHandIcon from '@/assets/icons/landing/helping-hand.png'
-import { useEffect, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 
 export default function Landing() {
@@ -73,7 +73,7 @@ export default function Landing() {
         return () => clearTimeout(timer);
     })
     return (
-        <>
+        <Fragment>
             <Head title="Portal" />
             <AnimatePresence initial={false}>
                 {showSplash && (
@@ -142,6 +142,6 @@ export default function Landing() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </>
+        </Fragment>
     )
 }
