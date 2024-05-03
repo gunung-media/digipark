@@ -2,6 +2,8 @@
 
 namespace App\Models\Company;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -12,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Company extends Authenticatable
+class Company extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -31,5 +33,10 @@ class Company extends Authenticatable
     public function legalization(): HasOne
     {
         return $this->hasOne(CompanyLegalization::class);
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
     }
 }
