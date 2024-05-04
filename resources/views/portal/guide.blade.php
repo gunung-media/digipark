@@ -59,6 +59,7 @@
                                     <div class="custom-block-body">
                                         <center>
                                             <h5 class="mb-3">{{ $data->name }}</h5>
+                                            <p>{{ $data->description }}</p>
                                         </center>
                                     </div>
                                 </div>
@@ -114,7 +115,6 @@
 
         .guide-image {
             min-height: 450px;
-
         }
     </style>
 @endsection
