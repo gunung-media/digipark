@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Tighten\Ziggy\ZiggyServiceProvider;
 
 return [
 
@@ -172,6 +173,7 @@ return [
         App\Providers\Filament\SeekerPanelProvider::class,
         App\Providers\Filament\AdminContentPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
+        ZiggyServiceProvider::class,
     ])->toArray(),
 
     /*
