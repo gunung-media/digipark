@@ -74,13 +74,13 @@ const menus = [
     <div key="landing">
 
         <Head title="Landing" />
-        <div class="splash" v-show="showSplash">
+        <div class="splash" v-if="showSplash">
             <div class="left-half" style='width:50%'></div>
             <div class="right-half" style="width: 50%"></div>
             <img :src=logo alt="Kalimantan Tengah" class="kalteng-logo" />
         </div>
         <Transition>
-            <div class="bg" v-show="!showSplash">
+            <div class="bg" v-if="!showSplash">
                 <div class="overlay">
                     <div class="landing-container">
                         <div class="heading">
