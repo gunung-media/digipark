@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { Head } from '@inertiajs/vue3'
 import './style.scss';
 import logo from '@/assets/images/logo.png';
@@ -17,11 +17,9 @@ import helpingHandIcon from '@/assets/icons/landing/helping-hand.png';
 
 const showSplash = ref(true);
 
-onMounted(() => {
-    setTimeout(() => {
-        showSplash.value = false;
-    }, 2000);
-});
+setTimeout(() => {
+    showSplash.value = false;
+}, 1000);
 
 const menus = [
     {
