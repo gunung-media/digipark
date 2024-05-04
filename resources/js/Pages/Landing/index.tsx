@@ -73,7 +73,7 @@ export default function Landing() {
         return () => clearTimeout(timer);
     })
     return (
-        <Fragment>
+        <div key="landing">
             <Head title="Portal" />
             <AnimatePresence initial={false}>
                 {showSplash && (
@@ -142,6 +142,6 @@ export default function Landing() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </Fragment>
+        </div>
     )
 }
