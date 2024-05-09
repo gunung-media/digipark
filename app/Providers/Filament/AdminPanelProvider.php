@@ -2,12 +2,14 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Admin\Pages\EditProfile;
 use App\Filament\Admin\Resources\DashboardResource;
 use App\Filament\Admin\Pages;
 use App\Models\Admin\Settings\Dashboard;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -72,6 +74,9 @@ class AdminPanelProvider extends PanelProvider
                     ->url(fn () => route('portal'))
                     ->icon('heroicon-o-globe-alt')
                     ->openUrlInNewTab()
+            ])
+            ->userMenuItems([
+                'Profile' => MenuItem::make()->url(fn () => EditProfile::getUrl())->icon('heroicon-o-user')->label("Profile"),
             ])
             ->brandLogo(asset('portal/images/logo.png'))
             ->brandLogoHeight('3rem')

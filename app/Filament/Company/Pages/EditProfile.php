@@ -115,6 +115,7 @@ class EditProfile extends Page implements HasForms
                             ->label('Password Saat Ini')
                             ->password()
                             ->required()
+                            ->dehydrated(false)
                             ->currentPassword(),
                         TextInput::make('password')
                             ->label('Password Baru')
@@ -181,9 +182,15 @@ class EditProfile extends Page implements HasForms
 
     private function handleRecordUpdate(Model $record, array $data): Model
     {
-        if ($data['legalization']) {
-            $record->legalization()->updateOrCreate(['id' => $record->legalization->id ?? null], $data['legalization']);
-            unset($data['legalization']);
+        try {
+            if ($data['legalization']) {
+                $record->legalization()->updateOrCreate(['id' => $record->legalization->id ?? null], $data['legalization']);
+                unset($data['legalization']);
+            }
+            if ($data['currentPassword']) {
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
         $record->update($data);
         return $record;
