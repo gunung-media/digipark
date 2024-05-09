@@ -1,6 +1,6 @@
   <nav class="navbar navbar-expand-lg bg-light shadow-lg">
       <div class="container">
-          <a class="navbar-brand" href="{{ route('portal') }}">
+          <a class="navbar-brand" href="{{ route('landing') }}">
               <img src="{{ asset('portal/images/logo.png') }}" class="logo img-fluid" alt="Kind Heart Charity">
               <span>
                   <!-- <small>Digital Palangka Raya Kreatif Ketenagakerjaan</small> -->
