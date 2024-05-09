@@ -139,6 +139,7 @@ class EditProfile extends Page
                             ->label('Password Saat Ini')
                             ->password()
                             ->required()
+                            ->dehydrated(false)
                             ->currentPassword(),
                         TextInput::make('password')
                             ->label('Password Baru')
@@ -205,9 +206,13 @@ class EditProfile extends Page
 
     private function handleRecordUpdate(Model $record, array $data): Model
     {
-        if ($data['additional']) {
-            $record->additional()->updateOrCreate(['id' => $record->additional->id ?? null], $data['additional']);
-            unset($data['additional']);
+        try {
+            if ($data['additional']) {
+                $record->additional()->updateOrCreate(['id' => $record->additional->id ?? null], $data['additional']);
+                unset($data['additional']);
+            }
+        } catch (\Exception $th) {
+            //throw $th;
         }
         $record->update($data);
         return $record;
