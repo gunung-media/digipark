@@ -139,17 +139,15 @@
             </div>
         </section>
 
-        @if (!is_null($departementMember))
+        @if (!is_null($departementMembers))
             <section class="about-section section-padding">
                 <div class="container">
-                    <div class="row">
 
-                        <div class="col-lg-6 col-md-5 col-12">
+                    <div class="owl-carousel owl-theme" id="carousel">
+                        @foreach ($departementMembers as $departementMember)
                             <img src="{{ asset('storage/' . $departementMember->image) }}"
                                 class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
-                        </div>
 
-                        <div class="col-lg-5 col-md-7 col-12">
                             <div class="custom-text-block">
                                 <h2 class="mb-0">{{ $departementMember->name }}</h2>
 
@@ -171,8 +169,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        </div>
-
+                        @endforeach
                     </div>
                 </div>
             </section>
@@ -391,4 +388,34 @@
             </div>
         </section>
     </main>
+@endsection
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('portal/css/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('portal/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('portal/css/owl.theme.default.css') }}">
+    <link rel="stylesheet" href="{{ asset('portal/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('portal/css/owl.theme.green.css') }}">
+    <link rel="stylesheet" href="{{ asset('portal/css/owl.theme.green.min.css') }}">
+@endsection
+
+@section('script')
+    <script src="{{ asset('portal/js/owl.carousel.min.js') }}"></script>
+    <script>
+        $('#carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            center: true,
+            item: 3,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+            }
+        })
+    </script>
 @endsection

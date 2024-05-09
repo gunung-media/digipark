@@ -19,11 +19,11 @@ class PortalController extends Controller
         $news = News::active()->with('category')->limit(4)->get();
         $categories =  NewsCategory::with('news')->get();
         $jobs = Job::active()->with('company')->limit('3')->latest()->get();
-        $departementMember = DepartementMember::active()->first();
+        $departementMembers = DepartementMember::active()->get();
         $total = [
             'pekerjaan' => Job::active()->count(),
             'perusahaan' => Company::count(),
         ];
-        return view('portal.index', compact('news', 'categories', 'jobs', 'total', 'departementMember'));
+        return view('portal.index', compact('news', 'categories', 'jobs', 'total', 'departementMembers'));
     }
 }
