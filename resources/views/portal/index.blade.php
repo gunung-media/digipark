@@ -143,34 +143,38 @@
             <section class="about-section section-padding">
                 <div class="container">
 
-                    <div class="owl-carousel owl-theme" id="carousel">
-                        @foreach ($departementMembers as $departementMember)
-                            <img src="{{ asset('storage/' . $departementMember->image) }}"
-                                class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
+                    @if ($departementMembers->count() > 1)
+                        <div class="owl-carousel owl-theme" id="carousel">
+                        @else
+                            <div class="d-flex justify-content-center">
+                    @endif
+                    @foreach ($departementMembers as $departementMember)
+                        <img src="{{ asset('storage/' . $departementMember->image) }}"
+                            class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
 
-                            <div class="custom-text-block">
-                                <h2 class="mb-0">{{ $departementMember->name }}</h2>
+                        <div class="custom-text-block">
+                            <h2 class="mb-0">{{ $departementMember->name }}</h2>
 
-                                <p class="text-muted mb-lg-4 mb-md-4">{{ $departementMember->position }}</p>
+                            <p class="text-muted mb-lg-4 mb-md-4">{{ $departementMember->position }}</p>
 
-                                <p>{!! $departementMember->description !!}</p>
+                            <p>{!! $departementMember->description !!}</p>
 
-                                @php
-                                    $socials = ['facebook', 'twitter', 'instagram'];
-                                @endphp
-                                <ul class="social-icon mt-4">
-                                    @foreach ($socials as $social)
-                                        @if (!is_null($departementMember->$social))
-                                            <li class="social-icon-item">
-                                                <a href="{{ $departementMember->$social }}"
-                                                    class="social-icon-link bi-{{ $social }}"></a>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endforeach
-                    </div>
+                            @php
+                                $socials = ['facebook', 'twitter', 'instagram'];
+                            @endphp
+                            <ul class="social-icon mt-4">
+                                @foreach ($socials as $social)
+                                    @if (!is_null($departementMember->$social))
+                                        <li class="social-icon-item">
+                                            <a href="{{ $departementMember->$social }}"
+                                                class="social-icon-link bi-{{ $social }}"></a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endforeach
+                </div>
                 </div>
             </section>
         @endif
