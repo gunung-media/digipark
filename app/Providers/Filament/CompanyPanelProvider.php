@@ -5,6 +5,8 @@ namespace App\Providers\Filament;
 use App\Filament\Company\Pages\EditProfile;
 use App\Filament\Company\Pages\Auth\Register;
 use App\Filament\Company\Pages\Auth\Login;
+use App\Http\Middleware\CanAccessPanel;
+use App\Http\Middleware\CompanyMustActive;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -56,6 +58,7 @@ class CompanyPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                CanAccessPanel::class,
             ])
             ->userMenuItems([
                 'Profile' => MenuItem::make()->url(fn () => EditProfile::getUrl())->icon('heroicon-o-user')->label("Profile"),
