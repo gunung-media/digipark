@@ -4,6 +4,7 @@ namespace App\Models\Company;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -17,6 +18,10 @@ use Laravel\Sanctum\HasApiTokens;
 class Company extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
     protected $with = ['legalization'];
 
@@ -38,5 +43,10 @@ class Company extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
+    }
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('is_active', 1);
     }
 }

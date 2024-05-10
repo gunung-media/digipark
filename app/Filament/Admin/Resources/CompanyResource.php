@@ -23,45 +23,6 @@ class CompanyResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make()->schema([
-                    Forms\Components\TextInput::make('name')
-                        ->label('Nama Perusahaan')
-                        ->required(),
-                    Forms\Components\TextInput::make('email')
-                        ->email()
-                        ->unique('companies', 'email', null, true)
-                        ->required(),
-                    Forms\Components\TextInput::make('phone_number')
-                        ->label('No. Telp')
-                        ->tel()
-                        ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
-                        ->required(),
-                    Forms\Components\TextInput::make('address')
-                        ->label('Alamat')
-                        ->required(),
-                    Forms\Components\TextInput::make('company_type')
-                        ->label('Jenis/ Bidang Usaha'),
-                    Forms\Components\Select::make('company_status')
-                        ->label('Status Perusahaan')
-                        ->options(
-                            collect([
-                                'pt',
-                                'cv',
-                                'perorangan',
-                                'badan usaha negara',
-                                'parsero',
-                                'pma',
-                                'perusahaan',
-                                'joint venture',
-                                'pmdn'
-                            ])->mapWithKeys(fn ($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
-                                ->toArray()
-                        ),
-                ])->columns(2),
-                // Password::make('password')
-                //     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                //     ->dehydrated(fn ($state) => filled($state))
-                //     ->required(fn (string rcontext): bool => $context === 'create'),
-                Forms\Components\Section::make()->schema([
                     Forms\Components\FileUpload::make('image')
                         ->label('Logo')
                         ->disk('public')
@@ -69,7 +30,56 @@ class CompanyResource extends Resource
                         ->image()
                         ->columnSpan(2)
                         ->required(),
-                ])
+                ])->columnSpanFull(),
+                Forms\Components\Split::make([
+                    Forms\Components\Section::make()->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nama Perusahaan')
+                            ->required(),
+                        Forms\Components\TextInput::make('email')
+                            ->email()
+                            ->unique('companies', 'email', null, true)
+                            ->required(),
+                        Forms\Components\TextInput::make('phone_number')
+                            ->label('No. Telp')
+                            ->tel()
+                            ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
+                            ->required(),
+                        Forms\Components\TextInput::make('address')
+                            ->label('Alamat')
+                            ->required(),
+                        Forms\Components\TextInput::make('company_type')
+                            ->label('Jenis/ Bidang Usaha'),
+                        Forms\Components\Select::make('company_is_active')
+                            ->label('is_active Perusahaan')
+                            ->options(
+                                collect([
+                                    'pt',
+                                    'cv',
+                                    'perorangan',
+                                    'badan usaha negara',
+                                    'parsero',
+                                    'pma',
+                                    'perusahaan',
+                                    'joint venture',
+                                    'pmdn'
+                                ])->mapWithKeys(fn ($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
+                                    ->toArray()
+                            ),
+                    ])
+                        ->columns(2)
+                        ->columnSpanFull(),
+                    // Password::make('password')
+                    //     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    //     ->dehydrated(fn ($state) => filled($state))
+                    //     ->required(fn (string rcontext): bool => $context === 'create'),
+                    //
+                    Forms\Components\Section::make()->schema([
+                        Forms\Components\Toggle::make('is_active')
+                            ->label('Acc?')
+                            ->default(false),
+                    ])->grow(false),
+                ])->columnSpanFull(),
             ]);
     }
 
@@ -93,11 +103,28 @@ class CompanyResource extends Resource
                 Tables\Columns\TextColumn::make('phone_number')
                     ->label("No. Telp")
                     ->searchable(),
+                Tables\Columns\IconColumn::make('is_active')
+                    ->label('Aktif di Web')
+                    ->boolean(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('active')
+                    ->label('Aktifkan')
+                    ->action(function (Company $record) {
+                        $record->is_active = true;
+                        $record->save();
+                    })
+                    ->hidden(fn (Company $record): bool => $record->is_active),
+                Tables\Actions\Action::make('inactive')
+                    ->label('Non Aktifkan')
+                    ->action(function (Company $record) {
+                        $record->is_active = false;
+                        $record->save();
+                    })
+                    ->visible(fn (Company $record): bool => $record->is_active),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

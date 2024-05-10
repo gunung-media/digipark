@@ -2,12 +2,16 @@
 
 namespace App\Filament\Company\Pages\Auth;
 
-use Filament\Forms\Components\DatePicker;
+use App\Filament\Admin\Resources\CompanyResource;
+use App\Models\User;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Notification;
 use Filament\Pages\Auth\Register as BaseRegisterProfile;
+use Illuminate\Database\Eloquent\Model;
 
 class Register extends BaseRegisterProfile
 {
@@ -57,5 +61,20 @@ class Register extends BaseRegisterProfile
                     ->image()
                     ->imagePreviewHeight(500)
             ]);
+    }
+
+    protected function handleRegistration(array $data): Model
+    {
+        Notification::make()->title('Ada Komentar Baru')
+            ->body('Ada Perusahaan yang butuh di-validasi, ' . $data['name'])
+            ->info()
+            ->actions([
+                Action::make('View')
+                    ->url(CompanyResource::getUrl('index', ['tableSearch' => $data['name']]))
+                    ->button()
+                    ->markAsRead(),
+            ])
+            ->sendToDatabase(User::all());
+        return $this->getUserModel()::create($data);
     }
 }
