@@ -78,7 +78,7 @@ class AdminPanelProvider extends PanelProvider
             ->userMenuItems([
                 'Profile' => MenuItem::make()->url(fn () => EditProfile::getUrl())->icon('heroicon-o-user')->label("Profile"),
             ])
-            ->brandLogo(asset('portal/images/logo.png'))
+            ->brandLogo(fn () => view('layouts.portal.logo'))
             ->brandLogoHeight('3rem')
             ->breadcrumbs(fn () => !request()->routeIs('filament.admin.resources.dashboards.edit', 'filament.admin.resources.dashboards.create'))
             ->databaseNotifications()

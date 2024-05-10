@@ -58,6 +58,7 @@ class AdminContentPanelProvider extends PanelProvider
                 'Profile' => MenuItem::make()->url(fn () => EditProfile::getUrl())->icon('heroicon-o-user')->label("Profile"),
             ])
             ->databaseNotifications()
-            ->databaseNotificationsPolling("20s");
+            ->databaseNotificationsPolling("20s")
+            ->brandLogo(fn () => view('layouts.portal.logo'));
     }
 }
