@@ -2,7 +2,12 @@
 
 namespace App\Filament\Company\Pages\Auth;
 
+use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
+use Filament\Facades\Filament;
 use Filament\Forms\Form;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Http\Responses\Auth\Contracts\LoginResponse;
+use Filament\Notifications\Notification;
 use Filament\Pages\Auth\Login as AuthLogin;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Validation\ValidationException;
@@ -24,11 +29,48 @@ class Login extends AuthLogin
             ->statePath('data');
     }
 
-
-    protected function throwFailureValidationException(): never
+    public function authenticate(): ?LoginResponse
     {
-        throw ValidationException::withMessages([
-            'data.email' => __('filament-panels::pages/auth/login.messages.failed'),
-        ]);
+        try {
+            $this->rateLimit(5);
+        } catch (TooManyRequestsException $exception) {
+            Notification::make()
+                ->title(__('filament-panels::pages/auth/login.notifications.throttled.title', [
+                    'seconds' => $exception->secondsUntilAvailable,
+                    'minutes' => ceil($exception->secondsUntilAvailable / 60),
+                ]))
+                ->body(array_key_exists('body', __('filament-panels::pages/auth/login.notifications.throttled') ?: []) ? __('filament-panels::pages/auth/login.notifications.throttled.body', [
+                    'seconds' => $exception->secondsUntilAvailable,
+                    'minutes' => ceil($exception->secondsUntilAvailable / 60),
+                ]) : null)
+                ->danger()
+                ->send();
+
+            return null;
+        }
+
+        $data = $this->form->getState();
+
+        if (!Filament::auth()->attempt($this->getCredentialsFromFormData($data), $data['remember'] ?? false)) {
+            $this->throwFailureValidationException();
+        }
+
+        $user = Filament::auth()->user();
+
+        if (
+            ($user instanceof FilamentUser) &&
+            (!$user->canAccessPanel(Filament::getCurrentPanel()))
+        ) {
+            Notification::make()
+                ->title("Akun Belum tervalidasi")
+                ->danger()
+                ->send();
+            $this->throwFailureValidationException();
+            Filament::auth()->logout();
+        }
+
+        session()->regenerate();
+
+        return app(LoginResponse::class);
     }
 }
