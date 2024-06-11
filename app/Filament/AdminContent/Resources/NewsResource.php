@@ -53,7 +53,7 @@ class NewsResource extends Resource
                             ->required(),
                         Forms\Components\TextInput::make('author')
                             ->label('Pembuat Berita')
-                            ->disabled()
+                            ->readOnly()
                             ->dehydrateStateUsing(fn ($state) => FilamentUtil::getUser()->name)
                             ->default(FilamentUtil::getUser()->name),
                         TinyEditor::make('body')

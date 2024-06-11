@@ -36,9 +36,9 @@ class SubMenuResource extends Resource
                             ->required()
                             ->default(request()->query('ownerRecord')),
                         Forms\Components\TextInput::make('author')
+                            ->readOnly()
                             ->dehydrateStateUsing(fn ($state) => FilamentUtil::getUser()->name)
-                            ->default('Admin')
-                            ->disabled(),
+                            ->default('Admin'),
                     ])->columns(2),
                     Forms\Components\Section::make()->schema([
                         Forms\Components\Toggle::make('is_active')
