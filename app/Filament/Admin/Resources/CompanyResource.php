@@ -63,7 +63,7 @@ class CompanyResource extends Resource
                                     'perusahaan',
                                     'joint venture',
                                     'pmdn'
-                                ])->mapWithKeys(fn ($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
+                                ])->mapWithKeys(fn($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
                                     ->toArray()
                             ),
                     ])
@@ -117,14 +117,14 @@ class CompanyResource extends Resource
                         $record->is_active = true;
                         $record->save();
                     })
-                    ->hidden(fn (Company $record): bool => $record->is_active),
+                    ->hidden(fn(Company $record): bool => $record?->is_active ?? false),
                 Tables\Actions\Action::make('inactive')
                     ->label('Non Aktifkan')
                     ->action(function (Company $record) {
                         $record->is_active = false;
                         $record->save();
                     })
-                    ->visible(fn (Company $record): bool => $record->is_active),
+                    ->visible(fn(Company $record): bool => $record?->is_active ?? false),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
