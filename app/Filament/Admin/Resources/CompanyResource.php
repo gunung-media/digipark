@@ -48,7 +48,7 @@ class CompanyResource extends Resource
                         Forms\Components\TextInput::make('address')
                             ->label('Alamat')
                             ->required(),
-                        Forms\Components\Select::make('company_is_active')
+                        Forms\Components\Select::make('is_active')
                             ->label('Jenis/ Bidang Usaha')
                             ->options(
                                 collect([
