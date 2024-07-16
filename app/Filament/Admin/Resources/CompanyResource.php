@@ -48,10 +48,8 @@ class CompanyResource extends Resource
                         Forms\Components\TextInput::make('address')
                             ->label('Alamat')
                             ->required(),
-                        Forms\Components\TextInput::make('company_type')
-                            ->label('Jenis/ Bidang Usaha'),
                         Forms\Components\Select::make('company_is_active')
-                            ->label('is_active Perusahaan')
+                            ->label('Jenis/ Bidang Usaha')
                             ->options(
                                 collect([
                                     'pt',
