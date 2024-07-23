@@ -50,7 +50,6 @@ class EditProfile extends Page
                             ->columnSpanFull(),
                         TextInput::make('name')
                             ->label('Nama Lengkap')
-                            ->disabled()
                             ->required()
                             ->columnSpanFull(),
 
@@ -79,7 +78,7 @@ class EditProfile extends Page
                             ->required()
                             ->rule(Password::default())
                             ->autocomplete('new-password')
-                            ->dehydrateStateUsing(fn ($state): string => Hash::make($state))
+                            ->dehydrateStateUsing(fn($state): string => Hash::make($state))
                             ->live(debounce: 500)
                             ->same('passwordConfirmation'),
                         TextInput::make('passwordConfirmation')
@@ -138,6 +137,9 @@ class EditProfile extends Page
 
     private function handleRecordUpdate(Model $record, array $data): Model
     {
+        if (array_key_exists('Current password', $data)) {
+            unset($data['Current password']);
+        }
         $record->update($data);
         return $record;
     }

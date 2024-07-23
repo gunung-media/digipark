@@ -85,7 +85,7 @@ class EditProfile extends Page implements HasForms
                                     'perusahaan',
                                     'joint venture',
                                     'pmdn'
-                                ])->mapWithKeys(fn ($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
+                                ])->mapWithKeys(fn($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
                                     ->toArray()
                             )
                             ->searchable()
@@ -123,7 +123,7 @@ class EditProfile extends Page implements HasForms
                             ->required()
                             ->rule(Password::default())
                             ->autocomplete('new-password')
-                            ->dehydrateStateUsing(fn ($state): string => Hash::make($state))
+                            ->dehydrateStateUsing(fn($state): string => Hash::make($state))
                             ->live(debounce: 500)
                             ->same('passwordConfirmation'),
                         TextInput::make('passwordConfirmation')
@@ -192,6 +192,9 @@ class EditProfile extends Page implements HasForms
         } catch (\Throwable $th) {
             //throw $th;
         }
+        if (array_key_exists('Current password', $data)) {
+            unset($data['Current password']);
+        }
         $record->update($data);
         return $record;
     }
@@ -241,7 +244,7 @@ class EditProfile extends Page implements HasForms
                                         'perusahaan',
                                         'joint venture',
                                         'pmdn'
-                                    ])->mapWithKeys(fn ($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
+                                    ])->mapWithKeys(fn($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
                                         ->toArray()
                                 )
                                 ->searchable()
