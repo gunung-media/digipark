@@ -69,7 +69,7 @@ class PlacementResource extends Resource
                                     "SD" => 'SD',
                                     "SMP" => 'SMP',
                                     "SMA/SMK" => 'SMA/SMK',
-                                    "Kuliah" => 'KuliahSMA',
+                                    "Kuliah" => 'Kuliah',
                                 ]),
                             Forms\Components\TextInput::make('phone')
                                 ->label('Nomor Kontak')
@@ -150,7 +150,7 @@ class PlacementResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'diterima' => 'gray',
                         'ditunda' => 'warning',
                         'diproses' => 'success',

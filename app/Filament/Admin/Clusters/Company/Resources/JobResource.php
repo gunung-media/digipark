@@ -86,7 +86,7 @@ class JobResource extends Resource
                                         "SD" => 'SD',
                                         "SMP" => 'SMP',
                                         "SMA/SMK" => 'SMA/SMK',
-                                        "Kuliah" => 'KuliahSMA',
+                                        "Kuliah" => 'Kuliah',
                                     ]),
                                 Forms\Components\TextInput::make('special')
                                     ->label('Keahlian Khusus'),
@@ -161,7 +161,7 @@ class JobResource extends Resource
                     ->boolean(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'diterima' => 'gray',
                         'ditunda' => 'warning',
                         'diproses' => 'success',
@@ -199,13 +199,13 @@ class JobResource extends Resource
                         $record->is_active = true;
                         $record->save();
                     })
-                    ->hidden(fn (Job $record): bool => $record->is_active),
+                    ->hidden(fn(Job $record): bool => $record->is_active),
                 Tables\Actions\Action::make('inactive')
                     ->action(function (Job $record) {
                         $record->is_active = false;
                         $record->save();
                     })
-                    ->visible(fn (Job $record): bool => $record->is_active),
+                    ->visible(fn(Job $record): bool => $record->is_active),
                 Tables\Actions\EditAction::make()->label("View")->icon('heroicon-o-eye'),
             ])
             ->bulkActions([
