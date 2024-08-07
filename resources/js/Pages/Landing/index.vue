@@ -1,19 +1,19 @@
 <script setup>
-import { ref } from 'vue';
-import { Head } from '@inertiajs/vue3'
-import './style.scss';
-import logo from '@/assets/images/logo.png';
-import gubWagub from '@/assets/images/gubWagub.png';
-import kadis from '@/assets/images/kadis.png';
-import mapIcon from '@/assets/icons/landing/map.png';
-import checkoutIcon from '@/assets/icons/landing/check-out.png';
-import statisticIcon from '@/assets/icons/landing/table.png';
-import proposalIcon from '@/assets/icons/landing/proposal.png';
-import reportIcon from '@/assets/icons/landing/report.png';
-import trackingIcon from '@/assets/icons/landing/tracking.png';
-import dpIcon from '@/assets/icons/landing/development-plan.png';
-import guideIcon from '@/assets/icons/landing/workshop.png';
-import helpingHandIcon from '@/assets/icons/landing/helping-hand.png';
+import { ref } from "vue";
+import { Head } from "@inertiajs/vue3";
+import "./style.scss";
+import logo from "@/assets/images/logo.png";
+import gubWagub from "@/assets/images/gubWagub.png";
+import kadis from "@/assets/images/kadis.png";
+import mapIcon from "@/assets/icons/landing/map.png";
+import checkoutIcon from "@/assets/icons/landing/check-out.png";
+import statisticIcon from "@/assets/icons/landing/table.png";
+import proposalIcon from "@/assets/icons/landing/proposal.png";
+import reportIcon from "@/assets/icons/landing/report.png";
+import trackingIcon from "@/assets/icons/landing/tracking.png";
+import dpIcon from "@/assets/icons/landing/development-plan.png";
+import guideIcon from "@/assets/icons/landing/workshop.png";
+import helpingHandIcon from "@/assets/icons/landing/helping-hand.png";
 
 const showSplash = ref(true);
 
@@ -23,49 +23,49 @@ setTimeout(() => {
 
 const menus = [
     {
-        href: route('portal.consultation'),
+        href: route("portal.consultation"),
         imgSrc: reportIcon,
-        title: "Layanan Konsultasi"
+        title: "Layanan Konsultasi",
     },
     {
-        href: route('portal.train-and-internship.index'),
+        href: route("portal.train-and-internship.index"),
         imgSrc: dpIcon,
-        title: "Pelatihan Dan Pemagangan"
+        title: "Pelatihan Dan Pemagangan",
     },
     {
-        href: route('filament.seeker.resources.claim-jhts.create'),
+        href: route("filament.seeker.resources.claim-jhts.create"),
         imgSrc: helpingHandIcon,
-        title: "Klaim JHT"
+        title: "Klaim JHT",
     },
     {
-        href: route('filament.company.resources.company-legalizations.create'),
+        href: route("filament.company.resources.company-legalizations.create"),
         imgSrc: statisticIcon,
-        title: "Pengesahan Peraturan Perusahaan"
+        title: "Pengesahan Peraturan Perusahaan",
     },
     {
-        href: route('filament.company.resources.company-laid-offs.create'),
+        href: route("filament.company.resources.company-laid-offs.create"),
         imgSrc: checkoutIcon,
-        title: "Laporan PHK"
+        title: "Laporan PHK",
     },
     {
-        href: route('filament.company.resources.jobs.create'),
+        href: route("filament.company.resources.jobs.create"),
         imgSrc: proposalIcon,
-        title: "Pelaporan Lowongan"
+        title: "Pelaporan Lowongan",
     },
     {
-        href: route('filament.company.resources.placements.create'),
+        href: route("filament.company.resources.placements.create"),
         imgSrc: mapIcon,
-        title: "Pelaporan Penempatan"
+        title: "Pelaporan Penempatan",
     },
     {
-        href: route('filament.company.resources.labor-demands.create'),
+        href: route("filament.company.resources.labor-demands.create"),
         imgSrc: trackingIcon,
-        title: "Permintaan Tenaga Kerja"
+        title: "Permintaan Tenaga Kerja",
     },
     {
-        href: route('filament.admin.info-employment'),
+        href: route("portal.info-employment"),
         imgSrc: guideIcon,
-        title: "Info Data Ketenagakerjaan"
+        title: "Info Data Ketenagakerjaan",
     },
 ];
 </script>
@@ -75,9 +75,9 @@ const menus = [
 
         <Head title="Landing" />
         <div class="splash" v-if="showSplash">
-            <div class="left-half" style='width:50%'></div>
+            <div class="left-half" style="width: 50%"></div>
             <div class="right-half" style="width: 50%"></div>
-            <img :src=logo alt="Kalimantan Tengah" class="kalteng-logo" />
+            <img :src="logo" alt="Kalimantan Tengah" class="kalteng-logo" />
         </div>
         <Transition>
             <div class="bg" v-if="!showSplash">
@@ -92,7 +92,9 @@ const menus = [
                                     <path d="M 0 0 L 5 23 L 0 47 L 245 47 L 240 23 L 245 0 z" fill="rgb(24,75,129)">
                                     </path>
                                 </svg>
-                                <div class="homeContentEnterLabel">MASUK WEBSITE</div>
+                                <div class="homeContentEnterLabel">
+                                    MASUK WEBSITE
+                                </div>
                             </a>
                         </div>
                         <div class="new-menus">
