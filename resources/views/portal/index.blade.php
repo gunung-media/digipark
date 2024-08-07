@@ -72,6 +72,20 @@
 
         <section class="section-padding section-bg" id="profil">
             <div class="container">
+
+                @if ($dashboard?->video_url)
+                    <div class="row">
+                        <div class="col-12">
+                            @php
+                                $videoUrl = explode('/', $dashboard->video_url);
+                            @endphp
+                            <iframe class="youtube-embed"
+                                src="https://www.youtube.com/embed/{{ $videoUrl[count($videoUrl) - 1] }}" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                @endif
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
@@ -401,6 +415,16 @@
     <link rel="stylesheet" href="{{ asset('portal/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('portal/css/owl.theme.green.css') }}">
     <link rel="stylesheet" href="{{ asset('portal/css/owl.theme.green.min.css') }}">
+
+    <style>
+        iframe.youtube-embed {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: none;
+        }
+    </style>
 @endsection
 
 @section('script')

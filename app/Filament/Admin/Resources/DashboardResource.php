@@ -47,6 +47,11 @@ class DashboardResource extends Resource
                             Forms\Components\Tabs\Tab::make('Data Tambahan')
                                 ->schema([
                                     Forms\Components\TextInput::make('address')->label('Alamat'),
+                                    Forms\Components\TextInput::make('video_url')
+                                        ->label('Video Sambutan')
+                                        ->prefixIcon('heroicon-s-play')
+                                        ->placeholder('https://youtu.be/Eo-KmOd3i7s')
+                                        ->hint('Gunakan link youtube'),
                                     Forms\Components\RichEditor::make('quote')
                                         ->default('"The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well."')
                                         ->columnSpanFull(),
