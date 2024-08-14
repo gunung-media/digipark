@@ -51,7 +51,7 @@ class Register extends BaseRegisterProfile
                             'perusahaan',
                             'joint venture',
                             'pmdn'
-                        ])->mapWithKeys(fn ($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
+                        ])->mapWithKeys(fn($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
                             ->toArray()
                     )
                     ->searchable()
@@ -111,14 +111,12 @@ class Register extends BaseRegisterProfile
 
         $this->sendEmailVerificationNotification($user);
 
-        session()->regenerate();
-
         return app(RegistrationResponse::class);
     }
 
     protected function handleRegistration(array $data): Model
     {
-        Notification::make()->title('Ada Komentar Baru')
+        Notification::make()->title('Ada Perusahaan Baru')
             ->body('Ada Perusahaan yang butuh di-validasi, ' . $data['name'])
             ->info()
             ->actions([

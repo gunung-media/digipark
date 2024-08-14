@@ -67,9 +67,9 @@ class Login extends AuthLogin
                 ->send();
             $this->throwFailureValidationException();
             Filament::auth()->logout();
+            session()->regenerate();
         }
 
-        session()->regenerate();
 
         return app(LoginResponse::class);
     }

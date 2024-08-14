@@ -42,7 +42,8 @@ class Company extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->is_active;
+        return true;
+        // return $thik->is_active;
     }
 
     public function scopeActive(Builder $query): void
