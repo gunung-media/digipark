@@ -58,7 +58,7 @@ class CompanyPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-                CanAccessPanel::class,
+                // CanAccessPanel::class,
             ])
             ->userMenuItems([
                 'Profile' => MenuItem::make()->url(fn() => EditProfile::getUrl())->icon('heroicon-o-user')->label("Profile"),
