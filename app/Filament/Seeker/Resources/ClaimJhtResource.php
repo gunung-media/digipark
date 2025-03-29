@@ -40,11 +40,11 @@ class ClaimJhtResource extends Resource
         return $form
             ->schema([
                 Section::make('Data Diri')->schema([
-                    Placeholder::make('Nama Lengkap')->content(fn () => $user->full_name),
-                    Placeholder::make('NIK')->label('NIK')->content(fn () => $user->additional->identity_number),
-                    Placeholder::make('Nomor Telpon')->content(fn () => $user->phone_number),
-                    Placeholder::make('Alamat')->content(fn () => $user->phone_number),
-                    Placeholder::make('Jenis Kelamin')->content(fn () => $user->gender === 'male' ? 'Laki-laki' : 'Perempuan'),
+                    Placeholder::make('Nama Lengkap')->content(fn() => $user->full_name),
+                    Placeholder::make('NIK')->label('NIK')->content(fn() => $user->additional->identity_number),
+                    Placeholder::make('Nomor Telpon')->content(fn() => $user->phone_number),
+                    Placeholder::make('Alamat')->content(fn() => $user->phone_number),
+                    Placeholder::make('Jenis Kelamin')->content(fn() => $user->gender === 'male' ? 'Laki-laki' : 'Perempuan'),
                 ])->columns(2),
                 Section::make('Klaim JHT')->schema([
                     Radio::make('type')
@@ -67,17 +67,17 @@ class ClaimJhtResource extends Resource
                 TextColumn::make('type')
                     ->label('Jenis Klaim')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'pengunduran_diri' => 'gray',
                         'pemutusan_hubungan_kerja' => 'danger',
                     })
-                    ->formatStateUsing(fn (string $state): string => __($state === 'pengunduran_diri' ? 'Pengunduran Diri' : 'Pemutusan Hubungan Kerja')),
+                    ->formatStateUsing(fn(string $state): string => __($state === 'pengunduran_diri' ? 'Pengunduran Diri' : 'Pemutusan Hubungan Kerja')),
                 TextColumn::make('created_at')
                     ->label('Dibuat pada')
                     ->date(),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'diterima' => 'gray',
                         'ditunda' => 'warning',
                         'diproses' => 'success',
