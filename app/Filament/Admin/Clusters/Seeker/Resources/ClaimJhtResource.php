@@ -100,9 +100,11 @@ class ClaimJhtResource extends Resource
                         ->schema([
                             ToggleButtons::make('status')
                                 ->options([
-                                    'diproses' => 'Diproses',
-                                    'ditunda' => 'Ditunda',
-                                    'ditolak' => 'Ditolak',
+                                    'diterima' => 'gray',
+                                    'ditunda' => 'warning',
+                                    'diproses' => 'success',
+                                    'ditolak' => 'danger',
+                                    'selesai' => 'info',
                                 ])
                                 ->inline()
                                 ->required(),
@@ -131,15 +133,15 @@ class ClaimJhtResource extends Resource
                 TextColumn::make('type')
                     ->label('Jenis Klaim')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'pengunduran_diri' => 'gray',
                         'pemutusan_hubungan_kerja' => 'danger',
                     })
-                    ->formatStateUsing(fn (string $state): string => __($state === 'pengunduran_diri' ? 'Pengunduran Diri' : 'Pemutusan Hubungan Kerja')),
+                    ->formatStateUsing(fn(string $state): string => __($state === 'pengunduran_diri' ? 'Pengunduran Diri' : 'Pemutusan Hubungan Kerja')),
                 TextColumn::make('created_at')->date(),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'diterima' => 'gray',
                         'ditunda' => 'warning',
                         'diproses' => 'success',

@@ -74,7 +74,7 @@ class CompanyLegalizationResource extends Resource
                                                 'perusahaan',
                                                 'joint venture',
                                                 'pmdn'
-                                            ])->mapWithKeys(fn ($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
+                                            ])->mapWithKeys(fn($val) => [$val => strlen($val) < 4 ? strtoupper($val) : ucfirst($val)])
                                                 ->toArray()
                                         )
                                         ->searchable()
@@ -253,11 +253,12 @@ class CompanyLegalizationResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'diterima' => 'gray',
                         'ditunda' => 'warning',
                         'diproses' => 'success',
                         'ditolak' => 'danger',
+                        'selesai' => 'info',
                     })
             ])
             ->filters([

@@ -211,6 +211,7 @@ class LaborDemandResource extends Resource
                         'ditunda' => 'warning',
                         'diproses' => 'success',
                         'ditolak' => 'danger',
+                        'selesai' => 'info',
                     })
             ])
             ->filters([

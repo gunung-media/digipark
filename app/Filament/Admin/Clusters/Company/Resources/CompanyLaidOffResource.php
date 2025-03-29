@@ -19,6 +19,8 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Collection;
+use ZipArchive;
 use Illuminate\Support\Facades\Blade;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
@@ -54,6 +56,7 @@ class CompanyLaidOffResource extends Resource
                                     'diproses' => 'Diproses',
                                     'ditunda' => 'Ditunda',
                                     'ditolak' => 'Ditolak',
+                                    'selesai' => 'Selesai'
                                 ])
                                 ->reactive()
                                 ->afterStateUpdated(function ($record, $state) {
@@ -183,6 +186,7 @@ class CompanyLaidOffResource extends Resource
                         'ditunda' => 'warning',
                         'diproses' => 'success',
                         'ditolak' => 'danger',
+                        'selesai' => 'info',
                     })
             ])
             ->filters([
@@ -205,6 +209,30 @@ class CompanyLaidOffResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('download')
+                        ->label('Download PDF')
+                        ->icon('heroicon-o-arrow-down-on-square')
+                        ->action(function (Collection $records) {
+                            $zipFileName = 'bulk-laporan-phk-' . now()->format('d_m_Y') . '.zip';
+                            $zipPath = storage_path("app/public/$zipFileName");
+
+                            $zip = new ZipArchive;
+                            if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
+                                foreach ($records as $record) {
+                                    $pdfContent = Pdf::loadHtml(
+                                        Blade::render('pdf.company-laid-off', ['record' => $record])
+                                    )->output();
+
+                                    $pdfFileName = "laporan-phk-{$record->id}-" . now()->format('d_m_Y') . ".pdf";
+                                    $zip->addFromString($pdfFileName, $pdfContent);
+                                }
+                                $zip->close();
+                            } else {
+                                return response()->json(['error' => 'Failed to create ZIP file'], 500);
+                            }
+
+                            return response()->download($zipPath)->deleteFileAfterSend(true);
+                        })
                 ]),
             ]);
     }
