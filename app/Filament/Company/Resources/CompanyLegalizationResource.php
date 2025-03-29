@@ -51,15 +51,10 @@ class CompanyLegalizationResource extends Resource
                             ->label('Tanggal berlakunya Peraturan Perusahaan yang baru')
                             ->required(),
                         TextInput::make('business_license_decision_letter')
-                            ->label('Surat Keputusan Ijin Usaha')
+                            ->label('NOMOR INDUK BERUSAHA(NIB)')
                             ->required(),
                         TextInput::make('labor_union_names')
-                            ->label('Nama-Nama Serikat Pekerja/Serikat Buruh di perusahaan (apabila ada)')
-                            ->required(),
-                        TextInput::make('bpjs_membership_number')
-                            ->label('Nomor Kepesertaan BPJS')
-                            ->required()
-                            ->columnSpanFull(),
+                            ->label('Nama-Nama Serikat Pekerja/Serikat Buruh di perusahaan (apabila ada)'),
                     ])->columns(2),
                     Tab::make('Karyawan')->schema([
                         TextInput::make('headquarters_male_employee_count')
@@ -172,7 +167,7 @@ class CompanyLegalizationResource extends Resource
                     ->date(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'diterima' => 'gray',
                         'ditunda' => 'warning',
                         'diproses' => 'success',
