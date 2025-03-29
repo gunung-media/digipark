@@ -3,8 +3,8 @@ import { ref } from "vue";
 import { Head } from "@inertiajs/vue3";
 import "./style.scss";
 import logo from "@/assets/images/logo.png";
-import gubWagub from "@/assets/images/gubWagub.png";
-import kadis from "@/assets/images/kadis.png";
+import personOne from "@/assets/images/person1.png";
+import personTwo from "@/assets/images/person2.png";
 import mapIcon from "@/assets/icons/landing/map.png";
 import checkoutIcon from "@/assets/icons/landing/check-out.png";
 import statisticIcon from "@/assets/icons/landing/table.png";
@@ -72,7 +72,6 @@ const menus = [
 
 <template>
     <div key="landing">
-
         <Head title="Landing" />
         <div class="splash" v-if="showSplash">
             <div class="left-half" style="width: 50%"></div>
@@ -85,12 +84,24 @@ const menus = [
                     <div class="landing-container">
                         <div class="heading">
                             <img :src="logo" alt="Kalimantan Tengah" />
-                            <a :href="route('portal')" class="homeContentEnterBtn">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 51" version="1.1">
-                                    <path d="M 3 4 L 8 27 L 3 51 L 248 51 L 243 27 L 248 4 z" fill="#000"
-                                        fill-opacity="0.2"></path>
-                                    <path d="M 0 0 L 5 23 L 0 47 L 245 47 L 240 23 L 245 0 z" fill="rgb(24,75,129)">
-                                    </path>
+                            <a
+                                :href="route('portal')"
+                                class="homeContentEnterBtn"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 248 51"
+                                    version="1.1"
+                                >
+                                    <path
+                                        d="M 3 4 L 8 27 L 3 51 L 248 51 L 243 27 L 248 4 z"
+                                        fill="#000"
+                                        fill-opacity="0.2"
+                                    ></path>
+                                    <path
+                                        d="M 0 0 L 5 23 L 0 47 L 245 47 L 240 23 L 245 0 z"
+                                        fill="rgb(24,75,129)"
+                                    ></path>
                                 </svg>
                                 <div class="homeContentEnterLabel">
                                     MASUK WEBSITE
@@ -98,7 +109,11 @@ const menus = [
                             </a>
                         </div>
                         <div class="new-menus">
-                            <a :href="menu.href" v-for="(menu, index) in menus" :key="index">
+                            <a
+                                :href="menu.href"
+                                v-for="(menu, index) in menus"
+                                :key="index"
+                            >
                                 <div class="circle">
                                     <img :src="menu.imgSrc" :alt="menu.title" />
                                 </div>
@@ -106,8 +121,16 @@ const menus = [
                             </a>
                         </div>
                         <div class="photos">
-                            <img :src="gubWagub" alt="Gubenur & Wakil Gubenur" class="gub-wagub" />
-                            <img :src="kadis" alt="Kepala Dinas" class="kadis" />
+                            <img
+                                :src="personOne"
+                                alt="Gubenur & Wakil Gubenur"
+                                class="gub-wagub"
+                            />
+                            <img
+                                :src="personTwo"
+                                alt="Kepala Dinas"
+                                class="kadis"
+                            />
                         </div>
                     </div>
                 </div>
