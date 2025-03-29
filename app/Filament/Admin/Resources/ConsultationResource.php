@@ -42,7 +42,8 @@ class ConsultationResource extends Resource
                     ->searchable()
                     ->default('-'),
                 TextColumn::make('email')->searchable(),
-                TextColumn::make('subject')->toggleable()->description(fn ($record) => $record->description),
+                TextColumn::make('phone_number')->label('No. Telepon/Wa')->searchable(),
+                TextColumn::make('subject')->toggleable()->description(fn($record) => $record->description),
                 TextColumn::make('created_at')->date()->sortable()
             ])
             ->filters([

@@ -31,6 +31,11 @@
                                     <input type="email" name="email" pattern="[^ @]*@[^ @]*" class="form-control"
                                         placeholder="Masukan Email" required>
                                 </div>
+                                <div class="col-12">
+                                    <label class="required">Nomor Telpon/Wa</label>
+                                    <input type="text" name="phone_number" class="form-control"
+                                        placeholder="Masukan Nomor Telpon/Wa" required>
+                                </div>
 
                                 <div class="col-12">
                                     <label class="required">Subject</label>
