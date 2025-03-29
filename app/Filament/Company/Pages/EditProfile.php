@@ -70,10 +70,8 @@ class EditProfile extends Page implements HasForms
                             ->label('No. Telp')
                             ->tel()
                             ->required(),
-                        TextInput::make('company_type')
-                            ->label('Jenis/ Bidang Usaha'),
-                        Select::make('company_status')
-                            ->label('Status Perusahaan')
+                        Select::make('company_type')
+                            ->label('Jenis/ Bidang Usaha')
                             ->options(
                                 collect([
                                     'pt',
@@ -89,7 +87,10 @@ class EditProfile extends Page implements HasForms
                                     ->toArray()
                             )
                             ->searchable()
-                            ->default(1),
+                            ->required(),
+                        TextInput::make('-')
+                            ->label('Jumlah Karyawan')
+                            ->readOnly(),
                         FileUpload::make('image')
                             ->label('Gambar')
                             ->disk('public')

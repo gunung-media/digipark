@@ -129,6 +129,29 @@ class CompanyLaidOffResource extends Resource
                             ->columnSpanFull(),
                         Forms\Components\FileUpload::make('doc_layoff_notification')
                             ->label('Surat Pemberitahuan PHK')
+                            ->required()
+                            ->disk('public')
+                            ->directory('company/laid-off')
+                            ->downloadable()
+                            ->columnSpanFull(),
+                        Forms\Components\FileUpload::make('doc_participant_card')
+                            ->label('Kartu Peserta')
+                            ->required()
+                            ->disk('public')
+                            ->directory('company/laid-off')
+                            ->downloadable()
+                            ->columnSpanFull(),
+                        Forms\Components\FileUpload::make('doc_bpjs_card')
+                            ->label('BPJS Jamsotek')
+                            ->required()
+                            ->disk('public')
+                            ->directory('company/laid-off')
+                            ->downloadable()
+                            ->columnSpanFull(),
+                        Forms\Components\FileUpload::make('doc_bpjs_card')
+                            ->label('Identitas')
+                            ->helperText('KTP, SIM, Passport, Dll.')
+                            ->required()
                             ->disk('public')
                             ->directory('company/laid-off')
                             ->downloadable()
@@ -155,7 +178,7 @@ class CompanyLaidOffResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'diterima' => 'gray',
                         'ditunda' => 'warning',
                         'diproses' => 'success',
