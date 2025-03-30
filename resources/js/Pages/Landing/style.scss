@@ -57,7 +57,7 @@ $bg-image: url("@/assets/images/bg1.jpg");
         position: fixed;
         bottom: 0;
         left: 0;
-        z-index: 2;
+        z-index: 101;
         margin: 0 0 0rem -1rem;
         width: 350px;
 
@@ -70,7 +70,7 @@ $bg-image: url("@/assets/images/bg1.jpg");
         position: fixed;
         bottom: 0;
         right: 0;
-        z-index: 2;
+        z-index: 101;
         margin: 0 -1rem 0rem 0rem;
         width: 350px;
 
@@ -120,6 +120,10 @@ $bg-image: url("@/assets/images/bg1.jpg");
         align-items: center;
         gap: 8px;
 
+        @include lt-sm {
+            width: 250px;
+        }
+
         img {
             width: 100%;
 
@@ -166,6 +170,10 @@ $bg-image: url("@/assets/images/bg1.jpg");
 
             svg {
                 width: 100%;
+
+                @include lt-sm {
+                    width: 80%;
+                }
             }
 
             .homeContentEnterLabel {
@@ -176,6 +184,10 @@ $bg-image: url("@/assets/images/bg1.jpg");
                 font-weight: 900;
                 font-size: 12pt;
 
+                @include lt-sm {
+                    font-size: 10pt;
+                }
+
                 &::after,
                 &::before {
                     content: "";
@@ -185,6 +197,10 @@ $bg-image: url("@/assets/images/bg1.jpg");
                     height: 0.35em;
                     border-radius: 0.5em;
                     background-color: #fdf2d3;
+
+                    @include lt-sm {
+                        display: none;
+                    }
                 }
 
                 &::before {
@@ -245,7 +261,7 @@ $bg-image: url("@/assets/images/bg1.jpg");
     max-width: 25rem;
 
     @include lt-sm {
-        margin: 2rem 0.5rem;
+        margin: 0.5rem;
     }
 
     a {
@@ -266,6 +282,7 @@ $bg-image: url("@/assets/images/bg1.jpg");
 
         @include lt-sm {
             padding: 0.5rem;
+            font-size: 8px;
         }
 
         .circle {
@@ -284,6 +301,10 @@ $bg-image: url("@/assets/images/bg1.jpg");
 
             img {
                 width: 49px;
+
+                @include lt-sm {
+                    width: 30px;
+                }
             }
 
             &:hover {
