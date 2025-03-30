@@ -1,6 +1,6 @@
-@import '@/assets/media-queries.scss';
+@import "@/assets/media-queries.scss";
 
-$bg-image: url('@/assets/images/bg1.jpg');
+$bg-image: url("@/assets/images/bg1.jpg");
 
 .splash {
     position: relative;
@@ -13,7 +13,7 @@ $bg-image: url('@/assets/images/bg1.jpg');
     display: flex;
 
     .left-half {
-        background: url('@/assets/images/left-splash.jpg');
+        background: url("@/assets/images/left-splash.jpg");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -21,7 +21,7 @@ $bg-image: url('@/assets/images/bg1.jpg');
     }
 
     .right-half {
-        background: url('@/assets/images/right-splash.jpg');
+        background: url("@/assets/images/right-splash.jpg");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -62,11 +62,8 @@ $bg-image: url('@/assets/images/bg1.jpg');
         width: 350px;
 
         @include lt-sm {
-            position: relative;
-            bottom: 0;
             width: 200px;
         }
-
     }
 
     .kadis {
@@ -78,8 +75,6 @@ $bg-image: url('@/assets/images/bg1.jpg');
         width: 350px;
 
         @include lt-sm {
-            position: relative;
-            bottom: 0;
             width: 200px;
         }
     }
@@ -151,7 +146,7 @@ $bg-image: url('@/assets/images/bg1.jpg');
         }
 
         h5 {
-            color: #FFF;
+            color: #fff;
             font-size: 15px;
             font-weight: 700;
 
@@ -177,7 +172,7 @@ $bg-image: url('@/assets/images/bg1.jpg');
                 margin-top: -2.5em;
                 -webkit-font-smoothing: antialiased;
                 text-align: center;
-                color: #FFF;
+                color: #fff;
                 font-weight: 900;
                 font-size: 12pt;
 
@@ -218,30 +213,29 @@ $bg-image: url('@/assets/images/bg1.jpg');
             font-style: normal;
             font-weight: 700;
             width: 400px;
-            padding: .5rem 5rem;
+            padding: 0.5rem 5rem;
             justify-content: center;
             align-items: center;
             gap: 10px;
             border-radius: 20px;
             border: 1px solid #000;
-            background: #B9CBEA;
+            background: #b9cbea;
             box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
             transition-property: all;
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
             transition-duration: 150ms;
 
             &:hover {
-                background: darken(#B9CBEA, 10%);
+                background: darken(#b9cbea, 10%);
             }
         }
     }
 }
 
-
 .new-menus {
     margin-top: 1rem;
     background-color: rgba(0, 0, 0, 0.5);
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 10px;
     display: flex;
     align-content: center;
@@ -251,7 +245,7 @@ $bg-image: url('@/assets/images/bg1.jpg');
     max-width: 25rem;
 
     @include lt-sm {
-        margin: 2rem;
+        margin: 2rem 0.5rem;
     }
 
     a {
@@ -270,18 +264,22 @@ $bg-image: url('@/assets/images/bg1.jpg');
         justify-content: center;
         padding: 1rem;
 
+        @include lt-sm {
+            padding: 0.5rem;
+        }
+
         .circle {
             text-align: center;
             background-color: #fff;
             padding: 1rem;
             border-radius: 20rem;
-            margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
             transition-property: all;
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
             transition-duration: 150ms;
 
             @include lt-sm {
-                padding: .5rem;
+                padding: 0.5rem;
             }
 
             img {
@@ -297,6 +295,5 @@ $bg-image: url('@/assets/images/bg1.jpg');
             max-width: 5.7rem;
             text-align: center;
         }
-
     }
 }
