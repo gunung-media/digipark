@@ -12,6 +12,7 @@ class JobApply extends ChartWidget
 {
     protected static ?string $heading = 'Jumlah Pendaftar';
 
+    static protected int|null $sort = 2;
     protected int | string | array $columnSpan = 2;
 
     protected function getData(): array
@@ -30,10 +31,10 @@ class JobApply extends ChartWidget
             'datasets' => [
                 [
                     'label' => 'Pendaftar',
-                    'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
+                    'data' => $data->map(fn(TrendValue $value) => $value->aggregate),
                 ],
             ],
-            'labels' => $data->map(fn (TrendValue $value) => Carbon::parse($value->date)->format('d M, Y')),
+            'labels' => $data->map(fn(TrendValue $value) => Carbon::parse($value->date)->format('d M, Y')),
         ];
     }
 
