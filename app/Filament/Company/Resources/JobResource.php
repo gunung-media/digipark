@@ -123,11 +123,12 @@ class JobResource extends Resource
                     ->boolean(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'diterima' => 'gray',
                         'ditunda' => 'warning',
                         'diproses' => 'success',
                         'ditolak' => 'danger',
+                        'selesai' => 'info',
                     })
             ])
             ->filters([
@@ -142,6 +143,7 @@ class JobResource extends Resource
                         'ditunda' => 'Ditunda',
                         'diproses' => 'Diproses',
                         'ditolak' => 'Ditolak',
+                        'selesai' => 'Selesai'
                     ]),
             ])
             ->actions([

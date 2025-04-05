@@ -92,7 +92,7 @@ class LaborDemandResource extends Resource
                                     'Mingguan',
                                     'Bulanan'
                                 ])
-                                    ->mapWithKeys(fn ($val) => [$val => $val])
+                                    ->mapWithKeys(fn($val) => [$val => $val])
                                     ->toArray()),
                             Forms\Components\TextInput::make('salary')
                                 ->label('Gaji / Upah Sebulan')
@@ -106,7 +106,7 @@ class LaborDemandResource extends Resource
                                     'Waktu Tak Tertentu',
                                     'Waktu Tertentu',
                                 ])
-                                    ->mapWithKeys(fn ($val) => [$val => $val])
+                                    ->mapWithKeys(fn($val) => [$val => $val])
                                     ->toArray()),
                             Forms\Components\TextInput::make('total_hours_per_week')
                                 ->label('Jumlah jam kerja dalam seminggu')
@@ -133,7 +133,7 @@ class LaborDemandResource extends Resource
                                     'Premi/Bonus',
                                     'Hari Tua',
                                 ])
-                                    ->mapWithKeys(fn ($val) => [$val => $val])
+                                    ->mapWithKeys(fn($val) => [$val => $val])
                                     ->toArray()),
                             TinyEditor::make('work_description')
                                 ->label('Uraian Tugas')
@@ -169,11 +169,12 @@ class LaborDemandResource extends Resource
                     ->date(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'diterima' => 'gray',
                         'ditunda' => 'warning',
                         'diproses' => 'success',
                         'ditolak' => 'danger',
+                        'selesai' => 'info',
                     })
             ])
             ->filters([
@@ -183,6 +184,7 @@ class LaborDemandResource extends Resource
                         'ditunda' => 'Ditunda',
                         'diproses' => 'Diproses',
                         'ditolak' => 'Ditolak',
+                        'selesai' => 'Selesai'
                     ]),
             ])
             ->actions([

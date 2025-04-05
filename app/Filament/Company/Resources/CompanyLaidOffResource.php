@@ -155,6 +155,7 @@ class CompanyLaidOffResource extends Resource
                         'ditunda' => 'warning',
                         'diproses' => 'success',
                         'ditolak' => 'danger',
+                        'selesai' => 'info',
                     })
             ])
             ->filters([
@@ -164,6 +165,7 @@ class CompanyLaidOffResource extends Resource
                         'ditunda' => 'Ditunda',
                         'diproses' => 'Diproses',
                         'ditolak' => 'Ditolak',
+                        'selesai' => 'Selesai'
                     ]),
             ])
             ->actions([
