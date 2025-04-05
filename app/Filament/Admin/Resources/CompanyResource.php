@@ -136,7 +136,11 @@ class CompanyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            // RelationManagers\JobsRelationManager::class,
+            CompanyResource\RelationManagers\CompanyLaidOffsRelationManager::class,
+            CompanyResource\RelationManagers\CompanyLegalizationRelationManager::class,
+            CompanyResource\RelationManagers\JobsRelationManager::class,
+            CompanyResource\RelationManagers\LaborDemandRelationManager::class,
+            CompanyResource\RelationManagers\PlacementRelationManager::class,
         ];
     }
 

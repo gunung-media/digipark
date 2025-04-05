@@ -26,6 +26,11 @@ class Company extends Authenticatable implements FilamentUser
 
     protected $with = ['legalization'];
 
+    public function laidOffs(): HasMany
+    {
+        return $this->hasMany(CompanyLaidOff::class);
+    }
+
     public function jobs(): HasMany
     {
         return $this->hasMany(Job::class);
@@ -39,6 +44,11 @@ class Company extends Authenticatable implements FilamentUser
     public function legalization(): HasOne
     {
         return $this->hasOne(CompanyLegalization::class);
+    }
+
+    public function laborDemands(): HasMany
+    {
+        return $this->hasMany(LaborDemand::class);
     }
 
     public function canAccessPanel(Panel $panel): bool
