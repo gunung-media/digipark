@@ -2,6 +2,7 @@
 
 namespace App\Models\Company;
 
+use App\Models\Seeker\Seeker;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Builder;
@@ -49,5 +50,10 @@ class Company extends Authenticatable implements FilamentUser
     public function scopeActive(Builder $query): void
     {
         $query->where('is_active', 1);
+    }
+
+    public function seekers(): HasMany
+    {
+        return $this->hasMany(Seeker::class);
     }
 }

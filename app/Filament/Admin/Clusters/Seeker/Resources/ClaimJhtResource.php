@@ -100,11 +100,11 @@ class ClaimJhtResource extends Resource
                         ->schema([
                             ToggleButtons::make('status')
                                 ->options([
-                                    'diterima' => 'gray',
-                                    'ditunda' => 'warning',
-                                    'diproses' => 'success',
-                                    'ditolak' => 'danger',
-                                    'selesai' => 'info',
+                                    'diproses' => 'Diproses',
+                                    'ditunda' => 'Ditunda',
+                                    'ditolak' => 'Ditolak',
+                                    'diterima' => 'Diterima',
+                                    'selesai' => 'Selesai'
                                 ])
                                 ->inline()
                                 ->required(),

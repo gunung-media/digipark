@@ -2,9 +2,11 @@
 
 namespace App\Models\Seeker;
 
+use App\Models\Company\Company;
 use App\Models\Company\Job;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +22,7 @@ class Seeker extends Authenticatable implements FilamentUser, HasName
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $with = ['additional'];
+    protected $with = ['additional', 'company'];
 
     public function getFilamentName(): string
     {
@@ -45,5 +47,10 @@ class Seeker extends Authenticatable implements FilamentUser, HasName
     public function claimJhts(): HasMany
     {
         return $this->hasMany(ClaimJht::class);
+    }
+
+    public function company(): BelongsTo|null
+    {
+        return $this->belongsTo(Company::class);
     }
 }

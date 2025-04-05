@@ -62,8 +62,7 @@ class EditProfile extends Page
                                             ->label('Nama Lengkap')
                                             ->required(),
                                         TextInput::make('additional.identity_number')
-                                            ->label('NIK')
-                                            ->required(),
+                                            ->label('NIK'),
                                         TextInput::make('phone_number')
                                             ->label('No. Telpon')
                                             ->required(),
@@ -75,8 +74,7 @@ class EditProfile extends Page
                                             ])
                                             ->required(),
                                         TextInput::make('additional.birth_place')
-                                            ->label('Tempat Lahir')
-                                            ->required(),
+                                            ->label('Tempat Lahir'),
                                         DatePicker::make('date_of_birth')
                                             ->label('Tanggal Lahir')
                                             ->required(),
@@ -84,14 +82,11 @@ class EditProfile extends Page
                                             ->label('Alamat')
                                             ->required(),
                                         TextInput::make('additional.postal_code')
-                                            ->label('Kode Pos')
-                                            ->required(),
+                                            ->label('Kode Pos'),
                                         TextInput::make('additional.rt')
-                                            ->label('RT')
-                                            ->required(),
+                                            ->label('RT'),
                                         TextInput::make('additional.rw')
-                                            ->label('RW')
-                                            ->required(),
+                                            ->label('RW'),
                                     ])
                                     ->columns(2),
                                 Tab::make('Dokumen Tambahan')
@@ -120,6 +115,15 @@ class EditProfile extends Page
                                             ->downloadable(),
                                     ])
                                     ->columns(2),
+
+                                Tab::make('Perusahaan')
+                                    ->schema([
+                                        Select::make('company_id')
+                                            ->label('Perusahaan')
+                                            ->relationship('company', 'name')
+                                            ->hint('Perusahan tempat pekerjaan saat ini')
+                                            ->nullable(),
+                                    ]),
                             ])
                     ])
             ])
