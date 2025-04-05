@@ -98,20 +98,21 @@ class Applicant extends ManageRelatedRecords
                         ];
                     })
                     ->action(function ($data, $record) {
-
                         if ($record->update([
                             'is_accepted' => true,
                             'company_message' => $data['message'],
-                        ]))
+                        ])) {
+                            Seeker::find($record->seeker_id)->update(['company_id' => $record->job->company_id]);
                             Notification::make()
                                 ->success()
                                 ->title('Selamat anda telah diterima!')
                                 ->body($data['message'])
                                 ->sendToDatabase(Seeker::find($record->seeker_id));
+                        }
                     })
                     ->requiresConfirmation()
                     ->modalWidth(MaxWidth::ExtraLarge)
-                    ->hidden(fn ($record) => $record->is_accepted)
+                    ->hidden(fn($record) => $record->is_accepted)
             ])
             ->bulkActions([]);
     }
