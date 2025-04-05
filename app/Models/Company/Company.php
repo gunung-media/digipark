@@ -24,7 +24,7 @@ class Company extends Authenticatable implements FilamentUser
         'is_active' => 'boolean',
     ];
 
-    protected $with = ['legalization'];
+    protected $with = ['laidOffs', 'jobs', 'placements', 'legalization', 'laborDemands'];
 
     public function laidOffs(): HasMany
     {
