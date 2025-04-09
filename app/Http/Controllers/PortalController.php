@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company\Company;
 use App\Models\Admin\DepartementMember;
+use App\Models\Admin\Menu\AdditionalLink;
 use App\Models\Company\Job;
 use App\Models\Admin\News\News;
 use App\Models\Admin\News\NewsCategory;
@@ -20,10 +21,11 @@ class PortalController extends Controller
         $categories =  NewsCategory::with('news')->get();
         $jobs = Job::active()->with('company')->limit('3')->latest()->get();
         $departementMembers = DepartementMember::active()->get();
+        $additionalLinks = AdditionalLink::all();
         $total = [
             'pekerjaan' => Job::active()->count(),
             'perusahaan' => Company::count(),
         ];
-        return view('portal.index', compact('news', 'categories', 'jobs', 'total', 'departementMembers'));
+        return view('portal.index', compact('news', 'categories', 'jobs', 'total', 'departementMembers', 'additionalLinks'));
     }
 }

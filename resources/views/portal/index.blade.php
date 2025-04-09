@@ -405,6 +405,29 @@
                 </div>
             </div>
         </section>
+
+        <section class="section-padding section-bg">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+
+                    <div class="col-lg-12 col-12 text-center mb-4">
+                        <h2>Akses Cepat</h2>
+                    </div>
+
+                    @foreach ($additionalLinks as $al)
+                        <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
+                            <div class="featured-block d-flex justify-content-center align-items-center">
+                                <a href="{{ $al->url }}" class="d-block" target="_blank">
+                                    <img src="{{ asset('storage/' . $al->doc_picture) }}"
+                                        class="featured-block-image img-fluid" alt="">
+                                    <p class="featured-block-text">{{ $al->name }}</p>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
     </main>
 @endsection
 
