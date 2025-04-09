@@ -20,7 +20,7 @@ class InfoEmploymentBarChart extends ChartWidget
             Carbon::parse($this->filters['month']) :
             now();
 
-        return  "Jumlah Pengangguran Tahun {$month->format('Y')}";
+        return  "Info Per Tahun {$month->format('Y')} (Bar chart)";
     }
 
     protected function getData(): array

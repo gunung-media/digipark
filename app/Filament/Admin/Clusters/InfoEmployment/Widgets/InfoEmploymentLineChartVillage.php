@@ -19,7 +19,7 @@ class InfoEmploymentLineChartVillage extends ChartWidget
             Carbon::parse($this->filters['month']) :
             now();
 
-        return  "Jumlah Pengangguran Per Kecamatan Bulan {$month->format('F')}";
+        return  "Info Per Kecamatan Bulan {$month->format('F')} (Line chart)";
     }
 
     protected function getData(): array
