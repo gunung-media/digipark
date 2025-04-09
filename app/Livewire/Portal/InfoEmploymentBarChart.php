@@ -16,8 +16,8 @@ class InfoEmploymentBarChart extends ChartWidget
 
     public function getHeading(): string | Htmlable | null
     {
-        $month = !is_null($this->filters['month'] ?? null) ?
-            Carbon::parse($this->filters['month']) :
+        $month = !is_null($_GET['month'] ?? null) ?
+            Carbon::parse($_GET['month']) :
             now();
 
         return  "Info Per Tahun {$month->format('Y')} (Bar chart)";
@@ -25,8 +25,8 @@ class InfoEmploymentBarChart extends ChartWidget
 
     protected function getData(): array
     {
-        $month = !is_null($this->filters['month'] ?? null) ?
-            Carbon::parse($this->filters['month']) :
+        $month = !is_null($_GET['month'] ?? null) ?
+            Carbon::parse($_GET['month']) :
             now();
 
         $unemployed = Trend::query(InfoEmployment::query()

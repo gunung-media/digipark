@@ -15,8 +15,8 @@ class InfoEmploymentLineChartVillage extends ChartWidget
 
     public function getHeading(): string | Htmlable | null
     {
-        $month = !is_null($this->filters['month'] ?? null) ?
-            Carbon::parse($this->filters['month']) :
+        $month = !is_null($_GET['month'] ?? null) ?
+            Carbon::parse($_GET['month']) :
             now();
 
         return  "Info Per Kecamatan Bulan {$month->format('F')} (Line chart)";
@@ -24,8 +24,8 @@ class InfoEmploymentLineChartVillage extends ChartWidget
 
     protected function getData(): array
     {
-        $month = !is_null($this->filters['month'] ?? null) ?
-            Carbon::parse($this->filters['month']) :
+        $month = !is_null($_GET['month'] ?? null) ?
+            Carbon::parse($_GET['month']) :
             now();
 
         $results = District::select(

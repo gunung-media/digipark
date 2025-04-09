@@ -39,10 +39,18 @@
 
                                  </div>
                                  <div class="news-block-body">
+
+                                     <form method="GET" class="mb-4">
+                                         <label for="monthFilter" class="form-label">Pilih Bulan:</label>
+                                         <input type="month" id="monthFilter" name="month" class="form-control"
+                                             value="{{ request('month', now()->format('Y-m')) }}"
+                                             onchange="this.form.submit()">
+                                     </form>
                                      @livewire(\App\Livewire\Portal\InfoEmploymentBarChart::class)
                                      @livewire(\App\Livewire\Portal\InfoEmploymentLineChart::class)
                                      @livewire(\App\Livewire\Portal\InfoEmploymentBarChartVillage::class)
                                      @livewire(\App\Livewire\Portal\InfoEmploymentLineChartVillage::class)
+
                                  </div>
                              </div>
                          </div>
