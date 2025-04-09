@@ -43,18 +43,30 @@ class InfoEmploymentResource extends Resource
                         ->live(),
                     Select::make('village_code')
                         ->label('Kelurahan/Desa')
-                        ->options(fn (Get $get): Collection => Village::query()
+                        ->options(fn(Get $get): Collection => Village::query()
                             ->where('district_code', $get('district'))
                             ->pluck('name', 'code'))
                         ->searchable()
                         ->required(),
-                ])->columns(2)->disabled(fn ($record) => !is_null($record)),
+                ])->columns(2)->disabled(fn($record) => !is_null($record)),
                 Section::make()->schema([
                     DatePicker::make('date_in')
                         ->label('Tanggal Perolehan Data')
                         ->required(),
-                    TextInput::make('count')
+                    TextInput::make('unemployed_count')
                         ->label('Jumlah Pengangguran')
+                        ->numeric()
+                        ->required(),
+                    TextInput::make('seeker_count')
+                        ->label('Jumlah Pencari Kerja')
+                        ->numeric()
+                        ->required(),
+                    TextInput::make('job_count')
+                        ->label('Jumlah Lowongan Pekerjaan')
+                        ->numeric()
+                        ->required(),
+                    TextInput::make('placement_count')
+                        ->label('Jumlah Penempatan Kerja')
                         ->numeric()
                         ->required(),
                 ]),
@@ -76,8 +88,20 @@ class InfoEmploymentResource extends Resource
                     ->date()
                     ->badge()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('count')
+                Tables\Columns\TextColumn::make('unemployed_count')
                     ->label('Jumlah Pengangguran')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('seeker_count')
+                    ->label('Jumlah Pencari Kerja')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('job_count')
+                    ->label('Jumlah Lowongan Pekerjaan')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('placement_count')
+                    ->label('Jumlah Penempatan Kerja')
                     ->sortable()
                     ->searchable(),
             ])
