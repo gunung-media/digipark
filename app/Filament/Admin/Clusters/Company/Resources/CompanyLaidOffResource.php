@@ -119,7 +119,7 @@ class CompanyLaidOffResource extends Resource
                     ])->columns(2),
                     Tab::make('Dokumen')->schema([
                         Forms\Components\FileUpload::make('doc_joint_agreement')
-                            ->label('Surat Perjanjian Bersama')
+                            ->label('Surat Perjanjian Kerja')
                             ->disk('public')
                             ->directory('company/laid-off')
                             ->downloadable()
