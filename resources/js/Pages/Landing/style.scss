@@ -1,6 +1,6 @@
 @import "@/assets/media-queries.scss";
 
-$bg-image: url("@/assets/images/bg1.jpg");
+$bg-image: url("@/assets/images/bg.jpg");
 
 .splash {
     position: relative;
@@ -12,20 +12,22 @@ $bg-image: url("@/assets/images/bg1.jpg");
     margin: 0;
     display: flex;
 
-    .left-half {
-        background: url("@/assets/images/left-splash.jpg");
+    .left-half,
+    .right-half {
+        flex: 1;
+        background-image: $bg-image;
         background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
+        background-size: 200% 100%;
+        background-position-y: center;
         filter: brightness(50%);
     }
 
+    .left-half {
+        background-position-x: left;
+    }
+
     .right-half {
-        background: url("@/assets/images/right-splash.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        filter: brightness(50%);
+        background-position-x: right;
     }
 
     .kalteng-logo {
