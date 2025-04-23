@@ -13,27 +13,19 @@ return new class extends Migration
     {
         Schema::create('institutional_approvals', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name');
             $table->string('name');
+            $table->string('address');
             $table->string('phone');
-            $table->string('company_type');
-            $table->enum('company_status', [
-                'pt',
-                'cv',
-                'perorangan',
-                'badan usaha negara',
-                'parsero',
-                'pma',
-                'perusahaan',
-                'joint venture',
-                'pmdn'
-            ])->nullable();
             $table->string('permission_number');
             $table->date('permission_date');
             $table->string('bpjs_number');
 
             $table->integer('male_employee');
             $table->integer('female_employee');
+
+            $table->string('doc_bap');
+            $table->string('doc_proofment');
+            $table->string('doc_administrator');
 
             $table->binary('signature')->nullable();
             $table->enum('status', ['diterima', 'diproses', 'ditunda', 'ditolak', 'selesai'])->nullable()->default('diterima');
