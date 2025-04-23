@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('requester_name');
             $table->string('requester_position');
             $table->string('labor_union_name');
-            $table->string('labor_union_location');
+            $table->string('labor_union_location')->nullable();
             $table->string('labor_union_address');
             $table->string('phone_number');
             $table->string('company_email')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->string('doc_member_list');
             $table->string('doc_budget');
-            $table->string('doc_arrangment');
+            $table->string('doc_arrangement');
             $table->string('doc_photocopies');
 
             $table->binary('signature')->nullable();
