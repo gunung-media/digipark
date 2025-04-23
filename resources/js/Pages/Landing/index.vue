@@ -67,11 +67,33 @@ const menus = [
         imgSrc: guideIcon,
         title: "Info Data Ketenagakerjaan",
     },
+
+    {
+        href: route(
+            "filament.company.resources.labor-union-registrations.create",
+        ),
+        imgSrc: guideIcon,
+        title: "Pendaftaran Serikat Pekerja",
+    },
+    {
+        href: route(
+            "filament.company.resources.institutional-approvals.create",
+        ),
+        imgSrc: guideIcon,
+        title: "Pengesahan Lembaga LKS BIPARTIT",
+    },
+    {
+        href: "https://account.kemnaker.go.id/register",
+        imgSrc: guideIcon,
+        title: "Pendaftaran AK 1",
+        isExternal: true,
+    },
 ];
 </script>
 
 <template>
     <div key="landing">
+
         <Head title="Landing" />
         <div class="splash" v-if="showSplash">
             <div class="left-half" style="width: 50%"></div>
@@ -84,24 +106,12 @@ const menus = [
                     <div class="landing-container">
                         <div class="heading">
                             <img :src="logo" alt="Kalimantan Tengah" />
-                            <a
-                                :href="route('portal')"
-                                class="homeContentEnterBtn"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 248 51"
-                                    version="1.1"
-                                >
-                                    <path
-                                        d="M 3 4 L 8 27 L 3 51 L 248 51 L 243 27 L 248 4 z"
-                                        fill="#000"
-                                        fill-opacity="0.2"
-                                    ></path>
-                                    <path
-                                        d="M 0 0 L 5 23 L 0 47 L 245 47 L 240 23 L 245 0 z"
-                                        fill="rgb(24,75,129)"
-                                    ></path>
+                            <a :href="route('portal')" class="homeContentEnterBtn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 51" version="1.1">
+                                    <path d="M 3 4 L 8 27 L 3 51 L 248 51 L 243 27 L 248 4 z" fill="#000"
+                                        fill-opacity="0.2"></path>
+                                    <path d="M 0 0 L 5 23 L 0 47 L 245 47 L 240 23 L 245 0 z" fill="rgb(24,75,129)">
+                                    </path>
                                 </svg>
                                 <div class="homeContentEnterLabel">
                                     MASUK WEBSITE
@@ -109,28 +119,17 @@ const menus = [
                             </a>
                         </div>
                         <div class="new-menus">
-                            <a
-                                :href="menu.href"
-                                v-for="(menu, index) in menus"
-                                :key="index"
-                            >
+                            <a :href="menu.href" v-for="(menu, index) in menus" :key="index">
                                 <div class="circle">
-                                    <img :src="menu.imgSrc" :alt="menu.title" />
+                                    <img :src="menu.imgSrc" :alt="menu.title" :target="menu.isExternal ? '_blank' : null
+                                        " />
                                 </div>
                                 <p>{{ menu.title }}</p>
                             </a>
                         </div>
                         <div class="photos">
-                            <img
-                                :src="personOne"
-                                alt="Gubenur & Wakil Gubenur"
-                                class="gub-wagub"
-                            />
-                            <img
-                                :src="personTwo"
-                                alt="Kepala Dinas"
-                                class="kadis"
-                            />
+                            <img :src="personOne" alt="Gubenur & Wakil Gubenur" class="gub-wagub" />
+                            <img :src="personTwo" alt="Kepala Dinas" class="kadis" />
                         </div>
                     </div>
                 </div>

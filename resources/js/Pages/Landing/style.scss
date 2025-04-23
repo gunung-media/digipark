@@ -48,36 +48,43 @@ $bg-image: url("@/assets/images/bg.jpg");
 .photos {
     @include lt-sm {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
-        align-items: center;
-        margin: auto;
+        align-items: flex-end;
         width: 100%;
+        margin-top: 1rem;
+        gap: 1rem;
+        position: relative;
     }
 
-    .gub-wagub {
+    .gub-wagub,
+    .kadis {
         position: fixed;
         bottom: 0;
-        left: 0;
         z-index: 101;
-        margin: 0 0 0rem -1rem;
         width: 350px;
 
         @include lt-sm {
-            width: 200px;
+            position: static; // <-- remove fixed on mobile
+            width: 45%; // or a fixed px size like 150px
+        }
+    }
+
+    .gub-wagub {
+        left: 0;
+        margin: 0 0 0rem -1rem;
+
+        @include lt-sm {
+            margin: 0;
         }
     }
 
     .kadis {
-        position: fixed;
-        bottom: 0;
         right: 0;
-        z-index: 101;
         margin: 0 -1rem 0rem 0rem;
-        width: 350px;
 
         @include lt-sm {
-            width: 200px;
+            margin: 0;
         }
     }
 }
@@ -260,10 +267,15 @@ $bg-image: url("@/assets/images/bg.jpg");
     align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 25rem;
+    max-width: 40rem;
 
     @include lt-sm {
         margin: 0.5rem;
+        max-width: 100%;
+        justify-content: space-between; // more natural row filling
+        column-gap: 0.5rem;
+        row-gap: 0.5rem;
+        padding: 0.5rem;
     }
 
     a {
@@ -281,10 +293,12 @@ $bg-image: url("@/assets/images/bg.jpg");
         align-items: center;
         justify-content: center;
         padding: 1rem;
+        flex: 1 1 20%;
 
         @include lt-sm {
+            flex: 1 1 20%; // two items per row
             padding: 0.5rem;
-            font-size: 8px;
+            font-size: 9px;
         }
 
         .circle {
@@ -293,9 +307,7 @@ $bg-image: url("@/assets/images/bg.jpg");
             padding: 1rem;
             border-radius: 20rem;
             margin-bottom: 0.5rem;
-            transition-property: all;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
+            transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
 
             @include lt-sm {
                 padding: 0.5rem;
@@ -310,7 +322,7 @@ $bg-image: url("@/assets/images/bg.jpg");
             }
 
             &:hover {
-                background-color: darken($color: #fff, $amount: 15);
+                background-color: darken(#fff, 15%);
             }
         }
 
