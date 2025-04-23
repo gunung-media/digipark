@@ -14,6 +14,9 @@ import trackingIcon from "@/assets/icons/landing/tracking.png";
 import dpIcon from "@/assets/icons/landing/development-plan.png";
 import guideIcon from "@/assets/icons/landing/workshop.png";
 import helpingHandIcon from "@/assets/icons/landing/helping-hand.png";
+import unionIcon from "@/assets/icons/landing/union.png";
+import instituteIcon from "@/assets/icons/landing/institute.png";
+import workIcon from "@/assets/icons/landing/work.png";
 
 const showSplash = ref(true);
 
@@ -72,19 +75,19 @@ const menus = [
         href: route(
             "filament.company.resources.labor-union-registrations.create",
         ),
-        imgSrc: guideIcon,
+        imgSrc: unionIcon,
         title: "Pendaftaran Serikat Pekerja",
     },
     {
         href: route(
             "filament.company.resources.institutional-approvals.create",
         ),
-        imgSrc: guideIcon,
+        imgSrc: instituteIcon,
         title: "Pengesahan Lembaga LKS BIPARTIT",
     },
     {
         href: "https://account.kemnaker.go.id/register",
-        imgSrc: guideIcon,
+        imgSrc: workIcon,
         title: "Pendaftaran AK 1",
         isExternal: true,
     },
