@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Clusters\Company\Resources;
 
 use App\Filament\Admin\Clusters\Company;
 use App\Filament\Admin\Clusters\Company\Resources\InstitutionalApprovalResource\Pages;
+use App\Filament\Admin\Clusters\Company\Resources\InstitutionalApprovalResource\Widgets\InstitutionalApprovalStats;
 use App\Models\Company\InstitutionalApproval;
 use App\Utils\FilamentUtil;
 use Filament\Forms\Components\Hidden;
@@ -225,6 +226,14 @@ class InstitutionalApprovalResource extends Resource
                 ]),
             ]);
     }
+
+    public static function getWidgets(): array
+    {
+        return [
+            InstitutionalApprovalStats::class,
+        ];
+    }
+
 
     public static function getRelations(): array
     {

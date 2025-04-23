@@ -4,11 +4,13 @@ namespace App\Filament\Admin\Clusters\Company\Resources\LaborUnionRegistrationRe
 
 use App\Filament\Admin\Clusters\Company\Resources\LaborUnionRegistrationResource;
 use Filament\Actions;
+use Filament\Pages\Concerns\ExposesTableToWidgets;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Resources\Components\Tab;
 
 class ListLaborUnionRegistrations extends ListRecords
 {
+    use ExposesTableToWidgets;
     protected static string $resource = LaborUnionRegistrationResource::class;
 
     protected function getHeaderActions(): array
@@ -16,6 +18,11 @@ class ListLaborUnionRegistrations extends ListRecords
         return [
             Actions\CreateAction::make(),
         ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return LaborUnionRegistrationResource::getWidgets();
     }
 
     public function getTabs(): array

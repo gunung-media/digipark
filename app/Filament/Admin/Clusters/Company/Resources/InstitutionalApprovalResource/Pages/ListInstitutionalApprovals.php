@@ -4,11 +4,13 @@ namespace App\Filament\Admin\Clusters\Company\Resources\InstitutionalApprovalRes
 
 use App\Filament\Admin\Clusters\Company\Resources\InstitutionalApprovalResource;
 use Filament\Actions;
+use Filament\Pages\Concerns\ExposesTableToWidgets;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 
 class ListInstitutionalApprovals extends ListRecords
 {
+    use ExposesTableToWidgets;
     protected static string $resource = InstitutionalApprovalResource::class;
 
     protected function getHeaderActions(): array
@@ -17,6 +19,12 @@ class ListInstitutionalApprovals extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return InstitutionalApprovalResource::getWidgets();
+    }
+
 
     public function getTabs(): array
     {

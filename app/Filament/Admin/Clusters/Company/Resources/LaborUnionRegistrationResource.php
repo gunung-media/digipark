@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Clusters\Company\Resources;
 
 use App\Filament\Admin\Clusters\Company;
 use App\Filament\Admin\Clusters\Company\Resources\LaborUnionRegistrationResource\Pages;
+use App\Filament\Admin\Clusters\Company\Resources\LaborUnionRegistrationResource\Widgets\LaborUnionRegistrationStats;
 use App\Models\Company\LaborUnionRegistration;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
@@ -225,6 +226,13 @@ class LaborUnionRegistrationResource extends Resource
                         })
                 ]),
             ]);
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            LaborUnionRegistrationStats::class,
+        ];
     }
 
     public static function getRelations(): array
