@@ -26,10 +26,11 @@ class ListCompanyLegalizations extends ListRecords
     {
         return [
             null => Tab::make('All'),
-            'diterima' => Tab::make()->query(fn ($query) => $query->where('status', 'diterima')),
-            'diproses' => Tab::make()->query(fn ($query) => $query->where('status', 'diproses')),
-            'ditunda' => Tab::make()->query(fn ($query) => $query->where('status', 'ditunda')),
-            'ditolak' => Tab::make()->query(fn ($query) => $query->where('status', 'ditolak')),
+            'diterima' => Tab::make()->query(fn($query) => $query->where('status', 'diterima')),
+            'diproses' => Tab::make()->query(fn($query) => $query->where('status', 'diproses')),
+            'ditunda' => Tab::make()->query(fn($query) => $query->where('status', 'ditunda')),
+            'ditolak' => Tab::make()->query(fn($query) => $query->where('status', 'ditolak')),
+            'selesai' => Tab::make()->query(fn($query) => $query->where('status', 'selesai')),
         ];
     }
 }

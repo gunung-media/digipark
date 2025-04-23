@@ -27,28 +27,38 @@ class ListClaimJhts extends ListRecords
     {
         return [
             null => Tab::make('All'),
-            'diterima' => Tab::make()->query(fn ($query) => $query->doesntHave('tracks')),
+            'diterima' => Tab::make()->query(fn($query) => $query->doesntHave('tracks')),
             'diproses' => Tab::make()->query(
-                fn ($query) =>
+                fn($query) =>
                 $query->whereHas('tracks', function ($q) {
                     $q->whereRaw('id = (SELECT MAX(id) FROM track_claim_jhts WHERE claim_jht_id = claim_jhts.id)')
                         ->where('status', 'diproses');
                 })
             ),
             'ditunda' => Tab::make()->query(
-                fn ($query) =>
+                fn($query) =>
                 $query->whereHas('tracks', function ($q) {
                     $q->whereRaw('id = (SELECT MAX(id) FROM track_claim_jhts WHERE claim_jht_id = claim_jhts.id)')
                         ->where('status', 'ditunda');
                 })
             ),
             'ditolak' => Tab::make()->query(
-                fn ($query) =>
+                fn($query) =>
                 $query->whereHas(
                     'tracks',
                     function ($q) {
                         $q->whereRaw('id = (SELECT MAX(id) FROM track_claim_jhts WHERE claim_jht_id = claim_jhts.id)')
                             ->where('status', 'ditolak');
+                    }
+                )
+            ),
+            'selesai' => Tab::make()->query(
+                fn($query) =>
+                $query->whereHas(
+                    'tracks',
+                    function ($q) {
+                        $q->whereRaw('id = (SELECT MAX(id) FROM track_claim_jhts WHERE claim_jht_id = claim_jhts.id)')
+                            ->where('status', 'selesai');
                     }
                 )
             ),
