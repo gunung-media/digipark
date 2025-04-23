@@ -43,8 +43,8 @@ class CompanyLaidOffResource extends Resource
                             Forms\Components\Placeholder::make('company.name')->content(function () {
                                 return FilamentUtil::getUser()->name;
                             }),
-                            Forms\Components\Placeholder::make('company.address')->content(function () {
-                                return FilamentUtil::getUser()->address;
+                            Forms\Components\Placeholder::make('company.address')->label('Alamat')->content(function () {
+                                return FilamentUtil::getUser()->address ?? "-";
                             })
                         ])
                         ->disabled(),
