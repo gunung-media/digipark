@@ -1,19 +1,26 @@
 <?php
 
-namespace App\Filament\Company\Resources;
+namespace App\Filament\Admin\Clusters\Company\Resources;
 
-use App\Filament\Company\Resources\InstitutionalApprovalResource\Pages;
+use App\Filament\Admin\Clusters\Company;
+use App\Filament\Admin\Clusters\Company\Resources\InstitutionalApprovalResource\Pages;
 use App\Models\Company\InstitutionalApproval;
 use App\Utils\FilamentUtil;
-use Filament\Forms;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Split;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
+use Illuminate\Support\Collection;
+use ZipArchive;
+use Illuminate\Support\Facades\Blade;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class InstitutionalApprovalResource extends Resource
 {
@@ -21,35 +28,63 @@ class InstitutionalApprovalResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
     protected static ?string $label = "Pengesahan Lembaga LKS BIPARTIT";
     protected static ?string $pluralModelLabel = 'Pengesahan Lembaga LKS BIPARTIT';
-    protected static ?string $navigationGroup = 'Layanan';
     static protected ?int $navigationSort = 2;
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->where('company_id', FilamentUtil::getUser()->id);
-    }
+    protected static ?string $cluster = Company::class;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Split::make([
+                    Section::make('Main Data')
+                        ->description('Perusahaan')
+                        ->schema([
+                            Forms\Components\Placeholder::make('company.name')->content(function () {
+                                return FilamentUtil::getUser()->name;
+                            }),
+                            Forms\Components\Placeholder::make('company.company_type')->label("Jenis Perusahaan")->content(function () {
+                                return FilamentUtil::getUser()->company_type;
+                            }),
+                            Forms\Components\Placeholder::make('company.company_status')->label("Status Perusahaan")->content(function () {
+                                return FilamentUtil::getUser()->company_status;
+                            }),
+                            Forms\Components\Placeholder::make('company.address')->label('Alamat')->content(function () {
+                                return FilamentUtil::getUser()->address ?? "-";
+                            })
+                        ])
+                        ->disabled(),
+                    Section::make('')
+                        ->schema([
+                            ToggleButtons::make('status')
+                                ->options([
+                                    'diterima' => 'Diterima',
+                                    'diproses' => 'Diproses',
+                                    'ditunda' => 'Ditunda',
+                                    'ditolak' => 'Ditolak',
+                                    'selesai' => 'Selesai'
+                                ])
+                                ->reactive()
+                                ->afterStateUpdated(function ($record, $state) {
+                                    $record->status = $state;
+                                    $record->save();
+                                    Notification::make()
+                                        ->success()
+                                        ->title(__("Saved"))
+                                        ->send();
+                                    FilamentUtil::sendNotifToCompany(
+                                        url: route('filament.company.resources.institutional-approvals.index'),
+                                        title: "Pengesahan Lembaga LKS BIPARTIT {$state} oleh Admin",
+                                        body: "Pengesahan Lembaga LKS BIPARTIT {$record->name} {$state} oleh Admin",
+                                        companyId: $record->company_id
+                                    );
+                                })
+                                ->required()
+                        ])->compact()
+                        ->grow(false),
+                ])
+                    ->from('md')
+                    ->columnSpanFull(),
                 Section::make('Data')->schema([
-                    Forms\Components\TextInput::make('company_name')
-                        ->default(fn() => FilamentUtil::getUser()->name)
-                        ->label('Nama Perusahaan')
-                        ->dehydrated(false)
-                        ->disabled(),
-                    Forms\Components\TextInput::make('company_type')
-                        ->default(fn() => FilamentUtil::getUser()->company_type)
-                        ->label('Jenis Perusahaan')
-                        ->dehydrated(false)
-                        ->disabled(),
-                    Forms\Components\TextInput::make('company_status')
-                        ->default(fn() => FilamentUtil::getUser()->company_status ?? "-")
-                        ->label('Status Perusahaan')
-                        ->dehydrated(false)
-                        ->disabled()
-                        ->columnSpanFull(),
                     Forms\Components\TextInput::make('name')
                         ->label('Nama Pengurus LKS BIPARTIT')
                         ->columnSpanFull()
@@ -89,7 +124,8 @@ class InstitutionalApprovalResource extends Resource
                         ->label('Tanda Tangan')
                         ->required()
                         ->downloadable(),
-                ])->columns(2),
+                ])->disabled()
+                    ->columns(2),
 
                 Section::make('Berkas')->schema([
                     Forms\Components\FileUpload::make('doc_bap')
@@ -118,7 +154,7 @@ class InstitutionalApprovalResource extends Resource
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
                         ->columnSpanFull(),
-                ]),
+                ])->disabled(),
             ]);
     }
 
@@ -140,16 +176,52 @@ class InstitutionalApprovalResource extends Resource
                         'ditolak' => 'danger',
                         'selesai' => 'info',
                     })
+
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('pdf')
+                    ->label('PDF')
+                    ->color('success')
+                    ->icon('heroicon-o-arrow-down-on-square')
+                    ->action(function (InstitutionalApproval $record) {
+                        return response()->streamDownload(function () use ($record) {
+                            echo Pdf::loadHtml(
+                                Blade::render('pdf.institutional-approval', ['record' => $record])
+                            )->stream();
+                        }, "pengesahan-lembaga-lks-{$record->id}-" . now()->format('d_m_Y') . ".pdf", ['content-type' => 'application/pdf']);
+                    }),
+                Tables\Actions\EditAction::make()->label("View")->icon('heroicon-o-eye'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('download')
+                        ->label('Download PDF')
+                        ->icon('heroicon-o-arrow-down-on-square')
+                        ->action(function (Collection $records) {
+                            $zipFileName = 'bulk-pengesahan-lembaga-lks-' . now()->format('d_m_Y') . '.zip';
+                            $zipPath = storage_path("app/public/$zipFileName");
+
+                            $zip = new ZipArchive;
+                            if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
+                                foreach ($records as $record) {
+                                    $pdfContent = Pdf::loadHtml(
+                                        Blade::render('pdf.institutional-approval', ['record' => $record])
+                                    )->output();
+
+                                    $pdfFileName = "pengesahan-lembaga-lks-{$record->id}-" . now()->format('d_m_Y') . ".pdf";
+                                    $zip->addFromString($pdfFileName, $pdfContent);
+                                }
+                                $zip->close();
+                            } else {
+                                return response()->json(['error' => 'Failed to create ZIP file'], 500);
+                            }
+
+                            return response()->download($zipPath)->deleteFileAfterSend(true);
+                        })
                 ]),
             ]);
     }

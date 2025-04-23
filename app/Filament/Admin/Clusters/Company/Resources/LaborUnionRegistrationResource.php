@@ -203,7 +203,7 @@ class LaborUnionRegistrationResource extends Resource
                         ->label('Download PDF')
                         ->icon('heroicon-o-arrow-down-on-square')
                         ->action(function (Collection $records) {
-                            $zipFileName = 'bulk-laporan-phk-' . now()->format('d_m_Y') . '.zip';
+                            $zipFileName = 'bulk-pendaftaran-serikat-pekerja-' . now()->format('d_m_Y') . '.zip';
                             $zipPath = storage_path("app/public/$zipFileName");
 
                             $zip = new ZipArchive;
