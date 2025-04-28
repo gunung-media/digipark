@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Clusters\Company\Resources;
 use App\Filament\Admin\Clusters\Company;
 use App\Filament\Admin\Clusters\Company\Resources\LaborUnionRegistrationResource\Pages;
 use App\Filament\Admin\Clusters\Company\Resources\LaborUnionRegistrationResource\Widgets\LaborUnionRegistrationStats;
+use App\Filament\Company\Resources\LaborUnionRegistrationResource\Pages\CreateLaborUnionRegistration;
 use App\Models\Company\LaborUnionRegistration;
 use App\Utils\FilamentUtil;
 use Filament\Forms;
@@ -249,5 +250,10 @@ class LaborUnionRegistrationResource extends Resource
             'create' => Pages\CreateLaborUnionRegistration::route('/create'),
             'edit' => Pages\EditLaborUnionRegistration::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin() || (FilamentUtil::isContent() && FilamentUtil::getUser()->role === 'HI dan Jamsostek');
     }
 }

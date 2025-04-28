@@ -24,6 +24,16 @@ class FilamentUtil
         return $user;
     }
 
+    public static function isAdmin(): bool
+    {
+        return Filament::auth()->name === 'web';
+    }
+
+    public static function isContent(): bool
+    {
+        return Filament::auth()->name === 'content';
+    }
+
     public static function sendNotifToAdmin(string $url, string $title, ?string $body): void
     {
         Notification::make()

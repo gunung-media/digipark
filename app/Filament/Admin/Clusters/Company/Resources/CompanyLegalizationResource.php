@@ -334,4 +334,9 @@ class CompanyLegalizationResource extends Resource
             'edit' => Pages\EditCompanyLegalization::route('/{record}/edit'),
         ];
     }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin() || (FilamentUtil::isContent() && FilamentUtil::getUser()->role === 'HI dan Jamsostek');
+    }
 }

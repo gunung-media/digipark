@@ -31,12 +31,13 @@ class AdminContentPanelProvider extends PanelProvider
             ->colors([
                 'primary' => "#209926",
             ])
-            ->discoverResources(in: app_path('Filament/AdminContent/Resources'), for: 'App\\Filament\\AdminContent\\Resources')
-            ->discoverPages(in: app_path('Filament/AdminContent/Pages'), for: 'App\\Filament\\AdminContent\\Pages')
+            ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
+            ->discoverClusters(in: app_path('Filament/Admin/Clusters'), for: 'App\\Filament\\Admin\\Clusters')
+            ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/AdminContent/Widgets'), for: 'App\\Filament\\AdminContent\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/AdminContent/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
             ])
@@ -55,10 +56,10 @@ class AdminContentPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->userMenuItems([
-                'Profile' => MenuItem::make()->url(fn () => EditProfile::getUrl())->icon('heroicon-o-user')->label("Profile"),
+                'Profile' => MenuItem::make()->url(fn() => EditProfile::getUrl())->icon('heroicon-o-user')->label("Profile"),
             ])
             ->databaseNotifications()
             ->databaseNotificationsPolling("20s")
-            ->brandLogo(fn () => view('layouts.portal.logo'));
+            ->brandLogo(fn() => view('layouts.portal.logo'));
     }
 }

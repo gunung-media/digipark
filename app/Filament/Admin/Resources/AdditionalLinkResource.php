@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\AdditionalLinkResource\Pages;
 use App\Filament\Admin\Resources\AdditionalLinkResource\RelationManagers;
 use App\Models\Admin\Menu\AdditionalLink;
+use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -92,5 +93,10 @@ class AdditionalLinkResource extends Resource
             'create' => Pages\CreateAdditionalLink::route('/create'),
             'edit' => Pages\EditAdditionalLink::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin();
     }
 }

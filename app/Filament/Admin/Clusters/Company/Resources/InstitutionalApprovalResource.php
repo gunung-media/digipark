@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Clusters\Company\Resources;
 use App\Filament\Admin\Clusters\Company;
 use App\Filament\Admin\Clusters\Company\Resources\InstitutionalApprovalResource\Pages;
 use App\Filament\Admin\Clusters\Company\Resources\InstitutionalApprovalResource\Widgets\InstitutionalApprovalStats;
+use App\Filament\Company\Resources\InstitutionalApprovalResource\Pages\CreateInstitutionalApproval;
 use App\Models\Company\InstitutionalApproval;
 use App\Utils\FilamentUtil;
 use Filament\Forms\Components\Hidden;
@@ -249,5 +250,10 @@ class InstitutionalApprovalResource extends Resource
             'create' => Pages\CreateInstitutionalApproval::route('/create'),
             'edit' => Pages\EditInstitutionalApproval::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin() || (FilamentUtil::isContent() && FilamentUtil::getUser()->role === 'HI dan Jamsostek');
     }
 }

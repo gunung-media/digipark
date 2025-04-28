@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\SeekerResource\Pages;
 use App\Models\Seeker\Seeker;
+use App\Utils\FilamentUtil;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Group;
@@ -139,7 +140,7 @@ class SeekerResource extends Resource
                     ->searchable(),
                 TextColumn::make('gender')
                     ->label('Jenis Kelamin')
-                    ->formatStateUsing(fn (string $state): string => __($state === 'male' ? 'Laki-laki' : 'Perempuan'))
+                    ->formatStateUsing(fn(string $state): string => __($state === 'male' ? 'Laki-laki' : 'Perempuan'))
                     ->sortable(),
             ])
             ->filters([
@@ -169,5 +170,10 @@ class SeekerResource extends Resource
             'create' => Pages\CreateSeeker::route('/create'),
             'edit' => Pages\EditSeeker::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin();
     }
 }

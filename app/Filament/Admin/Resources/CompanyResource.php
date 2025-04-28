@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\CompanyResource\Pages;
 use App\Models\Company\Company;
+use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -151,5 +152,10 @@ class CompanyResource extends Resource
             'create' => Pages\CreateCompany::route('/create'),
             'edit' => Pages\EditCompany::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin();
     }
 }

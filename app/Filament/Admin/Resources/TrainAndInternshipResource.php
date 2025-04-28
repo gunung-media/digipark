@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\TrainAndInternshipResource\Pages;
 use App\Models\Admin\TrainAndInternship;
+use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Split;
@@ -120,13 +121,13 @@ class TrainAndInternshipResource extends Resource
                         $record->is_active = true;
                         $record->save();
                     })
-                    ->hidden(fn (TrainAndInternship $record): bool => $record->is_active),
+                    ->hidden(fn(TrainAndInternship $record): bool => $record->is_active),
                 Tables\Actions\Action::make('inactive')
                     ->action(function (TrainAndInternship $record) {
                         $record->is_active = false;
                         $record->save();
                     })
-                    ->visible(fn (TrainAndInternship $record): bool => $record->is_active),
+                    ->visible(fn(TrainAndInternship $record): bool => $record->is_active),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
@@ -151,5 +152,10 @@ class TrainAndInternshipResource extends Resource
             'create' => Pages\CreateTrainAndInternship::route('/create'),
             'edit' => Pages\EditTrainAndInternship::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin();
     }
 }

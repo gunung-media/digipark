@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\MenuResource\Pages;
 use App\Filament\Admin\Resources\MenuResource\RelationManagers;
 use App\Models\Admin\Menu\Menu;
+use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Components\Split;
 use Filament\Forms\Form;
@@ -66,14 +67,14 @@ class MenuResource extends Resource
                         $record->is_active = true;
                         $record->save();
                     })
-                    ->hidden(fn (Menu $record): bool => $record->is_active),
+                    ->hidden(fn(Menu $record): bool => $record->is_active),
                 Tables\Actions\Action::make('inactive')
                     ->label('Non Aktifkan')
                     ->action(function (Menu $record) {
                         $record->is_active = false;
                         $record->save();
                     })
-                    ->visible(fn (Menu $record): bool => $record->is_active),
+                    ->visible(fn(Menu $record): bool => $record->is_active),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -97,5 +98,10 @@ class MenuResource extends Resource
             'create' => Pages\CreateMenu::route('/create'),
             'edit' => Pages\EditMenu::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\AdminContentResource\Pages;
 use App\Filament\Admin\Resources\AdminContentResource\RelationManagers;
 use App\Models\AdminContent;
+use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -41,15 +42,27 @@ class AdminContentResource extends Resource
                             ->password()
                             ->revealable(filament()->arePasswordsRevealable())
                             ->rule(Password::default())
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                            ->dehydrateStateUsing(fn($state) => Hash::make($state))
                             ->same('passwordConfirmation')
-                            ->required(),
+                            ->required(fn($operation) => $operation != 'edit')
+                            ->disabledOn('edit'),
                         Forms\Components\TextInput::make('passwordConfirmation')
                             ->label('Konfirmasi Password')
                             ->password()
                             ->revealable(filament()->arePasswordsRevealable())
                             ->dehydrated(false)
+                            ->required(fn($operation) => $operation != 'edit')
+                            ->disabledOn('edit'),
+                        Forms\Components\Select::make('role')
+                            ->label('Role Admin Bidang')
+                            ->options(
+                                collect(['Binapenta', 'Sekretariat', 'Lattas', 'HI dan Jamsostek', 'BLK'])->mapWithKeys(
+                                    fn($val) => [$val => "Bidang $val"]
+                                )->toArray()
+                            )
                             ->required()
+                            ->columnSpanFull(),
+
                     ])->columns(2)
             ]);
     }
@@ -59,7 +72,10 @@ class AdminContentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email')
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('role')
+                    ->badge()
+                    ->prefix('Bidang ')
             ])
             ->filters([
                 //
@@ -88,5 +104,10 @@ class AdminContentResource extends Resource
             'create' => Pages\CreateAdminContent::route('/create'),
             'edit' => Pages\EditAdminContent::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin();
     }
 }

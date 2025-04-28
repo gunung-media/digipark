@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\GuideResource\Pages;
 use App\Models\Admin\Guide;
+use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -48,7 +49,7 @@ class GuideResource extends Resource
                             ->url()
                             ->prefixIcon('heroicon-o-globe-alt')
                             ->columnSpan(2)
-                            ->hidden(fn (Get $get) => $get('is_video') === false)
+                            ->hidden(fn(Get $get) => $get('is_video') === false)
                             ->required(),
                         Forms\Components\FileUpload::make('file')
                             ->label('Ebook')
@@ -56,7 +57,7 @@ class GuideResource extends Resource
                             ->directory('guide')
                             ->downloadable()
                             ->columnSpan(2)
-                            ->hidden(fn (Get $get) => $get('is_video') === true)
+                            ->hidden(fn(Get $get) => $get('is_video') === true)
                             ->required(),
                     ])->columns(2),
                     Forms\Components\Section::make()->schema([
@@ -120,5 +121,10 @@ class GuideResource extends Resource
             'create' => Pages\CreateGuide::route('/create'),
             'edit' => Pages\EditGuide::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin();
     }
 }

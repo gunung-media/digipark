@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\SubMenuResource\Pages;
 use App\Models\Admin\Menu\SubMenu;
+use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -95,14 +96,14 @@ class SubMenuResource extends Resource
                         $record->is_active = true;
                         $record->save();
                     })
-                    ->hidden(fn (SubMenu $record): bool => $record->is_active),
+                    ->hidden(fn(SubMenu $record): bool => $record->is_active),
                 Tables\Actions\Action::make('inactive')
                     ->label('Non Aktifkan')
                     ->action(function (SubMenu $record) {
                         $record->is_active = false;
                         $record->save();
                     })
-                    ->visible(fn (SubMenu $record): bool => $record->is_active),
+                    ->visible(fn(SubMenu $record): bool => $record->is_active),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -126,5 +127,10 @@ class SubMenuResource extends Resource
             'create' => Pages\CreateSubMenu::route('/create'),
             'edit' => Pages\EditSubMenu::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin();
     }
 }

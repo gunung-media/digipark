@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\ConsultationResource\Pages;
 use App\Filament\Admin\Resources\ConsultationResource\Widgets\ConsultationStat;
 use App\Models\Admin\Consultation;
+use App\Utils\FilamentUtil;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -84,5 +85,10 @@ class ConsultationResource extends Resource
             // 'create' => Pages\CreateConsultation::route('/create'),
             // 'edit' => Pages\EditConsultation::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\DepartementMemberResource\Pages;
 use App\Models\Admin\DepartementMember;
+use App\Utils\FilamentUtil;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -89,14 +90,14 @@ class DepartementMemberResource extends Resource
                         $record->is_active = true;
                         $record->save();
                     })
-                    ->hidden(fn (DepartementMember $record): bool => $record->is_active),
+                    ->hidden(fn(DepartementMember $record): bool => $record->is_active),
                 Tables\Actions\Action::make('inactive')
                     ->label('Non Aktifkan')
                     ->action(function (DepartementMember $record) {
                         $record->is_active = false;
                         $record->save();
                     })
-                    ->visible(fn (DepartementMember $record): bool => $record->is_active),
+                    ->visible(fn(DepartementMember $record): bool => $record->is_active),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -120,5 +121,10 @@ class DepartementMemberResource extends Resource
             'create' => Pages\CreateDepartementMember::route('/create'),
             'edit' => Pages\EditDepartementMember::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin();
     }
 }

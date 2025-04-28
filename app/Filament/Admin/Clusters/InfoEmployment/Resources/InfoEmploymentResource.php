@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Clusters\InfoEmployment\Resources;
 use App\Filament\Admin\Clusters\InfoEmployment as Cluster;
 use App\Filament\Admin\Clusters\InfoEmployment\Resources\InfoEmploymentResource\Pages;
 use App\Models\Admin\InfoEmployment;
+use App\Utils\FilamentUtil;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -142,5 +143,10 @@ class InfoEmploymentResource extends Resource
             'create' => Pages\CreateInfoEmployment::route('/create'),
             'edit' => Pages\EditInfoEmployment::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin() || (FilamentUtil::isContent() && FilamentUtil::getUser()->role === 'Binapenta');
     }
 }

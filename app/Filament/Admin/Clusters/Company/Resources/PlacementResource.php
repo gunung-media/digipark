@@ -239,4 +239,9 @@ class PlacementResource extends Resource
             'edit' => Pages\EditPlacement::route('/{record}/edit'),
         ];
     }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin() || (FilamentUtil::isContent() && FilamentUtil::getUser()->role === 'Binapenta');
+    }
 }

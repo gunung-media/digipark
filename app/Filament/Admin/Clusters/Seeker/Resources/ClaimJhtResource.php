@@ -200,4 +200,9 @@ class ClaimJhtResource extends Resource
             'edit' => Pages\EditClaimJht::route('/{record}/edit'),
         ];
     }
+
+    public static function canAccess(): bool
+    {
+        return FilamentUtil::isAdmin() || (FilamentUtil::isContent() && FilamentUtil::getUser()->role === 'HI dan Jamsostek');
+    }
 }
