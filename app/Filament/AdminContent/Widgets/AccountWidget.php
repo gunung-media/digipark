@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Widgets;
+namespace App\Filament\AdminContent\Widgets;
 
 use Filament\Widgets\Widget;
 

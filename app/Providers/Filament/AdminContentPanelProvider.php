@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\AdminContent\Pages\EditProfile;
+use App\Filament\AdminContent\Widgets\AccountWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -10,7 +11,6 @@ use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -39,7 +39,7 @@ class AdminContentPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/AdminContent/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
+                AccountWidget::class
             ])
             ->middleware([
                 EncryptCookies::class,
