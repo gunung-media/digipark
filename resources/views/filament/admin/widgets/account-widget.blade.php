@@ -16,7 +16,8 @@
                     {{ filament()->getUserName($user) }}
                 </p>
 
-                <span class="inline-block text-xs font-semibold text-white bg-blue-500 rounded-full dark:bg-blue-600">
+                <span
+                    class="inline-block text-xs font-semibold bg-blue-500 text-black dark:text-white rounded-full dark:bg-blue-600">
                     {{ 'Bidang ' . $user->role }}
                 </span>
             </div>
