@@ -51,8 +51,7 @@ class AdminContentResource extends Resource
                             ->password()
                             ->revealable(filament()->arePasswordsRevealable())
                             ->dehydrated(false)
-                            ->required(fn($operation) => $operation != 'edit')
-                            ->disabledOn('edit'),
+                            ->required(fn($operation) => $operation != 'edit'),
                         Forms\Components\Select::make('role')
                             ->label('Role Admin Bidang')
                             ->options(
