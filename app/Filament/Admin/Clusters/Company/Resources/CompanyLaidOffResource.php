@@ -40,11 +40,17 @@ class CompanyLaidOffResource extends Resource
                     Section::make('Main Data')
                         ->description('Perusahaan')
                         ->schema([
-                            Forms\Components\Placeholder::make('company.name')->content(function () {
-                                return FilamentUtil::getUser()->name;
+                            Forms\Components\Placeholder::make('company.name')->content(function ($record) {
+                                return $record->company->name ?? "-";
                             }),
-                            Forms\Components\Placeholder::make('company.address')->label('Alamat')->content(function () {
-                                return FilamentUtil::getUser()->address ?? "-";
+                            Forms\Components\Placeholder::make('company.company_type')->label("Jenis Perusahaan")->content(function ($record) {
+                                return $record->company->company_type ?? "-";
+                            }),
+                            Forms\Components\Placeholder::make('company.company_status')->label("Status Perusahaan")->content(function ($record) {
+                                return $record->company->company_status ?? "-";
+                            }),
+                            Forms\Components\Placeholder::make('company.address')->label('Alamat')->content(function ($record) {
+                                return $record->company->company_status ?? "-";
                             })
                         ])
                         ->disabled(),
