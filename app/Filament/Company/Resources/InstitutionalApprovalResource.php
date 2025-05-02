@@ -35,17 +35,17 @@ class InstitutionalApprovalResource extends Resource
             ->schema([
                 Section::make('Data')->schema([
                     Forms\Components\TextInput::make('company_name')
-                        ->default(fn() => FilamentUtil::getUser()->name)
+                        ->formatStateUsing(fn($state) => $state ?? FilamentUtil::getUser()->name)
                         ->label('Nama Perusahaan')
                         ->dehydrated(false)
                         ->disabled(),
                     Forms\Components\TextInput::make('company_type')
-                        ->default(fn() => FilamentUtil::getUser()->company_type)
+                        ->formatStateUsing(fn() => FilamentUtil::getUser()->company_type ?? "-")
                         ->label('Jenis Perusahaan')
                         ->dehydrated(false)
                         ->disabled(),
                     Forms\Components\TextInput::make('company_status')
-                        ->default(fn() => FilamentUtil::getUser()->company_status ?? "-")
+                        ->formatStateUsing(fn() => FilamentUtil::getUser()->company_status ?? "-")
                         ->label('Status Perusahaan')
                         ->dehydrated(false)
                         ->disabled()
