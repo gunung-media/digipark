@@ -70,8 +70,10 @@ class EditProfile extends Page implements HasForms
                             ->label('No. Telp')
                             ->tel()
                             ->required(),
-                        Select::make('company_type')
-                            ->label('Jenis/ Bidang Usaha')
+                        TextInput::make('company_type')
+                            ->label('Jenis/ Bidang Usaha'),
+                        Select::make('company_status')
+                            ->label('Status Perusahaan')
                             ->options(
                                 collect([
                                     'pt',
@@ -89,6 +91,7 @@ class EditProfile extends Page implements HasForms
                             ->searchable()
                             ->required(),
                         TextInput::make('-')
+                            ->dehydrated(false)
                             ->label('Jumlah Karyawan')
                             ->readOnly(),
                         FileUpload::make('image')
@@ -196,7 +199,12 @@ class EditProfile extends Page implements HasForms
         if (array_key_exists('Current password', $data)) {
             unset($data['Current password']);
         }
+
+        if (array_key_exists('-', $data)) {
+            unset($data['-']);
+        }
         $record->update($data);
+
         return $record;
     }
 
