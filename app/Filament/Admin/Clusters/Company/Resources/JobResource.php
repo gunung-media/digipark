@@ -137,7 +137,8 @@ class JobResource extends Resource
                                         url: route('filament.company.resources.jobs.index'),
                                         title: "Laporan Lowongan {$state} oleh Admin",
                                         body: "Laporan Lowongan {$record->name_job} {$state} oleh Admin",
-                                        companyId: $record->company_id
+                                        companyId: $record->company_id,
+                                        sendEmail: true
                                     );
                                 })
                                 ->required()

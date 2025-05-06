@@ -18,7 +18,8 @@ class CreatePlacement extends CreateRecord
         FilamentUtil::sendNotifToAdmin(
             url: route('filament.admin.company.resources.placements.index', ['activeTab' => 'diterima', 'tableSearch' => $user->name]),
             title: "Ada Laporan Penempatan Baru!",
-            body: "Laporan Penempatan Baru dari " . $user->name
+            body: "Laporan Penempatan Baru dari " . $user->name,
+            sendEmail: true
         );
     }
 

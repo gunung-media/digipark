@@ -93,7 +93,8 @@ class ClaimJhtResource extends Resource
                                         url: route('filament.seeker.resources.claim-jhts.index'),
                                         title: "Laporan Claim JHT {$state['status']} oleh Admin",
                                         body: "Laporan Claim JHT {$state['status']} oleh Admin",
-                                        seekerId: $record->seeker_id
+                                        seekerId: $record->seeker_id,
+                                        sendEmail: true
                                     );
                                 }),
                         ])

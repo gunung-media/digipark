@@ -18,7 +18,8 @@ class CreateJob extends CreateRecord
         FilamentUtil::sendNotifToAdmin(
             url: route('filament.admin.company.resources.jobs.index', ['activeTab' => 'diterima', 'tableSearch' => $user->name]),
             title: "Ada Laporan Lowongan Baru!",
-            body: "Laporan Lowongan Baru dari " . $user->name
+            body: "Laporan Lowongan Baru dari " . $user->name,
+            sendEmail: true
         );
     }
 

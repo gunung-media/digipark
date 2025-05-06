@@ -18,6 +18,9 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
+use Illuminate\Support\Facades\Notification as NotificationFacade;
+use App\Notifications\BaseNotification;
+use App\Utils\FilamentUtil;
 
 class Applicant extends ManageRelatedRecords
 {
@@ -102,12 +105,13 @@ class Applicant extends ManageRelatedRecords
                             'is_accepted' => true,
                             'company_message' => $data['message'],
                         ])) {
-                            Seeker::find($record->seeker_id)->update(['company_id' => $record->job->company_id]);
-                            Notification::make()
-                                ->success()
-                                ->title('Selamat anda telah diterima!')
-                                ->body($data['message'])
-                                ->sendToDatabase(Seeker::find($record->seeker_id));
+                            FilamentUtil::seekerAccepted(
+                                title: 'Selamat anda telah diterima!',
+                                body: $data['message'],
+                                seekerId: $record->seeker_id,
+                                companyId: $record->job->company_id,
+                                sendEmail: true
+                            );
                         }
                     })
                     ->requiresConfirmation()

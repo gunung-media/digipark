@@ -37,7 +37,8 @@ class CreateClaimJht extends CreateRecord
         FilamentUtil::sendNotifToAdmin(
             url: route('filament.admin.seeker.resources.claim-jhts.index', ['activeTab' => 'diterima', 'tableSearch' => $user->full_name]),
             title: "Ada Laporan Claim JHT Baru!",
-            body: "Laporan Claim JHT Baru dari " . $user->full_name
+            body: "Laporan Claim JHT Baru dari " . $user->full_name,
+            sendEmail: true
         );
     }
 }

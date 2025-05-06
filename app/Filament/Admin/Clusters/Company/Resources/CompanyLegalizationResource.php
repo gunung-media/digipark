@@ -113,7 +113,8 @@ class CompanyLegalizationResource extends Resource
                                         url: route('filament.company.resources.company-legalizations.index'),
                                         title: "Laporan Pengesahan {$state} oleh Admin",
                                         body: "Laporan Pengesahan {$state} oleh Admin",
-                                        companyId: $record->company_id
+                                        companyId: $record->company_id,
+                                        sendEmail: true
                                     );
                                 })
                                 ->required()

@@ -12,6 +12,8 @@ use Filament\Facades\Filament;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Notification as NotificationFacade;
+use App\Notifications\BaseNotification;
 
 class FilamentUtil
 {
@@ -34,8 +36,14 @@ class FilamentUtil
         return Filament::auth()->name === 'content';
     }
 
-    public static function sendNotifToAdmin(string $url, string $title, ?string $body): void
-    {
+    public static function sendNotifToAdmin(
+        string $url,
+        string $title,
+        ?string $body,
+        bool $sendEmail = false,
+    ): void {
+        $users = User::all();
+
         Notification::make()
             ->title($title)
             ->body($body)
@@ -43,11 +51,33 @@ class FilamentUtil
             ->actions([
                 Action::make('View')->url($url)->button()->markAsRead(),
             ])
-            ->sendToDatabase(User::all());
+            ->sendToDatabase($users);
+
+        if ($sendEmail) {
+            foreach ($users as $user) {
+                $user->notify(new BaseNotification(
+                    title: $title,
+                    body: $body,
+                    url: $url
+                ));
+            }
+        }
     }
 
-    public static function sendNotifToCompany(string $url, string $title, ?string $body, int $companyId): void
-    {
+
+    public static function sendNotifToCompany(
+        string $url,
+        string $title,
+        ?string $body,
+        int $companyId,
+        bool $sendEmail = false
+    ): void {
+        $company = Company::find($companyId);
+
+        if (!$company) {
+            return;
+        }
+
         Notification::make()
             ->title($title)
             ->body($body)
@@ -55,11 +85,27 @@ class FilamentUtil
             ->actions([
                 Action::make('View')->url($url)->button()->markAsRead(),
             ])
-            ->sendToDatabase(Company::find($companyId));
+            ->sendToDatabase($company);
+
+        if ($sendEmail && $company->email) {
+            NotificationFacade::route('mail', $company->email)
+                ->notify(new BaseNotification($title, $body, $url));
+        }
     }
 
-    public static function sendNotifToSeeker(string $url, string $title, ?string $body, int $seekerId): void
-    {
+    public static function sendNotifToSeeker(
+        string $url,
+        string $title,
+        ?string $body,
+        int $seekerId,
+        bool $sendEmail = false
+    ): void {
+        $seeker = Seeker::find($seekerId);
+
+        if (!$seeker) {
+            return;
+        }
+
         Notification::make()
             ->title($title)
             ->body($body)
@@ -67,6 +113,38 @@ class FilamentUtil
             ->actions([
                 Action::make('View')->url($url)->button()->markAsRead(),
             ])
+            ->sendToDatabase($seeker);
+
+        if ($sendEmail && $seeker->email) {
+            NotificationFacade::route('mail', $seeker->email)
+                ->notify(new BaseNotification($title, $body, $url));
+        }
+    }
+
+    public static function seekerAccepted(
+        string $title,
+        ?string $body,
+        int $seekerId,
+        int $companyId,
+        bool $sendEmail = false
+    ): void {
+        $seeker = Seeker::find($seekerId);
+
+        if (!$seeker) {
+            return;
+        }
+
+        $seeker->update(['company_id' => $companyId]);
+
+        Notification::make()
+            ->success()
+            ->title($title)
+            ->body($body)
             ->sendToDatabase(Seeker::find($seekerId));
+
+        if ($sendEmail && $seeker->email) {
+            NotificationFacade::route('mail', $seeker->email)
+                ->notify(new BaseNotification($title, $body, ""));
+        }
     }
 }

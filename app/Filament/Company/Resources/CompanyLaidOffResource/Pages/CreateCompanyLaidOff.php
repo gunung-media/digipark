@@ -23,7 +23,8 @@ class CreateCompanyLaidOff extends CreateRecord
         FilamentUtil::sendNotifToAdmin(
             url: route('filament.admin.company.resources.company-laid-offs.index', ['activeTab' => 'diterima', 'tableSearch' => $user->name]),
             title: "Ada Laporan PHK Baru!",
-            body: "Laporan PHK Baru dari " . $user->name
+            body: "Laporan PHK Baru dari " . $user->name,
+            sendEmail: true
         );
     }
 }

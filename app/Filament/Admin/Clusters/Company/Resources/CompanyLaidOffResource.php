@@ -76,7 +76,8 @@ class CompanyLaidOffResource extends Resource
                                         url: route('filament.company.resources.company-laid-offs.index'),
                                         title: "Laporan PHK {$state} oleh Admin",
                                         body: "Laporan PHK {$record->responsible_name} {$state} oleh Admin",
-                                        companyId: $record->company_id
+                                        companyId: $record->company_id,
+                                        sendEmail: true
                                     );
                                 })
                                 ->required()

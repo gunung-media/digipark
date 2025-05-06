@@ -76,7 +76,8 @@ class LaborUnionRegistrationResource extends Resource
                                         url: route('filament.company.resources.labor-union-registrations.index'),
                                         title: "Pendaftaran Serikat Pekerja {$state} oleh Admin",
                                         body: "Pendaftaran Serikat Pekerja {$record->requester_name} {$state} oleh Admin",
-                                        companyId: $record->company_id
+                                        companyId: $record->company_id,
+                                        sendEmail: true
                                     );
                                 })
                                 ->required()

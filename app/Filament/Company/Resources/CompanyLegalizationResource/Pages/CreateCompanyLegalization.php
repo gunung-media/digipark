@@ -23,7 +23,9 @@ class CreateCompanyLegalization extends CreateRecord
         FilamentUtil::sendNotifToAdmin(
             url: route('filament.admin.company.resources.company-legalizations.index', ['activeTab' => 'diterima', 'tableSearch' => $user->name]),
             title: "Ada Laporan Pengesahan Baru!",
-            body: "Laporan Pengesahan Baru dari " . $user->name
+            body: "Laporan Pengesahan Baru dari " . $user->name,
+            sendEmail: true
+
         );
     }
 }

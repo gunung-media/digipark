@@ -23,7 +23,8 @@ class CreateLaborDemand extends CreateRecord
         FilamentUtil::sendNotifToAdmin(
             url: route('filament.admin.company.resources.labor-demands.index', ['activeTab' => 'diterima', 'tableSearch' => $user->name]),
             title: "Ada Laporan Permintaan Tenaga Kerja Baru!",
-            body: "Laporan Permintaan Tenaga Kerja Baru dari " . $user->name
+            body: "Laporan Permintaan Tenaga Kerja Baru dari " . $user->name,
+            sendEmail: true
         );
     }
 }

@@ -77,7 +77,8 @@ class InstitutionalApprovalResource extends Resource
                                         url: route('filament.company.resources.institutional-approvals.index'),
                                         title: "Pengesahan Lembaga LKS BIPARTIT {$state} oleh Admin",
                                         body: "Pengesahan Lembaga LKS BIPARTIT {$record->name} {$state} oleh Admin",
-                                        companyId: $record->company_id
+                                        companyId: $record->company_id,
+                                        sendEmail: true
                                     );
                                 })
                                 ->required()

@@ -182,7 +182,8 @@ class LaborDemandResource extends Resource
                                         url: route('filament.company.resources.labor-demands.index'),
                                         title: "Laporan Permintaan Tenaga Kerja {$state} oleh Admin",
                                         body: "Laporan Permintaan Tenaga Kerja {$record->name_job} {$state} oleh Admin",
-                                        companyId: $record->company_id
+                                        companyId: $record->company_id,
+                                        sendEmail: true
                                     );
                                 })
                                 ->required()

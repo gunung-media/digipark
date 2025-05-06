@@ -23,7 +23,8 @@ class CreateLaborUnionRegistration extends CreateRecord
         FilamentUtil::sendNotifToAdmin(
             url: route('filament.admin.company.resources.labor-union-registrations.index', ['activeTab' => 'diterima', 'tableSearch' => $user->name]),
             title: "Ada Pendaftaran Serikat Pekerja Baru!",
-            body: "Pendaftaran serikat pekerja baru telah ditambahkan oleh " . $user->name
+            body: "Pendaftaran serikat pekerja baru telah ditambahkan oleh " . $user->name,
+            sendEmail: true
         );
     }
 }

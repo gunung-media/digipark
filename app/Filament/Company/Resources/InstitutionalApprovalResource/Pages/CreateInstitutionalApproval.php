@@ -16,7 +16,8 @@ class CreateInstitutionalApproval extends CreateRecord
         FilamentUtil::sendNotifToAdmin(
             url: route('filament.admin.company.resources.institutional-approvals.index', ['activeTab' => 'diterima', 'tableSearch' => $user->name]),
             title: "Ada Pengesahan Lembaga LKS BIPARTIT Baru!",
-            body: "Pengesahan Lembaga LKS BIPARTIT baru telah ditambahkan oleh " . $user->name
+            body: "Pengesahan Lembaga LKS BIPARTIT baru telah ditambahkan oleh " . $user->name,
+            sendEmail: true
         );
     }
 }

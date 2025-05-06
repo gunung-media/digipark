@@ -123,7 +123,8 @@ class PlacementResource extends Resource
                                         url: route('filament.company.resources.placements.index'),
                                         title: "Laporan Penempatan {$state} oleh Admin",
                                         body: "Laporan Penempatan {$record->name} {$state} oleh Admin",
-                                        companyId: $record->company_id
+                                        companyId: $record->company_id,
+                                        sendEmail: true
                                     );
                                 })
                                 ->required()
