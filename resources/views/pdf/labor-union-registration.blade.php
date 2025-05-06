@@ -16,7 +16,8 @@
         }
 
         h3,
-        h4 {
+        h4,
+        h5 {
             text-align: center;
         }
 
@@ -47,6 +48,7 @@
 <body>
     <div class="container">
         <h3>PENDAFTARAN SERIKAT PEKERJA</h3>
+        <h5>{{ App\Utils\Helper::generateDocumentNumber($record->id, 'Bid.HIJK-01.SP', $record->created_at) }}</h5>
         <div class="data-tenaga-kerja">
             <table>
                 <tr>

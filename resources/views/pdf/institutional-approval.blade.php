@@ -47,6 +47,7 @@
 <body>
     <div class="container">
         <h3>PENGESAHAN LEMBAGA LKS BIPARTIT</h3>
+        <h5>{{ App\Utils\Helper::generateDocumentNumber($record->id, 'LKS-Bipartit', $record->created_at) }}</h5>
         <div class="data-tenaga-kerja">
             <table>
                 <tr>
