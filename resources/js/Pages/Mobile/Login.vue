@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { Head } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 import { ref } from "vue";
 import Input from "@/components/Input/index.vue";
 import Button from "@/components/Button/index.vue";
@@ -46,6 +46,6 @@ const form = ref({
 
 const submitForm = () => {
     console.log("Form Submitted:", form.value);
-    // You can use Inertia.post() or axios.post() here if submitting to backend
+    router.visit(route("mobile.home"));
 };
 </script>
