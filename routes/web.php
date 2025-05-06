@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'LandingController')->name('landing');
 
+
+Route::prefix('/mobile')->name('mobile')->middleware('inertia:app-mobile')->group(function () {
+    Route::get('/', 'Mobile\OnboardingController')->name('.landing');
+});
+
 // Portal Routes
 Route::get('website', 'PortalController')->name('portal');
 Route::name('portal.')->prefix('website')->group(function () {
@@ -72,15 +77,15 @@ Route::name('portal.')->prefix('website')->group(function () {
     // Dummies Routes
     Route::name('dummies.')
         ->group(function () {
-            Route::get('magang', fn () => view('portal.dummies.magang'))->name('magang');
-            Route::get('info', fn () => view('portal.dummies.info'))->name('info');
+            Route::get('magang', fn() => view('portal.dummies.magang'))->name('magang');
+            Route::get('info', fn() => view('portal.dummies.info'))->name('info');
             Route::prefix('pdf')->group(function () {
-                Route::get('claim-jht', fn () => view('pdf.claim-jht', ['record' => App\Models\Seeker\ClaimJht::first()]));
-                Route::get('job', fn () => view('pdf.job', ['record' => App\Models\Company\Job::first()]));
-                Route::get('company-laid-off', fn () => view('pdf.company-laid-off', ['record' => App\Models\Company\CompanyLaidOff::first()]));
-                Route::get('company-legalization', fn () => view('pdf.company-legalization', ['record' => App\Models\Company\CompanyLegalization::first()]));
-                Route::get('labor-demand', fn () => view('pdf.labor-demand', ['record' => App\Models\Company\LaborDemand::first()]));
-                Route::get('placement', fn () => view('pdf.placement', ['record' => App\Models\Company\Placement::first()]));
+                Route::get('claim-jht', fn() => view('pdf.claim-jht', ['record' => App\Models\Seeker\ClaimJht::first()]));
+                Route::get('job', fn() => view('pdf.job', ['record' => App\Models\Company\Job::first()]));
+                Route::get('company-laid-off', fn() => view('pdf.company-laid-off', ['record' => App\Models\Company\CompanyLaidOff::first()]));
+                Route::get('company-legalization', fn() => view('pdf.company-legalization', ['record' => App\Models\Company\CompanyLegalization::first()]));
+                Route::get('labor-demand', fn() => view('pdf.labor-demand', ['record' => App\Models\Company\LaborDemand::first()]));
+                Route::get('placement', fn() => view('pdf.placement', ['record' => App\Models\Company\Placement::first()]));
             });
         });
 });
