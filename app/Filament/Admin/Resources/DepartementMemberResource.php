@@ -57,6 +57,7 @@ class DepartementMemberResource extends Resource
                         ->disk('public')
                         ->directory('departement-members')
                         ->image()
+                        ->maxSize(2048)
                         ->columnSpanFull(),
                 ])
             ]);

@@ -120,6 +120,7 @@ class CompanyLegalizationResource extends Resource
                         ->directory('company/legalization')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                        ->maxSize(2048)
                         ->columnSpanFull(),
                     FileUpload::make('doc_evidence_union_consultation_request')
                         ->label('Bukti telah dimintakan saran dan pertimbangan dari Serikat Pekerja/Serikat Buruh dan/atau waktu pekerja Apabila diperusahaan tidak ada')
@@ -127,6 +128,7 @@ class CompanyLegalizationResource extends Resource
                         ->directory('company/legalization')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                        ->maxSize(2048)
                         ->columnSpanFull(),
                     FileUpload::make('doc_union_consultation_statement')
                         ->label('Surat pernyataan sebagai bukti telah dimintakan saran dan pertimbangan dari Serikat Pekerja/Serikat Buruh')
@@ -134,6 +136,7 @@ class CompanyLegalizationResource extends Resource
                         ->directory('company/legalization')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                        ->maxSize(2048)
                         ->columnSpanFull(),
                     FileUpload::make('doc_no_union_declaration')
                         ->label('Surat Pernyataan sebagai bukti tidak ada Serikat Pekerja/Serikat Buruh di Perusahaan.')
@@ -141,6 +144,7 @@ class CompanyLegalizationResource extends Resource
                         ->directory('company/legalization')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                        ->maxSize(2048)
                         ->columnSpanFull(),
                     FileUpload::make('doc_wage_structure_and_scale')
                         ->label('Struktur & Skala Upah')
@@ -148,6 +152,7 @@ class CompanyLegalizationResource extends Resource
                         ->directory('company/legalization')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                        ->maxSize(2048)
                         ->columnSpanFull(),
                     FileUpload::make('doc_bpjs_membership_and_payment_copy')
                         ->label('Fotocopy tanda keanggotaan dan pembayaran terakhir BPJS')
@@ -155,6 +160,7 @@ class CompanyLegalizationResource extends Resource
                         ->directory('company/legalization')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                        ->maxSize(2048)
                         ->columnSpanFull(),
                     Hidden::make('company_id')->default(FilamentUtil::getUser()->id),
                 ])

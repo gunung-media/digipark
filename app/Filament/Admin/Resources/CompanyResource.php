@@ -30,6 +30,7 @@ class CompanyResource extends Resource
                         ->directory('company')
                         ->image()
                         ->columnSpan(2)
+                        ->maxSize(2048)
                         ->required(),
                 ])->columnSpanFull(),
                 Forms\Components\Split::make([

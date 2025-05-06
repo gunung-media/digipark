@@ -99,6 +99,7 @@ class InstitutionalApprovalResource extends Resource
                         ->directory('company/institutional-approval')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                        ->maxSize(2048)
                         ->columnSpanFull(),
 
                     Forms\Components\FileUpload::make('doc_proofment')
@@ -108,6 +109,7 @@ class InstitutionalApprovalResource extends Resource
                         ->directory('company/institutional-approval')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                        ->maxSize(2048)
                         ->columnSpanFull(),
 
                     Forms\Components\FileUpload::make('doc_administrator')
@@ -117,6 +119,7 @@ class InstitutionalApprovalResource extends Resource
                         ->directory('company/institutional-approval')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                        ->maxSize(2048)
                         ->columnSpanFull(),
                 ]),
             ]);

@@ -130,12 +130,14 @@ class CompanyLaidOffResource extends Resource
                             ->disk('public')
                             ->directory('company/laid-off')
                             ->downloadable()
+                            ->maxSize(2048)
                             ->columnSpanFull(),
                         Forms\Components\FileUpload::make('doc_not_rejecting_layoff')
                             ->label('Surat Tidak Menolak PHK')
                             ->disk('public')
                             ->directory('company/laid-off')
                             ->downloadable()
+                            ->maxSize(2048)
                             ->columnSpanFull(),
                         Forms\Components\FileUpload::make('doc_layoff_notification')
                             ->label('Surat Pemberitahuan PHK')
@@ -143,6 +145,7 @@ class CompanyLaidOffResource extends Resource
                             ->disk('public')
                             ->directory('company/laid-off')
                             ->downloadable()
+                            ->maxSize(2048)
                             ->columnSpanFull(),
                         Forms\Components\FileUpload::make('doc_participant_card')
                             ->label('Kartu Peserta')
@@ -150,6 +153,7 @@ class CompanyLaidOffResource extends Resource
                             ->disk('public')
                             ->directory('company/laid-off')
                             ->downloadable()
+                            ->maxSize(2048)
                             ->columnSpanFull(),
                         Forms\Components\FileUpload::make('doc_bpjs_card')
                             ->label('BPJS Jamsotek')
@@ -157,6 +161,7 @@ class CompanyLaidOffResource extends Resource
                             ->disk('public')
                             ->directory('company/laid-off')
                             ->downloadable()
+                            ->maxSize(2048)
                             ->columnSpanFull(),
                         Forms\Components\FileUpload::make('doc_bpjs_card')
                             ->label('Identitas')
@@ -165,6 +170,7 @@ class CompanyLaidOffResource extends Resource
                             ->disk('public')
                             ->directory('company/laid-off')
                             ->downloadable()
+                            ->maxSize(2048)
                             ->columnSpanFull(),
                     ])->columns(2)
                 ])

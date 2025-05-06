@@ -34,6 +34,7 @@ class NewsResource extends Resource
                             ->directory('news')
                             ->image()
                             ->columnSpan(2)
+                            ->maxSize(2048)
                             ->required(),
                     ]),
                 Forms\Components\Split::make([
@@ -123,14 +124,14 @@ class NewsResource extends Resource
                         $record->status = true;
                         $record->save();
                     })
-                    ->hidden(fn (News $record): bool => $record->status),
+                    ->hidden(fn(News $record): bool => $record->status),
                 Tables\Actions\Action::make('inactive')
                     ->label('Non Aktifkan')
                     ->action(function (News $record) {
                         $record->status = false;
                         $record->save();
                     })
-                    ->visible(fn (News $record): bool => $record->status),
+                    ->visible(fn(News $record): bool => $record->status),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

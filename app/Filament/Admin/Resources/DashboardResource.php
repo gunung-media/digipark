@@ -42,6 +42,7 @@ class DashboardResource extends Resource
                                     ->directory('dashboard')
                                     ->image()
                                     ->columnSpanFull()
+                                    ->maxSize(2048)
                                     ->required(),
                             ]),
                             Forms\Components\Tabs\Tab::make('Data Tambahan')

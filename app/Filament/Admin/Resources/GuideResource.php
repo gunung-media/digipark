@@ -32,6 +32,7 @@ class GuideResource extends Resource
                             ->directory('guide')
                             ->image()
                             ->columnSpan(2)
+                            ->maxSize(2048)
                             ->required(),
                     ]),
                 Forms\Components\Split::make([
@@ -58,6 +59,7 @@ class GuideResource extends Resource
                             ->downloadable()
                             ->columnSpan(2)
                             ->hidden(fn(Get $get) => $get('is_video') === true)
+                            ->maxSize(2048)
                             ->required(),
                     ])->columns(2),
                     Forms\Components\Section::make()->schema([
