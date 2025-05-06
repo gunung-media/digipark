@@ -16,9 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'LandingController')->name('landing');
 
 
-Route::prefix('/mobile')->name('mobile')->middleware('inertia:app-mobile')->group(function () {
-    Route::get('/', 'Mobile\OnboardingController')->name('.landing');
-    Route::get('signup', 'Mobile\SignupController@index')->name('.signup');
+Route::prefix('/mobile')->name('mobile.')->middleware('inertia:app-mobile')->group(function () {
+    Route::get('/', 'Mobile\OnboardingController')->name('landing');
+    Route::get('signup', 'Mobile\SignupController@index')->name('signup');
+    Route::get('login', 'Mobile\LoginController@index')->name('login');
 });
 
 // Portal Routes

@@ -1,0 +1,51 @@
+<template>
+    <Head title="Login" />
+    <div class="">
+        <Back />
+
+        <h1 class="text-2xl font-semibold mt-4 text-gray-800 p-4">Login</h1>
+
+        <div class="flex flex-col justify-between px-4 mt-5 h-[77vh]">
+            <form class="space-y-4">
+                <Input
+                    label="Email"
+                    id="email"
+                    v-model="form.email"
+                    type="email"
+                />
+
+                <Input
+                    label="Password"
+                    id="password"
+                    v-model="form.password"
+                    type="password"
+                />
+            </form>
+            <div>
+                <Button title="Daftar" type="primary" @click="submitForm" />
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { Head } from "@inertiajs/vue3";
+import { ref } from "vue";
+import Input from "@/components/Input/index.vue";
+import Button from "@/components/Button/index.vue";
+import Back from "@/components/Back/index.vue";
+
+const form = ref({
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+    gender: "",
+    birthdate: "",
+});
+
+const submitForm = () => {
+    console.log("Form Submitted:", form.value);
+    // You can use Inertia.post() or axios.post() here if submitting to backend
+};
+</script>

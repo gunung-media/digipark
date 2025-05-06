@@ -1,29 +1,7 @@
 <template>
     <Head title="Daftar" />
     <div class="">
-        <div
-            class="flex items-center px-4 pt-6 space-x-2 cursor-pointer"
-            @click="goBack"
-        >
-            <button @click="goBack" class="text-gray-600 hover:text-green-500">
-                <!-- Back Icon -->
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M15 19l-7-7 7-7"
-                    />
-                </svg>
-            </button>
-            <span class="text-sm font-medium text-gray-600">Kembali</span>
-        </div>
+        <Back />
 
         <!-- Page Title -->
         <h1 class="text-2xl font-semibold mt-4 text-gray-800 p-4">
@@ -90,10 +68,11 @@
 </template>
 
 <script setup lang="ts">
-import { Head, router } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 import Input from "@/components/Input/index.vue";
 import Button from "@/components/Button/index.vue";
+import Back from "@/components/Back/index.vue";
 
 const form = ref({
     name: "",
@@ -107,9 +86,5 @@ const form = ref({
 const submitForm = () => {
     console.log("Form Submitted:", form.value);
     // You can use Inertia.post() or axios.post() here if submitting to backend
-};
-
-const goBack = () => {
-    window.history.length > 1 ? window.history.back() : router.visit("/");
 };
 </script>

@@ -29,8 +29,12 @@
         </div>
 
         <div class="w-full mt-10 space-y-3">
-            <Button title="Daftar" type="primary" />
-            <Button title="Sudah Punya Akun" type="secondary" />
+            <Button title="Daftar" type="primary" @click="goSignUp" />
+            <Button
+                title="Sudah Punya Akun"
+                type="secondary"
+                @click="goLogin"
+            />
         </div>
     </div>
 </template>
@@ -41,7 +45,7 @@ import Onboarding from "@/assets/images/onboarding.png";
 import OnboardingTwo from "@/assets/images/onboarding2.png";
 import OnboardingThird from "@/assets/images/onboarding3.png";
 import { onMounted, onUnmounted, ref } from "vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 
 const onboardingItem = [
     {
@@ -78,6 +82,9 @@ onMounted(() => {
 onUnmounted(() => {
     clearInterval(intervalId);
 });
+
+const goLogin = () => router.visit(route("mobile.login"));
+const goSignUp = () => router.visit(route("mobile.signup"));
 </script>
 
 <style scoped>
