@@ -10,6 +10,7 @@
                 <Input
                     label="Email"
                     id="email"
+                    placeholder="Masukan Email"
                     v-model="form.email"
                     type="email"
                 />
@@ -17,12 +18,13 @@
                 <Input
                     label="Password"
                     id="password"
+                    placeholder="******"
                     v-model="form.password"
                     type="password"
                 />
             </form>
             <div>
-                <Button title="Daftar" type="primary" @click="submitForm" />
+                <Button title="Masuk" type="primary" @click="submitForm" />
             </div>
         </div>
     </div>

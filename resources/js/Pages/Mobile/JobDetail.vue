@@ -1,10 +1,6 @@
 <template>
-    <div class="p-4">
-        <Back />
-
-        <h1 class="text-2xl font-semibold mt-4 text-gray-800 text-center">
-            Lowongan Staff Admin
-        </h1>
+    <div>
+        <Back heading="Lowongan Staff Admin" />
 
         <div class="flex justify-center my-6">
             <img
@@ -19,7 +15,7 @@
             <p>Jalan Menteng XII, No 1 Palangka Raya</p>
         </div>
 
-        <div class="mt-6 space-y-4">
+        <div class="mt-6 space-y-4 px-4">
             <div
                 :class="[
                     'flex justify-between items-center p-4 rounded-xl border',
@@ -72,29 +68,29 @@
             </div>
         </div>
 
-        <div class="mt-6">
+        <div class="mt-6 px-4">
             <p class="font-semibold text-gray-800 mb-2">Persyaratan :</p>
-            <ul class="space-y-3 text-gray-700">
-                <li class="flex items-center space-x-2">
-                    <i class="fa fa-user"></i>
+            <ul class="space-y-3 text-gray-500">
+                <li class="flex items-center space-x-2 border-b-1 py-5">
+                    <UsersIcon class="w-5" />
                     <span>Laki-Laki / Perempuan</span>
                 </li>
-                <li class="flex items-center space-x-2">
-                    <i class="fa fa-comment-alt"></i>
+                <li class="flex items-center space-x-2 border-b-1 py-5">
+                    <ChatBubbleLeftRightIcon class="w-5" />
                     <span>Usia maksimal 30 thn</span>
                 </li>
-                <li class="flex items-center space-x-2">
-                    <i class="fa fa-shopping-cart"></i>
+                <li class="flex items-center space-x-2 border-b-1 py-5">
+                    <BriefcaseIcon class="w-5" />
                     <span>Bersedia mengikuti pelatihan selama 1 bln</span>
                 </li>
-                <li class="flex items-center space-x-2">
-                    <i class="fa fa-graduation-cap"></i>
+                <li class="flex items-center space-x-2 border-b-1 py-5">
+                    <ExclamationCircleIcon class="w-5" />
                     <span>Minimal S1 atau sederajat</span>
                 </li>
             </ul>
         </div>
 
-        <div class="mt-8">
+        <div class="mt-8 px-4">
             <Button
                 title="Daftar Lowongan ini"
                 type="primary"
@@ -109,6 +105,12 @@ import { ref } from "vue";
 import { router } from "@inertiajs/vue3";
 import Button from "@/components/Button/index.vue";
 import Back from "@/components/Back/index.vue";
+import {
+    UsersIcon,
+    ChatBubbleLeftRightIcon,
+    BriefcaseIcon,
+    ExclamationCircleIcon,
+} from "@heroicons/vue/24/solid";
 
 const selected = ref("operator"); // default selected job
 
@@ -117,10 +119,3 @@ const applyJob = () => {
     router.visit(route("mobile.application"));
 };
 </script>
-
-<style scoped>
-/* Example icon classes - you may use Font Awesome or custom SVGs */
-.fa {
-    font-size: 16px;
-}
-</style>

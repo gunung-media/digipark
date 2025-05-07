@@ -10,11 +10,18 @@
 
         <div class="flex flex-col justify-between px-4 mt-5 h-[77vh]">
             <form class="space-y-4">
-                <Input label="Nama" id="name" v-model="form.name" type="text" />
+                <Input
+                    label="Nama"
+                    id="name"
+                    placeholder="Masukkan nama anda"
+                    v-model="form.name"
+                    type="text"
+                />
 
                 <Input
                     label="Email"
                     id="email"
+                    placeholder="Masukkan alamat email"
                     v-model="form.email"
                     type="email"
                 />
@@ -22,6 +29,7 @@
                 <Input
                     label="Password"
                     id="password"
+                    placeholder="******"
                     v-model="form.password"
                     type="password"
                 />
