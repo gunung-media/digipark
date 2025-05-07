@@ -1,21 +1,19 @@
 <template>
-    <div class="rounded-xl bg-white shadow-sm overflow-hidden">
-        <img :src="image" class="w-full h-24 object-cover" />
+    <div
+        class="rounded-xl bg-white shadow-sm overflow-hidden m-4 max-w-[250px] cursor-pointer"
+    >
+        <img
+            :src="`${storageUrl}/${job.image}`"
+            class="w-full h-24 object-cover"
+        />
         <div class="p-3">
-            <div class="text-xs text-gray-500">{{ position }}</div>
-            <div class="font-semibold text-sm truncate">{{ company }}</div>
-            <div v-if="note" class="text-xs text-gray-400 mt-1">{{ note }}</div>
-            <div
-                v-if="highlightNote"
-                :class="[
-                    'text-xs rounded-full mt-1 px-2 py-0.5 inline-block',
-                    highlightColorClass,
-                ]"
-            >
-                {{ highlightNote }}
+            <div class="text-xs text-gray-500">{{ job.name_job }}</div>
+            <div class="font-semibold text-sm truncate">
+                {{ job.company.name }}
             </div>
             <div class="text-xs text-gray-500 mt-1 flex items-center">
-                <MapPinIcon class="w-4 h-4 mr-1" />{{ location }}
+                <MapPinIcon class="w-7 mr-1" />
+                <p class="truncate">{{ job.address }}</p>
             </div>
         </div>
     </div>
@@ -23,19 +21,10 @@
 
 <script setup>
 import { MapPinIcon } from "@heroicons/vue/24/outline";
-import { computed } from "vue";
 const props = defineProps({
-    image: String,
-    position: String,
-    company: String,
-    note: String,
+    storageUrl: String,
+    job: Object,
     highlightNote: String,
     highlightColor: String,
-    location: String,
-});
-const highlightColorClass = computed(() => {
-    return props.highlightColor === "red"
-        ? "bg-red-100 text-red-500"
-        : "bg-green-100 text-green-600";
 });
 </script>
