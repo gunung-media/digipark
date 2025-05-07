@@ -25,4 +25,11 @@ export default defineConfig({
             '@': resolve(__dirname, 'resources/js/'),
         }
     },
+    css: {
+        preprocessorOptions: {
+            css: {
+                additionalData: `@import "../css/tailwind.css";`,
+            },
+        },
+    },
 });
