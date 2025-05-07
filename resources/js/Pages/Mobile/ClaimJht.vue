@@ -127,6 +127,7 @@ import Button from "@/components/Button/index.vue";
 import Back from "@/components/Back/index.vue";
 import { onMounted, ref } from "vue";
 import { VueSignaturePad } from "@selemondev/vue3-signature-pad";
+// @ts-expect-error
 import type { CanvasSignature } from "@selemondev/vue3-signature-pad";
 
 const options = ref({
@@ -147,6 +148,7 @@ const colors = [
         color: "rgb(255, 85, 51)",
     },
 ];
+// @ts-expect-error
 const signature = ref<Signature>();
 
 function handleUndo() {
