@@ -133,7 +133,7 @@ class LaborUnionRegistrationResource extends Resource
                         ->directory('company/labor-union-registration')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
-                        ->maxSize(2048)
+                        ->maxSize(10240)
                         ->columnSpanFull(),
 
                     Forms\Components\FileUpload::make('doc_budget')
@@ -143,7 +143,7 @@ class LaborUnionRegistrationResource extends Resource
                         ->directory('company/labor-union-registration')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
-                        ->maxSize(2048)
+                        ->maxSize(10240)
                         ->columnSpanFull(),
 
                     Forms\Components\FileUpload::make('doc_arrangement')
@@ -153,7 +153,7 @@ class LaborUnionRegistrationResource extends Resource
                         ->directory('company/labor-union-registration')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
-                        ->maxSize(2048)
+                        ->maxSize(10240)
                         ->columnSpanFull(),
 
                     Forms\Components\FileUpload::make('doc_photocopies')
@@ -163,7 +163,7 @@ class LaborUnionRegistrationResource extends Resource
                         ->directory('company/labor-union-registration')
                         ->downloadable()
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
-                        ->maxSize(2048)
+                        ->maxSize(10240)
                         ->columnSpanFull(),
                 ])->disabled(),
             ]);

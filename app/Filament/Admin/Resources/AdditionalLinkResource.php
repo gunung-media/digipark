@@ -45,7 +45,7 @@ class AdditionalLinkResource extends Resource
                         ->directory('addtional-link')
                         ->image()
                         ->columnSpan(2)
-                        ->maxSize(2048)
+                        ->maxSize(10240)
                         ->required(),
                 ])->columnSpanFull()
             ]);

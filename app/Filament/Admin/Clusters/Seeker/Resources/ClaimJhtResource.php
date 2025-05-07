@@ -116,7 +116,7 @@ class ClaimJhtResource extends Resource
                                 ->label('Dokumen Pendukung')
                                 ->disk('public')
                                 ->directory('seeker/claim_jht')
-                                ->maxSize(2048)
+                                ->maxSize(10240)
                                 ->downloadable(),
                         ])->compact()->grow(false)
                 ])

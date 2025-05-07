@@ -63,7 +63,7 @@ class JobResource extends Resource
                         ->disk('public')
                         ->directory('jobs')
                         ->image()
-                        ->maxSize(2048)
+                        ->maxSize(10240)
                         ->columnSpanFull(),
                 ])->columns(2),
                 Tabs::make()->tabs([

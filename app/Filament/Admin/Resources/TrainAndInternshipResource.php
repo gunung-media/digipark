@@ -34,7 +34,7 @@ class TrainAndInternshipResource extends Resource
                             ->disk('public')
                             ->directory('news')
                             ->image()
-                            ->maxSize(2048)
+                            ->maxSize(10240)
                             ->required(),
                     ]),
                 Split::make([

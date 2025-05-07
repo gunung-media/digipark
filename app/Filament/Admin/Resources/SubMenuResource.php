@@ -50,7 +50,7 @@ class SubMenuResource extends Resource
                         ->disk('public')
                         ->directory('news')
                         ->image()
-                        ->maxSize(2048)
+                        ->maxSize(10240)
                         ->columnSpan(2),
                     TinyEditor::make('body')
                         ->columnSpan(2)

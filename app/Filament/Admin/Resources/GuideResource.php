@@ -59,7 +59,7 @@ class GuideResource extends Resource
                             ->downloadable()
                             ->columnSpan(2)
                             ->hidden(fn(Get $get) => $get('is_video') === true)
-                            ->maxSize(2048)
+                            ->maxSize(10240)
                             ->required(),
                     ])->columns(2),
                     Forms\Components\Section::make()->schema([

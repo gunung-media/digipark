@@ -34,7 +34,7 @@ class NewsResource extends Resource
                             ->directory('news')
                             ->image()
                             ->columnSpan(2)
-                            ->maxSize(2048)
+                            ->maxSize(10240)
                             ->required(),
                     ]),
                 Forms\Components\Split::make([
