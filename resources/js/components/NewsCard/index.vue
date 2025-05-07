@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 defineProps<{
-    news: Object;
+    news: any;
     storageUrl: String;
 }>();
 </script>
