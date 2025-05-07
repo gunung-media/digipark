@@ -1,4 +1,5 @@
 <template>
+    <Head title="Lowongan Staff Admin" />
     <div>
         <Back heading="Lowongan Staff Admin" />
 
@@ -102,7 +103,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { router } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 import Button from "@/components/Button/index.vue";
 import Back from "@/components/Back/index.vue";
 import {

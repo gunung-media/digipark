@@ -1,4 +1,5 @@
 <template>
+    <Head title="List Pekerjaan" />
     <div>
         <SearchBar placeholder="Cari lowongan disini">
             <LocationInfo
@@ -54,6 +55,7 @@ import {
     ChatBubbleLeftRightIcon,
     ChevronRightIcon,
 } from "@heroicons/vue/24/outline";
+import { Head } from "@inertiajs/vue3";
 
 const categories = ["Semua", "Admin", "Operator", "Teknisi"];
 const selectedCategory = ref("Semua");
