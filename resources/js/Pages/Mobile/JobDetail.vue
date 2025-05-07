@@ -117,6 +117,6 @@ const selected = ref("operator"); // default selected job
 
 const applyJob = () => {
     console.log("Applied for:", selected.value);
-    router.visit(route("mobile.application"));
+    router.visit(route("mobile.home"));
 };
 </script>

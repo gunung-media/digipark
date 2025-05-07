@@ -19,12 +19,12 @@
 
         <div class="mt-18">
             <p class="text-lg font-semibold leading-2">Akun</p>
-            <AccountItem
+            <MenuItem
                 :icon="UserCircleIcon"
                 title="Edit Akun"
                 :onClick="() => router.visit('/mobile/home')"
             />
-            <AccountItem
+            <MenuItem
                 :icon="LockClosedIcon"
                 title="Ganti Password"
                 :onClick="() => router.visit('/mobile/home')"
@@ -51,5 +51,5 @@ import {
 import { router, Head } from "@inertiajs/vue3";
 
 import Button from "@/components/Button/index.vue";
-import AccountItem from "@/components/AccountItem/index.vue";
+import MenuItem from "@/components/MenuItem/index.vue";
 </script>
