@@ -2,7 +2,7 @@
     <Head title="Home" />
     <div class="bg-white min-h-screen pb-20">
         <SearchBar />
-        <div class="px-4">
+        <div class="p-4">
             <div class="relative rounded-xl overflow-hidden">
                 <img
                     src="@/assets/images/slider/1.png"
@@ -55,7 +55,7 @@
         </div>
 
         <SectionHeader title="Lowongan terbaru" linkText="Lihat Semua" />
-        <JobCard :job="job" :storageUrl="storageUrl" />
+        <JobCard :job="job" :storageUrl="storageUrl" class="m-4" />
 
         <SectionHeader title="Berita" linkText="Lihat Semua" />
         <div class="flex overflow-x-auto space-x-4 p-4 mt-5">

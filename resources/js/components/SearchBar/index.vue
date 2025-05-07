@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4">
+    <div class="px-4 pt-4">
         <div
             class="flex items-center bg-gray-50 rounded-xl px-4 py-3 border border-gray-300"
         >

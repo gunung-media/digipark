@@ -1,6 +1,7 @@
 <template>
     <div
-        class="rounded-xl bg-white shadow-sm overflow-hidden m-4 max-w-[250px] cursor-pointer"
+        class="rounded-xl bg-white shadow-sm overflow-hidden m-2 max-w-[250px] cursor-pointer"
+        @click="visitJob"
     >
         <img
             :src="`${storageUrl}/${job.image}`"
@@ -21,10 +22,14 @@
 
 <script setup>
 import { MapPinIcon } from "@heroicons/vue/24/outline";
+import { router } from "@inertiajs/vue3";
 const props = defineProps({
     storageUrl: String,
     job: Object,
     highlightNote: String,
     highlightColor: String,
 });
+const visitJob = () => {
+    router.visit(route("mobile.jobDetail", { id: props.job.id }));
+};
 </script>

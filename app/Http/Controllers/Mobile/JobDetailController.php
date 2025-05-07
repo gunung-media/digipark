@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Company\Job;
 use Inertia\Inertia;
 
-class JobController extends Controller
+class JobDetailController extends Controller
 {
     public function index()
     {
         $jobs = Job::with('company')->latest()->get();
-        return Inertia::render('Mobile/Job', [
+        return Inertia::render('Mobile/JobDetail', [
             'jobs' => $jobs
         ]);
     }

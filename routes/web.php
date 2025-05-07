@@ -22,6 +22,7 @@ Route::prefix('/mobile')->name('mobile.')->middleware('inertia:app-mobile')->gro
     Route::get('login', 'Mobile\LoginController@index')->name('login');
     Route::get('home', 'Mobile\HomeController@index')->name('home');
     Route::get('job', 'Mobile\JobController@index')->name('job');
+    Route::get('job/{id}', 'Mobile\JobDetailController@index')->name('jobDetail');
 });
 
 // Portal Routes
