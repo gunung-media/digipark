@@ -49,5 +49,7 @@ class CompanyWarning extends Command
                 );
             }
         }
+
+        Log::info("Done running company warning script");
     }
 }
