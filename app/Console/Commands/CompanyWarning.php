@@ -39,7 +39,12 @@ class CompanyWarning extends Command
             if (!$effectiveDate) continue;
             $effectiveDate = Carbon::parse($effectiveDate);
 
-            if ($effectiveDate->isSameDay($currentDate->addYear(2))) {
+            if (
+                $currentDate->month === $effectiveDate->month
+                && $currentDate->day === $effectiveDate->day
+                && ($currentDate->year + 2) === $effectiveDate->year
+            ) {
+                Log::info("Company {$company->company_id} will expire in 2 years");
                 FilamentUtil::sendNotifToCompany(
                     url: route('filament.company.resources.company-legalizations.edit', $company->id),
                     title: 'Peringatan',
