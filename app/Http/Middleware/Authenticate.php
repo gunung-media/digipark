@@ -8,24 +8,39 @@ use Illuminate\Http\Request;
 
 class Authenticate extends Middleware
 {
-
     public function handle($request, Closure $next, ...$guards): mixed
     {
         foreach ($guards as $guard) {
             if ($this->auth->guard($guard)->check()) {
                 return $next($request);
             }
-            return redirect()->route($this->redirectTo($guard));
+
+            $request->attributes->set('auth_guard', $guard);
         }
+
+        return redirect()->route($this->determineRedirectRoute($request));
     }
 
-    protected function redirectTo($guard): String
+    protected function redirectTo($request): ?string
     {
-        switch ($guard) {
-            case 'company':
-                return 'portal.login';
-            default:
-                return 'admin.login';
+        return $this->determineRedirectRoute($request);
+    }
+
+    protected function determineRedirectRoute(Request $request): string
+    {
+        if ($request->expectsJson()) {
+            return '';
         }
+
+        if ($request->is('mobile') || $request->is('mobile/*')) {
+            return 'mobile.login';
+        }
+
+        $guard = $request->attributes->get('auth_guard');
+
+        return match ($guard) {
+            'company' => 'portal.login',
+            default => 'admin.login',
+        };
     }
 }

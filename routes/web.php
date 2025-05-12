@@ -20,12 +20,15 @@ Route::prefix('/mobile')->name('mobile.')->middleware('inertia:app-mobile')->gro
     Route::get('/', 'Mobile\OnboardingController')->name('landing');
     Route::get('signup', 'Mobile\SignupController@index')->name('signup');
     Route::get('login', 'Mobile\LoginController@index')->name('login');
-    Route::get('home', 'Mobile\HomeController@index')->name('home');
-    Route::get('job', 'Mobile\JobController@index')->name('job');
-    Route::get('job/{id}', 'Mobile\JobDetailController@index')->name('jobDetail');
-    Route::get('service', 'Mobile\ServiceController')->name('service');
-    Route::get('service/claim-jht', 'Mobile\ClaimJhtController@index')->name('service.claim-jht');
-    Route::get('profile', 'Mobile\ProfileController@index')->name('profile');
+
+    Route::middleware('auth:seeker')->group(function () {
+        Route::get('home', 'Mobile\HomeController@index')->name('home');
+        Route::get('job', 'Mobile\JobController@index')->name('job');
+        Route::get('job/{id}', 'Mobile\JobDetailController@index')->name('jobDetail');
+        Route::get('service', 'Mobile\ServiceController')->name('service');
+        Route::get('service/claim-jht', 'Mobile\ClaimJhtController@index')->name('service.claim-jht');
+        Route::get('profile', 'Mobile\ProfileController@index')->name('profile');
+    });
 });
 
 // Portal Routes
