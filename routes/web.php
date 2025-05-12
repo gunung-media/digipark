@@ -24,6 +24,7 @@ Route::prefix('/mobile')
             ->group(function () {
                 Route::get('/', 'OnboardingController')->name('landing');
                 Route::get('login', 'LoginController@index')->name('login');
+                Route::post('login', 'LoginController@login')->name('login.proceed');
 
                 Route::get('signup', 'SignupController@index')->name('signup');
                 Route::post('signup/store', 'SignupController@store')->name('signup.store');
@@ -34,7 +35,7 @@ Route::prefix('/mobile')
                 Route::prefix('/home')
                     ->namespace('Home')
                     ->group(function () {
-                        Route::get('/', 'HomeController@index')->name('home');
+                        Route::get('/', 'HomeController')->name('home');
                     });
 
                 Route::prefix('job')
