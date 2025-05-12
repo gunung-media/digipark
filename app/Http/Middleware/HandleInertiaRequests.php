@@ -54,12 +54,9 @@ class HandleInertiaRequests extends Middleware
             'assets' => asset('template'),
             'storageUrl' => asset('storage'),
             'appName' => config('app.name', 'Laravel'),
-            'session' => [
-                'status' => $request->session('status')
-            ],
-            'ziggy' => fn() => [
-                ...(new Ziggy)->toArray(),
-                'location' => $request->url(),
+            'flash' => [
+                'success' => fn() => $request->session()->get('success'),
+                'error'   => fn() => $request->session()->get('error'),
             ],
         ];
     }

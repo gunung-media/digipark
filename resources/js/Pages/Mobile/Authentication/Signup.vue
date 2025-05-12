@@ -3,19 +3,24 @@
     <div class="">
         <Back />
 
-        <!-- Page Title -->
         <h1 class="text-2xl font-semibold mt-4 text-gray-800 p-4">
             Daftar Akun
         </h1>
 
-        <div class="flex flex-col justify-between px-4 mt-5 h-[77vh]">
-            <form class="space-y-4">
+        <div class="px-4 mt-5 flex-grow">
+            <form
+                method="POST"
+                class="space-y-4 flex flex-col min-h-[75vh]"
+                @submit.prevent="submitForm"
+            >
                 <Input
                     label="Nama"
-                    id="name"
+                    id="full_name"
                     placeholder="Masukkan nama anda"
-                    v-model="form.name"
+                    v-model="form.full_name"
                     type="text"
+                    :error="form.errors.full_name"
+                    isRequired
                 />
 
                 <Input
@@ -24,6 +29,18 @@
                     placeholder="Masukkan alamat email"
                     v-model="form.email"
                     type="email"
+                    :error="form.errors.email"
+                    isRequired
+                />
+
+                <Input
+                    label="Nomor Telepon/WA"
+                    id="phone_number"
+                    placeholder="Masukkan nomor telepon/whatsapp"
+                    v-model="form.phone_number"
+                    type="text"
+                    :error="form.errors.phone_number"
+                    isRequired
                 />
 
                 <Input
@@ -32,67 +49,66 @@
                     placeholder="******"
                     v-model="form.password"
                     type="password"
+                    :error="form.errors.password"
+                    isRequired
                 />
 
-                <!-- Jenis Kelamin -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1"
-                        >Jenis Kelamin</label
-                    >
-                    <div class="flex items-center space-x-4">
-                        <label class="flex items-center">
-                            <input
-                                type="radio"
-                                value="Laki-laki"
-                                v-model="form.gender"
-                                class="text-green-500 focus:ring-green-500"
-                            />
-                            <span class="ml-2">Laki-laki</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input
-                                type="radio"
-                                value="Perempuan"
-                                v-model="form.gender"
-                                class="text-green-500 focus:ring-green-500"
-                            />
-                            <span class="ml-2">Perempuan</span>
-                        </label>
-                    </div>
-                </div>
+                <RadioGroup
+                    label="Jenis Kelamin"
+                    :options="[
+                        { label: 'Laki-laki', value: 'male' },
+                        { label: 'Perempuan', value: 'female' },
+                    ]"
+                    name="gender"
+                    layout="horizontal"
+                    v-model="form.gender"
+                    :error="form.errors.gender"
+                    :isRequired="true"
+                />
 
                 <Input
                     label="Tanggal Lahir"
-                    id="birthdate"
-                    v-model="form.birthdate"
+                    id="date_of_birth"
+                    v-model="form.date_of_birth"
                     type="date"
+                    :error="form.errors.date_of_birth"
+                    isRequired
                 />
+
+                <div class="mt-auto pt-4">
+                    <Button title="Daftar" type="primary" class="w-full" />
+                </div>
             </form>
-            <div>
-                <Button title="Daftar" type="primary" @click="submitForm" />
-            </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { Head } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { Head, router, useForm } from "@inertiajs/vue3";
 import Input from "@/components/Input/index.vue";
 import Button from "@/components/Button/index.vue";
 import Back from "@/components/Back/index.vue";
+import RadioGroup from "@/components/RadioGroup/index.vue";
+import { useToastFlash } from "@/composables/useToastFlash";
 
-const form = ref({
-    name: "",
+const form = useForm({
+    full_name: "",
     email: "",
     password: "",
-    passwordConfirmation: "",
     gender: "",
-    birthdate: "",
+    date_of_birth: "",
+    phone_number: "",
 });
 
 const submitForm = () => {
-    console.log("Form Submitted:", form.value);
-    // You can use Inertia.post() or axios.post() here if submitting to backend
+    form.post(route("mobile.signup.store"), {
+        onError: (errors) => {
+            console.log(errors);
+        },
+        onSuccess: () => {
+            console.log("Success");
+        },
+    });
 };
+useToastFlash();
 </script>

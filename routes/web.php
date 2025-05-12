@@ -23,8 +23,10 @@ Route::prefix('/mobile')
         Route::namespace('Authentication')
             ->group(function () {
                 Route::get('/', 'OnboardingController')->name('landing');
-                Route::get('signup', 'SignupController@index')->name('signup');
                 Route::get('login', 'LoginController@index')->name('login');
+
+                Route::get('signup', 'SignupController@index')->name('signup');
+                Route::post('signup/store', 'SignupController@store')->name('signup.store');
             });
 
         Route::middleware('auth:seeker')
