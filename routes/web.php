@@ -21,6 +21,7 @@ Route::prefix('/mobile')
     ->namespace('Mobile')
     ->middleware('inertia:app-mobile')->group(function () {
         Route::namespace('Authentication')
+            ->middleware('guest:seeker')
             ->group(function () {
                 Route::get('/', 'OnboardingController')->name('landing');
                 Route::get('login', 'LoginController@index')->name('login');

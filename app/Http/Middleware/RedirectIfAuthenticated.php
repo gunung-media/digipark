@@ -21,6 +21,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                if ($guard === 'seeker') return redirect(route('mobile.home'));
                 return redirect(RouteServiceProvider::HOME);
             }
         }
