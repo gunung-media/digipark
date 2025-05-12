@@ -1,6 +1,7 @@
 <template>
     <div
         class="min-w-[250px] bg-white shadow rounded-xl overflow-hidden cursor-pointer"
+        @click="handleClick"
     >
         <img
             :src="`${storageUrl}/${news.image}`"
@@ -17,8 +18,13 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
     news: any;
     storageUrl: String;
 }>();
+
+const handleClick = (e: Event) => {
+    e.preventDefault();
+    window.open(route("portal.news.detail", { id: props.news.slug }));
+};
 </script>

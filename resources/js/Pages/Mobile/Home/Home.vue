@@ -48,13 +48,18 @@
                 </p>
                 <button
                     class="w-full text-white font-bold mt-10 text-right cursor-pointer"
+                    @click="openTrackJht"
                 >
                     Track Proses
                 </button>
             </div>
         </div>
 
-        <SectionHeader title="Lowongan terbaru" linkText="Lihat Semua" />
+        <SectionHeader
+            title="Lowongan terbaru"
+            linkText="Lihat Semua"
+            routeName="mobile.job.index"
+        />
         <JobCard :job="job" :storageUrl="storageUrl" class="m-4" />
 
         <SectionHeader title="Berita" linkText="Lihat Semua" />
@@ -85,4 +90,8 @@ defineProps({
     news: Array,
     storageUrl: String,
 });
+
+const openTrackJht = () => {
+    window.open(route("filament.seeker.resources.claim-jhts.index"));
+};
 </script>
