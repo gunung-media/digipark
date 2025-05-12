@@ -2,12 +2,14 @@
     <div>
         <label :for="id" class="block text-sm font-medium text-gray-700">
             {{ label }}
+            <span v-if="isRequired" class="text-red-500 ml-1">*</span>
         </label>
         <input
             :id="id"
             :type="type"
             :placeholder="placeholder"
             :value="modelValue"
+            :required="isRequired"
             @input="
                 $emit(
                     'update:modelValue',
@@ -26,6 +28,7 @@ defineProps<{
     id: string;
     type?: string;
     placeholder?: string;
+    isRequired?: boolean;
 }>();
 
 defineEmits<{

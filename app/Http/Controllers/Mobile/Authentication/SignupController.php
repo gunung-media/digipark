@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Mobile;
+namespace App\Http\Controllers\Mobile\Authentication;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,6 +10,6 @@ class SignupController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Mobile/Signup');
+        return Inertia::render('Mobile/Authentication/Signup');
     }
 }

@@ -30,6 +30,6 @@ const props = defineProps({
     highlightColor: String,
 });
 const visitJob = () => {
-    router.visit(route("mobile.jobDetail", { id: props.job.id }));
+    router.visit(route("mobile.job.detail", { id: props.job.id }));
 };
 </script>

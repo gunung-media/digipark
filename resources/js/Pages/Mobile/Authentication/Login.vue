@@ -13,6 +13,7 @@
                     placeholder="Masukan Email"
                     v-model="form.email"
                     type="email"
+                    isRequired
                 />
 
                 <Input
@@ -21,6 +22,7 @@
                     placeholder="******"
                     v-model="form.password"
                     type="password"
+                    isRequired
                 />
             </form>
             <div>
@@ -47,7 +49,6 @@ const form = ref({
 });
 
 const submitForm = () => {
-    console.log("Form Submitted:", form.value);
     router.visit(route("mobile.home"));
 };
 </script>

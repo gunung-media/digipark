@@ -29,8 +29,8 @@ const props = defineProps<{
 
 const navItems = [
     { label: "Home", icon: HomeIcon, name: "home" },
-    { label: "Pekerjaan", icon: BriefcaseIcon, name: "job" },
-    { label: "Layanan", icon: BuildingOfficeIcon, name: "service" },
+    { label: "Pekerjaan", icon: BriefcaseIcon, name: "job.index" },
+    { label: "Layanan", icon: BuildingOfficeIcon, name: "service.index" },
     { label: "Akun", icon: UserCircleIcon, name: "profile" },
 ];
 

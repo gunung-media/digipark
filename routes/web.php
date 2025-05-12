@@ -16,20 +16,49 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'LandingController')->name('landing');
 
 
-Route::prefix('/mobile')->name('mobile.')->middleware('inertia:app-mobile')->group(function () {
-    Route::get('/', 'Mobile\OnboardingController')->name('landing');
-    Route::get('signup', 'Mobile\SignupController@index')->name('signup');
-    Route::get('login', 'Mobile\LoginController@index')->name('login');
+Route::prefix('/mobile')
+    ->name('mobile.')
+    ->namespace('Mobile')
+    ->middleware('inertia:app-mobile')->group(function () {
+        Route::namespace('Authentication')
+            ->group(function () {
+                Route::get('/', 'OnboardingController')->name('landing');
+                Route::get('signup', 'SignupController@index')->name('signup');
+                Route::get('login', 'LoginController@index')->name('login');
+            });
 
-    Route::middleware('auth:seeker')->group(function () {
-        Route::get('home', 'Mobile\HomeController@index')->name('home');
-        Route::get('job', 'Mobile\JobController@index')->name('job');
-        Route::get('job/{id}', 'Mobile\JobDetailController@index')->name('jobDetail');
-        Route::get('service', 'Mobile\ServiceController')->name('service');
-        Route::get('service/claim-jht', 'Mobile\ClaimJhtController@index')->name('service.claim-jht');
-        Route::get('profile', 'Mobile\ProfileController@index')->name('profile');
+        Route::middleware('auth:seeker')
+            ->group(function () {
+                Route::prefix('/home')
+                    ->namespace('Home')
+                    ->group(function () {
+                        Route::get('/', 'HomeController@index')->name('home');
+                    });
+
+                Route::prefix('job')
+                    ->namespace('Job')
+                    ->name('job.')
+                    ->group(function () {
+                        Route::get('', 'JobController@index')->name('index');
+                        Route::get('{id}', 'JobDetailController@index')->name('detail');
+                    });
+
+                Route::prefix('/service')
+                    ->namespace('Service')
+                    ->name('service.')
+                    ->group(function () {
+                        Route::get('', 'ServiceController')->name('index');
+                        Route::get('claim-jht', 'ClaimJhtController@index')->name('claim-jht');
+                    });
+
+
+                Route::prefix('/profile')
+                    ->namespace('Profile')
+                    ->group(function () {
+                        Route::get('', 'ProfileController@index')->name('profile');
+                    });
+            });
     });
-});
 
 // Portal Routes
 Route::get('website', 'PortalController')->name('portal');

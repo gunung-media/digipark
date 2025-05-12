@@ -3,17 +3,21 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function index(): View|Factory
     {
         $mode = request()->query('mode');
         return view('portal.auth.login', compact('mode'));
     }
 
-    public function login(Request $request, $mode)
+    public function login(Request $request, $mode): Redirector|RedirectResponse
     {
         $request->validate([
             'email' => 'required|email',
@@ -28,7 +32,7 @@ class LoginController extends Controller
         return redirect()->back()->with('error', 'Login failed, please try again');
     }
 
-    public function logout()
+    public function logout(): Redirector|RedirectResponse
     {
         auth('company')->logout();
         auth('seeker')->logout();
