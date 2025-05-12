@@ -15,7 +15,7 @@
             />
         </div>
     </div>
-    <BottomNav active="service" />
+    <BottomNav active="service.index" />
 </template>
 
 <script setup lang="ts">

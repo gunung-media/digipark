@@ -40,7 +40,7 @@
             />
         </div>
 
-        <BottomNav active="job" />
+        <BottomNav active="job.index" />
     </div>
 </template>
 

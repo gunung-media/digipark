@@ -59,7 +59,7 @@ Route::prefix('/mobile')
                 Route::prefix('/profile')
                     ->namespace('Profile')
                     ->group(function () {
-                        Route::get('', 'ProfileController@index')->name('profile');
+                        Route::get('', 'ProfileController')->name('profile');
                     });
             });
     });
