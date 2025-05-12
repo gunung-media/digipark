@@ -16,8 +16,12 @@
                     ($event.target as HTMLInputElement).value,
                 )
             "
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 p-3"
+            class="mt-1 block w-full rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 p-3"
+            :class="error ? 'border-red-500' : 'border-gray-300'"
         />
+        <label v-if="error" class="text-red-500 text-sm mt-2">
+            {{ error }}
+        </label>
     </div>
 </template>
 
@@ -29,6 +33,7 @@ defineProps<{
     type?: string;
     placeholder?: string;
     isRequired?: boolean;
+    error?: string;
 }>();
 
 defineEmits<{
