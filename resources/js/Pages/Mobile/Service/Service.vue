@@ -15,6 +15,13 @@
                 :onClick="() => goTo('mobile.service.claim-jht')"
                 :withBorder="true"
             />
+
+            <MenuItem
+                :icon="UserCircleIcon"
+                title="Lamaran Saya"
+                :onClick="() => goTo('mobile.service.job-app')"
+                :withBorder="true"
+            />
         </div>
     </div>
     <BottomNav active="service.index" />

@@ -53,4 +53,9 @@ class Seeker extends Authenticatable implements FilamentUser, HasName
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function applications()
+    {
+        return $this->hasMany(JobApplicant::class);
+    }
 }

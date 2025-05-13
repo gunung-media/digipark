@@ -57,6 +57,7 @@ Route::prefix('/mobile')
                     ->name('service.')
                     ->group(function () {
                         Route::get('', 'ServiceController')->name('index');
+                        Route::get('job_app', 'ServiceController@jobApplication')->name('job-app');
                         Route::get('claim-jht', 'ClaimJhtController@index')->name('claim-jht');
                         Route::post('claim-jht/store', 'ClaimJhtController@store')->name('claim-jht.store');
                     });

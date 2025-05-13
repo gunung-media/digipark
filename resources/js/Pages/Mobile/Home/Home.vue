@@ -25,7 +25,8 @@
                             Lowongan yang kamu daftar ada disini
                         </p>
                         <button
-                            class="mt-3 bg-white text-black px-3 py-1 rounded-md w-max text-sm font-medium"
+                            class="mt-3 bg-white text-black px-3 py-1 rounded-md w-max text-sm font-medium cursor-pointer"
+                            @click="handleOpenJobApplication"
                         >
                             Lihat Detail
                         </button>
@@ -70,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { Head } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 import SearchBar from "@/components/SearchBar/index.vue";
 import SectionHeader from "@/components/SectionHeader/index.vue";
 import JobCard from "@/components/JobCard/index.vue";
@@ -87,4 +88,7 @@ defineProps({
 });
 
 const showAllNews = ref(false);
+
+const handleOpenJobApplication = () =>
+    router.visit(route("mobile.service.job-app"));
 </script>
