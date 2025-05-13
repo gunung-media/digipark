@@ -1,66 +1,46 @@
 <template>
     <Head title="Lowongan Staff Admin" />
-    <div>
-        <Back heading="Lowongan Staff Admin" />
+    <div v-if="job">
+        <Back :heading="job.name_job" />
 
         <div class="flex justify-center my-6">
             <img
-                src="@/assets/images/guaranteed_medicine.png"
+                :src="`${storageUrl}/${job.image ?? job.company.image}`"
                 alt="Job Illustration"
-                class="w-32 h-32"
             />
         </div>
 
         <div class="text-center font-semibold text-gray-800">
-            <p>CV. Bintang Kejora</p>
-            <p>Jalan Menteng XII, No 1 Palangka Raya</p>
+            <p>{{ job.company.name }}</p>
+            <p class="text-sm font-thin">{{ job.company.address }}</p>
         </div>
 
         <div class="mt-6 space-y-4 px-4">
             <div
                 :class="[
-                    'flex justify-between items-center p-4 rounded-xl border',
-                    selected === 'admin'
-                        ? 'border-green-500 bg-green-50'
-                        : 'border-gray-300',
-                ]"
-                @click="selected = 'admin'"
-            >
-                <div class="flex items-center space-x-3">
-                    <div
-                        :class="[
-                            'w-5 h-5 rounded-full border-2',
-                            selected === 'admin'
-                                ? 'border-green-500 bg-green-500'
-                                : 'border-gray-400',
-                        ]"
-                    ></div>
-                    <span class="text-gray-800">Jabatan Admin</span>
-                </div>
-                <span class="text-gray-800">Rp. 3 jt / bulan</span>
-            </div>
-
-            <div
-                :class="[
                     'flex justify-between items-center p-4 rounded-xl border relative',
-                    selected === 'operator'
+                    selected === 'main'
                         ? 'border-green-500 bg-green-50'
                         : 'border-gray-300',
                 ]"
-                @click="selected = 'operator'"
+                @click="selected = 'main'"
             >
                 <div class="flex items-center space-x-3">
                     <div
                         :class="[
                             'w-5 h-5 rounded-full border-2',
-                            selected === 'operator'
+                            selected === 'main'
                                 ? 'border-green-500 bg-green-500'
                                 : 'border-gray-400',
                         ]"
                     ></div>
-                    <span class="text-gray-800">Jabatan Operator</span>
+                    <span class="text-gray-800">{{ job.name_job }}</span>
                 </div>
-                <span class="text-gray-800">Rp. 3,5jt / bulan</span>
+                <span class="text-gray-800"
+                    >Rp.
+                    {{ new Intl.NumberFormat("id-ID").format(job.salary) }} /
+                    bulan</span
+                >
                 <span
                     class="absolute top-[-10px] right-[-10px] bg-green-500 text-white text-xs rounded-full px-2 py-0.5"
                 >
@@ -74,21 +54,41 @@
             <ul class="space-y-3 text-gray-500">
                 <li class="flex items-center space-x-2 border-b-1 py-5">
                     <UsersIcon class="w-5" />
-                    <span>Laki-Laki / Perempuan</span>
+                    <span
+                        v-tooltip="
+                            `Dibutuhkan: ${job.total_needed_man} Laki-Laki, ${job.total_needed_woman} Perempuan`
+                        "
+                        class="cursor-help"
+                    >
+                        {{ job.total_needed_man !== 0 ? "Laki-Laki" : "" }}
+                        {{
+                            job.total_needed_man !== 0 &&
+                            job.total_needed_woman !== 0
+                                ? " / "
+                                : ""
+                        }}
+                        {{ job.total_needed_woman !== 0 ? "Perempuan" : "" }}
+                    </span>
                 </li>
                 <li class="flex items-center space-x-2 border-b-1 py-5">
                     <ChatBubbleLeftRightIcon class="w-5" />
-                    <span>Usia maksimal 30 thn</span>
-                </li>
-                <li class="flex items-center space-x-2 border-b-1 py-5">
-                    <BriefcaseIcon class="w-5" />
-                    <span>Bersedia mengikuti pelatihan selama 1 bln</span>
+                    <span
+                        >Spesialisasi:
+                        {{ job.special ?? "Tidak disebutkan" }}</span
+                    >
                 </li>
                 <li class="flex items-center space-x-2 border-b-1 py-5">
                     <ExclamationCircleIcon class="w-5" />
-                    <span>Minimal S1 atau sederajat</span>
+                    <span>Minimal {{ job.minimal_education }}</span>
                 </li>
             </ul>
+        </div>
+
+        <div class="mt-6 px-4">
+            <p class="font-semibold text-gray-800 mb-2 text-base">
+                Info Tambahan :
+            </p>
+            <div v-html="job.description" class="text-sm font-light"></div>
         </div>
 
         <div class="mt-8 px-4">
@@ -102,8 +102,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { Head, router } from "@inertiajs/vue3";
+import { computed, ref } from "vue";
+import { Head, router, usePage } from "@inertiajs/vue3";
 import Button from "@/components/Button/index.vue";
 import Back from "@/components/Back/index.vue";
 import {
@@ -113,7 +113,14 @@ import {
     ExclamationCircleIcon,
 } from "@heroicons/vue/24/solid";
 
-const selected = ref("operator"); // default selected job
+const page = usePage();
+const storageUrl = computed(() => page.props.storageUrl);
+
+defineProps({
+    job: Object,
+});
+
+const selected = ref("main");
 
 const applyJob = () => {
     console.log("Applied for:", selected.value);

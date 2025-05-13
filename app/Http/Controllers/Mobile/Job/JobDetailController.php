@@ -9,11 +9,11 @@ use Inertia\Response;
 
 class JobDetailController extends Controller
 {
-    public function index(): Response
+    public function index($id): Response
     {
-        $jobs = Job::with('company')->latest()->get();
+        $job = Job::with('company')->find($id);
         return Inertia::render('Mobile/Job/JobDetail', [
-            'jobs' => $jobs
+            'job' => $job
         ]);
     }
 }

@@ -4,7 +4,7 @@
         @click="visitJob"
     >
         <img
-            :src="`${storageUrl}/${job.image}`"
+            :src="`${storageUrl}/${job.image ?? job.company.image}`"
             class="w-full h-24 object-cover"
         />
         <div class="p-3">
