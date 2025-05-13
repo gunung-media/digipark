@@ -3,7 +3,7 @@
     <div class="p-4">
         <div class="flex items-center justify-between mt-2 mb-10">
             <p class="text-2xl font-bold">Layanan</p>
-            <BellIcon class="w-8 cursor-pointer text-gray-700" />
+            <NotificationIcon />
         </div>
 
         <TrackYourJht />
@@ -22,9 +22,10 @@
 
 <script setup lang="ts">
 import BottomNav from "@/components/BottomNav/index.vue";
-import { BellIcon, UserCircleIcon } from "@heroicons/vue/24/outline";
+import { UserCircleIcon } from "@heroicons/vue/24/outline";
 import { router, Head } from "@inertiajs/vue3";
 import TrackYourJht from "@/components/TrackYourJht/index.vue";
+import NotificationIcon from "@/components/NotificationIcon/index.vue";
 
 import MenuItem from "@/components/MenuItem/index.vue";
 
