@@ -59,8 +59,11 @@ Route::prefix('/mobile')
 
                 Route::prefix('/profile')
                     ->namespace('Profile')
+                    ->name('profile.')
                     ->group(function () {
-                        Route::get('', 'ProfileController')->name('profile');
+                        Route::get('', 'ProfileController')->name('index');
+                        Route::get('edit', 'EditProfileController@index')->name('edit');
+                        Route::post('edit/proceed', 'EditProfileController@proceed')->name('edit.proceed');
                     });
             });
     });

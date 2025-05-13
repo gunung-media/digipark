@@ -31,7 +31,7 @@ const navItems = [
     { label: "Home", icon: HomeIcon, name: "home" },
     { label: "Pekerjaan", icon: BriefcaseIcon, name: "job.index" },
     { label: "Layanan", icon: BuildingOfficeIcon, name: "service.index" },
-    { label: "Akun", icon: UserCircleIcon, name: "profile" },
+    { label: "Akun", icon: UserCircleIcon, name: "profile.index" },
 ];
 
 const isActive = (item: { name: string }) => {

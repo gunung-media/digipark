@@ -49,7 +49,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user('seeker'),
             ],
             'assets' => asset('template'),
             'storageUrl' => asset('storage'),

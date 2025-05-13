@@ -8,11 +8,11 @@
 
         <div class="flex items-center gap-5">
             <img
-                :src="`https://ui-avatars.com/api/?rounded=true&name=${'Richie Zakaria'}`"
+                :src="`https://ui-avatars.com/api/?rounded=true&name=${user.full_name}`"
                 className="w-px-40 h-auto rounded-circle"
             />
             <div>
-                <p class="font-bold">Richie Zakaria</p>
+                <p class="font-bold">{{ user.full_name }}</p>
                 <p class="text-sm font-thin">Tidak memiliki pekerjaan</p>
             </div>
         </div>
@@ -22,7 +22,7 @@
             <MenuItem
                 :icon="UserCircleIcon"
                 title="Edit Akun"
-                :onClick="() => router.visit('/mobile/home')"
+                :onClick="() => redirect('mobile.profile.edit')"
             />
             <MenuItem
                 :icon="LockClosedIcon"
@@ -38,7 +38,7 @@
             :onClick="() => router.visit('/mobile')"
         />
     </div>
-    <BottomNav active="profile" />
+    <BottomNav active="profile.index" />
 </template>
 
 <script setup lang="ts">
@@ -48,8 +48,19 @@ import {
     UserCircleIcon,
     LockClosedIcon,
 } from "@heroicons/vue/24/outline";
-import { router, Head } from "@inertiajs/vue3";
+import { router, Head, usePage } from "@inertiajs/vue3";
 
 import Button from "@/components/Button/index.vue";
 import MenuItem from "@/components/MenuItem/index.vue";
+import { computed } from "vue";
+
+const page = usePage();
+const user = computed(
+    () => (page.props.auth as { user: { full_name: string } }).user,
+);
+
+const redirect = (routeName: string) => {
+    console.log(routeName);
+    router.visit(route(routeName));
+};
 </script>
