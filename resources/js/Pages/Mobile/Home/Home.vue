@@ -32,11 +32,6 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center mt-2 space-x-1">
-                <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-            </div>
         </div>
 
         <TrackYourJht />
@@ -48,13 +43,25 @@
         />
         <JobCard :job="job" :storageUrl="storageUrl" class="m-4" />
 
-        <SectionHeader title="Berita" linkText="Lihat Semua" />
-        <div class="flex overflow-x-auto space-x-4 p-4 mt-5">
+        <SectionHeader
+            title="Berita"
+            :linkText="`${showAllNews ? 'Tutup' : 'Lihat Semua'}`"
+            :onClick="() => (showAllNews = !showAllNews)"
+        />
+        <div
+            class="px-4 mt-5"
+            :class="
+                showAllNews
+                    ? 'grid grid-cols-2'
+                    : 'flex overflow-x-auto space-x-4 '
+            "
+        >
             <NewsCard
-                v-for="(n, i) in news"
+                v-for="(n, i) in !showAllNews ? news!.slice(0, 5) : news"
                 :news="n!"
                 :storageUrl="storageUrl!"
                 :key="i"
+                :class="showAllNews ? 'min-w-auto m-2' : ''"
             />
         </div>
 
@@ -71,10 +78,13 @@ import NewsCard from "@/components/NewsCard/index.vue";
 import BottomNav from "@/components/BottomNav/index.vue";
 import TrackYourJht from "@/components/TrackYourJht/index.vue";
 import NotificationIcon from "@/components/NotificationIcon/index.vue";
+import { ref } from "vue";
 
 defineProps({
     job: Object,
     news: Array,
     storageUrl: String,
 });
+
+const showAllNews = ref(false);
 </script>

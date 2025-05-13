@@ -1,6 +1,6 @@
 <template>
     <div
-        class="min-w-[250px] bg-white shadow rounded-xl overflow-hidden cursor-pointer"
+        class="min-w-[250px] max-w-[250px] bg-white shadow rounded-xl overflow-hidden cursor-pointer"
         @click="handleClick"
     >
         <img
