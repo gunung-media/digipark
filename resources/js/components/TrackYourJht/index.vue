@@ -21,8 +21,9 @@
 
 <script setup lang="ts">
 import { TruckIcon } from "@heroicons/vue/24/solid";
+import { router } from "@inertiajs/vue3";
 
 const openTrackJht = () => {
-    window.open(route("filament.seeker.resources.claim-jhts.index"));
+    router.visit(route("mobile.service.jht"));
 };
 </script>
