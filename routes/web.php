@@ -60,6 +60,9 @@ Route::prefix('/mobile')
                         Route::get('job_app', 'ServiceController@jobApplication')->name('job-app');
                         Route::get('claim-jht', 'ClaimJhtController@index')->name('claim-jht');
                         Route::post('claim-jht/store', 'ClaimJhtController@store')->name('claim-jht.store');
+
+                        Route::get('track_jht', 'TrackClaimJhtController@index')->name('jht');
+                        Route::get('track_jht/{id}', 'TrackClaimJhtController@show')->name('jht.detail');
                     });
 
 

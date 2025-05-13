@@ -22,6 +22,13 @@
                 :onClick="() => goTo('mobile.service.job-app')"
                 :withBorder="true"
             />
+
+            <MenuItem
+                :icon="UserCircleIcon"
+                title="Track Klaim Jht"
+                :onClick="() => goTo('mobile.service.jht')"
+                :withBorder="true"
+            />
         </div>
     </div>
     <BottomNav active="service.index" />
