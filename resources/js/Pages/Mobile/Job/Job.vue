@@ -1,12 +1,17 @@
 <template>
     <Head title="List Pekerjaan" />
     <div>
-        <SearchBar placeholder="Cari lowongan disini">
-            <LocationInfo
-                label="Lokasi Saat ini"
-                location="Palangka Raya, Kalteng"
-            />
-        </SearchBar>
+        <div class="flex w-full items-start gap-3 px-4 py-2">
+            <div class="flex-1">
+                <SearchBar class="w-full" placeholder="Cari lowongan disini">
+                    <LocationInfo
+                        label="Lokasi Saat ini"
+                        location="Palangka Raya, Kalteng"
+                    />
+                </SearchBar>
+            </div>
+            <NotificationIcon class="pt-2" />
+        </div>
 
         <div class="bg-[#F2F2F2] p-4">
             <div
@@ -55,6 +60,7 @@ import LocationInfo from "@/components/LocationInfo/index.vue";
 import JobCard from "@/components/JobCard/index.vue";
 import CategoryFilter from "@/components/CategoryFilter/index.vue";
 import BottomNav from "@/components/BottomNav/index.vue";
+import NotificationIcon from "@/components/NotificationIcon/index.vue";
 import { ref } from "vue";
 import {
     ChatBubbleLeftRightIcon,

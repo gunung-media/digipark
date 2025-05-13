@@ -1,7 +1,12 @@
 <template>
     <Head title="Home" />
     <div class="bg-white min-h-screen pb-20">
-        <SearchBar />
+        <div class="flex w-full items-center gap-3 px-4 py-2">
+            <div class="flex-1">
+                <SearchBar class="w-full" />
+            </div>
+            <NotificationIcon />
+        </div>
         <div class="p-4">
             <div class="relative rounded-xl overflow-hidden">
                 <img
@@ -65,6 +70,7 @@ import JobCard from "@/components/JobCard/index.vue";
 import NewsCard from "@/components/NewsCard/index.vue";
 import BottomNav from "@/components/BottomNav/index.vue";
 import TrackYourJht from "@/components/TrackYourJht/index.vue";
+import NotificationIcon from "@/components/NotificationIcon/index.vue";
 
 defineProps({
     job: Object,
