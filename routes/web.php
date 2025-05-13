@@ -47,7 +47,8 @@ Route::prefix('/mobile')
                     ->name('job.')
                     ->group(function () {
                         Route::get('', 'JobController@index')->name('index');
-                        Route::get('{id}', 'JobDetailController@index')->name('detail');
+                        Route::get('search', 'JobController@search')->name('search');
+                        Route::get('edit/{id}', 'JobDetailController@index')->name('detail');
                     });
 
                 Route::prefix('/service')
