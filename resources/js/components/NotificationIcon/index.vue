@@ -1,11 +1,15 @@
 <template>
     <BellIcon
         class="w-8 cursor-pointer text-gray-700 hover:text-yellow-600 transition duration-200 jiggle-on-hover"
+        @click="handleClick"
     />
 </template>
 
 <script setup lang="ts">
 import { BellIcon } from "@heroicons/vue/24/outline";
+import { router } from "@inertiajs/vue3";
+
+const handleClick = () => router.visit(route("mobile.notification"));
 </script>
 
 <style scoped>

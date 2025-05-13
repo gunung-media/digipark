@@ -38,6 +38,7 @@ Route::prefix('/mobile')
                     ->namespace('Home')
                     ->group(function () {
                         Route::get('/', 'HomeController')->name('home');
+                        Route::get('notification', 'NotificationController@index')->name('notification');
                     });
 
                 Route::prefix('job')
