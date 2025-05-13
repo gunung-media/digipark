@@ -84,7 +84,7 @@
 </template>
 
 <script setup lang="ts">
-import { Head, router, useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import Input from "@/components/Input/index.vue";
 import Button from "@/components/Button/index.vue";
 import Back from "@/components/Back/index.vue";

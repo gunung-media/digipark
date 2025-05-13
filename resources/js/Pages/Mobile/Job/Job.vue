@@ -10,14 +10,17 @@
 
         <div class="bg-[#F2F2F2] p-4">
             <div
-                class="flex items-center justify-between bg-yellow-100 rounded-xl p-4"
+                class="flex items-center justify-between bg-yellow-100 rounded-xl p-4 cursor-pointer hover:bg-yellow-200 group"
+                @click="handleOpenConsultation"
             >
                 <div class="flex items-start">
                     <ChatBubbleLeftRightIcon
-                        class="w-6 h-6 text-yellow-700 mr-2 mt-1"
+                        class="w-6 h-6 text-yellow-700 mr-2 mt-1 group-hover:text-yellow-800"
                     />
                     <div>
-                        <div class="font-semibold text-yellow-800 text-sm">
+                        <div
+                            class="font-semibold text-yellow-800 text-sm group-hover:text-yellow-700"
+                        >
                             Ada Pertanyaan?
                         </div>
                         <div class="text-yellow-700 text-xs">
@@ -25,7 +28,9 @@
                         </div>
                     </div>
                 </div>
-                <ChevronRightIcon class="w-5 h-5 text-yellow-600" />
+                <ChevronRightIcon
+                    class="w-5 h-5 text-yellow-600 group-hover:text-yellow-800"
+                />
             </div>
         </div>
 
@@ -50,14 +55,14 @@ import LocationInfo from "@/components/LocationInfo/index.vue";
 import JobCard from "@/components/JobCard/index.vue";
 import CategoryFilter from "@/components/CategoryFilter/index.vue";
 import BottomNav from "@/components/BottomNav/index.vue";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import {
     ChatBubbleLeftRightIcon,
     ChevronRightIcon,
 } from "@heroicons/vue/24/outline";
 import { Head } from "@inertiajs/vue3";
 
-const categories = ["Semua", "Admin", "Operator", "Teknisi"];
+const categories = ["Semua"];
 const selectedCategory = ref("Semua");
 
 defineProps({
@@ -65,8 +70,5 @@ defineProps({
     storageUrl: String,
 });
 
-const filteredJobs = computed(() => {
-    if (selectedCategory.value === "Semua") return jobs;
-    return jobs.filter((job) => job.category === selectedCategory.value);
-});
+const handleOpenConsultation = () => window.open(route("portal.consultation"));
 </script>

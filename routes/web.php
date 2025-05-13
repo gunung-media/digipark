@@ -53,6 +53,7 @@ Route::prefix('/mobile')
                     ->group(function () {
                         Route::get('', 'ServiceController')->name('index');
                         Route::get('claim-jht', 'ClaimJhtController@index')->name('claim-jht');
+                        Route::post('claim-jht', 'ClaimJhtController@index')->name('claim-jht.store');
                     });
 
 

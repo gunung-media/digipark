@@ -1,9 +1,15 @@
 <template>
     <div class="relative mt-7">
-        <label class="block text-sm font-medium text-gray-700 mb-1">{{
-            label
-        }}</label>
-        <div class="relative border rounded shadow border-gray-700-500/50">
+        <label
+            class="block text-sm font-medium mb-1"
+            :class="error ? 'text-red-500' : 'text-gray-700'"
+        >
+            {{ label }}
+        </label>
+        <div
+            class="relative border rounded shadow"
+            :class="error ? 'border-red-500' : 'border-gray-700-500/50'"
+        >
             <VueSignaturePad
                 ref="signature"
                 height="200px"
@@ -76,6 +82,10 @@
                 </button>
             </div>
         </div>
+
+        <label v-if="error" class="text-red-500 text-sm mt-2">
+            {{ error }}
+        </label>
     </div>
 </template>
 
