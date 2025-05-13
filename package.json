@@ -22,6 +22,7 @@
         "@programic/vue3-tooltip": "^1.0.0",
         "@selemondev/vue3-signature-pad": "^1.2.3",
         "@tailwindcss/vite": "^4.1.5",
+        "dayjs": "^1.11.13",
         "framer-motion": "^11.0.5",
         "moment": "^2.30.1",
         "tailwindcss": "^4.1.5",

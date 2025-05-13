@@ -14,7 +14,7 @@
                     {{ message }}
                 </p>
                 <p v-if="timestamp" class="text-xs text-gray-400 mt-1">
-                    {{ timestamp }}
+                    {{ formattedDate(timestamp) }}
                 </p>
             </div>
         </div>
@@ -30,6 +30,10 @@
 
 <script setup lang="ts">
 import type { Component } from "vue";
+import dayjs from "dayjs";
+
+const formattedDate = (created_at: string) =>
+    dayjs(created_at).format("DD MMM, YYYY, HH:mm");
 
 defineProps<{
     icon: Component;
@@ -39,7 +43,3 @@ defineProps<{
     isRead?: boolean;
 }>();
 </script>
-
-<style scoped>
-/* Optional subtle hover or animation styles can go here */
-</style>

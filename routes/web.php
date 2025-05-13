@@ -39,6 +39,7 @@ Route::prefix('/mobile')
                     ->group(function () {
                         Route::get('/', 'HomeController')->name('home');
                         Route::get('notification', 'NotificationController@index')->name('notification');
+                        Route::get('notification_count', 'NotificationController@count')->name('notification.count');
                     });
 
                 Route::prefix('job')

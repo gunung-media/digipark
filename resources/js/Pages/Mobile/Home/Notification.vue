@@ -9,43 +9,48 @@
             class="mt-2"
         />
 
-        <div class="px-4 mt-4">
-            <p class="text-2xl font-bold">Hari ini</p>
-
+        <div v-if="groupedNotifications.today.length" class="px-4 mt-4">
+            <p class="text-2xl font-bold">Hari Ini</p>
             <div class="flex flex-col gap-1 mt-4">
                 <NotificationItem
+                    v-for="notif in groupedNotifications.today"
+                    :key="notif.id"
+                    :title="notif.title"
+                    :message="notif.body"
+                    :timestamp="notif.created_at"
+                    :isRead="notif.read_at !== null"
                     :icon="ExclamationCircleIcon"
-                    title="Selamat"
-                    message="Laporan Claim JHT diproses oleh Admin"
-                    timestamp="13 May 2025, 15:34"
-                />
-                <NotificationItem
-                    :icon="ExclamationCircleIcon"
-                    title="Selamat"
-                    message="Laporan Claim JHT diproses oleh Admin"
-                    timestamp="13 May 2025, 15:34"
-                    isRead
                 />
             </div>
         </div>
 
-        <div class="px-4 mt-4">
+        <div v-if="groupedNotifications.yesterday.length" class="px-4 mt-4">
             <p class="text-2xl font-bold">Kemarin</p>
 
             <div class="flex flex-col gap-1 mt-4">
                 <NotificationItem
+                    v-for="notif in groupedNotifications.yesterday"
+                    :key="notif.id"
+                    :title="notif.title"
+                    :message="notif.body"
+                    :timestamp="notif.created_at"
+                    :isRead="notif.read_at !== null"
                     :icon="ExclamationCircleIcon"
-                    title="Selamat"
-                    message="Laporan Claim JHT diproses oleh Admin"
-                    timestamp="13 May 2025, 15:34"
-                    isRead
                 />
+            </div>
+        </div>
+
+        <div v-if="groupedNotifications.earlier.length" class="px-4 mt-4">
+            <p class="text-2xl font-bold">Sebelumnya...</p>
+            <div class="flex flex-col gap-1 mt-4">
                 <NotificationItem
+                    v-for="notif in groupedNotifications.earlier"
+                    :key="notif.id"
+                    :title="notif.title"
+                    :message="notif.body"
+                    :timestamp="notif.created_at"
+                    :isRead="notif.read_at !== null"
                     :icon="ExclamationCircleIcon"
-                    title="Selamat"
-                    message="Laporan Claim JHT diproses oleh Admin"
-                    timestamp="13 May 2025, 15:34"
-                    isRead
                 />
             </div>
         </div>
@@ -53,10 +58,13 @@
 </template>
 
 <script setup lang="ts">
-import { Head, useForm, usePage } from "@inertiajs/vue3";
+// @ts-nocheck
+import { Head, usePage } from "@inertiajs/vue3";
 import { ExclamationCircleIcon } from "@heroicons/vue/24/outline";
-import { toast } from "vue3-toastify";
 import { computed, ref } from "vue";
+import dayjs from "dayjs";
+import isToday from "dayjs/plugin/isToday";
+import isYesterday from "dayjs/plugin/isYesterday";
 
 import CategoryFilter from "@/components/CategoryFilter/index.vue";
 import Button from "@/components/Button/index.vue";
@@ -66,8 +74,34 @@ import NotificationItem from "@/components/NotificationItem/index.vue";
 const categories = ["Semua"];
 const selectedCategory = ref("Semua");
 
-const page = usePage();
-const user = computed(
-    () => (page.props.auth as { user: { full_name: string } }).user,
-);
+const props = defineProps<{
+    notifications: any;
+}>();
+
+dayjs.extend(isToday);
+dayjs.extend(isYesterday);
+
+const groupedNotifications = computed(() => {
+    const today: typeof props.notifications = [];
+    const yesterday: typeof props.notifications = [];
+    const earlier: typeof props.notifications = [];
+
+    props.notifications.forEach((item: any) => {
+        const date = dayjs(item.created_at);
+
+        if (date.isToday()) {
+            today.push(item);
+        } else if (date.isYesterday()) {
+            yesterday.push(item);
+        } else {
+            earlier.push(item);
+        }
+    });
+
+    return {
+        today,
+        yesterday,
+        earlier,
+    };
+});
 </script>

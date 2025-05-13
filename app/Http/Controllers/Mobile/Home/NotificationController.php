@@ -11,6 +11,16 @@ class NotificationController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Mobile/Home/Notification');
+        $user = auth('seeker')->user();
+        $notifications = collect($user->notifications)->map(fn($n) => ['created_at' => $n->created_at, 'read_at' => $n->read_at, ...$n->data]);
+        return Inertia::render('Mobile/Home/Notification', [
+            'notifications' => $notifications
+        ]);
+    }
+
+    public function count()
+    {
+        $user = auth('seeker')->user();
+        return response()->json(['total' => $user->unreadNotifications->count()]);
     }
 }
