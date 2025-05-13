@@ -27,7 +27,9 @@
             <MenuItem
                 :icon="LockClosedIcon"
                 title="Ganti Password"
-                :onClick="() => router.visit('/mobile/home')"
+                :onClick="
+                    () => redirect('mobile.profile.change-password.index')
+                "
             />
         </div>
 
@@ -60,7 +62,6 @@ const user = computed(
 );
 
 const redirect = (routeName: string) => {
-    console.log(routeName);
     router.visit(route(routeName));
 };
 </script>

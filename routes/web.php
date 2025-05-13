@@ -64,6 +64,9 @@ Route::prefix('/mobile')
                         Route::get('', 'ProfileController')->name('index');
                         Route::get('edit', 'EditProfileController@index')->name('edit');
                         Route::post('edit/proceed', 'EditProfileController@proceed')->name('edit.proceed');
+
+                        Route::get('change_pass', 'ChangePasswordController@index')->name('change-password.index');
+                        Route::post('change_pass/proceed', 'ChangePasswordController@proceed')->name('change-password.proceed');
                     });
             });
     });
