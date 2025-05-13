@@ -88,7 +88,7 @@
             <p class="font-semibold text-gray-800 mb-2 text-base">
                 Info Tambahan :
             </p>
-            <div v-html="job.description" class="text-sm font-light"></div>
+            <div v-html="job.description" class="rich-text-content"></div>
         </div>
 
         <div class="mt-8 px-4">
@@ -109,7 +109,6 @@ import Back from "@/components/Back/index.vue";
 import {
     UsersIcon,
     ChatBubbleLeftRightIcon,
-    BriefcaseIcon,
     ExclamationCircleIcon,
 } from "@heroicons/vue/24/solid";
 
@@ -127,3 +126,59 @@ const applyJob = () => {
     router.visit(route("mobile.home"));
 };
 </script>
+
+<style scoped>
+:deep(.rich-text-content) {
+    font-size: 0.875rem !important;
+    font-weight: 300 !important;
+    line-height: 1.6 !important;
+    color: #374151 !important;
+}
+
+:deep(.rich-text-content p) {
+    margin: 0 0 1em 0 !important;
+    text-indent: 0 !important;
+}
+
+:deep(.rich-text-content ul),
+:deep(.rich-text-content ol) {
+    padding-left: 1.5em !important;
+    margin-bottom: 1em !important;
+}
+
+:deep(.rich-text-content li) {
+    margin-bottom: 0.5em !important;
+}
+
+:deep(.rich-text-content h1),
+:deep(.rich-text-content h2),
+:deep(.rich-text-content h3) {
+    margin: 1em 0 0.5em 0 !important;
+    font-weight: 600 !important;
+}
+
+:deep(.rich-text-content br + br) {
+    display: none !important;
+}
+
+:deep(.rich-text-content table) {
+    margin-left: 0 !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-bottom: 1em !important;
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+    text-align: left !important;
+}
+
+:deep(.rich-text-content th),
+:deep(.rich-text-content td) {
+    border: 1px solid #d1d5db !important;
+    padding: 0.5em 0.75em !important;
+}
+
+:deep(.rich-text-content thead) {
+    background-color: #f9fafb !important;
+    font-weight: 600 !important;
+}
+</style>
