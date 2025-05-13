@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function __invoke(Request $request): Response
     {
         $job = Job::with('company')->latest()->first();
-        $news = News::with('category')->latest()->take(5)->get();
+        $news = News::with('category')->latest()->get();
         return Inertia::render('Mobile/Home/Home', [
             'job' => $job,
             'news' => $news

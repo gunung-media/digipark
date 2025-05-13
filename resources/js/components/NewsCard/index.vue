@@ -18,13 +18,14 @@
 </template>
 
 <script setup lang="ts">
+import { router } from "@inertiajs/vue3";
+
 const props = defineProps<{
     news: any;
     storageUrl: String;
 }>();
 
 const handleClick = (e: Event) => {
-    e.preventDefault();
-    window.open(route("portal.news.detail", { id: props.news.slug }));
+    router.visit(route("mobile.news.detail", { id: props.news.slug }));
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
-    <Head title="Lowongan Staff Admin" />
     <div v-if="job">
+        <Head :title="job.name_job" />
         <Back :heading="job.name_job" />
 
         <div class="flex justify-center my-6">
