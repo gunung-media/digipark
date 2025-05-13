@@ -28,6 +28,9 @@ import TrackYourJht from "@/components/TrackYourJht/index.vue";
 import NotificationIcon from "@/components/NotificationIcon/index.vue";
 
 import MenuItem from "@/components/MenuItem/index.vue";
+import { useToastFlash } from "@/composables/useToastFlash";
 
 const goTo = (name: string) => router.visit(route(name));
+
+useToastFlash();
 </script>

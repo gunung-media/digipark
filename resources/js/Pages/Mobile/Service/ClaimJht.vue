@@ -29,6 +29,7 @@
             />
 
             <SignaturePad
+                ref="signaturePadRef"
                 label="Tanda Tangan"
                 @update:signature="updateSignature"
                 :error="form.errors.signature"
@@ -54,7 +55,9 @@ const form = useForm({
 });
 
 const signaturePadRef = ref();
-const handleSubmit = () => {
+const handleSubmit = async () => {
+    // Save the signature to base64 and store it in the form
+    await signaturePadRef.value?.handleSaveSignature();
     if (!form.signature || form.signature == "") {
         toast.error("Tanda tangan harus diisi");
         return;
@@ -65,7 +68,7 @@ const handleSubmit = () => {
             console.error(errors);
         },
         onSuccess: () => {
-            toast.success("Klaim JHT berhasil disimpan");
+            console.log("yeay");
         },
     });
 };

@@ -13,7 +13,7 @@
             <VueSignaturePad
                 ref="signature"
                 height="200px"
-                width="400px"
+                width="350px"
                 :max-width="options.maxWidth"
                 :min-width="options.minWidth"
                 :options="{
@@ -126,4 +126,7 @@ function handleSaveSignature() {
         emit("update:signature", signatureData);
     }
 }
+defineExpose({
+    handleSaveSignature,
+});
 </script>

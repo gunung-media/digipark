@@ -34,7 +34,7 @@ class ClaimJhtController extends Controller
 
             $claim = new ClaimJht();
             $claim->type = $validated['type'];
-            $claim->signature_base64 = $validated['signature'];
+            $claim->signature = $validated['signature'];
             $claim->seeker_id = auth('seeker')->id();
             $claim->save();
 
