@@ -8,6 +8,7 @@ use App\Models\User;
 use Exception;
 use Filament\Notifications\Actions\Action;
 use Filament\Facades\Filament;
+use App\Filament\Company\Resources\JobResource;
 
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
@@ -145,6 +146,33 @@ class FilamentUtil
         if ($sendEmail && $seeker->email) {
             NotificationFacade::route('mail', $seeker->email)
                 ->notify(new BaseNotification($title, $body, ""));
+        }
+    }
+
+    public static function seekerApply(
+        int $jobId,
+        bool $sendEmail = false
+    ): void {
+        $company = Company::whereHas('jobs', function ($query) use ($jobId) {
+            $query->where('id', $jobId);
+        })->first();
+
+        $title = "Ada Pendaftar Pekerja Baru";
+        $body = 'Ada Pendaftar Pekerja baru bernama' . auth('seeker')->user()->name;
+        $url = JobResource::getUrl('edit', ['record' => $jobId], true, 'company');
+        Notification::make()
+            ->title($title)
+            ->body($body)
+            ->info()
+            ->actions([
+                Action::make('View')->url($url)->button(),
+            ])
+            ->sendToDatabase($company);
+
+
+        if ($sendEmail && $company->email) {
+            NotificationFacade::route('mail', $company->email)
+                ->notify(new BaseNotification($title, $body, $url));
         }
     }
 }

@@ -111,20 +111,22 @@ import {
     ChatBubbleLeftRightIcon,
     ExclamationCircleIcon,
 } from "@heroicons/vue/24/solid";
+import { useToastFlash } from "@/composables/useToastFlash";
 
 const page = usePage();
 const storageUrl = computed(() => page.props.storageUrl);
 
-defineProps({
+const props = defineProps({
     job: Object,
 });
 
 const selected = ref("main");
 
 const applyJob = () => {
-    console.log("Applied for:", selected.value);
-    router.visit(route("mobile.home"));
+    router.visit(route("mobile.job.apply", { id: props!.job!.id }));
 };
+
+useToastFlash();
 </script>
 
 <style scoped>
