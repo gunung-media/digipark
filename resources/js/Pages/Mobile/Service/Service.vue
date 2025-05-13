@@ -8,7 +8,7 @@
 
         <TrackYourJht />
 
-        <div class="mt-20">
+        <div class="mt-10">
             <MenuItem
                 :icon="UserCircleIcon"
                 title="Klaim JHT"
@@ -40,8 +40,8 @@ import { UserCircleIcon } from "@heroicons/vue/24/outline";
 import { router, Head } from "@inertiajs/vue3";
 import TrackYourJht from "@/components/TrackYourJht/index.vue";
 import NotificationIcon from "@/components/NotificationIcon/index.vue";
+import MenuItem from "@/components/MenuItem/better.vue";
 
-import MenuItem from "@/components/MenuItem/index.vue";
 import { useToastFlash } from "@/composables/useToastFlash";
 
 const goTo = (name: string) => router.visit(route(name));
