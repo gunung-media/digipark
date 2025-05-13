@@ -33,6 +33,7 @@ Route::prefix('/mobile')
 
         Route::middleware('auth:seeker')
             ->group(function () {
+                Route::get('logout', 'Authentication\LoginController@logout')->name('logout');
                 Route::prefix('/home')
                     ->namespace('Home')
                     ->group(function () {

@@ -37,7 +37,7 @@
             title="Logout"
             type="primary"
             class="mt-66"
-            :onClick="() => router.visit('/mobile')"
+            :onClick="() => redirect('mobile.logout')"
         />
     </div>
     <BottomNav active="profile.index" />

@@ -33,4 +33,11 @@ class LoginController extends Controller
             ]);
         }
     }
+
+    public function logout(): RedirectResponse
+    {
+        auth('seeker')->logout();
+
+        return redirect(route('mobile.landing'));
+    }
 }
