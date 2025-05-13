@@ -6,7 +6,9 @@
             <BellIcon class="w-8 cursor-pointer text-gray-700" />
         </div>
 
-        <div class="">
+        <TrackYourJht />
+
+        <div class="mt-20">
             <MenuItem
                 :icon="UserCircleIcon"
                 title="Klaim JHT"
@@ -22,6 +24,7 @@
 import BottomNav from "@/components/BottomNav/index.vue";
 import { BellIcon, UserCircleIcon } from "@heroicons/vue/24/outline";
 import { router, Head } from "@inertiajs/vue3";
+import TrackYourJht from "@/components/TrackYourJht/index.vue";
 
 import MenuItem from "@/components/MenuItem/index.vue";
 
