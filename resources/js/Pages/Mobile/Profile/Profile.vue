@@ -13,7 +13,9 @@
             />
             <div>
                 <p class="font-bold">{{ user.full_name }}</p>
-                <p class="text-sm font-thin">Tidak memiliki pekerjaan</p>
+                <p class="text-sm font-thin">
+                    {{ user?.company?.title ?? "Tidak memiliki pekerjaan" }}
+                </p>
             </div>
         </div>
 
@@ -23,6 +25,7 @@
                 :icon="UserCircleIcon"
                 title="Edit Akun"
                 :onClick="() => redirect('mobile.profile.edit')"
+                class="mt-2"
             />
             <MenuItem
                 :icon="LockClosedIcon"
@@ -54,7 +57,8 @@ import { computed } from "vue";
 
 const page = usePage();
 const user = computed(
-    () => (page.props.auth as { user: { full_name: string } }).user,
+    () =>
+        (page.props.auth as { user: { full_name: string; company: any } }).user,
 );
 
 const redirect = (routeName: string) => {

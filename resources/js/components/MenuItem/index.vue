@@ -1,17 +1,24 @@
 <template>
     <div
         @click="onClick"
-        class="py-6 flex justify-between text-gray-600 cursor-pointer hover:text-gray-800 group transition duration-200"
-        :class="withBorder ? 'border-b border-b-gray-400' : ''"
+        class="group cursor-pointer select-none transition duration-150 border-b border-gray-200 hover:bg-gray-50 px-2 py-5"
     >
-        <div class="flex items-center gap-5">
-            <component :is="icon" class="w-5 group-hover:font-black" />
-            <p>{{ title }}</p>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <component
+                    :is="icon"
+                    class="w-6 h-6 text-gray-500 group-hover:text-gray-700 transition"
+                />
+                <p
+                    class="text-sm font-medium text-gray-800 group-hover:text-black"
+                >
+                    {{ title }}
+                </p>
+            </div>
+            <ArrowRightCircleIcon
+                class="w-6 h-6 text-gray-300 group-hover:text-green-600 transition"
+            />
         </div>
-        <ArrowRightCircleIcon
-            v-if="withBorder"
-            class="w-7 group-hover:font-black group-hover:text-green-800"
-        />
     </div>
 </template>
 
@@ -32,6 +39,5 @@ const props = defineProps({
         type: Function,
         default: () => {},
     },
-    withBorder: { type: Boolean, default: true },
 });
 </script>
