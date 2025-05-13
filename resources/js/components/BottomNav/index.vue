@@ -1,6 +1,6 @@
 <template>
     <div
-        class="fixed bottom-0 bg-white flex justify-around items-center h-16 w-[450px] max-w-[450px] shadow"
+        class="fixed bottom-0 bg-white flex justify-around items-center h-16 shadow w-full max-w-[450px] mx-auto left-0 right-0"
     >
         <div
             v-for="item in navItems"
