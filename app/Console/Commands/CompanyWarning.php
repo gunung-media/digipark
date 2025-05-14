@@ -48,7 +48,7 @@ class CompanyWarning extends Command
                 FilamentUtil::sendNotifToCompany(
                     url: route('filament.company.resources.company-legalizations.edit', $company->id),
                     title: 'Peringatan',
-                    body: 'Peringatan! Waktu penerbitan regulasi perusahaan akan segera berlalu.',
+                    body: 'Peringatan! Waktu penerbitan regulasi perusahaan akan segera berakhir.',
                     companyId: $company->company_id,
                     sendEmail: true
                 );
