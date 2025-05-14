@@ -12,7 +12,7 @@ class JobController extends Controller
 {
     public function index(): Response
     {
-        $jobs = Job::with('company')->latest()->get();
+        $jobs = Job::with('company')->latest()->active()->get();
         return Inertia::render('Mobile/Job/Job', [
             'jobs' => $jobs
         ]);
