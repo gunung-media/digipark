@@ -25,7 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        URL::forceScheme('https');
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
         Model::unguard();
         if (Schema::hasTable('dashboard') || Schema::hasTable('menus')) {
             View::share('dashboard', Dashboard::with([
