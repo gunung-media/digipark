@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -26,9 +25,11 @@ class BaseNotification extends Notification
     {
         return (new MailMessage)
             ->subject($this->title)
-            ->line($this->body ?? '')
-            ->action('Lihat', $this->url)
-            ->line('Terima kasih telah menggunakan layanan kami.');
+            ->greeting('Halo!')
+            ->line($this->body ?? 'Kami punya informasi penting untuk Anda.')
+            ->action('Lihat Selengkapnya', $this->url)
+            ->line('Jika Anda memiliki pertanyaan atau membutuhkan bantuan, jangan ragu untuk menghubungi kami.')
+            ->salutation('Hormat Kami, Digipark');
     }
 
     public function toArray(object $notifiable): array
