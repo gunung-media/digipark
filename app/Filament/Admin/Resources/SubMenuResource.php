@@ -132,6 +132,6 @@ class SubMenuResource extends Resource
 
     public static function canAccess(): bool
     {
-        return FilamentUtil::isAdmin();
+        return FilamentUtil::isAdmin() || (FilamentUtil::isContent() && FilamentUtil::getUser()->role === 'Admin Loker');
     }
 }

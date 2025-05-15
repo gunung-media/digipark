@@ -55,7 +55,7 @@ class AdminContentResource extends Resource
                         Forms\Components\Select::make('role')
                             ->label('Role Admin Bidang')
                             ->options(
-                                collect(['Binapenta', 'Sekretariat', 'Lattas', 'HI dan Jamsostek', 'BLK'])->mapWithKeys(
+                                collect(['Binapenta', 'Sekretariat', 'Lattas', 'HI dan Jamsostek', 'BLK', 'Admin Loker'])->mapWithKeys(
                                     fn($val) => [$val => "Bidang $val"]
                                 )->toArray()
                             )
