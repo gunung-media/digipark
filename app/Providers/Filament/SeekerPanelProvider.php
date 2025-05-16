@@ -58,9 +58,9 @@ class SeekerPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->userMenuItems([
-                'Profile' => MenuItem::make()->url(fn () => EditProfile::getUrl())->icon('heroicon-o-user')->label("Profile"),
+                'Profile' => MenuItem::make()->url(fn() => EditProfile::getUrl())->icon('heroicon-o-user')->label("Profile"),
             ])
-            ->brandLogo(fn () => view('layouts.portal.logo'))
+            ->brandLogo(fn() => view('layouts.portal.logo'))
             ->brandLogoHeight('3rem')
             ->databaseNotifications()
             ->databaseNotificationsPolling("20s");
