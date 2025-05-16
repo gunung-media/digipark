@@ -36,7 +36,7 @@ class SignupController extends Controller
 
             Seeker::create([
                 ...$validated,
-                'password' => bcrypt($request->password),
+                'password' => $request->password,
                 'address' => ''
             ]);
 

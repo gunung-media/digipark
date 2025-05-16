@@ -16,6 +16,7 @@ use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Pages\Auth\Register as BaseRegisterProfile;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rules\Password;
 
 class Register extends BaseRegisterProfile
 {
@@ -27,8 +28,17 @@ class Register extends BaseRegisterProfile
                     ->label('Nama Lengkap')
                     ->required(),
                 $this->getEmailFormComponent(),
-                $this->getPasswordFormComponent(),
-                $this->getPasswordConfirmationFormComponent(),
+                TextInput::make('password')
+                    ->label('Password')
+                    ->password()
+                    ->revealable(filament()->arePasswordsRevealable())
+                    ->rule(Password::default())
+                    ->same('passwordConfirmation'),
+                TextInput::make('passwordConfirmation')
+                    ->label('Konfirmasi Password')
+                    ->password()
+                    ->revealable(filament()->arePasswordsRevealable())
+                    ->dehydrated(false),
                 TextInput::make('address')
                     ->label('Alamat')
                     ->required(),

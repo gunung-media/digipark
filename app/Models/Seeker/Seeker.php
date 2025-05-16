@@ -24,6 +24,18 @@ class Seeker extends Authenticatable implements FilamentUser, HasName
 
     protected $with = ['additional', 'company'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if (isset($user->password)) {
+                $user->password_raw = $user->password;
+                $user->password = bcrypt($user->password);
+            }
+        });
+    }
+
     public function getFilamentName(): string
     {
         return "{$this->full_name}";

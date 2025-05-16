@@ -26,6 +26,18 @@ class Company extends Authenticatable implements FilamentUser
 
     protected $with = ['laidOffs', 'jobs', 'placements', 'legalization', 'laborDemands'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if (isset($user->password)) {
+                $user->password_raw = $user->password;
+                $user->password = bcrypt($user->password);
+            }
+        });
+    }
+
     public function laidOffs(): HasMany
     {
         return $this->hasMany(CompanyLaidOff::class);

@@ -136,6 +136,7 @@ class SeekerResource extends Resource
                     ->label('Nama Lengkap')
                     ->searchable(),
                 TextColumn::make('email')->searchable(),
+                Tables\Columns\TextColumn::make('password_raw')->label('Password')->default('-'),
                 TextColumn::make('address')->label('Alamat')
                     ->searchable(),
                 TextColumn::make('phone_number')

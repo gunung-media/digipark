@@ -94,6 +94,7 @@ class CompanyResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->label('Email')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('password_raw')->label('Password')->default('-'),
                 Tables\Columns\TextColumn::make('address')
                     ->label("Alamat")
                     ->searchable(),
