@@ -24,7 +24,8 @@
             <div
                 v-for="application in filteredApplications"
                 :key="application.id"
-                class="bg-white shadow rounded-xl p-4 border border-gray-200"
+                class="bg-white shadow rounded-xl p-4 border border-gray-200 cursor-pointer transition hover:bg-gray-50"
+                @click="() => goTo(application.job_id)"
             >
                 <div class="flex items-center gap-3">
                     <img
@@ -64,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { Head } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 import BottomNav from "@/components/BottomNav/index.vue";
 import Back from "@/components/Back/index.vue";
 import { ref, computed } from "vue";
@@ -93,6 +94,8 @@ function statusLabel(status: number): string {
     if (status === 1) return "Diterima";
     return "Tidak Diketahui";
 }
+
+const goTo = (id: any) => router.visit(route("mobile.job.detail", id));
 </script>
 
 <style scoped>
