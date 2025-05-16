@@ -43,15 +43,12 @@ class AdminContentResource extends Resource
                             ->revealable(filament()->arePasswordsRevealable())
                             ->rule(Password::default())
                             ->dehydrateStateUsing(fn($state) => Hash::make($state))
-                            ->same('passwordConfirmation')
-                            ->required(fn($operation) => $operation != 'edit')
-                            ->disabledOn('edit'),
+                            ->same('passwordConfirmation'),
                         Forms\Components\TextInput::make('passwordConfirmation')
                             ->label('Konfirmasi Password')
                             ->password()
                             ->revealable(filament()->arePasswordsRevealable())
-                            ->dehydrated(false)
-                            ->required(fn($operation) => $operation != 'edit'),
+                            ->dehydrated(false),
                         Forms\Components\Select::make('role')
                             ->label('Role Admin Bidang')
                             ->options(
